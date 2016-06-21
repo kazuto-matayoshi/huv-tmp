@@ -61,9 +61,9 @@ meta周りの調整は済むようになっています。
 	</head>
 <body>
 ~~~
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## index.php
@@ -71,17 +71,17 @@ meta周りの調整は済むようになっています。
 基本的に使いません。
 TOPページの表示処理は
 front-page.phpで行います。
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## front-page.php
 ---
 TOPページの表示で使います。
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## footer.php
@@ -157,9 +157,9 @@ header.php同様
 </body>
 </html>
 ~~~
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## page.php
@@ -177,9 +177,9 @@ header.php同様
 ```
 /test-theme/parent/child.php
 ```
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## page-tmp.php
@@ -201,9 +201,9 @@ endif;
 このファイルは基本的にごみ扱いなので
 不要になった時点で削除してください。  
 (※リネームでの作業を推奨します。)
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## archive.php
@@ -211,9 +211,9 @@ endif;
 
 記事のアーカイブを取得し、表示するファイルです。
 固定ページでも代用可能なのでtmpでは404と同じ内容が入っています。
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## search.php -
@@ -224,9 +224,9 @@ endif;
 <?php get_search_form(); ?>
 ~~~
 上記のコードで後述のsearchform.phpの中身を読み込みます。
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## searchform.php
@@ -247,9 +247,9 @@ endif;
 - `<input type="search">`のname属性は変更しないでください。検索できなくなります。
 
 以上2点です。
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## single.php
@@ -257,9 +257,9 @@ endif;
 
 記事詳細を表示するページです。  
 注意点などは特にありません。
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
 
 ---
 ## fn.01 - 概要
@@ -275,6 +275,6 @@ head内の表示関係はcreanup.php
 追加機能はすべてcustom.phpに集約しています。
 
 さらに細かい部分はファイルを見てください。
-<br><br><br><br><br>
+<br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
-<br><br><br><br><br>
+<br><br><br>
