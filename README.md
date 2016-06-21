@@ -7,16 +7,16 @@
 ---
  - 目次
 
-1. [header.php](#header.php)
-1. [index.php](#index.php)
-1. [front-page.php](#front-page.php)
-1. [footer.php](#footer.php)
-1. [page.php](#page.php)
-1. [page-tmp.php](#page-tmp.php)
-1. [archive.php](#archive.php)
-1. [search.php](#search.php)
-1. [searchform.php](#searchform.php)
-1. [single.php](#single.php)
+1. [header.php](#headerphp)
+1. [index.php](#indexphp)
+1. [front-page.php](#front-pagephp)
+1. [footer.php](#footerphp)
+1. [page.php](#pagephp)
+1. [page-tmp.php](#page-tmpphp)
+1. [archive.php](#archivephp)
+1. [search.php](#searchphp)
+1. [searchform.php](#searchformphp)
+1. [single.php](#singlephp)
 1. [function - fn.01 - 概要](#fn01---概要)
 
 ---
