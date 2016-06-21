@@ -175,7 +175,7 @@ header.php同様
 親スラッグ -> parent  
 子スラッグ -> child
 ```
-/test-theme/parent/shild.php
+/test-theme/parent/child.php
 ```
 <br><br><br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
@@ -211,16 +211,19 @@ endif;
 
 記事のアーカイブを取得し、表示するファイルです。
 固定ページでも代用可能なのでtmpでは404と同じ内容が入っています。
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
-08 - search.php -
+## search.php -
 ---
 
 検索結果を表示するページのファイルです。
 ~~~php
 <?php get_search_form(); ?>
 ~~~
-で後述のsearchform.phpの中身を読み込みます。
+上記のコードで後述のsearchform.phpの中身を読み込みます。
 <br><br><br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
 <br><br><br><br><br>
