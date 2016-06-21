@@ -17,7 +17,7 @@
 1. [search.php](#searchphp)
 1. [searchform.php](#searchformphp)
 1. [single.php](#singlephp)
-1. [function - fn.01 - 概要](#fn01---概要)
+1. [function - 概要](#function---概要)
 
 ---
 ## header.php
@@ -262,7 +262,7 @@ endif;
 <br><br><br>
 
 ---
-## fn.01 - 概要
+## function - 概要
 ---
 
 関数について記述はすべてfunction内にあります。  
