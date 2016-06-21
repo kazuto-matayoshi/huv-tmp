@@ -40,7 +40,7 @@
  * 01.1 - ロゴを変更する
  */
 function custom_login_logo() {
-	echo '<style type="text/css">h1 a { width: auto !important; background: url(/img/login.png) no-repeat !important; background-size: contain !important; background-position: center !important; }</style>';
+	echo '<style type="text/css">h1 a { width: auto !important; background: url(' . get_template_directory_uri() . '/login.png) no-repeat !important; background-size: contain !important; background-position: center !important; }</style>';
 }
 add_action( 'login_head', 'custom_login_logo' );
 
