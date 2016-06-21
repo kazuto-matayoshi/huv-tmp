@@ -61,7 +61,9 @@ meta周りの調整は済むようになっています。
 	</head>
 <body>
 ~~~
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
 ## index.php
@@ -69,13 +71,17 @@ meta周りの調整は済むようになっています。
 基本的に使いません。
 TOPページの表示処理は
 front-page.phpで行います。
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
 ## front-page.php
 ---
 TOPページの表示で使います。
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
 ## footer.php
@@ -151,7 +157,9 @@ header.php同様
 </body>
 </html>
 ~~~
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
 ## page.php
@@ -169,7 +177,9 @@ header.php同様
 ```
 /test-theme/parent/shild.php
 ```
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
 ## page-tmp.php
@@ -191,7 +201,9 @@ endif;
 このファイルは基本的にごみ扱いなので
 不要になった時点で削除してください。  
 (※リネームでの作業を推奨します。)
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
 ## archive.php
@@ -209,7 +221,9 @@ endif;
 <?php get_search_form(); ?>
 ~~~
 で後述のsearchform.phpの中身を読み込みます。
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
 ## searchform.php
@@ -230,7 +244,9 @@ endif;
 - `<input type="search">`のname属性は変更しないでください。検索できなくなります。
 
 以上2点です。
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
 
 ---
 ## single.php
@@ -238,7 +254,10 @@ endif;
 
 記事詳細を表示するページです。  
 注意点などは特にありません。
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
+
 ---
 ## fn.01 - 概要
 ---
