@@ -272,3 +272,6 @@ head内の表示関係はcreanup.php
 追加機能はすべてcustom.phpに集約しています。
 
 さらに細かい部分はファイルを見てください。
+<br><br><br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br><br><br>
