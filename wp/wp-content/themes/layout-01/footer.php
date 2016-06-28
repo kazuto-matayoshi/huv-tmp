@@ -1,3 +1,30 @@
+</main>
+<!-- /.main -->
+
+<footer class="footer">
+	<nav class="fnav">
+		<ul class="fnav-list">
+			<li class="fnav-item">
+				<a href="/">トップ</a>
+			</li>
+			<li class="fnav-item">
+				<a href="/">menu1</a>
+			</li>
+			<li class="fnav-item">
+				<a href="/">menu2</a>
+			</li>
+			<li class="fnav-item">
+				<a href="/">menu3</a>
+			</li>
+			<li class="fnav-item">
+				<a href="/">menu4</a>
+			</li>
+		</ul>
+	</nav>
+	<p class="footer-copy-text">copyright © huvrid.co.jp All Rights Reserved.</p>
+</footer>
+<!-- /.footer -->
+
 <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="/js/common.js"></script>
 <script>

@@ -31,3 +31,29 @@
 		?>
 	</head>
 <body>
+<header class="header">
+	<h1>h1 tag</h1>
+	<section class="mv">
+		<h2>site main title</h2>
+	</section>
+	<nav class="gnav">
+		<ul class="gnav-list">
+			<li class="gnav-item">
+				<a href="/">トップ</a>
+			</li>
+			<li class="gnav-item">
+				<a href="/">menu1</a>
+			</li>
+			<li class="gnav-item">
+				<a href="/">menu2</a>
+			</li>
+			<li class="gnav-item">
+				<a href="/">menu3</a>
+			</li>
+			<li class="gnav-item">
+				<a href="/">menu4</a>
+			</li>
+		</ul>
+	</nav>
+</header>
+<main class="main">
