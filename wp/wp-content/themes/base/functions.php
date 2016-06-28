@@ -177,7 +177,7 @@ function is_subpage() {
 /**
  * 新着のループ処理
  */
-function get_new_post( $post_type = 'post', $posts_per_page = 10 ) {
+function get_new_post( $post_type = 'post', $view_posts = 10 ) {
 
 	// 三項演算子によるpagedの設定
 	$paged = get_query_var('paged') ? get_query_var('paged') : 1;
@@ -192,7 +192,7 @@ function get_new_post( $post_type = 'post', $posts_per_page = 10 ) {
 		'paged'          => $paged,
 		'post_type'      => $post_type,
 		'post_status'    => 'publish',
-		'posts_per_page' => $posts_per_page,
+		'posts_per_page' => $view_posts,
 	);
 	
 	$the_query = new WP_Query( $query );
