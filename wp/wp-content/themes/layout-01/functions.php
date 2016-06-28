@@ -167,9 +167,48 @@ function is_subpage() {
 	global $post;
 	if ( is_page() && $post->post_parent ) {
 		$parentID = $post->post_parent;
-		// 親ページの ID を返します。
+		// 親ページの ID を返す。
 		return $parentID;
 	} else {
 		return false;
 	};
 };
+
+/**
+ * 新着のループ処理
+ */
+function get_new_post( $post_type = 'post', $posts_per_page = 10 ) {
+
+	// 三項演算子によるpagedの設定
+	$paged = get_query_var('paged') ? get_query_var('paged') : 1;
+
+	// 三項演算子によるyearの設定
+	// $_SERVER['REQUEST_URI'] => /event/2011/ => [0]->'', [1]->'event', [2]->'2011'
+	$year = $post_type == 'post' ? split('[/]', $_SERVER['REQUEST_URI'])[1] : split('[/]', $_SERVER['REQUEST_URI'])[2];
+	
+	$query =
+	array(
+		'year'           => $year,
+		'paged'          => $paged,
+		'post_type'      => $post_type,
+		'post_status'    => 'publish',
+		'posts_per_page' => $posts_per_page,
+	);
+	
+	$the_query = new WP_Query( $query );
+	
+	if ( $the_query->have_posts() ) :
+		echo "<ul class=\"post\">";
+		while ( $the_query->have_posts() ) :
+			$the_query->the_post();
+			get_template_part( 'loop-new_post' );
+		endwhile;
+		echo "</ul>";
+		if ( !is_home() || !is_front_page() ) {
+			pagination($the_query->max_num_pages);
+		};
+	else :
+		get_template_part( '404' );
+	endif;
+	wp_reset_postdata(); // reset
+}
