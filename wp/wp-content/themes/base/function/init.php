@@ -136,7 +136,7 @@ add_action( 'admin_bar_menu', 'remove_admin_bar_menu', 201 );
 function remove_menus () {
 	global $menu;
 	// 投稿
-	unset( $menu[5] );
+	// unset( $menu[5] );
 	// コメント
 	unset( $menu[25] );
 
@@ -191,7 +191,7 @@ add_action('admin_menu','remove_default_post_screen_metaboxes');
 /*
  * 06.0 - 投稿画面のパーマリンク編集部分を非表示
  */
-add_filter( 'get_sample_permalink_html', '__return_false' );
+// add_filter( 'get_sample_permalink_html', '__return_false' );
 
 /*
  * 07.0 - APIによるバージョンチェックの通信をさせない
