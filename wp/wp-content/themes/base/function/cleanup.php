@@ -13,8 +13,7 @@
  * 7.0 - print_emoji_detection_script
  * 8.0 - wp_shortlink_wp_head
  * 9.0 - oEmbed系
- * 10.0 - se_global_head
- * 
+ * 10.0 - window._se_plugin_version = 'x.x.x';と生成されるのを削除(global_head.phpの読み込み停止)
  * 要検証
  */
 
@@ -79,9 +78,9 @@ remove_action('wp_head','wp_oembed_add_host_js');
 remove_action('wp_head','rest_output_link_wp_head');
 remove_action('wp_head','wp_oembed_add_discovery_links');
 
-/**
- * 10.0 - se_global_head
- * window._se_plugin_versionの削除
+/*
+ * 10.0 - window._se_plugin_version = 'x.x.x';と生成されるのを削除(global_head.phpの読み込み停止)
+ * 参考 - https://goo.gl/fz6eOH
  */
 remove_action('wp_head', 'se_global_head');
 

@@ -1,4 +1,3 @@
-<?php get_header(); ?>
 <?php
 if ( have_posts() ) :
 while ( have_posts() ) :
@@ -6,6 +5,8 @@ while ( have_posts() ) :
 	the_content();
 endwhile;
 endif;
-breadcrumb();
+/*
+ * get_new_post( $post_type = 'post', $view_posts = 10 );
+ */
+get_new_post();
 ?>
-<?php get_footer(); ?>
