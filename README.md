@@ -280,9 +280,9 @@ endif;
 
 関数について記述はすべてfunction内にあります。  
 
-head内の表示関係をまとめた、【creanup.php】  
-管理画面に関係する関数をまとめた、【init.php】
-カスタム投稿の関数をまとめた、【custom-post.php】
+head内の表示関係をまとめた、【creanup.php】<br>
+管理画面に関係する関数をまとめた、【init.php】<br>
+カスタム投稿の関数をまとめた、【custom-post.php】<br>
 ウィジェットに関する関数をまとめた、【widget.php】
 
 上記で主に構成され、
