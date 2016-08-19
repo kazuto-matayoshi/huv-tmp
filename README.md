@@ -17,7 +17,7 @@
 1. [search.php](#searchphp)
 1. [searchform.php](#searchformphp)
 1. [single.php](#singlephp)
-1. [function - 概要](#function---概要)
+1. [functions - 概要](#functions---概要)
 
 ---
 ## header.php
@@ -168,15 +168,15 @@ header.php同様
 各固定ページのスラッグ名(URL部分)で分岐する仕組みで作っています。
 固定ページを作る際には『(スラッグ名).php』という命名規則で作成してください。
 
-子ページについてですが、作成する際は
-『/(テーマディレクトリ)/(親スラッグ名)/(子ページのスラッグ名).php』というディレクトリ構成、命名規則で作成してください。
+また、子ページについてですが、作成する際は
+『/(テーマディレクトリ)/page/(親スラッグ名)-(子ページのスラッグ名).php』というディレクトリ構成、命名規則で作成してください。
 
 <\*-- 例 --\*>
 
-親スラッグ -> parent  
-子スラッグ -> child
+親ページのスラッグ -> parent
+子ページのスラッグ -> child
 ```
-/test-theme/parent/child.php
+/test-theme/page/parent-child.php
 ```
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
@@ -213,6 +213,13 @@ endif;
 記事のアーカイブを取得し、表示するファイルです。
 固定ページでも代用可能ですがtmpでは
 一覧の表示をするための『get_new_post()』(追加関数)を初期で追加しています。
+
+また、命名規則、ディレクトリ構成は
+下記の通りです。
+
+```
+/test-theme/archive/投稿タイプ名.php
+```
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
 <br><br><br>
@@ -258,23 +265,28 @@ endif;
 ---
 
 記事詳細を表示するページです。  
-注意点などは特にありません。
+命名規則、ディレクトリ構成は下記の通りです。
+
+```
+/test-theme/single/投稿タイプ名.php
+```
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
 <br><br><br>
 
 ---
-## function - 概要
+## functions - 概要
 ---
 
 関数について記述はすべてfunction内にあります。  
-テーマと同階層のfunctions.phpはあくまで入り口の役割を担っているのみです。
 
-ファイルを開くとわかると思いますが
+head内の表示関係をまとめた、【creanup.php】  
+管理画面に関係する関数をまとめた、【init.php】
+カスタム投稿の関数をまとめた、【custom-post.php】
+ウィジェットに関する関数をまとめた、【widget.php】
 
-head内の表示関係はcreanup.php  
-管理画面に関係する関数群はinit.php  
-追加機能はすべてcustom.phpに集約しています。
+上記で主に構成され、
+その他追加関数はfunctions.phpに記述しています。
 
 さらに細かい部分はファイルを見てください。
 <br><br><br>
