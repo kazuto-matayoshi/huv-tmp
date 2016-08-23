@@ -207,7 +207,7 @@ endif;
 <br><br><br>
 
 ---
-## archive.php -
+## archive.php
 ---
 
 記事のアーカイブを取得し、表示するファイルです。
