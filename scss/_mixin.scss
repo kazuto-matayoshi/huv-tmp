@@ -45,51 +45,10 @@ $fa: FontAwesome;
 }
 
 // ---------------------------------------------------
-
-// btn
-
-// ---------------------------------------------------
-
-@mixin btn($width) {
-	width: $width;
-	margin: 0 auto;
-	@content;
-	a {
-		display: block;
-		color: #FFF;
-		line-height: 1;
-		font-size: 22px;
-		font-size: 2.2rem;
-		text-align: center;
-		text-decoration: none;
-		padding: 20px 0;
-		background: #303030;
-		&:after {
-			@include fa(f105);
-			line-height: 1;
-			font-size: 28px;
-			font-size: 2.8rem;
-			margin-left: 20px;
-			transition: all 0.3s;
-		}
-		&:hover {
-			&:after {
-				margin-left: 30px;
-			}
-		}
-	}
-}
-
-
-
-// ---------------------------------------------------
-
 //   ／＼
 // ／    ＼三角形を作るcss
 // ￣￣￣￣
-
 // ---------------------------------------------------
-
 
 @mixin tri-base {
 	@content;
@@ -118,7 +77,7 @@ $fa: FontAwesome;
 @mixin tri-b($width, $height, $color) {
 	@content;
 	@include tri-base;
-	border-width: $width $height/2 0  $height/2;
+	border-width: $width $height/2 0 $height/2;
 	border-color: $color transparent transparent transparent;
 }
 
@@ -126,7 +85,7 @@ $fa: FontAwesome;
 @mixin tri-l($width, $height, $color) {
 	@content;
 	@include tri-base;
-	border-width:  $height/2 $width $height/2 0;
+	border-width: $height/2 $width $height/2 0;
 	border-color: transparent $color transparent transparent;
 }
 
@@ -162,3 +121,9 @@ $fa: FontAwesome;
 	border-color: $color transparent transparent transparent;
 }
 
+// ---------------------------------------------------
+// グラデーション
+// ---------------------------------------------------
+
+@mixin gradient($direction, $color) {
+}
