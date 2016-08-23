@@ -2,6 +2,7 @@
 get_header();
 
 $path = get_post_type($post->ID);
+// echo 'archive : '.$path;
 
 /**
  * ファイルがあるかの判定

@@ -2,6 +2,7 @@
 get_header();
 
 $path = get_post_type($post->ID);
+echo 'single : '.$path;
 
 /**
  * ファイルがあるかの判定
@@ -21,7 +22,7 @@ if ( locate_template( 'single/'.$path.'.php' ) ) {
 		the_content();
 	endwhile;
 	endif;
-
 }
 
-get_footer(); ?>
+get_footer();
+?>

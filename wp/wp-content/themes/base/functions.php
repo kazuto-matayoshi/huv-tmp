@@ -2,7 +2,7 @@
 get_template_part('function/init');        // 初期設定関数群(主に管理画面)
 get_template_part('function/widget');      // ウィジェットに関する関数群
 get_template_part('function/cleanup');     // headerで自動生成される不要なタグを削除する関数群
-get_template_part('function/custom-post'); // カスタム投稿の関数
+get_template_part('function/custom_post'); // カスタム投稿タイプ関係
 
 
 /**
