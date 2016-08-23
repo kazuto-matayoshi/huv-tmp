@@ -225,7 +225,7 @@ endif;
 <br><br><br>
 
 ---
-## search.php -
+## search.php
 ---
 
 検索結果を表示するページのファイルです。
