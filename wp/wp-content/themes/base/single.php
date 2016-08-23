@@ -2,7 +2,7 @@
 get_header();
 
 $path = get_post_type($post->ID);
-echo 'single : '.$path;
+// echo 'single : '.$path;
 
 /**
  * ファイルがあるかの判定
