@@ -187,7 +187,16 @@ function is_subpage() {
  * 06.0 - 新着のループ処理
  */
 //---------------------------------------------------------------------------------------------------
-function get_new_post( $post_type = 'post', $view_posts = 10 ) {
+function get_new_post( $args ) {
+	$default = array(
+		'class'      => 'post',
+		'post_type'  => 'post',
+		'view_posts' => 10,
+		'pagination' => true,
+	);
+
+	// default_password_nag()の更新
+	$option = array_replace( $default, $args );
 
 	// 三項演算子によるpagedの設定
 	$paged = get_query_var('paged') ? get_query_var('paged') : 1;
@@ -200,21 +209,22 @@ function get_new_post( $post_type = 'post', $view_posts = 10 ) {
 	array(
 		'year'           => $year,
 		'paged'          => $paged,
-		'post_type'      => $post_type,
+		'post_type'      => $option['post_type'],
 		'post_status'    => 'publish',
-		'posts_per_page' => $view_posts,
+		'posts_per_page' => $option['view_posts'],
 	);
 	
 	$the_query = new WP_Query( $query );
 	
 	if ( $the_query->have_posts() ) :
-		echo "<ul class=\"post\">";
+		echo '<ul class="'.$option['class'].'">';
 		while ( $the_query->have_posts() ) :
 			$the_query->the_post();
 			get_template_part( 'loop/new_post' );
 		endwhile;
-		echo "</ul>";
-		if ( !is_home() || !is_front_page() ) {
+		echo '</ul>';
+		if ( $option['pagination'] === true ) {
+			echo 'trt';
 			pagination($the_query->max_num_pages);
 		};
 	else :
