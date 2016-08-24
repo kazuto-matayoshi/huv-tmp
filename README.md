@@ -288,7 +288,7 @@ head内の表示関係をまとめた、【creanup.php】<br>
 上記で主に構成され、
 その他追加関数はfunctions.phpに記述しています。
 
-さらに細かい部分はファイルを見てください。
+さらに細かい部分はファイルまたは、[wiki](https://github.com/kazuto-matayoshi/huv-tmp/wiki/functions.php%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)を確認してください。
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
 <br><br><br>
