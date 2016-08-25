@@ -187,12 +187,13 @@ function is_subpage() {
  * 06.0 - 新着のループ処理
  */
 //---------------------------------------------------------------------------------------------------
-function get_new_post( $args ) {
+function huv_get_new_post( $args ) {
 	$default = array(
 		'class'      => 'post',
 		'post_type'  => 'post',
 		'view_posts' => 10,
 		'pagination' => true,
+		'eyecatch'   => false,
 	);
 
 	// default_password_nag()の更新
@@ -204,7 +205,7 @@ function get_new_post( $args ) {
 	// 三項演算子によるyearの設定
 	// $_SERVER['REQUEST_URI'] => /event/2011/ => [0]->'', [1]->'event', [2]->'2011'
 	$year = $post_type == 'post' ? split('[/]', $_SERVER['REQUEST_URI'])[1] : split('[/]', $_SERVER['REQUEST_URI'])[2];
-	
+
 	$query =
 	array(
 		'year'           => $year,
@@ -213,9 +214,9 @@ function get_new_post( $args ) {
 		'post_status'    => 'publish',
 		'posts_per_page' => $option['view_posts'],
 	);
-	
+
 	$the_query = new WP_Query( $query );
-	
+
 	if ( $the_query->have_posts() ) :
 		echo '<ul class="'.$option['class'].'">';
 		while ( $the_query->have_posts() ) :
@@ -224,7 +225,6 @@ function get_new_post( $args ) {
 		endwhile;
 		echo '</ul>';
 		if ( $option['pagination'] === true ) {
-			echo 'trt';
 			pagination($the_query->max_num_pages);
 		};
 	else :

@@ -1,6 +1,13 @@
 <?php
-	/*
-	 * get_new_post( $post_type = 'post', $view_posts = 10 );
+	/**
+	 * get_new_post( $args );
 	 */
-	get_new_post();
+	$args = array(
+		'class'      => 'info-list',
+		'post_type'  => 'post',
+		'view_posts' => 4,
+		'pagination' => false,
+		'eye' => true,
+	);
+	huv_get_new_post( $args );
 ?>

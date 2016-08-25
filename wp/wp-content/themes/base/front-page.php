@@ -9,7 +9,8 @@
 		'post_type'  => 'post',
 		'view_posts' => 4,
 		'pagination' => false,
+		'eye' => true,
 	);
-	get_new_post( $args );
+	huv_get_new_post( $args );
 ?>
 <?php get_footer(); ?>
