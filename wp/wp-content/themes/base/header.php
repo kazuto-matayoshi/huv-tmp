@@ -16,17 +16,18 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="/css/normalize.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/common.css">
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/normalize.css">
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/common.css">
+	
 	<?php
 		if ( is_home() || is_front_page() ) {
-			echo "<link rel=\"stylesheet\" href=\"/css/index.css\">\n";
-		} elseif ( is_single() ) {
+			echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/index.css">';
+		} elseif ( is_singular() ) {
 		} elseif ( is_search() ) {
 		} elseif ( is_archive() || is_404() ) {
 		} else {
-			echo "<link rel=\"stylesheet\" href=\"/css/".get_page_uri($post->ID).".css\">\n";
+			echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/'.get_page_uri($post->ID).'.css">';
 		}
 	?>
 </head>
