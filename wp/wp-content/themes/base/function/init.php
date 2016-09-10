@@ -70,7 +70,7 @@ function redirect_dashiboard() {
 		// ダッシュボードチェック
 		if ( preg_match('/(\/wp-admin\/index.php)/', $_SERVER['SCRIPT_NAME']) ) {
 			// リダイレクトアドレス作成
-			$redirect_url = str_replace($_SERVER['SCRIPT_NAME'], "index.php", "edit.php?post_type=base");
+			$redirect_url = str_replace($_SERVER['SCRIPT_NAME'], "index.php", "edit.php");
 			// リダイレクト
 			wp_redirect( $redirect_url );
 		};
