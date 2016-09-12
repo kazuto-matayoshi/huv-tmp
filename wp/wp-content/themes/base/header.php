@@ -32,6 +32,7 @@
 	?>
 </head>
 <body>
+<h1></h1>
 <nav>
 	<?php
 		$args = array(
