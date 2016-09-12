@@ -438,6 +438,15 @@
 						// url()
 						$content = preg_replace_callback("/(url)\(([^\)]+)\)/i", array($this, 'cdn_replace_urls'), $content);
 					}
+					
+					if(isset($this->options->wpFastestCacheLazyLoad)){
+						include_once plugin_dir_path( __FILE__ )."pro/library/lazy-load.php";
+
+						if(method_exists("WpFastestCacheLazyLoad", "images_to_lazyload")){
+							$content = WpFastestCacheLazyLoad::images_to_lazyload($content, $this->options->wpFastestCacheLazyLoad_type);
+						}
+					}
+
 
 					if(isset($this->options->wpFastestCacheRenderBlocking) && method_exists("WpFastestCachePowerfulHtml", "render_blocking")){
 						if(isset($this->options->wpFastestCacheRenderBlockingCss)){

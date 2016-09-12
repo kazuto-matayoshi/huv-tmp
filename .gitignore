@@ -1,11 +1,14 @@
 prepros.cfg
-.gitignore
+.settings
+.buildpath
+.project
 .htaccess
 .htpasswd
 wp/wp-config.php
 wp/wp-content/uploads
 
 
+#.gitignore
 
 
 #wp/wp-admin

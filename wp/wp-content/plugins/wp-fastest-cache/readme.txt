@@ -100,6 +100,18 @@ Wpfc does not support Wordpress Multisite yet.
 
 == Changelog ==
 
+= 0.8.6.1 =
+* <strong>[FEATURE]</strong>  exclude css sources
+* to fix Non-trailing Slash problem
+* to add specify source option for cdn integration
+* new interface of cdn tab
+* <strong>[FEATURE]</strong> to add Photon
+* <strong>[FEATURE]</strong> Multiple CDN
+* <strong>[FEATURE]</strong>  exclude js sources
+* to improve Combine JS feature
+* <strong>[FEATURE]</strong> Compatible with WpResidence theme
+* <strong>[FEATURE]</strong> to call preload manually
+
 = 0.8.6.0 =
 * to fix the problem about replacing url after minify css
 * to add "start with" option to the cache timeout
@@ -635,6 +647,9 @@ Yes, it is compatible with WP-PostRatings.
 
 = Is this plugin compatible with AdRotate? =
 No, it is NOT compatible with AdRotate.
+
+= Is this plugin compatible with WP Hide & Security Enhancer? =
+No, it is NOT compatible with WP Hide & Security Enhancer.
 
 = Is this plugin compatible with WP-PostViews? =
 Yes, it is compatible with WP-PostViews. The current post views appear on the admin panel. The visitors cannot see the current post views. The developer of WP-PostViews needs to fix this issue.
