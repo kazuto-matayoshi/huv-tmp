@@ -23,6 +23,7 @@ get_template_part('function/custom_post');
  * 06.0 - 新着のループ処理
  * 07.0 - アーカイブページの記事ループ外でも、通常の記事ループ内でもpost_typeを取得できるようにした関数
  * 08.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
+ * 09.0 - 親スラッグの取得
  *
  */
 
@@ -92,9 +93,9 @@ function breadcrumb() {
 	global $post;
 	$str = "";
 	if( ( !is_home() || !is_front_page() ) && !is_admin() ){
-		$str .= '<div class="breadcrumb">';
-		$str .= '<ul class="">';
-		$str .= '<li><a href="'. home_url() .'">トップ</a></li>';
+		// $str .= '<div class="breadcrumb">';
+		$str .= '<ul class="breadcrumb-list">';
+		$str .= '<li class="breadcrumb-list-item"><a href="'. home_url() .'">TOP</a></li>';
 
 		// if( is_category() ) {
 		// 	$cat = get_queried_object();
@@ -111,25 +112,25 @@ function breadcrumb() {
 			if( $post->post_parent != 0 ){
 				$ancestors = array_reverse( get_post_ancestors( $post->ID ) );
 				foreach( $ancestors as $ancestor ){
-					$str .= '<li><a href="'. get_permalink( $ancestor ) .'">'. get_the_title( $ancestor ) .'</a></li>';
+					$str .= '<li class="breadcrumb-list-item"><a href="'. get_permalink( $ancestor ) .'">'. get_the_title( $ancestor ) .'</a></li>';
 				}
 			}
-			$str .= '<li>'. get_the_title() .'</li>';
+			$str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
 		} elseif( is_single() ){
-			$str .= '<li><a href="/'. get_post_type() .'/">';
+			$str .= '<li class="breadcrumb-list-item"><a href="/'. get_post_type() .'/">';
 			$str .= esc_html( get_post_type_object( get_post_type() )->label );
 			$str .= '</a></li>';
-			$str .= '<li>'. get_the_title() .'</li>';
+			$str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
 		} elseif( is_archive() ){
-			$str .= '<li>';
+			$str .= '<li class="breadcrumb-list-item">';
 			$str .= esc_html( get_post_type_object( get_post_type() )->label );
 			$str .= '</li>';
 		} elseif( is_search() ){
 		} else {
-			$str .= '<li>'. get_the_title() .'</li>';
+			$str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
 		}
 		$str .= '</ul>';
-		$str .= '</div>';
+		// $str .= '</div>';
 	}
 	echo $str;
 }
@@ -213,7 +214,10 @@ function huv_get_new_post( $args ) {
 
 	// 三項演算子によるyearの設定
 	// $_SERVER['REQUEST_URI'] => /event/2011/ => [0]->'', [1]->'event', [2]->'2011'
-	$year = $post_type == 'post' ? split('[/]', $_SERVER['REQUEST_URI'])[1] : split('[/]', $_SERVER['REQUEST_URI'])[2];
+	$year = '';
+	if ( is_archive() ) {
+		$year = $option['post_type'] == 'post' ? split('[/]', $_SERVER['REQUEST_URI'])[1] : split('[/]', $_SERVER['REQUEST_URI'])[2];
+	}
 
 	$query =
 	array(
@@ -268,7 +272,7 @@ function get_post_type_query() {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 08.0 -ログインしてる状態でも「非公開：」の記事が表示されないようする。
+ * 08.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
  */
 //---------------------------------------------------------------------------------------------------
 function parse_query_ex() {
@@ -277,3 +281,23 @@ function parse_query_ex() {
 	}
 }
 // add_action('parse_query', 'parse_query_ex');
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 09.0 - 親スラッグの取得
+ */
+//---------------------------------------------------------------------------------------------------
+function is_parent_slug() {
+	global $post;
+	if ($post->post_parent) {
+		$post_data = get_post($post->post_parent);
+		return $post_data->post_name;
+	}
+}
+
+function is_root_parent_slug() {
+	global $post;
+	$root_parent = get_page($post->ancestors[count($post->ancestors) - 1]);
+	return $root_parent->post_name;
+}
+
