@@ -10,13 +10,12 @@
 	<!-- IE対策 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><?php wp_head(); ?>
 
-
 	<!-- その他設定 -->
 	<meta name="format-detection" content="telephone=no">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/normalize.css">
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/common.css">
 	
@@ -35,8 +34,9 @@
 </head>
 <body>
 <h1></h1>
-<nav>
+<!-- <nav>
 	<?php
+		// 開発中ナビゲーション
 		$args = array(
 			'theme_location'  => '',
 			'menu'            => '',
@@ -57,6 +57,6 @@
 		);
 		wp_nav_menu( $args );
 	?>
-</nav>
+</nav> -->
 
 <?php breadcrumb(); ?>

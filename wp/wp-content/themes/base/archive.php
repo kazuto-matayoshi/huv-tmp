@@ -1,8 +1,10 @@
 <?php
 get_header();
 
-$path = get_post_type($post->ID);
-// echo 'archive : '.$path;
+	$path = get_post_type($post->ID);
+
+	// 書き出しテスト
+	// echo 'archive : '.$path;
 
 /**
  * ファイルがあるかの判定
