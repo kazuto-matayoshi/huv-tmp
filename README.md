@@ -12,7 +12,8 @@
 1. [front-page.php](#front-pagephp)
 1. [footer.php](#footerphp)
 1. [page.php](#pagephp)
-1. [page-tmp.php](#page-tmpphp)
+1. [page/tmpl.php](#page-tmpphp)
+1. [page/loop-tmpl.php](#page-tmpphp)
 1. [archive.php](#archivephp)
 1. [search.php](#searchphp)
 1. [searchform.php](#searchformphp)
@@ -55,7 +56,7 @@ meta周りの調整は済むようになっています。
 
 		<!-- CSS -->
 		<link rel="stylesheet" href="/css/normalize.css">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/css/common.css">
 		<link rel="stylesheet" href="/css/index.css">
 	</head>
@@ -79,7 +80,7 @@ front-page.phpで行います。
 ## front-page.php
 ---
 TOPページの表示で使います。
-一覧の表示をするための『get_new_post()』(追加関数)を初期で追加しています。
+初期の記載として、新着を取得するコードを書いています。
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
 <br><br><br>
@@ -95,6 +96,7 @@ header.php同様
 - Google Analyticsのサポートをするコード (\*1)が常に読み込まれます。
 
 また、MW-WP-Formを使う際の最低限度のjs(\*2)も追加していますので確認お願いします。
+※使用する際は<form>の内側に<div class="form_box">を生成してください。
 
 -------------------------------------------------------------------------------------------------------
 
@@ -165,34 +167,35 @@ header.php同様
 ---
 ## page.php
 ---
-各固定ページのスラッグ名(URL部分)で分岐する仕組みで作っています。
+各固定ページの分岐用のページです。
 固定ページを作る際には『(スラッグ名).php』という命名規則で作成してください。
 
-また、子ページについてですが、作成する際は
+子ページについてですが、作成する際は
 『/(テーマディレクトリ)/page/(親スラッグ名)-(子ページのスラッグ名).php』というディレクトリ構成、命名規則で作成してください。
 
 <\*-- 例 --\*>
 
-親ページのスラッグ -> parent
-子ページのスラッグ -> child
+テーマ名  -> test-theme
+親スラッグ -> parent
+子スラッグ -> child
 ```
-/test-theme/page/parent-child.php
+/test-theme/parent-child.php
 ```
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
 <br><br><br>
 
 ---
-## page-tmp.php
+## page/tmpl.php
 ---
 固定ページのテンプレートです。
 
 ~~~php
 if ( have_posts() ) :
-  while ( have_posts() ) :
-  	the_post();
-  	the_content();
-  endwhile;
+while ( have_posts() ) :
+	the_post();
+	the_content();
+endwhile;
 endif;
 ~~~
 
@@ -200,8 +203,19 @@ endif;
 固定ページで入力した値を取得します。
 
 このファイルは基本的にごみ扱いなので
-不要になった時点で削除してください。  
+不要になった時点で削除してください。
+
 (※リネームでの作業を推奨します。)
+<br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br>
+
+---
+## page/loop-tmpl.php
+---
+固定ページのloop用のテンプレートです。
+
+新着一覧などを利用時にリネームなどしてお使いください。
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
 <br><br><br>
@@ -211,8 +225,11 @@ endif;
 ---
 
 記事のアーカイブを取得し、表示するファイルです。
-固定ページでも代用可能ですがtmpでは
-一覧の表示をするための『get_new_post()』(追加関数)を初期で追加しています。
+ポストタイプを判定し、archive/内にファイルがあれば
+そのファイルを見に行きます。
+
+なければそのままコンテンツを表示します。
+（※404にすべきか検討中）
 
 また、命名規則、ディレクトリ構成は
 下記の通りです。
@@ -264,7 +281,13 @@ endif;
 ## single.php
 ---
 
-記事詳細を表示するページです。  
+記事詳細を取得し、表示するファイルです。
+ポストタイプを判定し、single/内にファイルがあれば
+そのファイルを見に行きます。
+
+ない場合は管理画面の投稿画面で入力されたコンテンツが
+そのまま表示されます。
+
 命名規則、ディレクトリ構成は下記の通りです。
 
 ```
