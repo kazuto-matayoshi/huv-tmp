@@ -2,33 +2,41 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-10-12 18:32:53+0000\n"
+"PO-Revision-Date: 2016-09-19 20:43:05+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: GlotPress/1.1.0-alpha\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
 "Project-Id-Version: Stable (latest release)\n"
+
+#: templates/admin/admin-mail-options.php:34
+msgid "Return-Path ( E-mail address )"
+msgstr "Return-Path ( メールアドレス )"
+
+#: classes/validation-rules/class.filesize.php:38
+msgid "Failed to upload the file."
+msgstr "ファイルのアップロードに失敗しました。"
 
 #: classes/validation-rules/class.maximagesize.php:77
 msgid "This image size is too big."
-msgstr ""
+msgstr "画像サイズが大きすぎます。"
 
 #: classes/validation-rules/class.maximagesize.php:105
 msgid "Maximum image size"
-msgstr ""
+msgstr "最大画像サイズ"
 
 #: classes/validation-rules/class.minimagesize.php:77
 msgid "This image size is too small."
-msgstr ""
+msgstr "画像サイズが小さすぎます。"
 
 #: classes/validation-rules/class.minimagesize.php:105
 msgid "Minimum image size"
-msgstr ""
+msgstr "最小画像サイズ"
 
 #: classes/form-fields/class.custom-mail-tag.php:30
 msgid "Custom Mail Tag"
-msgstr ""
+msgstr "カスタムメールタグ"
 
 #: classes/controllers/class.admin-list.php:34
 msgid "Your contribution is needed for making this plugin better."
@@ -411,15 +419,15 @@ msgstr "一致しません。"
 msgid "The key at same value"
 msgstr "一致する項目"
 
-#: classes/validation-rules/class.filesize.php:35
+#: classes/validation-rules/class.filesize.php:72
 msgid "This file size is too big."
 msgstr "ファイルサイズが大きすぎます。"
 
-#: classes/validation-rules/class.filesize.php:59
+#: classes/validation-rules/class.filesize.php:94
 msgid "Permitted file size"
 msgstr "サイズ制限"
 
-#: classes/validation-rules/class.filesize.php:60
+#: classes/validation-rules/class.filesize.php:95
 msgid "bytes"
 msgstr "バイト"
 
@@ -605,6 +613,7 @@ msgstr "送信先（E-mailアドレス）"
 #: templates/admin/admin-mail-options.php:14
 #: templates/admin/admin-mail-options.php:31
 #: templates/admin/admin-mail-options.php:36
+#: templates/admin/admin-mail-options.php:41
 #: templates/admin/mail-options.php:15 templates/admin/mail-options.php:20
 msgid "If empty:"
 msgstr "未入力の場合:"
@@ -626,12 +635,12 @@ msgstr "件名"
 msgid "Sender"
 msgstr "送信者"
 
-#: templates/admin/admin-mail-options.php:34
+#: templates/admin/admin-mail-options.php:39
 #: templates/admin/mail-options.php:18
 msgid "From ( E-mail address )"
 msgstr "送信元（E-mailアドレス）"
 
-#: templates/admin/admin-mail-options.php:39
+#: templates/admin/admin-mail-options.php:44
 #: templates/admin/mail-options.php:23
 msgid "Content"
 msgstr "本文"

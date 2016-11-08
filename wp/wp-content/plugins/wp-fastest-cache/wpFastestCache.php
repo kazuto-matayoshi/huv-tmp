@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 0.8.6.1
+Version: 0.8.6.2
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 Text Domain: wp-fastest-cache
@@ -74,7 +74,38 @@ GNU General Public License for more details.
 				$this->rm_folder_recursively($this->getWpContentDir()."/cache/tmpWpfc");
 			}
 
-			if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "wpestate_ajax_agent_contact_form"){
+
+			if(isset($_POST) && isset($_POST["_ninja_forms_display_submit"])){
+				if(isset($_POST["_wpnonce"]) && $_POST["_wpnonce"]){
+					if(isset($_POST["_form_id"]) && $_POST["_form_id"]){
+						//for Ninja Forms
+						include_once ABSPATH."wp-includes/pluggable.php";
+
+						$_POST["_wpnonce"] = wp_create_nonce('nf_form_'.$_POST["_form_id"]);
+					}
+				}
+			}else if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "cptch_reload"){
+				if(isset($_POST["cptch_nonce"]) && $_POST["cptch_nonce"]){
+					//for Mailchimp mc4wp.com
+					include_once ABSPATH."wp-includes/pluggable.php";
+
+					$_POST["cptch_nonce"] = wp_create_nonce('cptch', 'cptch_nonce');
+				}
+			}else if(isset($_POST) && isset($_POST["yiw_action"])){
+				if(isset($_POST["_wpnonce"]) && $_POST["_wpnonce"]){
+					//for yithemes contact form
+					include_once ABSPATH."wp-includes/pluggable.php";
+
+					$_POST["_wpnonce"] = wp_create_nonce( "yit-sendmail");
+				}
+			}else if(isset($_POST) && isset($_POST["_wpcf7_is_ajax_call"]) && $_POST["_wpcf7_is_ajax_call"] == "1"){
+				if(isset($_POST["_wpnonce"]) && $_POST["_wpnonce"]){
+					//for Contact Form 7
+					include_once ABSPATH."wp-includes/pluggable.php";
+
+					$_POST["_wpnonce"] = substr( wp_hash($_POST["_wpcf7"], 'nonce' ), -12, 10 );
+				}
+			}else if(isset($_POST) && isset($_POST["action"]) && $_POST["action"] == "wpestate_ajax_agent_contact_form"){
 				if(isset($_POST["nonce"]) && $_POST["nonce"]){
 					//for WpResidence theme contact form
 					include_once ABSPATH."wp-includes/pluggable.php";
@@ -167,10 +198,9 @@ GNU General Public License for more details.
 							include_once $this->get_premium_path("logs.php");
 						}
 
-						add_action( 'wp_ajax_wpfc_cdn_template_ajax_request', array($this, 'wpfc_cdn_template_ajax_request_callback'));
-
-
-						add_action( 'plugins_loaded', array($this, 'wpfc_load_plugin_textdomain'));
+						add_action('wp_ajax_wpfc_cdn_template_ajax_request', array($this, 'wpfc_cdn_template_ajax_request_callback'));
+						add_action('plugins_loaded', array($this, 'wpfc_load_plugin_textdomain'));
+						add_action('wp_loaded', array($this, "load_admin_toolbar"));
 
 						$this->admin();
 					}
@@ -193,6 +223,9 @@ GNU General Public License for more details.
 							}
 						}
 					}else{
+						// to show if the user is logged-in
+						add_action('wp_loaded', array($this, "load_admin_toolbar"));
+
 						//for cache
 						$this->cache();
 					}
@@ -201,6 +234,11 @@ GNU General Public License for more details.
 		}
 
 		public function is_trailing_slash(){
+			// no need to check if Custom Permalinks plugin is active (https://tr.wordpress.org/plugins/custom-permalinks/)
+			if($this->isPluginActive("custom-permalinks/custom-permalinks.php")){
+				return false;
+			}
+
 			if($permalink_structure = get_option('permalink_structure')){
 				if(preg_match("/\/$/", $permalink_structure)){
 					return true;
@@ -609,10 +647,7 @@ GNU General Public License for more details.
 			}
 		}
 
-		private function admin(){
-			add_action('wp_loaded', array($this, "load_admin_toolbar"));
-			
-
+		private function admin(){			
 			if(isset($_GET["page"]) && $_GET["page"] == "wpfastestcacheoptions"){
 				include_once('inc/admin.php');
 				$wpfc = new WpFastestCacheAdmin();
@@ -620,12 +655,6 @@ GNU General Public License for more details.
 			}else{
 				add_action('admin_menu', array($this, 'register_my_custom_menu_page'));
 			}
-
-			add_action('admin_enqueue_scripts', array($this, 'load_toolbar_js'));
-		}
-
-		public function load_toolbar_js(){
-			wp_enqueue_script("wpfc-toolbar", plugins_url("wp-fastest-cache/js/toolbar.js"), array(), time(), true);
 		}
 
 		public function load_admin_toolbar(){
@@ -646,7 +675,8 @@ GNU General Public License for more details.
 
 				add_action('wp_ajax_wpfc_delete_cache', array($this, "deleteCacheToolbar"));
 				add_action('wp_ajax_wpfc_delete_cache_and_minified', array($this, "deleteCssAndJsCacheToolbar"));
-				
+				add_action('wp_ajax_wpfc_delete_current_page_cache', array($this, "delete_current_page_cache"));
+
 				$toolbar = new WpFastestCacheAdminToolbar();
 				$toolbar->add();
 			}
@@ -654,12 +684,10 @@ GNU General Public License for more details.
 
 		public function register_my_custom_menu_page(){
 			if(function_exists('add_menu_page')){ 
-				add_menu_page("WP Fastest Cache Settings", "WP Fastest Cache", 'manage_options', "wpfastestcacheoptions", array($this, 'optionsPage'), plugins_url("wp-fastest-cache/images/icon-32x32.png"), 99);
+				add_menu_page("WP Fastest Cache Settings", "WP Fastest Cache", 'manage_options', "wpfastestcacheoptions", array($this, 'optionsPage'), plugins_url("wp-fastest-cache/images/icon-32x32.png"));
 				wp_enqueue_style("wp-fastest-cache", plugins_url("wp-fastest-cache/css/style.css"), array(), time(), "all");
 			}
-			
-			wp_enqueue_style("wp-fastest-cache-toolbar", plugins_url("wp-fastest-cache/css/toolbar.css"), array(), time(), "all");
-			
+						
 			if(isset($_GET["page"]) && $_GET["page"] == "wpfastestcacheoptions"){
 				wp_enqueue_style("wp-fastest-cache-buycredit", plugins_url("wp-fastest-cache/css/buycredit.css"), array(), time(), "all");
 				wp_enqueue_style("wp-fastest-cache-flaticon", plugins_url("wp-fastest-cache/css/flaticon.css"), array(), time(), "all");
@@ -673,6 +701,43 @@ GNU General Public License for more details.
 
 		public function deleteCssAndJsCacheToolbar(){
 			$this->deleteCache(true);
+		}
+
+		public function delete_current_page_cache(){
+			if(isset($_GET["path"])){
+				if($_GET["path"]){
+					if($_GET["path"] == "/"){
+						$_GET["path"] = $_GET["path"]."index.html";
+					}
+				}else{
+					$_GET["path"] = "/index.html";
+				}
+
+				$paths = array();
+
+				array_push($paths, $this->getWpContentDir()."/cache/all".$_GET["path"]);
+
+				if(class_exists("WpFcMobileCache")){
+					$wpfc_mobile = new WpFcMobileCache();
+					array_push($paths, $this->getWpContentDir()."/cache/".$wpfc_mobile->get_folder_name()."".$_GET["path"]);
+				}
+
+				foreach ($paths as $key => $value){
+					if(file_exists($value)){
+						if(preg_match("/\/(all|wpfc-mobile-cache)\/index\.html$/i", $value)){
+							@unlink($value);
+						}else{
+							$this->rm_folder_recursively($value);
+						}
+					}
+				}
+
+				die(json_encode(array("The cache of page has been cleared","success")));
+			}else{
+				die(json_encode(array("Path has NOT been defined", "error", "alert")));
+			}
+
+			exit;
 		}
 
 		private function cache(){
@@ -1239,8 +1304,14 @@ GNU General Public License for more details.
 
 						$rule->content = trim($rule->content, "/");
 
-						@rename($this->getWpContentDir()."/cache/all/".$rule->content, $this->getWpContentDir()."/cache/tmpWpfc/".time());
-						@rename($this->getWpContentDir()."/cache/wpfc-mobile-cache/".$rule->content, $this->getWpContentDir()."/cache/tmpWpfc/mobile_".time());
+						$files = glob($this->getWpContentDir()."/cache/all/".$rule->content."*");
+
+						foreach ((array)$files as $file) {
+							$mobile_file = str_replace("/cache/all/", "/cache/wpfc-mobile-cache/", $file);
+							
+							@rename($file, $this->getWpContentDir()."/cache/tmpWpfc/".time());
+							@rename($mobile_file, $this->getWpContentDir()."/cache/tmpWpfc/mobile_".time());
+						}
 				}else if($rule->prefix == "exact"){
 					$rule->content = trim($rule->content, "/");
 

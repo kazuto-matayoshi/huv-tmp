@@ -16,10 +16,6 @@
 			$this->setCronJobSettings();
 			$this->addButtonOnEditor();
 			add_action('admin_enqueue_scripts', array($this, 'addJavaScript'));
-
-			if($this->isPluginActive('ninja-forms/ninja-forms.php')){
-				$this->create_auto_cache_timeout("twicedaily", 43200);
-			}
 		}
 
 		public function create_auto_cache_timeout($recurrance, $interval){
@@ -519,6 +515,7 @@
 			$mobile = "";
 			$loggedInUser = "";
 			$ifIsNotSecure = "";
+			$trailing_slash_rule = "";
 
 			if(isset($_POST["wpFastestCacheMobile"]) && $_POST["wpFastestCacheMobile"] == "on"){
 				$mobile = "RewriteCond %{HTTP_USER_AGENT} !^.*(".$this->getMobileUserAgents().").*$ [NC]"."\n";
@@ -545,6 +542,7 @@
 					$this->ruleForWpContent()."\n".
 					$this->prefixRedirect().
 					$this->excludeRules()."\n".
+					$this->http_condition_rule()."\n".
 					"RewriteCond %{HTTP_USER_AGENT} !(".$this->get_excluded_useragent().")"."\n".
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					$ifIsNotSecure."\n".
@@ -591,6 +589,20 @@
 					"</FilesMatch>"."\n".
 					"# END WpFastestCache"."\n";
 			return preg_replace("/\n+/","\n", $data);
+		}
+
+		public function http_condition_rule(){
+			$http_host = preg_replace("/(http(s?)\:)?\/\/(www\d*\.)?/i", "", trim(home_url(), "/"));
+
+			if(preg_match("/\//", $http_host)){
+				$http_host = strstr($http_host, '/', true);
+			}
+
+			if(preg_match("/www\./", home_url())){
+				$http_host = "www.".$http_host;
+			}
+
+			return "RewriteCond %{HTTP_HOST} ^".$http_host;
 		}
 
 		public function ruleForWpContent(){
@@ -1055,20 +1067,20 @@
 								<?php if(method_exists("WpFastestCachePowerfulHtml", "render_blocking")){ ?>
 									<div class="questionCon">
 										<div class="question">Render Blocking Js</div>
-										<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRenderBlocking; ?> id="wpFastestCacheRenderBlocking" name="wpFastestCacheRenderBlocking"><label for="wpFastestCacheRenderBlocking">Remove render-blocking JavaScript</label> <b style="color:red;">(Beta)</b></div>
+										<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheRenderBlocking; ?> id="wpFastestCacheRenderBlocking" name="wpFastestCacheRenderBlocking"><label for="wpFastestCacheRenderBlocking">Remove render-blocking JavaScript</label></div>
 										<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/render-blocking-js/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
 									</div>
 								<?php }else{ ?>
 									<div class="questionCon update-needed">
 										<div class="question">Render Blocking Js</div>
-										<div class="inputCon"><input type="checkbox" id="wpFastestCacheRenderBlocking" name="wpFastestCacheRenderBlocking"><label for="wpFastestCacheRenderBlocking">Remove render-blocking JavaScript</label> <b style="color:red;">(Beta)</b></div>
+										<div class="inputCon"><input type="checkbox" id="wpFastestCacheRenderBlocking" name="wpFastestCacheRenderBlocking"><label for="wpFastestCacheRenderBlocking">Remove render-blocking JavaScript</label></div>
 										<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/render-blocking-js/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
 									</div>
 								<?php } ?>
 							<?php }else{ ?>
 								<div class="questionCon disabled">
 									<div class="question">Render Blocking Js</div>
-									<div class="inputCon"><input type="checkbox" id="wpFastestCacheRenderBlocking" name="wpFastestCacheRenderBlocking"><label for="wpFastestCacheRenderBlocking">Remove render-blocking JavaScript</label> <b style="color:red;">(Beta)</b></div>
+									<div class="inputCon"><input type="checkbox" id="wpFastestCacheRenderBlocking" name="wpFastestCacheRenderBlocking"><label for="wpFastestCacheRenderBlocking">Remove render-blocking JavaScript</label></div>
 									<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/render-blocking-js/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
 								</div>
 							<?php } ?>
@@ -1818,6 +1830,11 @@
 			</div>
 
 			<div class="omni_admin_sidebar">
+<!-- 				<div style="padding:0 !important;float:left;">
+					<a href="//partners.hostgator.com/c/149801/178138/3094" target="_blank">
+						<img src="<?php echo plugins_url("wp-fastest-cache/images/ads/hostgator-250x250.gif"); ?>" border="0" alt="" width="222" height="220"/>
+					</a>
+				</div> -->
 				<div class="omni_admin_sidebar_section" id="vote-us">
 					<h3 style="color: antiquewhite;">Rate Us</h3>
 					<ul>
