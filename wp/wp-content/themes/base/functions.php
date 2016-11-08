@@ -17,20 +17,22 @@ get_template_part('function/custom_post');
  * 01.0 - 一覧用ページネーション
  * 02.0 - パンくず
  * 03.0 - カスタム投稿タイプの公開時に自動で投稿IDをスラッグに変更する。
- * 04.0 - 検索関係
+ * 04.0 - 検索
  *   04.1 - 検索の値が空でもsearch.phpに飛ばす処理
- * 05.0 - 子ページであるかのチェック(true -> 親ページの ID を返す。)
- * 06.0 - 新着のループ処理
- * 07.0 - アーカイブページの記事ループ外でも、通常の記事ループ内でもpost_typeを取得できるようにした関数
- * 08.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
- * 09.0 - 親スラッグの取得
+ * 05.0 - アーカイブページの記事ループ外でも、通常の記事ループ内でもpost_typeを取得できるようにした関数
+ * 06.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
+ * 07.0 - 子ページであるかのチェック(true -> 親ページの ID を返す。)
+ * 08.0 - 親スラッグの取得
+ *   08.1 - 直上の親を返す
+ *   08.2 - 一番上の親を返す
+ * 09.0 - メインクエリの書き換え
  *
  */
 
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 01.0 - 一覧用ページネーション  ---  "(ダブルクォーテーション)を'(シングルクォーテーション)に変更したので挙動確認必須
+ * 01.0 - 一覧用ページネーション
  */
 //---------------------------------------------------------------------------------------------------
 function pagination($pages = '') {
@@ -86,7 +88,7 @@ function pagination($pages = '') {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 02.0 - パンくず  ---  "(ダブルクォーテーション)を'(シングルクォーテーション)に変更したので挙動確認必須
+ * 02.0 - パンくず
  */
 //---------------------------------------------------------------------------------------------------
 function breadcrumb() {
@@ -177,7 +179,31 @@ function custom_search( $search, $wp_query ) {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 05.0 - 子ページであるかのチェック(true -> 親ページの ID を返す。)
+ * 05.0 - アーカイブページの記事ループ外でも、通常の記事ループ内でもpost_typeを取得できるようにした関数
+ */
+//---------------------------------------------------------------------------------------------------
+function get_post_type_query() {
+	if ( is_archive() ) {
+		return get_query_var( 'post_type' );
+	}
+	return get_post_type();
+}
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 06.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
+ */
+//---------------------------------------------------------------------------------------------------
+function parse_query_ex() {
+	if ( !is_super_admin() && !get_query_var('post_status') && !is_singular() ) {
+		set_query_var('post_status', 'publish');
+	}
+}
+// add_action('parse_query', 'parse_query_ex');
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 07.0 - 子ページであるかのチェック(true -> 親ページの ID を返す。)
  */
 //---------------------------------------------------------------------------------------------------
 function is_subpage() {
@@ -191,102 +217,14 @@ function is_subpage() {
 	};
 };
 
-
 //---------------------------------------------------------------------------------------------------
 /**
- * 06.0 - 新着のループ処理  ---  テンプレートのリネームをしたので挙動確認必須
+ * 08.0 - 親スラッグの取得
  */
-//---------------------------------------------------------------------------------------------------
-function huv_get_new_post( $args ) {
-	$default = array(
-		'class'      => 'post',
-		'post_type'  => 'post',
-		'view_posts' => 10,
-		'pagination' => true,
-		'eyecatch'   => false,
-	);
-
-	// default_password_nag()の更新
-	$option = array_replace( $default, $args );
-
-	// 三項演算子によるpagedの設定
-	$paged = get_query_var('paged') ? get_query_var('paged') : 1;
-
-	// 三項演算子によるyearの設定
-	// $_SERVER['REQUEST_URI'] => /event/2011/ => [0]->'', [1]->'event', [2]->'2011'
-	$year = '';
-	if ( is_archive() ) {
-		$year = $option['post_type'] == 'post' ? split('[/]', $_SERVER['REQUEST_URI'])[1] : split('[/]', $_SERVER['REQUEST_URI'])[2];
-	}
-
-	$query =
-	array(
-		'year'           => $year,
-		'paged'          => $paged,
-		'post_type'      => $option['post_type'],
-		'post_status'    => 'publish',
-		'posts_per_page' => $option['view_posts'],
-	);
-
-	$the_query = new WP_Query( $query );
-
-	if ( $the_query->have_posts() ) :
-		echo '<ul class="'.$option['class'].'">';
-		while ( $the_query->have_posts() ) :
-			$the_query->the_post();
-			// get_template_part( 'huv_loop/huv_new_post' );
-		?>
-			<li>
-				<p class="post-img"><?php
-					if ( empty(get_the_post_thumbnail()) ) {
-						echo'<img src="/img/no-image.jpg" alt="no-image">';
-					} else {
-						echo get_the_post_thumbnail( $page->ID, 'thumbnail' ); 
-					}
-				?></p>
-				<p class="post-day"><?php echo get_the_date(); ?></p>
-				<p class="post-ttl"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></p>
-			</li>
-		<?php endwhile;
-		echo '</ul>';
-		if ( $option['pagination'] === true ) {
-			pagination($the_query->max_num_pages);
-		};
-	else :
-		get_template_part( '404' );
-	endif;
-	wp_reset_postdata(); // reset
-}
-
 //---------------------------------------------------------------------------------------------------
 /**
- * 07.0 - アーカイブページの記事ループ外でも、通常の記事ループ内でもpost_typeを取得できるようにした関数
+ * 08.1 - 直上の親を返す
  */
-//---------------------------------------------------------------------------------------------------
-function get_post_type_query() {
-	if ( is_archive() ) {
-		return get_query_var( 'post_type' );
-	}
-	return get_post_type();
-}
-
-//---------------------------------------------------------------------------------------------------
-/**
- * 08.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
- */
-//---------------------------------------------------------------------------------------------------
-function parse_query_ex() {
-	if ( !is_super_admin() && !get_query_var('post_status') && !is_singular() ) {
-		set_query_var('post_status', 'publish');
-	}
-}
-// add_action('parse_query', 'parse_query_ex');
-
-//---------------------------------------------------------------------------------------------------
-/**
- * 09.0 - 親スラッグの取得
- */
-//---------------------------------------------------------------------------------------------------
 function is_parent_slug() {
 	global $post;
 	if ($post->post_parent) {
@@ -295,9 +233,32 @@ function is_parent_slug() {
 	}
 }
 
+/**
+ * 08.2 - 一番上の親を返す
+ */
 function is_root_parent_slug() {
 	global $post;
 	$root_parent = get_page($post->ancestors[count($post->ancestors) - 1]);
 	return $root_parent->post_name;
 }
 
+//---------------------------------------------------------------------------------------------------
+/**
+ * 09.0 - メインクエリの書き換え
+ */
+//---------------------------------------------------------------------------------------------------
+
+function change_posts_per_page($query) {
+/* 管理画面,メインクエリに干渉しないために必須 */
+	if ( is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+ // カテゴリーページの表示件数を5件にする 
+	if ( $query->is_category() ) {
+		// $query->set( 'posts_per_page', '5' );
+		return;
+	}
+
+}
+// add_action( 'pre_get_posts', 'change_posts_per_page' );
