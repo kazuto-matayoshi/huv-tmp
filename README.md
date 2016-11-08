@@ -175,8 +175,8 @@ header.php同様
 
 <\*-- 例 --\*>
 
-テーマ名  -> test-theme
-親スラッグ -> parent
+テーマ名  -> test-theme<br>
+親スラッグ -> parent<br>
 子スラッグ -> child
 ```
 /test-theme/parent-child.php
