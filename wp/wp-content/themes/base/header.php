@@ -33,7 +33,7 @@
 	?>
 </head>
 <body>
-<h1></h1>
+<h1 class="meta-h1"></h1>
 <!-- <nav>
 	<?php
 		// 開発中ナビゲーション
