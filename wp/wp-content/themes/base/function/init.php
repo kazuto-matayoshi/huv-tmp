@@ -120,7 +120,7 @@ function remove_admin_bar_menu( $wp_admin_bar ) {
 	// コメント
 	$wp_admin_bar->remove_menu( 'comments' );
 	// 『新規 -> 投稿ページ』の削除
-	$wp_admin_bar->remove_menu( 'new-post' );
+	// $wp_admin_bar->remove_menu( 'new-post' );
 
 	// 管理者ではない場合実行
 	if ( !current_user_can( 'level_10' ) ) {
