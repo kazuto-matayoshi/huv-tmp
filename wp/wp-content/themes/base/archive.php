@@ -1,7 +1,8 @@
 <?php
 get_header();
 
-	$path = get_post_type($post->ID);
+	// $path = get_post_type($post->ID);
+	$path = get_query_var( 'post_type' );
 
 	// 書き出しテスト
 	// echo 'archive : '.$path;
