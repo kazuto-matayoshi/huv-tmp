@@ -26,6 +26,7 @@ get_template_part('function/custom_post');
  *   08.1 - 直上の親を返す
  *   08.2 - 一番上の親を返す
  * 09.0 - メインクエリの書き換え
+ * 10.0 - post_type == 'post'の一覧ページの設定
  *
  */
 
@@ -262,3 +263,21 @@ function change_posts_per_page($query) {
 
 }
 // add_action( 'pre_get_posts', 'change_posts_per_page' );
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 10.0 - post_type == 'post'の一覧ページの設定
+ */
+//---------------------------------------------------------------------------------------------------
+/*
+ * 投稿にアーカイブ(投稿一覧)を持たせるようにします。
+ * ※ 記載後にパーマリンク設定で「変更を保存」してください。
+ */
+function post_has_archive( $args, $post_type ) {
+	if ( $post_type == 'post' ) {
+		$args['rewrite'] = true;
+		$args['has_archive'] = 'post'; // ページ名
+	}
+	return $args;
+}
+add_filter( 'register_post_type_args', 'post_has_archive', 10, 2 );
