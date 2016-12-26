@@ -46,7 +46,7 @@ endif;
 				<p class="post-img"><?php
 					// アイキャッチ
 					if ( has_post_thumbnail() ) {
-						echo get_the_post_thumbnail( $page->ID, 'thumbnail' ); 
+						echo get_the_post_thumbnail( $page->ID, 'thumbnail' );
 					} else {
 						echo'<img src="/img/no-image.jpg" alt="no-image">';
 					}
