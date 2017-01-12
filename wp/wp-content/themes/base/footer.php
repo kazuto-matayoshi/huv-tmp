@@ -3,15 +3,21 @@
 <script>
 	<?php if ( is_page('form_xxx') ) : ?>
 	(function($){
+		// $('.mw_wp_form_input input[name="tell"]')のinput typeをtelに変更
 		$('.mw_wp_form_input input[name="tell"]').attr( 'type', 'tel' );
-		$('select[name="prefectures"] option[value=""]').html( '選択してください' );
+
+		// $('.mw_wp_form_preview input[name="tell"]')のinput typeをhiddenに変更
 		$('.mw_wp_form_preview input[name="tell"]').attr( 'type', 'hidden' );
+
+		// $('select[name="prefectures"] option[value=""]')に対し、『選択してください』の文言を追加
+		$('select[name="prefectures"] option[value=""]').html( '選択してください' );
+
+		// 確認画面の際.form_box内のinput[type="hidden"]のvalue=""の行を消す処理
 		$('.mw_wp_form_preview input[type="hidden"]').each(function(){
 			if ($(this).val() == "") {
 				$(this).parentsUntil(".form_box").hide();
 			};
 		});
-		if ($('.mw_wp_form_preview').length) $('.apply_ttl').hide();
 	})(jQuery);
 	<?php endif; ?>
 	jQuery(function() {
