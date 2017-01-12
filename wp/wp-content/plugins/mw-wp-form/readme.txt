@@ -3,8 +3,8 @@ Contributors: inc2734, ryu263, tomothumb, nanniku, mt8.biz, NExt-Season, kuck1u,
 Donate link: http://www.amazon.co.jp/registry/wishlist/39ANKRNSTNW40
 Tags: plugin, form, confirm, preview, shortcode, mail, chart, graph, html, contact form, form creation, form creator, form manager, form builder, custom form
 Requires at least: 4.0
-Tested up to: 4.6.0
-Stable tag: 2.11.0
+Tested up to: 4.7.0
+Stable tag: 2.13.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,18 @@ Do you have questions or issues with MW WP Form? Use these support channels appr
 5. Supports chart display of saved inquiry data.
 
 == Changelog ==
+
+= 2.13.1 =
+* Bugfix  : Fix undefined constant error FILEINFO_MIME_TYPE
+
+= 2.13.0 =
+* Added   : Added the button elements.
+* Added   : Added filter hook mwform_custom_mail_tag
+* Added   : Added Method MW_WP_Form_Data::get_view_flg()
+
+= 2.12.0 =
+* Added   : Added filter hook mwform_complete_content_mw-wp-form-xxx
+* Changed : Changed to pass MW_WP_Form_Data object as the 2nd argument of mwform_post_content_mw-wp-form-xxx hook.
 
 = 2.11.0 =
 * Bugfix  : Fixed a bug that to remove the uploaded file when filesize validation error.

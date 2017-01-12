@@ -38,7 +38,21 @@
 				}
 			}
 
-			define("WPFC_CONTENT_URL", $content_url);
+			// WP Hide & Security Enhancer
+			if($this->isPluginActive('wp-hide-security-enhancer/wp-hide.php')){
+				$wph_settings = get_option("wph_settings");
+
+				if(isset($wph_settings["module_settings"])){
+					if(isset($wph_settings["module_settings"]["new_content_path"]) && $wph_settings["module_settings"]["new_content_path"]){
+						$wph_settings["module_settings"]["new_content_path"] = trim($wph_settings["module_settings"]["new_content_path"], "/");
+						$content_url = str_replace("wp-content", $wph_settings["module_settings"]["new_content_path"], $content_url);
+					}
+				}
+			}
+
+			if (!defined('WPFC_WP_CONTENT_URL')) {
+				define("WPFC_WP_CONTENT_URL", $content_url);
+			}
 		}
 
 		public function set_exclude_rules(){
@@ -138,14 +152,23 @@
 				if(isset($this->options->wpFastestCacheLoggedInUser) && $this->options->wpFastestCacheLoggedInUser == "on"){
 					// to check logged-in user
 					foreach ((array)$_COOKIE as $cookie_key => $cookie_value){
-						if(preg_match("/comment_author_|wordpress_logged_in|wp_woocommerce_session/i", $cookie_key)){
+						if(preg_match("/wordpress_logged_in|wp_woocommerce_session/i", $cookie_key)){
 							return 0;
 						}
 					}
 				}
 
+				// to check comment author
+				foreach ((array)$_COOKIE as $cookie_key => $cookie_value){
+					if(preg_match("/comment_author_/i", $cookie_key)){
+						return 0;
+					}
+				}
+
 				if(preg_match("/\?/", $_SERVER["REQUEST_URI"]) && !preg_match("/\/\?fdx\_switcher\=true/", $_SERVER["REQUEST_URI"])){ // for WP Mobile Edition
-					if(defined('WPFC_CACHE_QUERYSTRING') && WPFC_CACHE_QUERYSTRING){
+					if(preg_match("/\?amp(\=1)?/i", $_SERVER["REQUEST_URI"])){
+						//
+					}else if(defined('WPFC_CACHE_QUERYSTRING') && WPFC_CACHE_QUERYSTRING){
 						//
 					}else{
 						return 0;
@@ -205,7 +228,9 @@
 				}else{
 					if($this->isMobile()){
 						if(class_exists("WpFcMobileCache") && isset($this->options->wpFastestCacheMobileTheme)){
-							if($this->isPluginActive('wptouch/wptouch.php') || $this->isPluginActive('wptouch-pro/wptouch-pro.php')){
+							if(isset($this->options->wpFastestCacheMobileTheme_themename) && $this->options->wpFastestCacheMobileTheme_themename){
+								$create_cache = true;
+							}else if($this->isPluginActive('wptouch/wptouch.php') || $this->isPluginActive('wptouch-pro/wptouch-pro.php')){
 								//to check that user-agent exists in wp-touch's list or not
 								if($this->is_wptouch_smartphone()){
 									$create_cache = true;
@@ -234,7 +259,9 @@
 
 					if($create_cache){
 						$this->startTime = microtime(true);
+
 						add_action( 'get_footer', array($this, "wp_print_scripts_action"));
+
 						ob_start(array($this, "callback"));
 					}
 				}
@@ -326,6 +353,10 @@
 						if(preg_match("/".preg_quote($value->content, "/")."/i", $_SERVER['HTTP_USER_AGENT'])){
 							return true;
 						}
+					}else if($value->type == "cookie"){
+						if(preg_match("/".preg_quote($value->content, "/")."/i", $_SERVER['HTTP_COOKIE'])){
+							return true;
+						}
 					}
 				}
 
@@ -343,9 +374,14 @@
 		public function callback($buffer){
 			$buffer = $this->checkShortCode($buffer);
 
-			if(!$this->cacheFilePath){
-				return $buffer."<!-- permalink_structure ends with slash (/) but REQUEST_URI does not end with slash (/) -->";
-			}else if(preg_match("/Mediapartners-Google|Google\sWireless\sTranscoder/i", $_SERVER['HTTP_USER_AGENT'])){
+			// for Wordfence: not to cache 503 pages
+			if(defined('DONOTCACHEPAGE') && $this->isPluginActive('wordfence/wordfence.php')){
+				if(function_exists("http_response_code") && http_response_code() == 503){
+					return $buffer."<!-- DONOTCACHEPAGE is defined as TRUE -->";
+				}
+			}
+
+			if(preg_match("/Mediapartners-Google|Google\sWireless\sTranscoder/i", $_SERVER['HTTP_USER_AGENT'])){
 				return $buffer;
 			}else if($this->is_xml($buffer)){
 				return $buffer;
@@ -361,8 +397,6 @@
 				}else{
 					return $buffer."<!-- \$_COOKIE['wp_woocommerce_session'] has been set -->";
 				}
-			}else if(defined('DONOTCACHEPAGE') && $this->isPluginActive('wordfence/wordfence.php')){ // for Wordfence: not to cache 503 pages
-				return $buffer."<!-- DONOTCACHEPAGE is defined as TRUE -->";
 			}else if($this->isPasswordProtected($buffer)){
 				return $buffer."<!-- Password protected content has been detected -->";
 			}else if($this->isWpLogin($buffer)){
@@ -381,6 +415,8 @@
 				return $buffer."<!-- html is corrupted -->";
 			}else if((function_exists("http_response_code")) && (http_response_code() == 301 || http_response_code() == 302)){
 				return $buffer;
+			}else if(!$this->cacheFilePath){
+				return $buffer."<!-- permalink_structure ends with slash (/) but REQUEST_URI does not end with slash (/) -->";
 			}else{				
 				$content = $buffer;
 
@@ -474,17 +510,30 @@
 						$content = preg_replace_callback("/(srcset|src|href|data-lazyload)\=[\'\"]([^\'\"]+)[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
 						// url()
 						$content = preg_replace_callback("/(url)\(([^\)]+)\)/i", array($this, 'cdn_replace_urls'), $content);
+						// {"concatemoji":"http:\/\/your_url.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}
+						$content = preg_replace_callback("/\{\"concatemoji\"\:\"[^\"]+\"\}/i", array($this, 'cdn_replace_urls'), $content);
 					}
 					
 					if(isset($this->options->wpFastestCacheLazyLoad)){
-						include_once plugin_dir_path( __FILE__ )."pro/library/lazy-load.php";
-
-						if(method_exists("WpFastestCacheLazyLoad", "images_to_lazyload")){
-							$content = WpFastestCacheLazyLoad::images_to_lazyload($content, $this->options->wpFastestCacheLazyLoad_type);
-						}
+						$content = $powerful_html->lazy_load($content);
 					}
 					
 					$content = str_replace("<!--WPFC_FOOTER_START-->", "", $content);
+
+
+					if(isset($this->options->wpFastestCacheLazyLoad)){
+						if(!class_exists("WpFastestCacheLazyLoad")){
+							include_once $this->get_premium_path("lazy-load.php");
+						}
+
+						if(method_exists("WpFastestCacheLazyLoad",'get_js_source_new')){
+							$lazy_load_js = WpFastestCacheLazyLoad::get_js_source_new();
+						}else if(method_exists("WpFastestCacheLazyLoad",'get_js_source')){
+							$lazy_load_js = WpFastestCacheLazyLoad::get_js_source();
+						}
+
+						$content = preg_replace("/\s*<\/head>/i", $lazy_load_js."</head>", $content, 1);
+					}
 
 					if($this->cacheFilePath){
 						$this->createFolder($this->cacheFilePath, $content);
