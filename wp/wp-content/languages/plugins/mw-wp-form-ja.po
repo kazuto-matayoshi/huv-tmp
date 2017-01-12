@@ -153,17 +153,21 @@ msgstr "確認画面URL"
 msgid "Input Page URL"
 msgstr "入力画面URL"
 
-#: templates/admin/tag-generator.php:26
+#: templates/admin/tag-generator.php:23
 msgid "Add form tag"
 msgstr "フォームタグを追加"
 
-#: templates/admin/tag-generator.php:22
+#: templates/admin/tag-generator.php:19
 msgid "Other fields"
 msgstr "その他の項目"
 
-#: templates/admin/tag-generator.php:19
+#: templates/admin/tag-generator.php:16
 msgid "Error fields"
 msgstr "エラー項目"
+
+#: templates/admin/tag-generator.php:13
+msgid "Button fields"
+msgstr "ボタン項目"
 
 #: templates/admin/tag-generator.php:10
 msgid "Select fields"
@@ -554,7 +558,6 @@ msgstr "テキスト"
 msgid "Tel"
 msgstr "電話番号"
 
-#: classes/form-fields/class.button-submit.php:30
 #: classes/form-fields/class.submit.php:30
 msgid "Submit Button"
 msgstr "送信ボタン"
@@ -567,7 +570,6 @@ msgstr "送信ボタンに表示する文字列"
 msgid "String on the confirm button"
 msgstr "確認ボタンに表示する文字列"
 
-#: classes/form-fields/class.button-submit.php:44
 #: classes/form-fields/class.submit-button.php:44
 #: classes/form-fields/class.submit.php:43
 msgid "Send"
@@ -605,7 +607,6 @@ msgstr "画像フィールド"
 msgid "Display hidden value."
 msgstr "hiddenの値を表示"
 
-#: classes/form-fields/class.button-submit.php:115
 #: classes/form-fields/class.hidden.php:89
 msgid "Display"
 msgstr "表示する"
@@ -650,13 +651,11 @@ msgstr "Email フィールド"
 msgid "Datepicker"
 msgstr "日付"
 
-#: classes/form-fields/class.button-confirm.php:43
 #: classes/form-fields/class.confirm-button.php:42
 #: classes/form-fields/class.submit-button.php:43
 msgid "Confirm"
 msgstr "確認画面へ"
 
-#: classes/form-fields/class.button-confirm.php:30
 #: classes/form-fields/class.confirm-button.php:30
 msgid "Confirm Button"
 msgstr "確認ボタン"
@@ -767,24 +766,19 @@ msgstr "選択肢"
 msgid "Checkbox"
 msgstr "チェックボックス"
 
-#: classes/form-fields/class.button-button.php:30
 #: classes/form-fields/class.button.php:30
 msgid "Button"
 msgstr "ボタン"
 
 #: classes/form-fields/class.back-button.php:77
-#: classes/form-fields/class.button-back.php:88
-#: classes/form-fields/class.button-button.php:95
-#: classes/form-fields/class.button-confirm.php:88
-#: classes/form-fields/class.button-submit.php:107
 #: classes/form-fields/class.button.php:84
 #: classes/form-fields/class.confirm-button.php:77
 #: classes/form-fields/class.submit.php:84
 msgid "String on the button"
 msgstr "ボタンに表示する文字列"
 
+#: classes/form-fields/class.back-button.php:30
 #: classes/form-fields/class.back-button.php:42
-#: classes/form-fields/class.button-back.php:43
 msgid "Back"
 msgstr "戻る"
 
