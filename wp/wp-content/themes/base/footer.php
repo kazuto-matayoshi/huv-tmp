@@ -12,7 +12,7 @@
 		// $('select[name="prefectures"] option[value=""]')に対し、『選択してください』の文言を追加
 		$('select[name="prefectures"] option[value=""]').html( '選択してください' );
 
-		// 確認画面の際.form_box内のinput[type="hidden"]のvalue=""の行を消す処理
+		// 確認画面の際、.form_box内のinput[type="hidden"]のvalue=""の行を消す処理
 		$('.mw_wp_form_preview input[type="hidden"]').each(function(){
 			if ($(this).val() == "") {
 				$(this).parentsUntil(".form_box").hide();
