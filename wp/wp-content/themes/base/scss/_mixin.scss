@@ -7,7 +7,11 @@
 $fa: FontAwesome;
 
 @mixin fa($fontCode) {
-	content: '"\\' + $fontCode + '"';
+	@if str-index($fontCode, '\\' ) {
+		content: unquote("\"") + unquote($fontCode) + unquote("\"");
+	} @else {
+		content: unquote("\"") + unquote(str-insert($fontCode, "\\", 1)) + unquote("\"");
+	}
 	font-family: $fa;
 	line-height: 1;
 }
@@ -16,13 +20,28 @@ $fa: FontAwesome;
 // icomoon
 //————————————————————————————————————————————
 
+// @font-face {
+// 	font-family: 'icomoon';
+// 	src: url("../fonts/icomoon.eot");
+// 	src: url("../fonts/icomoon.eot") format("embedded-opentype"), url("../fonts/icomoon.ttf") format("truetype"), url("../fonts/icomoon.woff") format("woff"), url("../fonts/icomoon.svg") format("svg");
+// 	font-weight: normal;
+// 	font-style: normal;
+// }
+
 $im: icomoon;
 
 @mixin im($fontCode) {
-	content: '"\\' + $fontCode + '"';
+	@if str-index($fontCode, '\\' ) {
+		content: unquote("\"") + unquote($fontCode) + unquote("\"");
+	} @else {
+		content: unquote("\"") + unquote(str-insert($fontCode, "\\", 1)) + unquote("\"");
+	}
 	font-family: $im;
 	line-height: 1;
 }
+
+// 上記、$fontCodeの設定詳細は下記URLの『6,7』
+// http://qiita.com/nekoneko-wanwan/items/e0f5a71a7d603215bcc3
 
 
 //————————————————————————————————————————————
