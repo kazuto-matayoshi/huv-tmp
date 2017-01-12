@@ -43,7 +43,7 @@ meta周りの調整は済むようになっています。
 <html lang="ja">
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>All in One SEO Setting Title</title>
 		<!-- icon -->
 		<link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -70,6 +70,9 @@ meta周りの調整は済むようになっています。
 ## index.php
 ---
 基本的に使いません。
+さまざまな分岐を行ったうえで
+該当のページファイルがない場合に表示されます。
+
 TOPページの表示処理は
 front-page.phpで行います。
 <br><br><br>
@@ -123,17 +126,23 @@ header.php同様
 (\*2)のコード
 
 ~~~js
-	(function($){
-		$('.mw_wp_form_input input[name="tell"]').attr( 'type', 'tel' );
-		$('select[name="prefectures"] option[value=""]').html( '選択してください' );
-		$('.mw_wp_form_preview input[name="tell"]').attr( 'type', 'hidden' );
-		$('.mw_wp_form_preview input[type="hidden"]').each(function(){
-			if ($(this).val() == "") {
-				$(this).parentsUntil(".form_box").hide();
-			};
-		});
-		if ($('.mw_wp_form_preview').length) $('.apply_ttl').hide();
-	})(jQuery);
+  (function($){
+    // $('.mw_wp_form_input input[name="tell"]')のinput typeをtelに変更
+    $('.mw_wp_form_input input[name="tell"]').attr( 'type', 'tel' );
+
+    // $('.mw_wp_form_preview input[name="tell"]')のinput typeをhiddenに変更
+    $('.mw_wp_form_preview input[name="tell"]').attr( 'type', 'hidden' );
+
+    // $('select[name="prefectures"] option[value=""]')に対し、『選択してください』の文言を追加
+    $('select[name="prefectures"] option[value=""]').html( '選択してください' );
+
+    // 確認画面の際、.form_box内のinput[type="hidden"]のvalue=""の行を消す処理
+    $('.mw_wp_form_preview input[type="hidden"]').each(function(){
+      if ($(this).val() == "") {
+        $(this).parentsUntil(".form_box").hide();
+      };
+    });
+  })(jQuery);
 ~~~
 ---
 
@@ -179,7 +188,7 @@ header.php同様
 親スラッグ -> parent<br>
 子スラッグ -> child
 ```
-/test-theme/parent-child.php
+/test-theme/page/parent-child.php
 ```
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
@@ -202,7 +211,7 @@ endif;
 上記コードで
 固定ページで入力した値を取得します。
 
-このファイルは基本的にごみ扱いなので
+このファイルは基本的にゴミ扱いなので
 不要になった時点で削除してください。
 
 (※リネームでの作業を推奨します。)
