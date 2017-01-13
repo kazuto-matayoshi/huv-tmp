@@ -2,11 +2,11 @@
 /**
  * Name       : MW WP Form Form
  * Description: フォームヘルパー
- * Version    : 1.9.0
+ * Version    : 1.10.0
  * Author     : Takashi Kitajima
  * Author URI : http://2inc.org
  * Created    : September 25, 2012
- * Modified   : December 26, 2016
+ * Modified   : January 13, 2017
  * License    : GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -591,7 +591,12 @@ class MW_WP_Form_Form {
 				'class' => $options['class'],
 			) );
 			$_ret .= sprintf(
-				'<span class="mwform-radio-field %s"><label%s><input type="radio" name="%s" value="%s"%s %s />%s</label></span>',
+				'<span class="mwform-radio-field %s">
+					<label%s>
+						<input type="radio" name="%s" value="%s"%s %s />
+						<span class="mwform-radio-field-text">%s</span>
+					</label>
+				</span>',
 				$vertically,
 				$attributes_for_label,
 				esc_attr( $name ),
@@ -640,7 +645,12 @@ class MW_WP_Form_Form {
 				'class' => $options['class'],
 			) );
 			$_ret .= sprintf(
-				'<span class="mwform-checkbox-field %s"><label%s><input type="checkbox" name="%s" value="%s"%s %s />%s</label></span>',
+				'<span class="mwform-checkbox-field %s">
+					<label%s>
+						<input type="checkbox" name="%s" value="%s"%s %s />
+						<span class="mwform-checkbox-field-text">%s</span>
+					</label>
+				</span>',
 				$vertically,
 				$attributes_for_label,
 				esc_attr( $name . '[data][]' ),
