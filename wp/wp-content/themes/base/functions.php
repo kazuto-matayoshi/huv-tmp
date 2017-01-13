@@ -11,6 +11,9 @@ get_template_part('function/cleanup');
 // カスタム投稿タイプ関係
 get_template_part('function/custom_post');
 
+// test
+// get_template_part('function/admin');
+
 
 /**
  *
