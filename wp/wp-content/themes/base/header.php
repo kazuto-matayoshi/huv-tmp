@@ -5,7 +5,7 @@
 	<title><?php wp_title(); ?></title>
 
 	<!-- icon -->
-	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico">
 
 	<!-- IE対策 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><?php wp_head(); ?>
