@@ -16,7 +16,7 @@ function my_css_attributes_filter($var) {
  * - いらないデフォルトウィジェットを消す -
  */
 
-function unregister_widgets(){
+function init_widgets(){
 	unregister_widget('WP_Widget_RSS');             // RSS/Atom フィード
 	unregister_widget('WP_Widget_Meta');            // メタ情報(login/outなど)
 	unregister_widget('WP_Widget_Text');            // 任意のテキストやHTMLを挿入するウィジェット
@@ -31,7 +31,7 @@ function unregister_widgets(){
 	unregister_widget('WP_Widget_Recent_Posts');    // 最近の投稿
 	unregister_widget('WP_Widget_Recent_Comments'); // 最近のコメント
 }
-add_action('widgets_init', 'unregister_widgets');
+add_action('widgets_init', 'init_widgets');
 
 
 /**
