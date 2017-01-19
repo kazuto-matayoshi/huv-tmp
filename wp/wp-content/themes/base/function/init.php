@@ -21,6 +21,7 @@
  * 09.0 - バージョン更新を非表示にする
  * 10.0 - サイト側の管理バーを非表示
  * 11.0 - アイキャッチ画像の設定
+ * 12.0 - カスタムメニューをONにする
  *
  *
  * - カスタマイズ -
@@ -101,9 +102,11 @@ function site_target_blank( $wp_admin_bar ) {
 			'meta'   => array( 'target' => '_blank' ),
 		)
 	);
-}
-add_action( 'admin_bar_menu', 'site_target_blank', 100 );
 
+	// サブメニューの削除
+	$wp_admin_bar -> remove_menu( 'view-site' );
+}
+add_action( 'admin_bar_menu', 'site_target_blank', 50 );
 
 //---------------------------------
 /*
@@ -236,4 +239,7 @@ add_filter('show_admin_bar', '__return_false');
  */
 add_theme_support( 'post-thumbnails' );
 
-
+/**
+ * 12.0 - カスタムメニューをONにする
+ */
+add_theme_support( 'menus' );
