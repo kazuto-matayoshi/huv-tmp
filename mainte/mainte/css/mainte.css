@@ -1,0 +1,93 @@
+@charset "UTF-8";
+html {
+  font-size: 62.5%;
+  position: relative;
+  min-height: 100%;
+  overflow-y: scroll;
+}
+
+html body {
+  margin: 0;
+  font-size: 10px;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: Avenir, "Open Sans", "Helvetica Neue", Helvetica , Arial , Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+  min-width: 980px;
+}
+
+html,
+body,
+.wrapper {
+  height: 100%;
+}
+
+h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 0;
+  line-height: 0;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.cf:after {
+  content: "";
+  display: block;
+  width: 100%;
+  clear: both;
+}
+
+.content {
+  width: 980px;
+  margin: 0 auto;
+}
+
+.head {
+  padding: 2.6rem 0;
+  text-align: center;
+}
+
+.head-logo {
+  max-width: 200px;
+}
+
+.wrapper {
+  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.maintenance {
+  text-align: center;
+  padding: 7rem 0;
+  border-top: 8px solid #16d0cf;
+  border-bottom: 8px solid #16d0cf;
+  height: 125px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.maintenance h2 {
+  color: red;
+  font-size: 2.6rem;
+  line-height: 1;
+  margin-bottom: 3rem;
+}
+
+.maintenance p {
+  font-size: 1.8rem;
+  line-height: 1.8;
+}
