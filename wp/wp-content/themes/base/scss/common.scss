@@ -33,8 +33,13 @@ h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd {
 }
 
 h1.meta-h1 {
-	text-indent: -99999999px;
-	height: 0;
+	// text-indent: -99999999px;
+	// height: 0;
+
+	// 一旦追加
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 li {
