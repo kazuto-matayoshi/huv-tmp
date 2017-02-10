@@ -17,6 +17,14 @@ html {
 	position: relative;
 	min-height: 100%;
 	// overflow-y: scroll;
+
+	// type-kit、goolge-fonts読み込み時のカクツキを解消
+	&.wf-loading {
+		visibility: hidden;
+	}
+	&.wf-active {
+		visibility: visible;
+	}
 }
 
 body {
@@ -33,6 +41,7 @@ h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd {
 }
 
 h1.meta-h1 {
+	// 一旦削除
 	// text-indent: -99999999px;
 	// height: 0;
 
