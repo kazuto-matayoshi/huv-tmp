@@ -2,14 +2,42 @@
 # This file is distributed under the same license as the Plugins - MW WP Form - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-12-08 04:24:14+0000\n"
+"PO-Revision-Date: 2017-03-25 13:02:33+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: GlotPress/2.3.0-alpha\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - MW WP Form - Stable (latest release)\n"
+
+#: templates/admin/tag-generator.php:16
+msgid "Button fields (input)"
+msgstr "ボタン項目（input）"
+
+#: templates/admin/tag-generator.php:13
+msgid "Button fields (button)"
+msgstr "ボタン項目（button）"
+
+#: classes/form-fields/class.button-submit.php:112
+msgid "Display on input page"
+msgstr "入力画面に表示する"
+
+#: classes/form-fields/class.button-button.php:44
+msgid "button"
+msgstr "ボタン"
+
+#: classes/form-fields/class.button-back.php:83
+#: classes/form-fields/class.button-button.php:90
+#: classes/form-fields/class.button-confirm.php:83
+#: classes/form-fields/class.button-submit.php:102
+msgid "Value"
+msgstr "value"
+
+#: classes/form-fields/class.back-button.php:30
+#: classes/form-fields/class.button-back.php:30
+msgid "Back Button"
+msgstr "戻るボタン"
 
 #: templates/admin/admin-mail-options.php:34
 msgid "Return-Path ( E-mail address )"
@@ -86,7 +114,7 @@ msgstr "リンクをクリックすることでデータベースに保存され
 
 #: templates/contact-data-list/csv-button.php:2
 msgid "CSV Download"
-msgstr "CSVダウンロード"
+msgstr "CSV ダウンロード"
 
 #: templates/contact-data/returning-link.php:2
 msgid "&laquo; Back to the list"
@@ -153,21 +181,17 @@ msgstr "確認画面URL"
 msgid "Input Page URL"
 msgstr "入力画面URL"
 
-#: templates/admin/tag-generator.php:23
+#: templates/admin/tag-generator.php:26
 msgid "Add form tag"
 msgstr "フォームタグを追加"
 
-#: templates/admin/tag-generator.php:19
+#: templates/admin/tag-generator.php:22
 msgid "Other fields"
 msgstr "その他の項目"
 
-#: templates/admin/tag-generator.php:16
+#: templates/admin/tag-generator.php:19
 msgid "Error fields"
 msgstr "エラー項目"
-
-#: templates/admin/tag-generator.php:13
-msgid "Button fields"
-msgstr "ボタン項目"
 
 #: templates/admin/tag-generator.php:10
 msgid "Select fields"
@@ -185,39 +209,39 @@ msgstr "選択してください"
 msgid "Select Style"
 msgstr "スタイルを選択"
 
-#: templates/admin/settings.php:35
+#: templates/admin/settings.php:78
 msgid "Input the key to use Akismet."
 msgstr "Akismetを使用する項目のキーを入力してください。"
 
-#: templates/admin/settings.php:20
+#: templates/admin/settings.php:63
 msgid "Akismet Setting"
 msgstr "Akismet 設定"
 
-#: templates/admin/settings.php:16
+#: templates/admin/settings.php:57
 msgid "I want to change."
 msgstr "変更する"
 
-#: templates/admin/settings.php:13
+#: templates/admin/settings.php:44
 msgid "Next Tracking Number"
 msgstr "次の問い合わせ番号"
 
-#: templates/admin/settings.php:10
+#: templates/admin/settings.php:39
 msgid "Enable scrolling of screen transition."
 msgstr "画面変遷時のスクロールを有効にする"
 
-#: templates/admin/settings.php:7
+#: templates/admin/settings.php:27
 msgid "Saving inquiry data in database"
 msgstr "問い合わせデータをデータベースに保存"
 
-#: templates/admin/settings.php:4
+#: templates/admin/settings.php:15
 msgid "Example: {ID}, {post_title}, {post_meta} etc..."
 msgstr "例：{ID}、{post_title}、{post_meta}など…"
 
-#: templates/admin/settings.php:3
+#: templates/admin/settings.php:13
 msgid "If this field is active, MW WP Form get query string. And get post data from query string \"post_id\". You can use $post's property in editor."
 msgstr "有効にした場合、MW WP FormはURL引数を取得します。また、URL引数 ”post_id” をもとに投稿を取得します。その投稿（$post） のプロパティを使用できるようになります。"
 
-#: templates/admin/settings.php:2
+#: templates/admin/settings.php:9
 msgid "Activate Query string of post"
 msgstr "URL引数を有効にする"
 
@@ -344,12 +368,12 @@ msgstr "フォームを編集"
 msgid "Add New Form"
 msgstr "フォームを追加"
 
-#: mw-wp-form.php:197 mw-wp-form.php:198
+#: mw-wp-form.php:198 mw-wp-form.php:199
 #: templates/stores-inquiry-data-form-list/index.php:2
 msgid "Inquiry data"
 msgstr "問い合わせデータ"
 
-#: mw-wp-form.php:168 mw-wp-form.php:169 templates/chart/index.php:4
+#: mw-wp-form.php:169 mw-wp-form.php:170 templates/chart/index.php:4
 msgid "Chart"
 msgstr "グラフ"
 
@@ -558,6 +582,7 @@ msgstr "テキスト"
 msgid "Tel"
 msgstr "電話番号"
 
+#: classes/form-fields/class.button-submit.php:30
 #: classes/form-fields/class.submit.php:30
 msgid "Submit Button"
 msgstr "送信ボタン"
@@ -570,6 +595,7 @@ msgstr "送信ボタンに表示する文字列"
 msgid "String on the confirm button"
 msgstr "確認ボタンに表示する文字列"
 
+#: classes/form-fields/class.button-submit.php:44
 #: classes/form-fields/class.submit-button.php:44
 #: classes/form-fields/class.submit.php:43
 msgid "Send"
@@ -601,12 +627,13 @@ msgstr "Number フィールド"
 
 #: classes/form-fields/class.image.php:30
 msgid "Image"
-msgstr "画像フィールド"
+msgstr "画像"
 
 #: classes/form-fields/class.hidden.php:91
 msgid "Display hidden value."
 msgstr "hiddenの値を表示"
 
+#: classes/form-fields/class.button-submit.php:115
 #: classes/form-fields/class.hidden.php:89
 msgid "Display"
 msgstr "表示する"
@@ -651,20 +678,23 @@ msgstr "Email フィールド"
 msgid "Datepicker"
 msgstr "日付"
 
+#: classes/form-fields/class.button-confirm.php:43
 #: classes/form-fields/class.confirm-button.php:42
 #: classes/form-fields/class.submit-button.php:43
 msgid "Confirm"
 msgstr "確認画面へ"
 
+#: classes/form-fields/class.button-confirm.php:30
 #: classes/form-fields/class.confirm-button.php:30
 msgid "Confirm Button"
 msgstr "確認ボタン"
 
 #: classes/form-fields/class.checkbox.php:158
-#: classes/form-fields/class.datepicker.php:168
+#: classes/form-fields/class.datepicker.php:167
 #: classes/form-fields/class.email.php:139
 #: classes/form-fields/class.file.php:125
 #: classes/form-fields/class.image.php:128
+#: classes/form-fields/class.monthpicker.php:178
 #: classes/form-fields/class.number.php:135
 #: classes/form-fields/class.password.php:131
 #: classes/form-fields/class.radio.php:149
@@ -677,10 +707,11 @@ msgid "Don't display error."
 msgstr "エラーを表示しない"
 
 #: classes/form-fields/class.checkbox.php:156
-#: classes/form-fields/class.datepicker.php:166
+#: classes/form-fields/class.datepicker.php:165
 #: classes/form-fields/class.email.php:137
 #: classes/form-fields/class.file.php:123
 #: classes/form-fields/class.image.php:126
+#: classes/form-fields/class.monthpicker.php:176
 #: classes/form-fields/class.number.php:133
 #: classes/form-fields/class.password.php:129
 #: classes/form-fields/class.radio.php:147
@@ -707,9 +738,10 @@ msgid "Separator string"
 msgstr "区切り文字"
 
 #: classes/form-fields/class.checkbox.php:141
-#: classes/form-fields/class.datepicker.php:156
+#: classes/form-fields/class.datepicker.php:155
 #: classes/form-fields/class.email.php:127
 #: classes/form-fields/class.hidden.php:84
+#: classes/form-fields/class.monthpicker.php:166
 #: classes/form-fields/class.password.php:119
 #: classes/form-fields/class.radio.php:137
 #: classes/form-fields/class.select.php:133
@@ -766,19 +798,24 @@ msgstr "選択肢"
 msgid "Checkbox"
 msgstr "チェックボックス"
 
+#: classes/form-fields/class.button-button.php:30
 #: classes/form-fields/class.button.php:30
 msgid "Button"
 msgstr "ボタン"
 
 #: classes/form-fields/class.back-button.php:77
+#: classes/form-fields/class.button-back.php:88
+#: classes/form-fields/class.button-button.php:95
+#: classes/form-fields/class.button-confirm.php:88
+#: classes/form-fields/class.button-submit.php:107
 #: classes/form-fields/class.button.php:84
 #: classes/form-fields/class.confirm-button.php:77
 #: classes/form-fields/class.submit.php:84
 msgid "String on the button"
 msgstr "ボタンに表示する文字列"
 
-#: classes/form-fields/class.back-button.php:30
 #: classes/form-fields/class.back-button.php:42
+#: classes/form-fields/class.button-back.php:43
 msgid "Back"
 msgstr "戻る"
 

@@ -183,7 +183,8 @@
 		}
 
 		public function addJavaScript(){
-			wp_enqueue_script("wpfc-jquery-ui", plugins_url("wp-fastest-cache/js/jquery-ui.min.js"), array(), time(), false);
+			wp_enqueue_script("jquery-ui-draggable");
+			wp_enqueue_script("jquery-ui-position");
 			wp_enqueue_script("wpfc-dialog", plugins_url("wp-fastest-cache/js/dialog.js"), array(), time(), false);
 			wp_enqueue_script("wpfc-dialog-new", plugins_url("wp-fastest-cache/js/dialog_new.js"), array(), time(), false);
 
@@ -197,11 +198,8 @@
 
 			
 			if(class_exists("WpFastestCacheImageOptimisation")){
-
 				if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/js/statics.js")){
 					wp_enqueue_script("wpfc-statics", plugins_url("wp-fastest-cache-premium/pro/js/statics.js"), array(), time(), false);
-				}else{
-					wp_enqueue_script("wpfc-statics", plugins_url("wp-fastest-cache/js/statics.js"), array(), time(), false);
 				}
 
 				if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/js/premium.js")){
@@ -343,26 +341,29 @@
 			}else if($this->isPluginActive('mobilepress/mobilepress.php')){
 				return $this->warningIncompatible("MobilePress", array("name" => "WPtouch Mobile", "url" => "https://wordpress.org/plugins/wptouch/"));
 			}else if($this->isPluginActive('speed-booster-pack/speed-booster-pack.php')){
-				return array("Speed Booster Pack needs to be deactive<br>", "error");
+				return array("Speed Booster Pack needs to be deactivated<br>", "error");
 			}else if($this->isPluginActive('cdn-enabler/cdn-enabler.php')){
-				return array("CDN Enabler needs to be deactive<br>This plugin has aldready CDN feature", "error");
+				return array("CDN Enabler needs to be deactivated<br>This plugin has aldready CDN feature", "error");
 			}else if($this->isPluginActive('wp-performance-score-booster/wp-performance-score-booster.php')){
-				return array("WP Performance Score Booster needs to be deactive<br>This plugin has aldready Gzip, Leverage Browser Caching features", "error");
+				return array("WP Performance Score Booster needs to be deactivated<br>This plugin has aldready Gzip, Leverage Browser Caching features", "error");
 			}else if($this->isPluginActive('bwp-minify/bwp-minify.php')){
-				return array("Better WordPress Minify needs to be deactive<br>This plugin has aldready Minify feature", "error");
+				return array("Better WordPress Minify needs to be deactivated<br>This plugin has aldready Minify feature", "error");
 			}else if($this->isPluginActive('check-and-enable-gzip-compression/richards-toolbox.php')){
-				return array("Check and Enable GZIP compression needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+				return array("Check and Enable GZIP compression needs to be deactivated<br>This plugin has aldready Gzip feature", "error");
 			}else if($this->isPluginActive('gzippy/gzippy.php')){
-				return array("GZippy needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+				return array("GZippy needs to be deactivated<br>This plugin has aldready Gzip feature", "error");
 			}else if($this->isPluginActive('gzip-ninja-speed-compression/gzip-ninja-speed.php')){
-				return array("GZip Ninja Speed Compression needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+				return array("GZip Ninja Speed Compression needs to be deactivated<br>This plugin has aldready Gzip feature", "error");
 			}else if($this->isPluginActive('wordpress-gzip-compression/ezgz.php')){
-				return array("WordPress Gzip Compression needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+				return array("WordPress Gzip Compression needs to be deactivated<br>This plugin has aldready Gzip feature", "error");
 			}else if($this->isPluginActive('filosofo-gzip-compression/filosofo-gzip-compression.php')){
-				return array("GZIP Output needs to be deactive<br>This plugin has aldready Gzip feature", "error");
+				return array("GZIP Output needs to be deactivated<br>This plugin has aldready Gzip feature", "error");
 			}else if($this->isPluginActive('head-cleaner/head-cleaner.php')){
-				return array("Head Cleaner needs to be deactive", "error");
+				return array("Head Cleaner needs to be deactivated", "error");
+			}else if($this->isPluginActive('far-future-expiry-header/far-future-expiration.php')){
+				return array("Far Future Expiration Plugin needs to be deactivated", "error");
 			}else if(is_writable($path.".htaccess")){
+				$htaccess = $this->insertWebp($htaccess);
 				$htaccess = $this->insertLBCRule($htaccess, $post);
 				$htaccess = $this->insertGzipRule($htaccess, $post);
 				$htaccess = $this->insertRewriteRule($htaccess, $post);
@@ -385,15 +386,56 @@
 			}
 		}
 
+		public function insertWebp($htaccess){
+			$tester_arr = array(
+				//"tr-TR",
+				"berkatan.com",
+				"pembeportakal.com",
+				"wpfastestcache.com",
+				"zamknijkonto.pl",
+				"devv.zamknijkonto.pl",
+				"goldsgym.nl"
+				);
+														
+			if(in_array(get_bloginfo('language'), $tester_arr) || in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $tester_arr)){
+				$data = "# BEGIN WEBPWpFastestCache"."\n".
+						"<IfModule mod_rewrite.c>"."\n".
+						"RewriteEngine On"."\n".
+						"RewriteCond %{HTTP_ACCEPT} image/webp"."\n".
+						"RewriteCond %{REQUEST_URI} jpg|png"."\n".
+						"RewriteCond %{DOCUMENT_ROOT}/$1.webp -f"."\n".
+						"RewriteRule ^(.*) \"/$1.webp\" [L]"."\n".
+						"</IfModule>"."\n".
+						"<IfModule mod_headers.c>"."\n".
+						"Header append Vary Accept env=REDIRECT_accept"."\n".
+						"Header set Expires \"max-age=2592000, public\""."\n".
+						"Header unset ETag"."\n".
+						"Header set Connection keep-alive"."\n".
+						"FileETag None"."\n".
+						"</IfModule>"."\n".
+						"AddType image/webp .webp"."\n".
+						"# END WEBPWpFastestCache"."\n";
+
+				if(!preg_match("/BEGIN\s*WEBPWpFastestCache/", $htaccess)){
+					$htaccess = $data.$htaccess;
+				}
+
+				return $htaccess;
+			}else{
+				return $htaccess;
+			}
+		}
+
 		public function insertLBCRule($htaccess, $post){
 			if(isset($post["wpFastestCacheLBC"]) && $post["wpFastestCacheLBC"] == "on"){
 
 
 			$data = "# BEGIN LBCWpFastestCache"."\n".
-					'<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|x-html|css|xml|js|woff|woff2|ttf|svg|eot)(\.gz)?$">'."\n".
+					'<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|js|css|swf|x-html|css|xml|js|woff|woff2|ttf|svg|eot)(\.gz)?$">'."\n".
 					'<IfModule mod_expires.c>'."\n".
 					'ExpiresActive On'."\n".
 					'ExpiresDefault A0'."\n".
+					'ExpiresByType image/webp A2592000'."\n".
 					'ExpiresByType image/gif A2592000'."\n".
 					'ExpiresByType image/png A2592000'."\n".
 					'ExpiresByType image/jpg A2592000'."\n".
@@ -551,6 +593,7 @@
 					$trailing_slash_rule.
 					"RewriteCond %{QUERY_STRING} !.+"."\n".$loggedInUser.
 					"RewriteCond %{HTTP:Cookie} !comment_author_"."\n".
+					"RewriteCond %{HTTP:Cookie} !safirmobilswitcher=mobil"."\n".
 					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile;
 			
 
@@ -558,7 +601,10 @@
 				$data = $data."RewriteCond %{DOCUMENT_ROOT}/".WPFC_WP_CONTENT_BASENAME."/cache/all/$1/index.html -f"."\n";
 			}else{
 				$data = $data."RewriteCond %{DOCUMENT_ROOT}/".WPFC_WP_CONTENT_BASENAME."/cache/all/$1/index.html -f [or]"."\n";
-				$data = $data."RewriteCond ".WPFC_WP_CONTENT_DIR."/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n";
+				// to escape spaces
+				$tmp_WPFC_WP_CONTENT_DIR = str_replace(" ", "\ ", WPFC_WP_CONTENT_DIR);
+
+				$data = $data."RewriteCond ".$tmp_WPFC_WP_CONTENT_DIR."/cache/all/".$this->getRewriteBase(true)."$1/index.html -f"."\n";
 			}
 
 			$data = $data.'RewriteRule ^(.*) "/'.$this->getRewriteBase().WPFC_WP_CONTENT_BASENAME.'/cache/all/'.$this->getRewriteBase(true).'$1/index.html" [L]'."\n";
@@ -697,9 +743,11 @@
 				echo "<noscript id='wpfc-htaccess-path-data'>".$path.".htaccess"."</noscript>";
 				?>
 				<script type="text/javascript">
-					Wpfc_New_Dialog.dialog("wpfc-modal-htaccess", {close: "default"}, function(modal){
-						jQuery("#" + modal.id).find("label.mm-input-label").html(jQuery("#wpfc-htaccess-path-data").html());
-						jQuery("#" + modal.id).find("textarea.wiz-inp-readonly-textarea").html(jQuery("#wpfc-htaccess-data").html());
+					jQuery(document).ready(function(){
+						Wpfc_New_Dialog.dialog("wpfc-modal-htaccess", {close: "default"}, function(modal){
+							jQuery("#" + modal.id).find("label.mm-input-label").html(jQuery("#wpfc-htaccess-path-data").html());
+							jQuery("#" + modal.id).find("textarea.wiz-inp-readonly-textarea").html(jQuery("#wpfc-htaccess-data").html());
+						});
 					});
 				</script>
 				<?php
@@ -711,6 +759,7 @@
 			$this->systemMessage = count($this->systemMessage) > 0 ? $this->systemMessage : $this->getSystemMessage();
 
 			$wpFastestCacheCombineCss = isset($this->options->wpFastestCacheCombineCss) ? 'checked="checked"' : "";
+			$wpFastestCacheGoogleFonts = isset($this->options->wpFastestCacheGoogleFonts) ? 'checked="checked"' : "";
 			$wpFastestCacheGzip = isset($this->options->wpFastestCacheGzip) ? 'checked="checked"' : "";
 			$wpFastestCacheCombineJs = isset($this->options->wpFastestCacheCombineJs) ? 'checked="checked"' : "";
 			$wpFastestCacheCombineJsPowerFul = isset($this->options->wpFastestCacheCombineJsPowerFul) ? 'checked="checked"' : "";
@@ -759,6 +808,7 @@
 			$wpFastestCacheTimeOut = isset($this->cronJobSettings["period"]) ? $this->cronJobSettings["period"] : "";
 
 			$wpFastestCacheUpdatePost = isset($this->options->wpFastestCacheUpdatePost) ? 'checked="checked"' : "";
+			$wpFastestCacheWidgetCache = isset($this->options->wpFastestCacheWidgetCache) ? 'checked="checked"' : "";
 			?>
 			
 			<div class="wrap">
@@ -772,37 +822,12 @@
 						$tabs = array(array("id"=>"wpfc-options","title"=>"Settings"),
 									  array("id"=>"wpfc-deleteCache","title"=>"Delete Cache"),
 									  array("id"=>"wpfc-cacheTimeout","title"=>"Cache Timeout"));
-
-						if(class_exists("WpFastestCacheImageOptimisation")){
-						}
-							array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimization"));
 						
+						array_push($tabs, array("id"=>"wpfc-imageOptimisation","title"=>"Image Optimization"));
 						array_push($tabs, array("id"=>"wpfc-premium","title"=>"Premium"));
-
 						array_push($tabs, array("id"=>"wpfc-exclude","title"=>"Exclude"));
-
 						array_push($tabs, array("id"=>"wpfc-cdn","title"=>"CDN"));
-
-
-
-
-
-						$tester_arr_db = array(
-									"tr-TR",
-									"berkatan.com",
-									"yenihobiler.com",
-									"hobiblogu.com",
-									"modafikirleri.com",
-									"pamsenfashion.com",
-									"gingerdomain.com"
-									);
-
-						if(in_array(get_bloginfo('language'), $tester_arr_db) || in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $tester_arr_db)){
-							array_push($tabs, array("id"=>"wpfc-db","title"=>"DB"));
-						}
-
-
-
+						array_push($tabs, array("id"=>"wpfc-db","title"=>"DB"));
 
 						foreach ($tabs as $key => $value){
 							$checked = "";
@@ -829,6 +854,60 @@
 								<div class="question">Cache System</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheStatus; ?> id="wpFastestCacheStatus" name="wpFastestCacheStatus"><label for="wpFastestCacheStatus">Enable</label></div>
 							</div>
+
+
+
+
+							<?php
+
+							$tester_arr = array(
+											"tr-TR",
+											"berkatan.com",
+											"hciwla.org"
+											);
+														
+							if(in_array(get_bloginfo('language'), $tester_arr) || in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $tester_arr)){ ?>
+								
+
+
+								<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
+									<?php if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/widget-cache.php")){ ?>
+										<?php include_once WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/widget-cache.php"; ?>
+
+										<?php if(class_exists("WpfcWidgetCache") && method_exists("WpfcWidgetCache", "add_filter_admin")){ ?>
+											<div class="questionCon">
+												<div class="question">Widget Cache</div>
+												<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache" name="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
+												<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+											</div>
+										<?php }else{ ?>
+											<div class="questionCon update-needed">
+												<div class="question">Widget Cache</div>
+												<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
+												<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+											</div>
+										<?php } ?>
+									<?php }else{ ?>
+										<div class="questionCon update-needed">
+											<div class="question">Widget Cache</div>
+											<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
+											<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+										</div>
+									<?php } ?>
+								<?php }else{ ?>
+									<div class="questionCon disabled">
+										<div class="question">Widget Cache</div>
+										<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
+										<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+									</div>
+								<?php } ?>
+
+
+
+							<?php } ?>
+
+
+
 							
 							<div class="questionCon">
 								<div class="question">Preload</div>
@@ -866,6 +945,7 @@
 									"canliradyodinle.life",
 									"canlitvturk.org",
 									"haftahaftahamilelik.gen.tr",
+									"tooxclusive.com",
 									"canliradyodinle.fm"
 									);
 
@@ -1030,6 +1110,41 @@
 								</div>
 							<?php } ?>
 
+
+
+
+
+							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?> 
+								<?php if(method_exists("WpFastestCachePowerfulHtml", "google_fonts")){ ?>
+									<div class="questionCon">
+										<div class="question">Google Fonts</div>
+										<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheGoogleFonts; ?> id="wpFastestCacheGoogleFonts" name="wpFastestCacheGoogleFonts"><label for="wpFastestCacheGoogleFonts">Load Google Fonts asynchronously </label></div>
+										<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/google-fonts-optimize-css-delivery/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+									</div>
+								<?php }else{ ?>
+									<div class="questionCon update-needed">
+										<div class="question">Google Fonts</div>
+										<div class="inputCon"><input type="checkbox" id="wpFastestCacheGoogleFonts" name="wpFastestCacheGoogleFonts"><label for="wpFastestCacheGoogleFonts">Load Google Fonts asynchronously</label></div>
+										<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/google-fonts-optimize-css-delivery/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+									</div>
+								<?php } ?>
+							<?php }else{ ?>
+								<div class="questionCon disabled">
+									<div class="question">Google Fonts</div>
+									<div class="inputCon"><input type="checkbox" id="wpFastestCacheGoogleFonts" name="wpFastestCacheGoogleFonts"><label for="wpFastestCacheGoogleFonts">Load Google Fonts asynchronously</label></div>
+									<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/google-fonts-optimize-css-delivery/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+								</div>
+							<?php } ?>
+
+
+
+
+
+
+
+
+
+
 							<?php
 
 							$tester_arr = array(
@@ -1062,7 +1177,8 @@
 											"polyamory.dating",
 											"mygamer.com",
 											"gingerdomain.com",
-											"topclassprinting.com"
+											"topclassprinting.com",
+											"camilazivit.com.br"
 											);
 														
 							if(in_array(get_bloginfo('language'), $tester_arr) || in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $tester_arr)){ ?>
@@ -1445,20 +1561,14 @@
 				    			</div>
 				    			<div class="wpfc-premium-step-footer">
 				    				<?php
-				    					$svn_price_arr = wp_remote_get("http://plugins.svn.wordpress.org/wp-fastest-cache/assets/price.html", 5);
-
-				    					if ( !$svn_price_arr || is_wp_error( $svn_price_arr ) ) {
-				    						$premium_price = $svn_price_arr->get_error_message();
+				    					if(get_bloginfo('language') == "tr-TR"){
+				    						$premium_price = "100TL";
 				    					}else{
-				    						if(wp_remote_retrieve_response_code($svn_price_arr) == 200){
-				    							$premium_price = wp_remote_retrieve_body( $svn_price_arr );
-					    					}else{
-					    						$premium_price = "Error";
-					    					}
+					    					$premium_price = "$39.99";
 				    					}
 
 				    				?>
-				    				<h1 style="float:left;" id="just-h1">Just</h1><h1>$<span id="wpfc-premium-price"><?php echo $premium_price; ?></span></h1>
+				    				<h1 style="float:left;" id="just-h1">Just</h1><h1><span style="margin-left:5px;" id="wpfc-premium-price"><?php echo $premium_price; ?></span></h1>
 				    				<p>The download button will be available after paid. You can buy the premium version now.</p>
 
 				    				<?php if(!preg_match("/Caiu\s*Na/i", get_bloginfo("name")) && !preg_match("/caiuna/i", $_SERVER["HTTP_HOST"]) && !preg_match("/\.ir$/i", $_SERVER["HTTP_HOST"])){ ?>
@@ -1498,52 +1608,11 @@
 
 
 				    				<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
-					    				<button id="wpfc-update-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
-					    					<span data-type="update">Update</span>
-					    				</button>
-					    				<script type="text/javascript">
-					    					jQuery(document).ready(function(){
-									    		wpfc_premium_page();
-
-									    		function wpfc_premium_page(){
-										    		jQuery(document).ready(function(){
-						    							Wpfc_Premium.check_update("<?php echo $this->get_premium_version(); ?>", '<?php echo "http://api.wpfastestcache.net/premium/newdownload/".str_replace(array("http://", "www."), "", $_SERVER["HTTP_HOST"])."/".get_option("WpFc_api_key"); ?>', '<?php echo plugins_url('wp-fastest-cache/templates'); ?>');
-
-														var counter = 0;
-														var looper = setInterval(function(){
-														    counter++;
-
-														    if(counter >= 4){
-														        clearInterval(looper);
-														    }
-
-														    if(jQuery("#wpfc-update-premium-button").attr("class") == "wpfc-btn primaryCta"){
-														    	clearInterval(looper);
-														    	
-							    								if(jQuery("div[id^='wpfc-modal-updatenow-']").length === 0){
-							    									Wpfc_New_Dialog.dialog("wpfc-modal-updatenow", {close: function(){
-																		Wpfc_New_Dialog.clone.find("div.window-content input").each(function(){
-																			if(jQuery(this).attr("checked")){
-																				var id = jQuery(this).attr("action-id");
-																				jQuery("div.tab1 div[template-id='wpfc-modal-updatenow'] div.window-content input#" + id).attr("checked", true);
-																			}
-																		});
-
-																		Wpfc_New_Dialog.clone.remove();
-																	}});
-
-																	Wpfc_New_Dialog.show_button("close");
-																}
-							    							}
-
-														}, 1000);
-										    		});
-									    		}
-					    					});
-					    				</script>
-					    				<script type="text/javascript">
-
-					    				</script>
+				    					<a href="http://www.wpfastestcache.com/blog/premium-update-before-v1-3-6/">
+						    				<button id="wpfc-update-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
+						    					<span data-type="update">Update</span>
+						    				</button>
+				    					</a>
 				    				<?php }else{ ?>
 					    				<button class="wpfc-btn primaryCta" id="wpfc-download-premium-button" class="wpfc-btn primaryDisableCta" style="width:200px;">
 					    					<span data-type="download">Download</span>
@@ -1837,7 +1906,7 @@
 						    			<label>Only available in Premium version</label>
 						    		</div>
 						    	</div>
-			    			<?php } ?>
+			    		<?php } ?>
 
 				    		<div class="integration-page" style="display: block;width:98%;float:left;">
 
@@ -1930,34 +1999,6 @@
 			</div>
 
 			<div class="omni_admin_sidebar">
-				<?php
-					$ads_source = wp_remote_get("http://plugins.svn.wordpress.org/wp-fastest-cache/assets/ads/source.json", 5);
-
-					if ( !$ads_source || is_wp_error( $ads_source ) ) {
-						//toDo
-					}else{
-						if(wp_remote_retrieve_response_code($ads_source) == 200){
-							$json = wp_remote_retrieve_body($ads_source);
-
-							if($json){
-								$std = json_decode($json);
-
-								?>
-								<?php if($std->visible == "true"){ ?>
-									<div style="padding:0 !important;float:left;">
-										<a href="<?php echo $std->link; ?>" target="_blank">
-											<img src="<?php echo $std->image; ?>" border="0" alt="" width="222" height="220"/>
-										</a>
-									</div>
-								<?php } ?>
-								<?php
-							}
-    					}
-					}
-
-				?>
-
-
 				<div class="omni_admin_sidebar_section" id="vote-us">
 					<h3 style="color: antiquewhite;">Rate Us</h3>
 					<ul>

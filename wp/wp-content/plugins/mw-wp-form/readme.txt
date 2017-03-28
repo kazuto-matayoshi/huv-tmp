@@ -3,8 +3,8 @@ Contributors: inc2734, ryu263, tomothumb, nanniku, mt8.biz, NExt-Season, kuck1u,
 Donate link: http://www.amazon.co.jp/registry/wishlist/39ANKRNSTNW40
 Tags: plugin, form, confirm, preview, shortcode, mail, chart, graph, html, contact form, form creation, form creator, form manager, form builder, custom form
 Requires at least: 4.0
-Tested up to: 4.7.1
-Stable tag: 2.14.2
+Tested up to: 4.7.2
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,24 @@ Do you have questions or issues with MW WP Form? Use these support channels appr
 5. Supports chart display of saved inquiry data.
 
 == Changelog ==
+
+= 3.1.0 =
+* Added   : Added the month picker field.
+
+= 3.0.1 =
+* Bugfix  : Fixed a bug of action hook mwform_contact_data_save-mwf_xxx
+
+= 3.0.0 =
+* Added   : Added method MWF_Functions::get_form_id_from_form_key( $form_key );
+* Added   : Added action hook mwform_after_exec_shortcode
+* Added   : Added action hook mwform_before_load_content_mw-wp-form-xxx
+* Added   : Added action hook mwform_after_load_content_mw-wp-form-xxx
+* Added   : Added action hook mwform_before_redirect_mw-wp-form-xxx
+* Added   : Added filter hook mwform_redirect_url_mw-wp-form-xxx
+* Added   : Added filter hook mwform_complete_content_raw_mw-wp-form-xxx
+* Added   : Added action hook mwform_settings_meta_box
+* Added   : Added action hook mwform_settings_save_mw-wp-form-xxx
+* Added   : Added action hook mwform_contact_data_save-mwf_xxx
 
 = 2.14.2 =
 * Bugfix  : Fixed type on japanese.

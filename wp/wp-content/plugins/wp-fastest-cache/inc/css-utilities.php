@@ -275,6 +275,11 @@
 			$link_tags = $this->find_tags("<link", ">");
 
 			foreach ($link_tags as $key => $value) {
+				//<link rel='stylesheet' id='avada-dynamic-css-css'  href='/wp-content/uploads/avada-styles/avada-9.css?timestamp=1485306359&#038;ver=4.7.2' type='text/css' media='all' />
+				if(preg_match("/avada-dynamic-css-css/", $value["text"])){
+					continue;
+				}
+
 				preg_match("/media\=[\'\"]([^\'\"]+)[\'\"]/", $value["text"], $media);
 				preg_match("/href\=[\'\"]([^\'\"]+)[\'\"]/", $value["text"], $href);
 

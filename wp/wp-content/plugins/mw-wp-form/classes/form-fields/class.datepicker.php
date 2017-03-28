@@ -2,11 +2,11 @@
 /**
  * Name       : MW WP Form Field Datepicker
  * Description: datepickerを出力
- * Version    : 1.8.0
+ * Version    : 1.8.1
  * Author     : Takashi Kitajima
  * Author URI : http://2inc.org
  * Created    : December 14, 2012
- * Modified   : September 18, 2016
+ * Modified   : March 9, 2017
  * License    : GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -66,7 +66,6 @@ class MW_WP_Form_Field_Datepicker extends MW_WP_Form_Abstract_Form_Field {
 
 		// jsの指定がないときはデフォルトで年付き変更機能追加
 		if ( empty( $js ) ) {
-			$js = '"showMonthAfterYear": true, "changeYear": true, "changeMonth": true';
 			$js = array(
 				'showMonthAfterYear' => 'true',
 				'changeYear'         => 'true',
