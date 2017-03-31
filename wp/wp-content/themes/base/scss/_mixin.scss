@@ -1,4 +1,74 @@
 @charset "utf-8";
+//————————————————————————————————————————————
+// break point
+//————————————————————————————————————————————
+
+@mixin bp ( $type: min, $num1: false, $num2: false ) {
+	@if $type != max and $type != min {
+		$num2: $num1;
+		$num1: $type;
+		$type: min;
+	}
+
+	@if $type == min {
+		$min: $num1;
+		$max: $num2;
+
+		@if $max and $max < $min {
+			$min: $num2;
+			$max: $num1;
+		} @else {
+
+		}
+
+		@if $max == false {
+			@media screen and (min-width: $min) { @content; }
+		} @else {
+			@media screen and (min-width: $min) and (max-width: $max) { @content; }
+		}
+	} @elseif $type == max {
+		$min: $num2;
+		$max: $num1;
+
+		@if $min and $max < $min {
+			$min: $num1;
+			$max: $num2;
+		}
+
+		@if $min == false {
+			@media screen and (max-width: $max) { @content; }
+		} @else {
+			@media screen and (min-width: $min) and (max-width: $max) { @content; }
+		}
+	}
+}
+
+@mixin breakMax( $max, $min: false ) {
+	@if $min == false {
+		@media screen and (max-width: $max) { @content; }
+	} @else {
+		@media screen and (max-width: $max) and (min-width: $min) { @content; }
+	}
+}
+
+@mixin breakMin( $min, $max: false ) {
+	@if $max == false {
+		@media screen and (min-width: $min) { @content; }
+	} @else {
+		@media screen and (max-width: $max) and (min-width: $min) { @content; }
+	}
+}
+
+//————————————————————————————————————————————
+// FontSize
+//————————————————————————————————————————————
+@mixin fsvw( $type: min, $num1: false, $num2: false ) {
+	@include bp( $type, $num1, $num2 ) {
+		:root {
+			font-size: calc( 100% + ( ( 1vw - .48rem ) * 1.389 ) );
+		}
+	}
+}
 
 //————————————————————————————————————————————
 // FontAwesome
@@ -43,26 +113,6 @@ $im: icomoon;
 // 上記、$fontCodeの設定詳細は下記URLの『6,7』
 // http://qiita.com/nekoneko-wanwan/items/e0f5a71a7d603215bcc3
 
-
-//————————————————————————————————————————————
-// break point
-//————————————————————————————————————————————
-
-@mixin breakMax($max, $min: false) {
-	@if $min == false {
-		@media screen and (max-width: $max) { @content; }
-	} @else {
-		@media screen and (max-width: $max) and (min-width: $min) { @content; }
-	}
-}
-
-@mixin breakMin( $min, $max: false ) {
-	@if $max == false {
-		@media screen and (min-width: $min) { @content; }
-	} @else {
-		@media screen and (max-width: $max) and (min-width: $min) { @content; }
-	}
-}
 
 //————————————————————————————————————————————
 //   ／＼
