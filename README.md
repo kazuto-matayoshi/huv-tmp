@@ -21,6 +21,9 @@
 1. [functions - 概要](#functions---概要)
 
 ---
+## bp()
+---
+---
 ## header.php
 ---
 
