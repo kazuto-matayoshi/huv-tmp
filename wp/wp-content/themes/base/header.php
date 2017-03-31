@@ -22,8 +22,10 @@
 	<?php
 		if ( is_home() || is_front_page() ) {
 			echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/index.css">';
+		// archive area
+		} elseif ( is_post_type_archive( 'post' ) ) {
+		// singul area
 		} elseif ( is_singular( 'post' ) ) {
-		} elseif ( is_archive() ) {
 		} elseif ( is_search() ) {
 		} elseif ( is_404() ) {
 			echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/404.css">';
