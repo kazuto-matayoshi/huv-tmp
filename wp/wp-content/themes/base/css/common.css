@@ -7,7 +7,7 @@ Default Settings
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 10px;
   position: relative;
   min-height: 100%;
 }
@@ -21,21 +21,33 @@ html.wf-active {
 }
 
 body {
-  margin: 0;
+  font-family: Avenir, 'Open Sans', 'Helvetica Neue', Helvetica , Arial , Verdana, '游ゴシック', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, sans-serif;
   font-size: 1.6em;
   line-height: 1.6;
-  font-family: Avenir, "Open Sans", "Helvetica Neue", Helvetica , Arial , Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+  margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
   margin: 0;
   padding: 0;
 }
 
 h1.meta-h1 {
-  text-indent: 100%;
-  white-space: nowrap;
   overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
 }
 
 li {
@@ -57,15 +69,8 @@ img {
 }
 
 .cf:after {
-  content: "";
   display: block;
-  width: 100%;
   clear: both;
-}
-
-.vm:before {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
+  width: 100%;
+  content: '';
 }
