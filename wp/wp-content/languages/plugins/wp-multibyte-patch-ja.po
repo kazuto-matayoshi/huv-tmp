@@ -31,15 +31,15 @@ msgstr "http://eastcoder.com/code/wp-multibyte-patch/"
 msgid "WP Multibyte Patch"
 msgstr "WP Multibyte Patch"
 
-#: wp-multibyte-patch.php:481
+#: wp-multibyte-patch.php:493
 msgid "Sorry, WP Multibyte Patch requires <a href=\"http://www.php.net/manual/en/mbstring.installation.php\" target=\"_blank\">mbstring</a> functions."
 msgstr "お使いの WP Multibyte Patch を有効化するには PHP の <a href=\"http://www.php.net/manual/ja/mbstring.installation.php\" target=\"_blank\">mbstring</a> 関数が必要です。"
 
-#: wp-multibyte-patch.php:477
+#: wp-multibyte-patch.php:489
 msgid "Sorry, WP Multibyte Patch requires WordPress %s or later."
 msgstr "お使いの WP Multibyte Patch を有効化するには WordPress %s 以上が必要です。"
 
-#: ext/ja/class.php:178 wp-multibyte-patch.php:381
+#: ext/ja/class.php:178 wp-multibyte-patch.php:386
 msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr "words"

@@ -11,11 +11,11 @@ msgstr ""
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - WP Fastest Cache - Development (trunk)\n"
 
-#: wpFastestCache.php:1543
+#: wpFastestCache.php:1578
 msgid "Once Every 2 Hours"
 msgstr "2時間毎に1度"
 
-#: wpFastestCache.php:1567
+#: wpFastestCache.php:1602
 msgid "Once Every 10 Days"
 msgstr "10日に1度"
 
@@ -39,42 +39,42 @@ msgstr "https://ja.wordpress.org/plugins/wp-fastest-cache/"
 msgid "WP Fastest Cache"
 msgstr "WP Fastest Cache"
 
-#: wpFastestCache.php:1579
+#: wpFastestCache.php:1614
 msgid "Once a Year"
 msgstr "1年毎に1度"
 
-#: wpFastestCache.php:1573
+#: wpFastestCache.php:1608
 msgid "Once a Month"
 msgstr "1ヶ月に1度"
 
-#: wpFastestCache.php:1561
+#: wpFastestCache.php:1596
 msgid "Once a Week"
 msgstr "1周間に1度"
 
-#: wpFastestCache.php:1555
+#: wpFastestCache.php:1590
 msgid "Once a Day"
 msgstr "1日に1度"
 
-#: wpFastestCache.php:1549
+#: wpFastestCache.php:1584
 msgid "Once Every 6 Hours"
 msgstr "6時間毎に1度"
 
-#: wpFastestCache.php:1537
+#: wpFastestCache.php:1572
 msgid "Once an Hour"
 msgstr "1時間毎に1度"
 
-#: wpFastestCache.php:1531
+#: wpFastestCache.php:1566
 msgid "Twice an Hour"
 msgstr "1時間に2度"
 
-#: wpFastestCache.php:1525
+#: wpFastestCache.php:1560
 msgid "Once Every 15 Minutes"
 msgstr "15分毎に1度"
 
-#: wpFastestCache.php:1519
+#: wpFastestCache.php:1554
 msgid "Once Every 5 Minutes"
 msgstr "5分毎に1度"
 
-#: wpFastestCache.php:1513
+#: wpFastestCache.php:1548
 msgid "Once Every 1 Minute"
 msgstr "1分毎に1度"
