@@ -25,6 +25,7 @@ function create_post_type() {
 			'public'        => true,
 			'has_archive'   => true,
 			'rewrite'       => array( 'slug' => 'orijinal_themes', ),
+			'menu_icon'     => '',
 			'menu_position' => 5,
 			'supports'      => array (
 				'title',
