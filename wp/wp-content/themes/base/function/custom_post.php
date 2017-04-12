@@ -24,6 +24,7 @@ function create_post_type() {
 			),
 			'public'        => true,
 			'has_archive'   => true,
+			'rewrite'       => array( 'slug' => 'orijinal_themes', ),
 			'menu_position' => 5,
 			'supports'      => array (
 				'title',
@@ -76,6 +77,9 @@ function create_post_type() {
 			'show_ui'               => true
 		)
 	);
+
+	// パーマリンク設定を再設定
+	flush_rewrite_rules();
 }
 // add_action( 'init', 'create_post_type' );
 
