@@ -6,7 +6,7 @@
 	$query =
 	array(
 		// 投稿のタイプ
-		'post_type'      => 'orijinal_themes',
+		'post_type'      => 'original_themes',
 
 		// 投稿の状態
 		'post_status'    => 'publish',

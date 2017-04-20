@@ -16,7 +16,7 @@ function create_post_type() {
 	 * register_post_type( '$post_type', $args );
 	 * 詳細 -> http://goo.gl/Sqgk2o
 	 */
-	register_post_type( 'orijinal_themes', //ポストタイプ名の指定
+	register_post_type( 'original_themes', //ポストタイプ名の指定
 		array(
 			'labels'           => array (
 				'name'           => __( 'オリジナルテーマ作成' ),
@@ -24,7 +24,7 @@ function create_post_type() {
 			),
 			'public'        => true,
 			'has_archive'   => true,
-			'rewrite'       => array( 'slug' => 'orijinal_themes', ),
+			'rewrite'       => array( 'slug' => 'original_themes', ),
 			'menu_icon'     => '',
 			'menu_position' => 5,
 			'supports'      => array (
@@ -47,10 +47,10 @@ function create_post_type() {
 	register_taxonomy (
 
 		// タクソノミーの名前
-		'orijinal_themes_cat',
+		'original_themes_cat',
 
 		// 使用するカスタム投稿タイプ名
-		'orijinal_themes',
+		'original_themes',
 
 		array(
 			'hierarchical'          => true,
@@ -65,10 +65,10 @@ function create_post_type() {
 	register_taxonomy(
 
 		// タクソノミーの名前
-		'orijinal_themes_tag',
+		'original_themes_tag',
 
 		// 使用するカスタム投稿タイプ名
-		'orijinal_themes',
+		'original_themes',
 
 		array(
 			'hierarchical'          => false,
