@@ -2,7 +2,7 @@
 get_header();
 
 	// file名の変数管理
-	if( $post->ancestors ){
+	if ( $post->ancestors ) {
 		$ancestors = array_reverse( get_post_ancestors( $post->ID ) );
 		foreach( $ancestors as $ancestor ){
 			$page = get_post( $ancestor );
