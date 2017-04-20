@@ -13,6 +13,17 @@
 		'posts_per_page' => 3,
 	);
 
+	// if ( is_user_logged_in() ) {
+	// 	$query['post_status'] = array(
+	// 		'publish',
+	// 		'pending',
+	// 		'draft',
+	// 		'future',
+	// 		'private',
+	// 		'inherit',
+	// 	);
+	// }
+
 	$the_query = new WP_Query( $query );
 
 	if ( $the_query->have_posts() ) :
