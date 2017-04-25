@@ -4,7 +4,7 @@ Donate link: http://profiles.wordpress.org/emrevona/
 Tags: cache, performance, wp-cache, total cache, super cache
 Requires at least: 3.3
 Tested up to: 4.7.3
-Stable tag: 0.8.6.7
+Stable tag: 0.8.6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,19 @@ Wpfc does not support Wordpress Multisite yet.
 18. Database Cleanup
 
 == Changelog ==
+
+= 0.8.6.8 =
+* <strong>[FEATURE]</strong> Widget Cache [<a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/">Details</a>]
+* to add browser cache for woff2
+* to fix Woocommerce basket issue
+* to serve the sources via cdn for logged-in users
+* to prevent removing "=" from exclude rules
+* to change <FilesMatch "\.(html|htm)"> to <FilesMatch "index\.(html|htm)">
+* to fix problem about random url of photon
+* to replace origin-url which starts with /wp-content with cdn-url
+* to replace wp_get_recent_posts() with get_results() for preload
+* to replace the attribute which are data-srcsmall|data-srclarge|data-srcfull with cdn-url
+* <strong>[FEATURE]</strong> Compatible with WP Hide & Security Enhancer
 
 = 0.8.6.7 =
 * to escape spaces in path for htaccess

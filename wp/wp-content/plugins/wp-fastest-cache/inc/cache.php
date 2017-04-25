@@ -36,18 +36,6 @@
 				}
 			}
 
-			// WP Hide & Security Enhancer
-			if($this->isPluginActive('wp-hide-security-enhancer/wp-hide.php')){
-				$wph_settings = get_option("wph_settings");
-
-				if(isset($wph_settings["module_settings"])){
-					if(isset($wph_settings["module_settings"]["new_content_path"]) && $wph_settings["module_settings"]["new_content_path"]){
-						$wph_settings["module_settings"]["new_content_path"] = trim($wph_settings["module_settings"]["new_content_path"], "/");
-						$content_url = str_replace(basename(WPFC_WP_CONTENT_DIR), $wph_settings["module_settings"]["new_content_path"], $content_url);
-					}
-				}
-			}
-
 			if (!defined('WPFC_WP_CONTENT_URL')) {
 				define("WPFC_WP_CONTENT_URL", $content_url);
 			}
@@ -88,7 +76,11 @@
 				if(!preg_match("/\.html/i", $_SERVER["REQUEST_URI"])){
 					if($this->is_trailing_slash()){
 						if(!preg_match("/\/$/", $_SERVER["REQUEST_URI"])){
-							$this->cacheFilePath = false;
+							if(defined('WPFC_CACHE_QUERYSTRING') && WPFC_CACHE_QUERYSTRING){
+								//toDo
+							}else{
+								$this->cacheFilePath = false;
+							}
 						}
 					}else{
 						//toDo
@@ -151,6 +143,8 @@
 					// to check logged-in user
 					foreach ((array)$_COOKIE as $cookie_key => $cookie_value){
 						if(preg_match("/wordpress_logged_in/i", $cookie_key)){
+							ob_start(array($this, "cdn_rewrite"));
+
 							return 0;
 						}
 					}
@@ -159,6 +153,18 @@
 				// to check comment author
 				foreach ((array)$_COOKIE as $cookie_key => $cookie_value){
 					if(preg_match("/comment_author_/i", $cookie_key)){
+						ob_start(array($this, "cdn_rewrite"));
+
+						return 0;
+					}
+				}
+
+				// to check wp_woocommerce_session cookie
+				foreach ((array)$_COOKIE as $cookie_key => $cookie_value){
+					if(preg_match("/^wp\_woocommerce\_session/", $cookie_key)){
+						//"<!-- \$_COOKIE['wp_woocommerce_session'] has been set -->";
+						ob_start(array($this, "cdn_rewrite"));
+						
 						return 0;
 					}
 				}
@@ -192,7 +198,11 @@
 
 				if(!preg_match("/^https/i", get_option("home")) && is_ssl()){
 					//must be normal connection
-					return 0;
+					if(!$this->isPluginActive('really-simple-ssl/rlrsssl-really-simple-ssl.php')){
+						if(!$this->isPluginActive('really-simple-ssl-pro/really-simple-ssl-pro.php')){
+							return 0;
+						}
+					}
 				}
 
 				if(preg_match("/www\./", get_option("home")) && !preg_match("/www\./", $_SERVER['HTTP_HOST'])){
@@ -362,12 +372,20 @@
 			return false;
 		}
 
-		public function is_json(){
+		public function is_json($buffer){
 			if(isset($_SERVER["HTTP_ACCEPT"]) && preg_match("/json/i", $_SERVER["HTTP_ACCEPT"])){
 				return true;
 			}
 
 			if(preg_match("/^\/wp-json/", $_SERVER["REQUEST_URI"])){
+				return true;
+			}
+
+			if(preg_match("/^\s*\{\s*[\"\']/i", $buffer)){
+				return true;
+			}
+
+			if(preg_match("/^\s*\[\s*\{\s*[\"\']/i", $buffer)){
 				return true;
 			}
 
@@ -397,16 +415,10 @@
 				return $buffer;
 			}else if (is_user_logged_in() || $this->isCommenter()){
 				return $buffer;
-			}else if($this->is_json()){
+			}else if($this->is_json($buffer)){
 				return $buffer;
 			}else if(isset($_COOKIE["wptouch-pro-view"])){
 				return $buffer."<!-- \$_COOKIE['wptouch-pro-view'] has been set -->";
-			}else if($this->checkWoocommerceSession()){
-				if($this->checkHtml($buffer)){
-					return $buffer;
-				}else{
-					return $buffer."<!-- \$_COOKIE['wp_woocommerce_session'] has been set -->";
-				}
 			}else if($this->isPasswordProtected($buffer)){
 				return $buffer."<!-- Password protected content has been detected -->";
 			}else if($this->isWpLogin($buffer)){
@@ -515,16 +527,10 @@
 				}else{
 					$content = $this->cacheDate($content);
 					$content = $this->minify($content);
-					
-					if($this->cdn){
-						$content = preg_replace_callback("/(srcset|src|href|data-lazyload)\s{0,2}\=[\'\"]([^\'\"]+)[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
-						// url()
-						$content = preg_replace_callback("/(url)\(([^\)]+)\)/i", array($this, 'cdn_replace_urls'), $content);
-						// {"concatemoji":"http:\/\/your_url.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}
-						$content = preg_replace_callback("/\{\"concatemoji\"\:\"[^\"]+\"\}/i", array($this, 'cdn_replace_urls'), $content);
-					}
-					
 
+					$content = $this->cdn_rewrite($content);
+					
+					
 					$content = str_replace("<!--WPFC_FOOTER_START-->", "", $content);
 
 
@@ -547,6 +553,12 @@
 						}
 					}
 
+					// WP Hide & Security Enhancer
+					if($this->isPluginActive('wp-hide-security-enhancer/wp-hide.php')){
+						global $wph;
+						$content = $wph->functions->content_urls_replacement($content, $wph->functions->get_replacement_list());
+					}
+
 					if($this->cacheFilePath){
 						$this->createFolder($this->cacheFilePath, $content);
 					}
@@ -554,6 +566,20 @@
 					return $content."<!-- need to refresh to see cached version -->";
 				}
 			}
+		}
+
+		public function cdn_rewrite($content){
+			if($this->cdn){
+				$content = preg_replace_callback("/(srcset|src|href|data-lazyload|data-srcsmall|data-srclarge|data-srcfull|data-slide-img)\s{0,2}\=[\'\"]([^\'\"]+)[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
+				//url()
+				$content = preg_replace_callback("/(url)\(([^\)]+)\)/i", array($this, 'cdn_replace_urls'), $content);
+				//{"concatemoji":"http:\/\/your_url.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}
+				$content = preg_replace_callback("/\{\"concatemoji\"\:\"[^\"]+\"\}/i", array($this, 'cdn_replace_urls'), $content);
+				//<script>var loaderRandomImages=["https:\/\/www.site.com\/wp-content\/uploads\/2016\/12\/image.jpg"];</script>
+				$content = preg_replace_callback("/[\"\']https?\:\\\\\/\\\\\/[^\"\']+[\"\']/i", array($this, 'cdn_replace_urls'), $content);
+			}
+
+			return $content;
 		}
 
 		public function get_header($content){
@@ -722,16 +748,6 @@
 					return true;
 				}
 			}
-		}
-
-		public function checkWoocommerceSession(){
-			foreach($_COOKIE as $key => $value){
-			  if(preg_match("/^wp\_woocommerce\_session/", $key)){
-			  	return true;
-			  }
-			}
-
-			return false;
 		}
 
 		public function isWpLogin($buffer){

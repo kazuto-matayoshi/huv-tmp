@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 0.8.6.7
+Version: 0.8.6.8
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 Text Domain: wp-fastest-cache
@@ -21,7 +21,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
-	//test7
+	//test6
 	if (!defined('WPFC_WP_CONTENT_BASENAME')) {
 		if (!defined('WPFC_WP_PLUGIN_DIR')) {
 			if(preg_match("/(\/trunk\/|\/wp-fastest-cache\/)$/", plugin_dir_path( __FILE__ ))){
@@ -467,8 +467,8 @@ GNU General Public License for more details.
 						$value["prefix"] = strip_tags($value["prefix"]);
 						$value["content"] = strip_tags($value["content"]);
 
-						$value["prefix"] = preg_replace("/\=|\'|\"/", "", $value["prefix"]);
-						$value["content"] = preg_replace("/\=|\'|\"/", "", $value["content"]);
+						$value["prefix"] = preg_replace("/\'|\"/", "", $value["prefix"]);
+						$value["content"] = preg_replace("/\'|\"/", "", $value["content"]);
 
 						$value["content"] = trim($value["content"], "/");
 
@@ -1134,15 +1134,18 @@ GNU General Public License for more details.
 
 				// POST
 				if($number > 0 && $pre_load->post > -1){
-		    		$recent_posts = wp_get_recent_posts(array(
-											'numberposts' => $number,
-										    'offset' => $pre_load->post,
-										    'orderby' => 'ID',
-										    'order' => 'DESC',
-										    'post_type' => 'post',
-										    'post_status' => 'publish',
-										    'suppress_filters' => true
-										    ), ARRAY_A);
+		    		// $recent_posts = wp_get_recent_posts(array(
+								// 			'numberposts' => $number,
+								// 		    'offset' => $pre_load->post,
+								// 		    'orderby' => 'ID',
+								// 		    'order' => 'DESC',
+								// 		    'post_type' => 'post',
+								// 		    'post_status' => 'publish',
+								// 		    'suppress_filters' => true
+								// 		    ), ARRAY_A);
+		    		global $wpdb;
+		    		$recent_posts = $GLOBALS['wpdb']->get_results("SELECT SQL_CALC_FOUND_ROWS  ".$wpdb->prefix."posts.ID FROM ".$wpdb->prefix."posts  WHERE 1=1  AND ".$wpdb->prefix."posts.post_type = 'post' AND ((".$wpdb->prefix."posts.post_status = 'publish'))  ORDER BY ".$wpdb->prefix."posts.ID DESC LIMIT ".$pre_load->post.", ".$number, ARRAY_A);
+
 
 		    		if(count($recent_posts) > 0){
 		    			foreach ($recent_posts as $key => $post) {
@@ -1622,8 +1625,14 @@ GNU General Public License for more details.
 					}
 
 					if(preg_match("/^\/\/random/", $cdn->cdnurl) || preg_match("/\/\/i\d\.wp\.com/", $cdn->cdnurl)){
-						$cdn->cdnurl = "//i".rand(0,3).".wp.com/".str_replace("www.", "", $_SERVER["HTTP_HOST"]);
-						$cdn->cdnurl = preg_replace("/\/\/i\d\.wp\.com/", "//i".rand(0,3).".wp.com", $cdn->cdnurl);
+						if(preg_match("/^\/\/random/", $cdn->cdnurl)){
+							$cdnurl = "//i".rand(0,3).".wp.com/".str_replace("www.", "", $_SERVER["HTTP_HOST"]);
+							$cdnurl = preg_replace("/\/\/i\d\.wp\.com/", "//i".rand(0,3).".wp.com", $cdnurl);
+						}else{
+							$cdnurl = $cdn->cdnurl;
+						}
+					}else{
+						$cdnurl = $cdn->cdnurl;
 					}
 
 					$cdn->file_types = str_replace(",", "|", $cdn->file_types);
@@ -1642,12 +1651,19 @@ GNU General Public License for more details.
 
 					if(preg_match("/\{\"concatemoji\"\:\"[^\"]+\"\}/i", $matches[0])){
 						$matches[0] = preg_replace("/(http(s?)\:)?".preg_quote("\/\/", "/")."(www\.)?/i", "", $matches[0]);
-						$matches[0] = preg_replace("/".preg_quote($cdn->originurl, "/")."/i", $cdn->cdnurl, $matches[0]);
+						$matches[0] = preg_replace("/".preg_quote($cdn->originurl, "/")."/i", $cdnurl, $matches[0]);
 					}else if(preg_match("/".preg_quote($cdn->originurl, "/")."/", $matches[2])){
-						$matches[0] = preg_replace("/(http(s?)\:)?\/\/(www\.)?".preg_quote($cdn->originurl, "/")."/i", $cdn->cdnurl, $matches[0]);
-					}else if(preg_match("/^(\/?)(wp-includes|wp-includes)/", $matches[2])){
-						$matches[2] = preg_replace("/^\//", "", $matches[2]);
-						$matches[0] = str_replace($matches[2], $cdn->cdnurl."/".$matches[2], $matches[0]);
+						$matches[0] = preg_replace("/(http(s?)\:)?\/\/(www\.)?".preg_quote($cdn->originurl, "/")."/i", $cdnurl, $matches[0]);
+					}else if(preg_match("/^(\/?)(wp-includes|wp-content)/", $matches[2])){
+						$matches[0] = preg_replace("/(\/?)(wp-includes|wp-content)/i", $cdnurl."/"."$2", $matches[0]);
+					}else if(preg_match("/[\"\']https?\:\\\\\/\\\\\/[^\"\']+[\"\']/i", $matches[0])){
+						//<script>var loaderRandomImages=["https:\/\/www.site.com\/wp-content\/uploads\/2016\/12\/image.jpg"];</script>
+						$matches[0] = preg_replace("/\\\\\//", "/", $matches[0]);
+						
+						if(preg_match("/".preg_quote($cdn->originurl, "/")."/", $matches[0])){
+							$matches[0] = preg_replace("/(http(s?)\:)?\/\/(www\.)?".preg_quote($cdn->originurl, "/")."/i", $cdnurl, $matches[0]);
+							$matches[0] = preg_replace("/\//", "\/", $matches[0]);
+						}
 					}
 				}
 			}

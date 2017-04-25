@@ -388,13 +388,20 @@
 
 		public function insertWebp($htaccess){
 			$tester_arr = array(
-				//"tr-TR",
+				"tr-TR",
 				"berkatan.com",
 				"pembeportakal.com",
 				"wpfastestcache.com",
 				"zamknijkonto.pl",
 				"devv.zamknijkonto.pl",
-				"goldsgym.nl"
+				"goldsgym.nl",
+				"luxury-chauffeurs.com",
+				"rashays.com",
+				"bitcoincafe.ch",
+				"romeing.it",
+				"huzurlabeslen.com",
+				"premiumlv.com",
+				"ribbons.se"
 				);
 														
 			if(in_array(get_bloginfo('language'), $tester_arr) || in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $tester_arr)){
@@ -433,6 +440,7 @@
 			$data = "# BEGIN LBCWpFastestCache"."\n".
 					'<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|js|css|swf|x-html|css|xml|js|woff|woff2|ttf|svg|eot)(\.gz)?$">'."\n".
 					'<IfModule mod_expires.c>'."\n".
+					'AddType application/font-woff2 .woff2'."\n".
 					'ExpiresActive On'."\n".
 					'ExpiresDefault A0'."\n".
 					'ExpiresByType image/webp A2592000'."\n".
@@ -446,6 +454,7 @@
 					'ExpiresByType text/javascript A2592000'."\n".
 					'ExpiresByType application/javascript A2592000'."\n".
 					'ExpiresByType application/x-javascript A2592000'."\n".
+					'ExpiresByType application/font-woff2 A2592000'."\n".
 					'</IfModule>'."\n".
 					'<IfModule mod_headers.c>'."\n".
 					'Header set Expires "max-age=2592000, public"'."\n".
@@ -565,7 +574,7 @@
 			}
 
 			if(isset($_POST["wpFastestCacheLoggedInUser"]) && $_POST["wpFastestCacheLoggedInUser"] == "on"){
-				$loggedInUser = "RewriteCond %{HTTP:Cookie} !(wordpress_logged_in|wp_woocommerce_session)"."\n";
+				$loggedInUser = "RewriteCond %{HTTP:Cookie} !wordpress_logged_in"."\n";
 			}
 
 			if(!preg_match("/^https/i", get_option("home"))){
@@ -593,6 +602,7 @@
 					$trailing_slash_rule.
 					"RewriteCond %{QUERY_STRING} !.+"."\n".$loggedInUser.
 					"RewriteCond %{HTTP:Cookie} !comment_author_"."\n".
+					"RewriteCond %{HTTP:Cookie} !wp_woocommerce_session"."\n".
 					"RewriteCond %{HTTP:Cookie} !safirmobilswitcher=mobil"."\n".
 					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile;
 			
@@ -625,7 +635,7 @@
 			}
 
 			$data = $data."</IfModule>"."\n".
-					"<FilesMatch \"\.(html|htm)$\">"."\n".
+					"<FilesMatch \"index\.(html|htm)$\">"."\n".
 					"AddDefaultCharset UTF-8"."\n".
 					"<ifModule mod_headers.c>"."\n".
 					"FileETag None"."\n".
@@ -867,26 +877,20 @@
 											);
 														
 							if(in_array(get_bloginfo('language'), $tester_arr) || in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $tester_arr)){ ?>
+							<?php } ?>
 								
 
 
-								<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
-									<?php if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/widget-cache.php")){ ?>
-										<?php include_once WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/widget-cache.php"; ?>
+							<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
+								<?php if(file_exists(WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/widget-cache.php")){ ?>
+									<?php include_once WPFC_WP_CONTENT_DIR."/plugins/wp-fastest-cache-premium/pro/library/widget-cache.php"; ?>
 
-										<?php if(class_exists("WpfcWidgetCache") && method_exists("WpfcWidgetCache", "add_filter_admin")){ ?>
-											<div class="questionCon">
-												<div class="question">Widget Cache</div>
-												<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache" name="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
-												<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
-											</div>
-										<?php }else{ ?>
-											<div class="questionCon update-needed">
-												<div class="question">Widget Cache</div>
-												<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
-												<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
-											</div>
-										<?php } ?>
+									<?php if(class_exists("WpfcWidgetCache") && method_exists("WpfcWidgetCache", "add_filter_admin")){ ?>
+										<div class="questionCon">
+											<div class="question">Widget Cache</div>
+											<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache" name="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
+											<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+										</div>
 									<?php }else{ ?>
 										<div class="questionCon update-needed">
 											<div class="question">Widget Cache</div>
@@ -895,20 +899,22 @@
 										</div>
 									<?php } ?>
 								<?php }else{ ?>
-									<div class="questionCon disabled">
+									<div class="questionCon update-needed">
 										<div class="question">Widget Cache</div>
 										<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
 										<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
 									</div>
 								<?php } ?>
-
-
-
+							<?php }else{ ?>
+								<div class="questionCon disabled">
+									<div class="question">Widget Cache</div>
+									<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheWidgetCache; ?> id="wpFastestCacheWidgetCache"><label for="wpFastestCacheWidgetCache">Reduce the number of SQL queries</label></div>
+									<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/premium/widget-cache-reduce-the-number-of-sql-queries/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+								</div>
 							<?php } ?>
 
 
 
-							
 							<div class="questionCon">
 								<div class="question">Preload</div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCachePreload; ?> id="wpFastestCachePreload" name="wpFastestCachePreload"><label for="wpFastestCachePreload">Create the cache of all the site automatically</label></div>
@@ -1178,7 +1184,8 @@
 											"mygamer.com",
 											"gingerdomain.com",
 											"topclassprinting.com",
-											"camilazivit.com.br"
+											"camilazivit.com.br",
+											"spycoupon.in"
 											);
 														
 							if(in_array(get_bloginfo('language'), $tester_arr) || in_array(str_replace("www.", "", $_SERVER["HTTP_HOST"]), $tester_arr)){ ?>
@@ -1252,7 +1259,7 @@
 						    		<span id="show-delete-log">Show Logs</span>
 						    		<span id="hide-delete-log" style="display:none;">Hide Logs</span>
 						    	</div>
-						    	<h2 style="opacity:0.3;padding-left:20px;padding-bottom:10px;">Cache Statics</h2>
+						    	<h2 style="opacity:0.3;padding-left:20px;padding-bottom:10px;">Cache Statistics</h2>
 						    	<div id="wpfc-cache-statics" style="opacity:0.3;width:100%;float:right;margin:15px 0;">
 									<style type="text/css">
 										#wpfc-cache-statics > div{
@@ -1571,7 +1578,7 @@
 				    				<h1 style="float:left;" id="just-h1">Just</h1><h1><span style="margin-left:5px;" id="wpfc-premium-price"><?php echo $premium_price; ?></span></h1>
 				    				<p>The download button will be available after paid. You can buy the premium version now.</p>
 
-				    				<?php if(!preg_match("/Caiu\s*Na/i", get_bloginfo("name")) && !preg_match("/caiuna/i", $_SERVER["HTTP_HOST"]) && !preg_match("/\.ir$/i", $_SERVER["HTTP_HOST"])){ ?>
+				    				<?php if(!preg_match("/Caiu\s*Na/i", get_bloginfo("name")) && !preg_match("/(caiuna|escort|porn)/i", $_SERVER["HTTP_HOST"]) && !preg_match("/\.ir$/i", $_SERVER["HTTP_HOST"])){ ?>
 					    				<?php if(class_exists("WpFastestCachePowerfulHtml")){ ?>
 						    					<button id="wpfc-buy-premium-button" type="submit" class="wpfc-btn primaryDisableCta" style="width:200px;">
 							    					<span>Purchased</span>
