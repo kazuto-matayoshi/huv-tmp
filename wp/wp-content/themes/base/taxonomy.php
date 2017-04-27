@@ -9,9 +9,7 @@ get_header();
 /**
  * ファイルがあるかの判定
  */
-if ( $path == 'marine' || $path == 'diving' || $path == 'licence' ) {
-	get_template_part( 'taxonomy/menu-taxonomys' );
-} else if ( locate_template( 'taxonomy/'.$path.'.php' ) ) {
+if ( locate_template( 'taxonomy/'.$path.'.php' ) ) {
 	// true
 
 	get_template_part( 'taxonomy/'.$path );
