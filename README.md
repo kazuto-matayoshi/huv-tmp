@@ -18,6 +18,8 @@
 1. [search.php](#searchphp)
 1. [searchform.php](#searchformphp)
 1. [single.php](#singlephp)
+1. [404.php](#404php)
+1. [404_content.php](#404contentphp)
 1. [functions - 概要](#functions---概要)
 
 ---
@@ -184,11 +186,11 @@ header.php同様
 
 <\*-- 例 --\*>
 
-テーマ名  -> test-theme<br>
+テーマ名  -> base<br>
 親スラッグ -> parent<br>
 子スラッグ -> child
 ```
-/test-theme/page/parent-child.php
+/base/page/parent-child.php
 ```
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
@@ -233,8 +235,8 @@ endif;
 ## archive.php
 ---
 
-記事のアーカイブを取得し、表示するファイルです。
-ポストタイプを判定し、archive/内にファイルがあれば
+記事のアーカイブを取得し、表示するファイルです。<br>
+ポストタイプを判定し、archive内にファイルがあれば
 そのファイルを見に行きます。
 
 なければそのままコンテンツを表示します。
@@ -244,7 +246,23 @@ endif;
 下記の通りです。
 
 ```
-/test-theme/archive/投稿タイプ名.php
+/base/archive/投稿タイプ名.php
+```
+<br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br>
+
+---
+## taxonomy.php
+---
+
+カスタム投稿のカテゴリ一覧を表示するテンプレートファイル（仮）です。
+
+初期からある『投稿』のカテゴリは『category.php』になります。<br>
+（※category.phpは未準備）
+
+```
+/base/taxonomy/投稿タイプ名.php
 ```
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
@@ -300,8 +318,33 @@ endif;
 命名規則、ディレクトリ構成は下記の通りです。
 
 ```
-/test-theme/single/投稿タイプ名.php
+/base/single/投稿タイプ名.php
 ```
+<br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br>
+
+---
+## 404.php
+---
+
+404を表示するファイルです。<br>
+コンテンツは『404_content.php』内に記述しております。
+<br><br><br>
+ - [上部へ戻る](#huvrid用テンプレートファイルの説明)
+<br><br><br>
+
+---
+## 404_content.php
+---
+
+404をコンテンツを表示するファイルです。
+
+別ページで404を表示したい際に404.phpを読み込むと<br>
+header、footerの重複が起こる為コンテンツ部分を分離しました。
+
+アーカイブなどのページで404を表示したい場合は<br>
+get_template_part関数で呼び出してください。
 <br><br><br>
  - [上部へ戻る](#huvrid用テンプレートファイルの説明)
 <br><br><br>
