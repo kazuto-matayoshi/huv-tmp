@@ -210,6 +210,7 @@ $im: icomoon;
   //     bottom right, bottom left, top left, top right,
   //     right bottom, left bottom, left top, right top; 
 
+	// top → to bottom 等に変換する処理
 	@function angle($str) {
 		@if $str == 'top' {
 			@return #{unquote('to bottom')};
@@ -236,31 +237,35 @@ $im: icomoon;
 		} @else if $str == 'right top' {
 			@return #{unquote('to left bottom')};
 		}
-		// @if $str == 'to bottom' {
-		// 	@return #{unquote('top')};
-		// } @else if $str == 'to left' {
-		// 	@return #{unquote('right')};
-		// } @else if $str == 'to top' {
-		// 	@return #{unquote('bottom')};
-		// } @else if $str == 'to right' {
-		// 	@return #{unquote('left')};
-		// } @else if $str == 'to top left' {
-		// 	@return #{unquote('bottom right')};
-		// } @else if $str == 'to top right' {
-		// 	@return #{unquote('bottom left')};
-		// } @else if $str == 'to bottom right' {
-		// 	@return #{unquote('top left')};
-		// } @else if $str == 'to bottom left' {
-		// 	@return #{unquote('top right')};
-		// } @else if $str == 'to left top' {
-		// 	@return #{unquote('right bottom')};
-		// } @else if $str == 'to right top' {
-		// 	@return #{unquote('left bottom')};
-		// } @else if $str == 'to right bottom' {
-		// 	@return #{unquote('left top')};
-		// } @else if $str == 'to left bottom' {
-		// 	@return #{unquote('right top')};
-		// }
+	}
+
+	// to bottom → top 等に変換する処理
+	@function vender_angle($str) {
+		@if $str == 'to bottom' {
+			@return #{unquote('top')};
+		} @else if $str == 'to left' {
+			@return #{unquote('right')};
+		} @else if $str == 'to top' {
+			@return #{unquote('bottom')};
+		} @else if $str == 'to right' {
+			@return #{unquote('left')};
+		} @else if $str == 'to top left' {
+			@return #{unquote('bottom right')};
+		} @else if $str == 'to top right' {
+			@return #{unquote('bottom left')};
+		} @else if $str == 'to bottom right' {
+			@return #{unquote('top left')};
+		} @else if $str == 'to bottom left' {
+			@return #{unquote('top right')};
+		} @else if $str == 'to left top' {
+			@return #{unquote('right bottom')};
+		} @else if $str == 'to right top' {
+			@return #{unquote('left bottom')};
+		} @else if $str == 'to right bottom' {
+			@return #{unquote('left top')};
+		} @else if $str == 'to left bottom' {
+			@return #{unquote('right top')};
+		}
 	}
 
 	// 色の作成
@@ -286,26 +291,26 @@ $im: icomoon;
 	@if type-of($direction) == 'number' {
 		$angle: (450 - $direction) % 360;
 		$angle: if( unitless($angle), #{$angle}deg, #{$angle} );
-		background: -moz-linear-gradient($angle, $gradientColor );
+		background: -moz-linear-gradient( $angle, $gradientColor );
 	} @else {
-		background: -moz-linear-gradient($direction, $gradientColor );
+		background: -moz-linear-gradient( vender_angle($direction), $gradientColor );
 	}
 
 	/* Chrome10-25,Safari5.1-6 */
 	@if type-of($direction) == 'number' {
 		$angle: (450 - $direction) % 360;
 		$angle: if( unitless($angle), #{$angle}deg, #{$angle} );
-		background: -webkit-linear-gradient($angle, $gradientColor);
+		background: -webkit-linear-gradient( $angle, $gradientColor );
 	} @else {
-		background: -webkit-linear-gradient($direction, $gradientColor);
+		background: -webkit-linear-gradient( vender_angle($direction), $gradientColor );
 	}
 
 	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	@if type-of($direction) == 'number' {
 		$angle: if( unitless($direction), #{$direction}deg, #{$direction} );
-		background: linear-gradient($angle, $gradientColor);
+		background: linear-gradient( $angle, $gradientColor );
 	} @else {
-		background: linear-gradient( angle($direction), $gradientColor);
+		background: linear-gradient( angle($direction), $gradientColor );
 	}
 
 	/* IE6-9 */
