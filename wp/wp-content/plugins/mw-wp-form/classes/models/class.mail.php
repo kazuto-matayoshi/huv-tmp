@@ -2,11 +2,11 @@
 /**
  * Name       : MW WP Form Mail
  * Description: メールクラス
- * Version    : 2.1.0
+ * Version    : 2.2.1
  * Author     : Takashi Kitajima
  * Author URI : http://2inc.org
  * Created    : July 20, 2012
- * Modified   : January 13, 2017
+ * Modified   : May 4, 2017
  * License    : GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -73,10 +73,12 @@ class MW_WP_Form_Mail {
 
 	/**
 	 * メール送信
+	 *
+	 * @return boolean
 	 */
 	public function send() {
-		if ( !$this->to ) {
-			return;
+		if ( ! $this->to ) {
+			return apply_filters( 'mwform_is_mail_sended', false );
 		}
 
 		$sender      = $this->sender;
@@ -118,14 +120,16 @@ class MW_WP_Form_Mail {
 				$body,
 				implode( "\n", $this->attachments )
 			);
-			file_put_contents( $temp_dir . '/mw-wp-form-debug.log', $contents, FILE_APPEND );
+			$is_mail_sended = file_put_contents( $temp_dir . '/mw-wp-form-debug.log', $contents, FILE_APPEND );
 		} else {
-			@wp_mail( $to, $subject, $body, $headers, $this->attachments );
+			$is_mail_sended = wp_mail( $to, $subject, $body, $headers, $this->attachments );
 		}
 
 		remove_action( 'phpmailer_init'   , array( $this, 'set_return_path' ) );
 		remove_filter( 'wp_mail_from'     , array( $this, 'set_mail_from' ) );
 		remove_filter( 'wp_mail_from_name', array( $this, 'set_mail_from_name' ) );
+
+		return apply_filters( 'mwform_is_mail_sended', $is_mail_sended );
 	}
 
 	/**
@@ -360,16 +364,25 @@ class MW_WP_Form_Mail {
 	 * メールを送信内容に置換
 	 *
 	 * @param MW_WP_Form_Setting $Setting
-	 * @param bool $do_update
 	 */
-	public function parse( $Setting, $do_update = false ) {
-		$Data = MW_WP_Form_Data::getInstance();
-
+	public function parse( $Setting ) {
 		$this->Mail_Parser = new MW_WP_Form_Mail_Parser( $this, $Setting );
-		$Mail = $this->Mail_Parser->get_parsed_mail_object( $do_update );
+		$Mail = $this->Mail_Parser->get_parsed_mail_object();
 		foreach ( get_object_vars( $Mail ) as $key => $value ) {
 			$this->$key = $value;
 		}
+	}
+
+	/**
+	 * メールをデータベースに保存
+	 *
+	 * @param MW_WP_Form_Setting $Setting
+	 * @return int
+	 */
+	public function save( $Setting ) {
+		$this->Mail_Parser = new MW_WP_Form_Mail_Parser( $this, $Setting );
+		$this->Mail_Parser->save();
+		return $this->get_saved_mail_id();
 	}
 
 	/**

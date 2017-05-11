@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - All in One SEO Pack - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-04-08 23:03:24+0000\n"
+"PO-Revision-Date: 2017-05-06 07:53:12+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,10 +11,10 @@ msgstr ""
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - All in One SEO Pack - Stable (latest release)\n"
 
-#. #-#-#-#-#  tmp-all-in-one-seo-pack.pot (All In One SEO Pack 2.3.12.2.1) 
+#. #-#-#-#-#  all-in-one-seo-pack-code.pot (All In One SEO Pack 2.3.12.5) 
 #. #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  tmp-all-in-one-seo-pack.pot (All In One SEO Pack 2.3.12.2.1) 
+#. #-#-#-#-#  all-in-one-seo-pack-code.pot (All In One SEO Pack 2.3.12.5) 
 #. #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "https://semperplugins.com/all-in-one-seo-pack-pro-version/"
@@ -96,7 +96,7 @@ msgstr "%description% - 各ページ・投稿用に書いた説明文または�
 msgid "Access to video tutorials about SEO with the Pro version"
 msgstr "プロ版にアップグレードして SEO についてのチュートリアル動画へにアクセス"
 
-#: admin/aioseop_module_class.php:2560
+#: admin/aioseop_module_class.php:2568
 msgid "Reset %s Settings to Defaults"
 msgstr "%s の設定をデフォルトにリセット"
 
@@ -117,7 +117,7 @@ msgstr "このオプションでは自動的にあなたの全体の WordPress �
 msgid "CLICK HERE"
 msgstr "ここをクリック"
 
-#: modules/aioseop_sitemap.php:989
+#: modules/aioseop_sitemap.php:993
 msgid "Removed empty file %s."
 msgstr "削除された空のファイル %s。 "
 
@@ -129,15 +129,15 @@ msgstr "SEO 最新情報のウィジェットをダッシュボードに表示�
 msgid "Show SEO News"
 msgstr "SEO の最新情報を表示"
 
-#: modules/aioseop_sitemap.php:622
+#: modules/aioseop_sitemap.php:626
 msgid " and changes are automatically submitted to search engines."
 msgstr "そして変更は自動的に検索エンジンに提出されます"
 
-#: modules/aioseop_sitemap.php:620
+#: modules/aioseop_sitemap.php:624
 msgid " Your sitemap has been created"
 msgstr "サイトマップが生成されました"
 
-#: modules/aioseop_sitemap.php:619
+#: modules/aioseop_sitemap.php:623
 msgid "Click here to %s."
 msgstr "ここをクリックして %s 。"
 
@@ -237,13 +237,15 @@ msgstr "All in One SEO Pack の多くのサポートとなる情報がありま�
 msgid "Support All in One SEO Pack"
 msgstr "All in One SEO Pack のサポート"
 
-#: admin/display/credits-content.php:61
+#: admin/display/credits-content.php:62
 msgid "Translation contributors and translation editors"
 msgstr "翻訳貢献者と編集者"
 
-#: admin/display/credits-content.php:40
-msgid "Want to see your name and picture here as a community developer? Open a new issue on Github to report a bug or request a feature or find an issue and submit code!"
-msgstr "コミュニティー開発者としてここに自分の名前を載せたいですか？Github にバグを報告したり新機能を提案したり、問題を見つけてコードを送ってください！"
+#. translators: '%1$s' and '%2$s' are used as placeholders and turn the text in
+#. between into a clickable link
+#: admin/display/credits-content.php:41
+msgid "Want to see your name and picture here as a community developer? %1$sClick here%2$s to open an issue on GitHub to report a bug, request a feature or find an issue and submit code!"
+msgstr "コミュニティー開発者としてここに自分の名前を載せてみたいという方は、%1$sここをクリック%2$sして GitHub でイシューを開いてバグを報告したり、新機能を提案したり、問題を見つけてコードを送ってください。"
 
 #: admin/display/credits-content.php:38
 msgid "Recent Rockstar Contributors"
@@ -290,11 +292,11 @@ msgstr "親投稿への添付ファイルをリダイレクトします :"
 msgid "Redirect attachment pages to post parent."
 msgstr "親を投稿する添付ファイルのページをリダイレクトします。"
 
-#: modules/aioseop_sitemap.php:53
+#: modules/aioseop_sitemap.php:54
 msgid "Dynamically creates the XML sitemap instead of using a static file."
 msgstr "静的ファイルを使用せずに、動的に XML サイトマップを作ります。"
 
-#: modules/aioseop_importer_exporter.php:551
+#: modules/aioseop_importer_exporter.php:553
 msgid "<b>Security warning:</b> Your file looks compromised. Please check the file for any script-injection."
 msgstr "<b>セキュリティ警告:</b> ファイルが損傷されたように見えます。任意のスクリプトインジェクションのためのファイルを確認してください。"
 
@@ -598,351 +600,351 @@ msgstr "Michael Torbert"
 msgid "All In One SEO Pack"
 msgstr "All In One SEO Pack"
 
-#: modules/aioseop_sitemap.php:1321
+#: modules/aioseop_sitemap.php:1330
 msgid "Failed to notify %s about changes to your sitemap at %s, unable to access via wp_remote_get()."
 msgstr "サイトマップの変更について %s への通知に %s において失敗しました。 wp_remote_get() 経由で接続出来ません。"
 
-#: modules/aioseop_sitemap.php:1318
+#: modules/aioseop_sitemap.php:1327
 msgid "Failed to notify %s about changes to your sitemap at %s, error code %s."
 msgstr "%s への通知（ %s のサイトマップの変更）に失敗。エラーコード %s。"
 
-#: modules/aioseop_sitemap.php:1150
+#: modules/aioseop_sitemap.php:1154
 msgid "static"
 msgstr "固定"
 
-#: modules/aioseop_sitemap.php:1155
+#: modules/aioseop_sitemap.php:1159
 msgid "dynamic"
 msgstr "動的"
 
-#: modules/aioseop_sitemap.php:1152
+#: modules/aioseop_sitemap.php:1156
 msgid "compressed"
 msgstr "圧縮済み"
 
-#: modules/aioseop_sitemap.php:1026
+#: modules/aioseop_sitemap.php:1030
 msgid "Delete Conflicting Files"
 msgstr "衝突ファイルを削除"
 
-#: modules/aioseop_sitemap.php:1025
+#: modules/aioseop_sitemap.php:1029
 msgid "Rename Conflicting Files"
 msgstr "衝突ファイルの名前を変更"
 
-#: modules/aioseop_sitemap.php:985
+#: modules/aioseop_sitemap.php:989
 msgid "Potential conflict with unknown file %s."
 msgstr "未知のファイル %s の競合する可能性。"
 
-#: modules/aioseop_sitemap.php:980
+#: modules/aioseop_sitemap.php:984
 msgid "Warning: a static sitemap '%s' generated by All in One SEO Pack %s on %s already exists that may conflict with dynamic sitemap generation."
 msgstr "警告：All in One SEO Pack静サイトマップ '%s' 、All in One SEO Pack %s の %s はすでにそれが動的サイトマップ生成と競合する可能性が存在します。"
 
-#: modules/aioseop_sitemap.php:901
+#: modules/aioseop_sitemap.php:905
 msgid "Couldn't find file %s!"
 msgstr "%s が見つかりません。"
 
-#: modules/aioseop_sitemap.php:897
+#: modules/aioseop_sitemap.php:901
 msgid "Renamed %s to %s."
 msgstr "%s を %s に変更しました。"
 
-#: modules/aioseop_sitemap.php:893
+#: modules/aioseop_sitemap.php:897
 msgid "Couldn't rename file %s!"
 msgstr "%s をリネームできません。"
 
-#: modules/aioseop_sitemap.php:883
+#: modules/aioseop_sitemap.php:887
 msgid "Deleted %s."
 msgstr "%sを削除しました。"
 
-#: modules/aioseop_sitemap.php:866
+#: modules/aioseop_sitemap.php:870
 msgid "Warning: dynamic sitemap generation must have permalinks enabled."
 msgstr "警告：動的なサイトマップの生成はパーマリンクを有効にする必要があります。"
 
-#: modules/aioseop_sitemap.php:643
+#: modules/aioseop_sitemap.php:647
 msgid "Warning: your privacy settings are configured to ask search engines to not index your site; you can change this under %s for your blog."
 msgstr "警告：サイトがインデックスされないよう検索エンジンに依頼しプライバシー設定構築されます。; ブログのために %s の下にこれを変更することができます。"
 
-#: modules/aioseop_sitemap.php:641
+#: modules/aioseop_sitemap.php:645
 msgid "Privacy Settings"
 msgstr "プライバシー設定"
 
-#: modules/aioseop_sitemap.php:639
+#: modules/aioseop_sitemap.php:643
 msgid "Reading Settings"
 msgstr "表示設定"
 
-#: modules/aioseop_sitemap.php:633
+#: modules/aioseop_sitemap.php:637
 msgid "Dynamic sitemap generation does not appear to be using the correct rewrite rules; please disable any other sitemap plugins or functionality on your site and reset your permalinks."
 msgstr "ダイナミックサイトマップ生成で正しいリライトルールが使用されていないようです。 サイトの他のサイトマッププラグインや機能を無効にして、パーマリンクをリセットしてください。"
 
-#: modules/aioseop_sitemap.php:619
+#: modules/aioseop_sitemap.php:623
 msgid "view your sitemap"
 msgstr "サイトマップを表示"
 
-#: modules/aioseop_sitemap.php:558
+#: modules/aioseop_sitemap.php:559
 msgid "Update Sitemap"
 msgstr "サイトマップを更新"
 
-#: modules/aioseop_sitemap.php:481
+#: modules/aioseop_sitemap.php:482
 msgid " Taxonomy"
 msgstr "タクソノミー"
 
-#: modules/aioseop_sitemap.php:480
+#: modules/aioseop_sitemap.php:481
 msgid " Post Type"
 msgstr "投稿タイプ"
 
-#: modules/aioseop_sitemap.php:479
+#: modules/aioseop_sitemap.php:480
 msgid "Manually set the frequency for the "
 msgstr "頻度を手動で決定:"
 
-#: modules/aioseop_sitemap.php:478
+#: modules/aioseop_sitemap.php:479
 msgid "Manually set the priority for the "
 msgstr "優先順位を手動で決定:"
 
-#: modules/aioseop_sitemap.php:474
+#: modules/aioseop_sitemap.php:475
 msgid "All Taxonomies"
 msgstr "すべてのタクソノミー"
 
-#: modules/aioseop_sitemap.php:473
+#: modules/aioseop_sitemap.php:474
 msgid "All Post Types"
 msgstr "すべての投稿タイプ"
 
-#: modules/aioseop_sitemap.php:471
+#: modules/aioseop_sitemap.php:472
 msgid "Media / Attachments"
 msgstr "メディア・添付ファイル"
 
-#: modules/aioseop_sitemap.php:385
+#: modules/aioseop_sitemap.php:386
 msgid "Daily scheduled sitemap check has finished."
 msgstr "日次スケジュールされたサイトマップチェックが終了しました。"
 
-#: modules/aioseop_sitemap.php:362
+#: modules/aioseop_sitemap.php:363
 msgid "Once Monthly"
 msgstr "月1回"
 
-#: modules/aioseop_sitemap.php:358
+#: modules/aioseop_sitemap.php:359
 msgid "Once Weekly"
 msgstr "週1回"
 
-#: modules/aioseop_sitemap.php:287
+#: modules/aioseop_sitemap.php:288
 msgid "Frequencies"
 msgstr "頻度"
 
-#: modules/aioseop_sitemap.php:281
+#: modules/aioseop_sitemap.php:282
 msgid "Priorities"
 msgstr "優先順位"
 
-#: modules/aioseop_sitemap.php:275
+#: modules/aioseop_sitemap.php:276
 msgid "Excluded Items"
 msgstr "除外項目"
 
-#: modules/aioseop_sitemap.php:265
+#: modules/aioseop_sitemap.php:266
 msgid "Excluded Pages"
 msgstr "除外ページ"
 
-#: modules/aioseop_sitemap.php:261
+#: modules/aioseop_sitemap.php:262
 msgid "Excluded Categories"
 msgstr "除外カテゴリー"
 
-#: modules/aioseop_sitemap.php:251
+#: modules/aioseop_sitemap.php:252
 msgid "Add URL"
 msgstr "URL を追加"
 
-#: modules/aioseop_sitemap.php:244 modules/aioseop_sitemap.php:269
+#: modules/aioseop_sitemap.php:245 modules/aioseop_sitemap.php:270
 msgid "Additional Pages"
 msgstr "追加ページ"
 
-#: modules/aioseop_sitemap.php:238
+#: modules/aioseop_sitemap.php:239
 msgid "Last Modified"
 msgstr "最終更新日時"
 
-#: modules/aioseop_sitemap.php:231
+#: modules/aioseop_sitemap.php:232
 msgid "Page Frequency"
 msgstr "ページ頻度"
 
-#: modules/aioseop_sitemap.php:224
+#: modules/aioseop_sitemap.php:225
 msgid "Page Priority"
 msgstr "ページ優先順位"
 
-#: modules/aioseop_sitemap.php:218
+#: modules/aioseop_sitemap.php:219
 msgid "Page URL"
 msgstr "ページ URL"
 
-#: modules/aioseop_sitemap.php:212
+#: modules/aioseop_sitemap.php:213
 msgid "Enter information below for any additional links for your sitemap not already managed through WordPress."
 msgstr "まだ WordPress で管理されていないサイトマップを追加するについては、以下に情報を入力してください。"
 
-#: modules/aioseop_sitemap.php:198
+#: modules/aioseop_sitemap.php:199
 msgid "Manually set the %s of your %s."
 msgstr "%sを手動で設定します。%sについて。"
 
-#: modules/aioseop_sitemap.php:186
+#: modules/aioseop_sitemap.php:187
 msgid "author pages"
 msgstr "投稿者ページ"
 
-#: modules/aioseop_sitemap.php:185
+#: modules/aioseop_sitemap.php:186
 msgid "archive pages"
 msgstr "アーカイブページ"
 
-#: modules/aioseop_sitemap.php:184
+#: modules/aioseop_sitemap.php:185
 msgid "taxonomies"
 msgstr "タクソノミー"
 
-#: modules/aioseop_sitemap.php:183
+#: modules/aioseop_sitemap.php:184
 msgid "posts"
 msgstr "投稿"
 
-#: modules/aioseop_sitemap.php:182
+#: modules/aioseop_sitemap.php:183
 msgid "homepage"
 msgstr "ホームページ"
 
-#: modules/aioseop_sitemap.php:175
+#: modules/aioseop_sitemap.php:176
 msgid "frequency"
 msgstr "頻度"
 
-#: modules/aioseop_sitemap.php:174
+#: modules/aioseop_sitemap.php:175
 msgid "priority"
 msgstr "優先順位"
 
-#: modules/aioseop_sitemap.php:161
+#: modules/aioseop_sitemap.php:162
 msgid "Select Individual"
 msgstr "個別に選択"
 
-#: modules/aioseop_sitemap.php:160
+#: modules/aioseop_sitemap.php:161
 msgid "Do Not Override"
 msgstr "上書きしない"
 
-#: modules/aioseop_sitemap.php:144
+#: modules/aioseop_sitemap.php:145
 msgid "Sitemap Status"
 msgstr "サイトマップのステータス"
 
-#: modules/aioseop_sitemap.php:133
+#: modules/aioseop_sitemap.php:134
 msgid "Dynamically Generate Sitemap"
 msgstr "サイトマップを動的に生成"
 
-#: modules/aioseop_sitemap.php:129
+#: modules/aioseop_sitemap.php:130
 msgid "Link From Virtual Robots.txt"
 msgstr "仮想 Robots.txt からリンクする"
 
-#: modules/aioseop_sitemap.php:125
+#: modules/aioseop_sitemap.php:126
 msgid "Create Compressed Sitemap"
 msgstr "圧縮版サイトマップを構築する"
 
-#: modules/aioseop_sitemap.php:123
+#: modules/aioseop_sitemap.php:124
 msgid "Include Author Pages"
 msgstr "投稿者ページを含める"
 
-#: modules/aioseop_sitemap.php:122
+#: modules/aioseop_sitemap.php:123
 msgid "Include Date Archive Pages"
 msgstr "日別アーカイブページを含める"
 
-#: modules/aioseop_sitemap.php:118
+#: modules/aioseop_sitemap.php:119
 msgid "Taxonomies"
 msgstr "タクソノミー"
 
-#: modules/aioseop_sitemap.php:113
+#: modules/aioseop_sitemap.php:114
 msgid "Post Types"
 msgstr "投稿タイプ"
 
-#: modules/aioseop_sitemap.php:107
+#: modules/aioseop_sitemap.php:108
 msgid "Maximum Posts Per Sitemap"
 msgstr "サイトマップあたりの最大投稿数"
 
-#: modules/aioseop_sitemap.php:103
+#: modules/aioseop_sitemap.php:104
 msgid "Paginate Sitemap Indexes"
 msgstr "サイトマップインデックスのページ送りを有効化"
 
-#: modules/aioseop_sitemap.php:101
+#: modules/aioseop_sitemap.php:102
 msgid "Enable Sitemap Indexes"
 msgstr "サイトマップインデックスを有効化"
 
-#: modules/aioseop_sitemap.php:97
+#: modules/aioseop_sitemap.php:98
 msgid "Monthly"
 msgstr "月"
 
-#: modules/aioseop_sitemap.php:96
+#: modules/aioseop_sitemap.php:97
 msgid "Weekly"
 msgstr "毎週"
 
-#: modules/aioseop_sitemap.php:95
+#: modules/aioseop_sitemap.php:96
 msgid "Daily"
 msgstr "毎日"
 
-#: modules/aioseop_sitemap.php:94
+#: modules/aioseop_sitemap.php:95
 msgid "No Schedule"
 msgstr "予約なし"
 
-#: modules/aioseop_sitemap.php:91
+#: modules/aioseop_sitemap.php:92
 msgid "Schedule Updates"
 msgstr "更新を予約"
 
-#: modules/aioseop_sitemap.php:85
+#: modules/aioseop_sitemap.php:86
 msgid "Filename Prefix"
 msgstr "ファイル名接頭語"
 
-#: modules/aioseop_sitemap.php:59
+#: modules/aioseop_sitemap.php:60
 msgid "Use page slugs or page IDs, seperated by commas, to exclude pages from the sitemap."
 msgstr "サイトマップからページを除外するには、カンマで区切られたページスラッグやページIDを使用します。"
 
-#: modules/aioseop_sitemap.php:58
+#: modules/aioseop_sitemap.php:59
 msgid "Entries from these categories will be excluded from the sitemap."
 msgstr "このカテゴリーの項目はサイトマップから除外されます。"
 
-#: modules/aioseop_sitemap.php:57
+#: modules/aioseop_sitemap.php:58
 msgid "Last modified date of the page."
 msgstr "ページの最終更新日。"
 
-#: modules/aioseop_sitemap.php:56
+#: modules/aioseop_sitemap.php:57
 msgid "The frequency of the page."
 msgstr "ページの頻度。"
 
-#: modules/aioseop_sitemap.php:55
+#: modules/aioseop_sitemap.php:56
 msgid "The priority of the page."
 msgstr "ページの優先順位。"
 
-#: modules/aioseop_sitemap.php:54
+#: modules/aioseop_sitemap.php:55
 msgid "URL to the page."
 msgstr "ページの URL。"
 
-#: modules/aioseop_sitemap.php:52
+#: modules/aioseop_sitemap.php:53
 msgid "Places a link to your Sitemap.xml into your virtual Robots.txt file."
 msgstr "仮想 Robots.txt ファイルに Sitemap.xml へのリンクを配置します。"
 
-#: modules/aioseop_sitemap.php:51
+#: modules/aioseop_sitemap.php:52
 msgid "Create a compressed sitemap file in .xml.gz format."
 msgstr " .xml.gz フォーマットに圧縮したサイトマップファイルを作成する。"
 
-#: modules/aioseop_sitemap.php:50
+#: modules/aioseop_sitemap.php:51
 msgid "Include Author Archives in your sitemap."
 msgstr "サイトマップに投稿者アーカイブを含める。"
 
-#: modules/aioseop_sitemap.php:49
+#: modules/aioseop_sitemap.php:50
 msgid "Include Date Archives in your sitemap."
 msgstr "サイトマップに日付アーカイブを含める。"
 
-#: modules/aioseop_sitemap.php:48
+#: modules/aioseop_sitemap.php:49
 msgid "Select which taxonomy archives appear in your sitemap"
 msgstr "サイトマップに表示されたタクソノミーアーカイブを選択します。"
 
-#: modules/aioseop_sitemap.php:47
+#: modules/aioseop_sitemap.php:48
 msgid "Select which Post Types appear in your sitemap."
 msgstr "サイトマップに表示された投稿タイプを選択します。"
 
-#: modules/aioseop_sitemap.php:46
+#: modules/aioseop_sitemap.php:47
 msgid "Allows you to specify the maximum number of posts in a sitemap (up to 50,000)."
 msgstr "サイトマップ内でのポスト数を指定する事が出来ます。(最大 50,000)"
 
-#: modules/aioseop_sitemap.php:45
+#: modules/aioseop_sitemap.php:46
 msgid "Split long sitemaps into separate files."
 msgstr "長いサイトマップを個別ファイルに分割する。"
 
-#: modules/aioseop_sitemap.php:44
+#: modules/aioseop_sitemap.php:45
 msgid "Organize sitemap entries into distinct files in your sitemap. Enable this only if your sitemap contains over 50,000 URLs or the file is over 5MB in size."
 msgstr "サイトマップ内の個別のファイルにサイトマップのエントリを整理します。サイトマップは、50,000以上のURLが含まれているか、ファイルのサイズは5メガバイトを超えている場合にのみ有効にします。"
 
-#: modules/aioseop_sitemap.php:43
+#: modules/aioseop_sitemap.php:44
 msgid "Notify search engines based on the selected schedule, and also update static sitemap daily if in use. (this uses WP-Cron, so make sure this is working properly on your server as well)"
 msgstr "選択したスケジュールに基づいて、検索エンジンに通知し、また日々、使用中の静的なサイトマップを更新します。（ WP-cron がサーバー上で正常に動作していることを確認し、使用します）"
 
-#: modules/aioseop_sitemap.php:42
+#: modules/aioseop_sitemap.php:43
 msgid "Specifies the name of your sitemap file. This will default to 'sitemap'."
 msgstr "サイトマップファイルの名前を指定して下さい。 このままだとデフォルトの 'sitemap' になります。"
 
-#: modules/aioseop_sitemap.php:32
+#: modules/aioseop_sitemap.php:33
 msgid "XML Sitemap"
 msgstr "XML サイトマップ"
 
@@ -1793,47 +1795,47 @@ msgstr "スポーツ"
 msgid "Activity"
 msgstr "アクティビティ"
 
-#: admin/aioseop_module_class.php:2555
+#: admin/aioseop_module_class.php:2563
 msgid "Update Options"
 msgstr "設定を更新"
 
-#: admin/aioseop_module_class.php:2487
+#: admin/aioseop_module_class.php:2495
 msgid "All in One SEO Options Updated."
 msgstr "All in One SEO 設定を更新しました。"
 
-#: admin/aioseop_module_class.php:2478
+#: admin/aioseop_module_class.php:2486
 msgid "Options Reset."
 msgstr "設定をリセットしました。"
 
-#: admin/aioseop_module_class.php:2475 modules/aioseop_sitemap.php:871
+#: admin/aioseop_module_class.php:2483 modules/aioseop_sitemap.php:875
 msgid "Security Check - If you receive this in error, log out and back in to WordPress"
 msgstr "セキュリティーチェック - このエラーを受け取ったら一度 WordPress をログアウトして、戻ってください。"
 
-#: admin/aioseop_module_class.php:2257
+#: admin/aioseop_module_class.php:2265
 msgid "Click for Help!"
 msgstr "わからない時はこちらをクリック！"
 
-#: admin/aioseop_module_class.php:2218
+#: admin/aioseop_module_class.php:2226
 msgid " characters. Most search engines use a maximum of %s chars for the %s."
 msgstr "文字。ほとんどの検索エンジンは最大%s文字を %s に使用します。"
 
-#: admin/aioseop_module_class.php:1676
+#: admin/aioseop_module_class.php:1677
 msgid "Click here for documentation on this setting"
 msgstr "この設定の説明はここをクリック（英語）"
 
-#: modules/aioseop_importer_exporter.php:511
+#: modules/aioseop_importer_exporter.php:513
 msgid "Settings export file for All in One SEO Pack"
 msgstr "All in One SEO Pack 用のエクスポートファイル設定"
 
-#: modules/aioseop_importer_exporter.php:463
+#: modules/aioseop_importer_exporter.php:465
 msgid "<b>Warning:</b> This following post could not be found: <b>\"%s\"</b>"
 msgstr "<b>警告 : </b> 次の投稿が見つかりませんでした : <b>\"%s\"</b>"
 
-#: modules/aioseop_importer_exporter.php:414
+#: modules/aioseop_importer_exporter.php:416
 msgid "<b>Warning:</b> Line not matched: <b>\"%s\"</b>, On Line: <b>%s</b>"
 msgstr "<b>警告 : </b> 行が一致しません : <b>\"%s\"</b>, On Line: <b>%s</b>"
 
-#: modules/aioseop_importer_exporter.php:155
+#: modules/aioseop_importer_exporter.php:157
 msgid ""
 "You may change this by activating or deactivating\n"
 "\t\t\t\t\t\tmodules in the Feature Manager."
@@ -1841,7 +1843,7 @@ msgstr ""
 "機能マネージャでモジュールを有効化または無効化\n"
 "\t\t\t\t\t\t変更することがあります。"
 
-#: modules/aioseop_importer_exporter.php:148
+#: modules/aioseop_importer_exporter.php:150
 msgid "There are no other modules currently loaded!"
 msgstr "現在他に読み込まれたモジュールはありません。"
 
@@ -1886,102 +1888,102 @@ msgstr "稼働中のモジュールやコンテンツの投稿データからエ
 msgid "Select a valid All in One SEO Pack ini file and click 'Import' to import options from a previous state or install of All in One SEO Pack.<br /><a href='https://semperplugins.com/documentation/importer-exporter-module/' target='_blank'>Click here for documentation on this setting</a>"
 msgstr "有効な All in One SEO Pack の初期ファイルを選び、 All in One SEO Packのインストールや以前の状況からオプションをインポートするために ' インポート ' をクリックしてください。<br /><a href='https://semperplugins.com/documentation/importer-exporter-module/' target='_blank'>この設定の説明はここをクリック（英語）この設定の説明はここをクリック（英語）</a>"
 
-#: inc/aioseop_functions.php:816
+#: inc/aioseop_functions.php:817
 msgid "Facebook"
 msgstr "Facebook"
 
-#: inc/aioseop_functions.php:813
+#: inc/aioseop_functions.php:814
 msgid "Twitter"
 msgstr "Twitter"
 
-#: inc/aioseop_functions.php:807
+#: inc/aioseop_functions.php:808
 msgid "Google+"
 msgstr "Google+"
 
-#: inc/aioseop_functions.php:571
+#: inc/aioseop_functions.php:572
 msgid "Please refer to the document for each tool for help in using these to debug your social meta."
 msgstr "ソーシャルメタをデバッグするためにこれらを使用する際の助けのための各ツールのドキュメントを参照してください。"
 
-#: inc/aioseop_functions.php:561
+#: inc/aioseop_functions.php:562
 msgid "You should avoid duplicate social meta tags. You can use these free tools from Facebook and Twitter to validate your social meta and check for errors:"
 msgstr "ソーシャルメタタグが重複しないようにする必要があります。 FacebookやTwitterのこれらの無料ツールを使ってソーシャルメタを検証し、エラーをチェックすることができます : "
 
-#: inc/aioseop_functions.php:560
+#: inc/aioseop_functions.php:561
 msgid "You may prefer to use the social meta tags that are being output by the other plugin(s) or theme. If so, then you should deactivate this Social Meta feature in All in One SEO Pack Feature Manager."
 msgstr "他のプラグイン（複数可）またはテーマによって出力されているソーシャルメタタグを使用することもできます。もしそうなら、 All in One SEO Pack の機能マネージャでこのソーシャルメタ機能を無効にする必要があります。"
 
-#: inc/aioseop_functions.php:559
+#: inc/aioseop_functions.php:560
 msgid "All in One SEO Pack has detected that a plugin(s) or theme is also outputting social meta tags on your site. You can view this social meta in the source code of your site (check your browser help for instructions on how to view source code)."
 msgstr "All in One SEO Pack に含まれるプラグイン（複数可）またはテーマはまた、あなたのサイトにソーシャルメタタグを出力していることを検出しました。サイトのソースコード内でこのソーシャルメタ（ソースコードを表示する方法については、ブラウザのヘルプを確認してください）表示することができます。"
 
-#: inc/aioseop_functions.php:558
+#: inc/aioseop_functions.php:559
 msgid "What Does This Mean?"
 msgstr "これはどういう意味ですか ?"
 
-#: inc/aioseop_functions.php:555
+#: inc/aioseop_functions.php:556
 msgid "No duplicate meta tags found."
 msgstr "重複の meta タグが見つかりませんでした。"
 
-#: inc/aioseop_functions.php:546
+#: inc/aioseop_functions.php:547
 msgid "Duplicate %s Meta"
 msgstr "%s メタを複製"
 
-#: inc/aioseop_functions.php:482
+#: inc/aioseop_functions.php:483
 msgid "Row %s not found; no rows were deleted."
 msgstr "行 %sが見つかりません ; 行は削除されませんでした。"
 
-#: inc/aioseop_functions.php:382
+#: inc/aioseop_functions.php:383
 msgid "Unauthorized access; try reloading the page."
 msgstr "不正アクセス ; ページを再読み込みしてみてください。"
 
-#: inc/aioseop_functions.php:359 inc/aioseop_functions.php:710
+#: inc/aioseop_functions.php:360 inc/aioseop_functions.php:711
 #: modules/aioseop_performance.php:205 modules/aioseop_performance.php:210
 #: modules/aioseop_performance.php:215 modules/aioseop_performance.php:224
 msgid "No"
 msgstr "いいえ"
 
-#: inc/aioseop_functions.php:254
+#: inc/aioseop_functions.php:255
 msgid "Insert time"
 msgstr "時間を挿入"
 
-#: inc/aioseop_functions.php:253
+#: inc/aioseop_functions.php:254
 msgid "Revisions"
 msgstr "リビジョン"
 
-#: inc/aioseop_functions.php:252
+#: inc/aioseop_functions.php:253
 msgid "Slug may not be empty!"
 msgstr "スラッグを空にしないでください。"
 
-#: inc/aioseop_functions.php:251
+#: inc/aioseop_functions.php:252
 msgid "Please wait..."
 msgstr "お待ちください..."
 
-#: inc/aioseop_functions.php:249
+#: inc/aioseop_functions.php:250
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: inc/aioseop_functions.php:248
+#: inc/aioseop_functions.php:249
 msgid "Save"
 msgstr "保存"
 
-#: inc/aioseop_functions.php:247
+#: inc/aioseop_functions.php:248
 msgid "Post"
 msgstr "投稿"
 
-#: inc/aioseop_functions.php:246 inc/aioseop_functions.php:363
-#: inc/aioseop_functions.php:714
+#: inc/aioseop_functions.php:247 inc/aioseop_functions.php:364
+#: inc/aioseop_functions.php:715
 msgid "Edit"
 msgstr "編集"
 
-#: inc/aioseop_functions.php:176
+#: inc/aioseop_functions.php:177
 msgid "SEO Keywords"
 msgstr "SEO キーワード"
 
-#: inc/aioseop_functions.php:174
+#: inc/aioseop_functions.php:175
 msgid "SEO Description"
 msgstr "SEO ディスクリプション"
 
-#: inc/aioseop_functions.php:173
+#: inc/aioseop_functions.php:174
 msgid "SEO Title"
 msgstr "SEO タイトル"
 
@@ -2100,8 +2102,8 @@ msgstr "機能管理"
 msgid "Main Settings"
 msgstr "メイン設定"
 
-#: admin/aioseop_module_class.php:2017 admin/aioseop_module_class.php:2292
-#: admin/aioseop_module_class.php:2591 aioseop_class.php:4759
+#: admin/aioseop_module_class.php:2025 admin/aioseop_module_class.php:2300
+#: admin/aioseop_module_class.php:2599 aioseop_class.php:4759
 #: aioseop_class.php:4777
 msgid "Help"
 msgstr "ヘルプ"
