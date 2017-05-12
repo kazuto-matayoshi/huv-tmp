@@ -1,245 +1,160 @@
 <?php
+include_once( plugin_dir_path( __FILE__ ) . 'init_actions.php' );
 
-/**
- * - 管理画面に関する初期関数群 -
- *
- * 01.0 - ログイン画面
- *   01.1 - ロゴを変更する
- *   01.2 - ロゴのリンク先を変更する
- *   01.3 - ロゴのtitle属性を変更する
- * 02.0 - ログイン後に投稿のページヘリダイレクトさせる
- * 03.0 - フッターWordPressリンクを非表示にする設定
- * 04.0 - 管理バーのサイトリンクを別ウインドウで開く
- * 05.0 - メニューの非表示関係
- *   05.1 - 管理バーの項目を非表示にする設定
- *   05.2 - メニューバーの表示に関する設定
- *   05.3 - 投稿画面 / カテゴリーのタブを非表示
- *   05.4 - 投稿画面 / 項目を非表示にする
- * 06.0 - 投稿画面のパーマリンク編集部分を非表示
- * 07.0 - APIによるバージョンチェックの通信をさせない
- * 08.0 - 自動更新の停止
- * 09.0 - バージョン更新を非表示にする
- * 10.0 - サイト側の管理バーを非表示
- * 11.0 - アイキャッチ画像の設定
- * 12.0 - カスタムメニューをONにする
- *
- *
- * - カスタマイズ -
- *
- * カスタム投稿タイプを追加
- * カスタム投稿タイプの公開時に自動で投稿IDをスラッグに変更する。
- *
- */
+if ( !class_exists( 'HUV_init_settings' ) ) {
+	class HUV_init_settings {
 
-//---------------------------------
-/*
- * 01.0 - ログイン画面
- */
-//---------------------------------
+		/* 設定値 */
+		private $snsarr = array(
+			'dontChange',
+			'change',
+		);
 
-// /*
-//  * 01.1 - ロゴを変更する
-//  */
-// function custom_login_logo() {
-// 	echo '<style type="text/css">h1 a { width: auto !important; background: url(' . get_template_directory_uri() . '/login.png) no-repeat !important; background-size: contain !important; background-position: center !important; }</style>';
-// }
-// add_action( 'login_head', 'custom_login_logo' );
+		/*---------*\
+		 * 初期処理 *
+		\*---------*/
+		public function __construct( $parent_slug, $slug ) {
+			$this->parent_slug = $parent_slug;
+			$this->slug        = $slug;
+			$this->option      = get_option( $this->slug );
 
-// /*
-//  * 01.2 - ロゴのリンク先を変更する
-//  */
-// function login_logo_url() {
-// 	return get_bloginfo( 'url' );
-// }
-// add_filter( 'login_headerurl', 'login_logo_url' );
-
-// /*
-//  * 01.3 - ロゴのtitle属性を変更する
-//  */
-// function login_logo_title(){
-// 	return get_bloginfo('name');
-// }
-// add_filter( 'login_headertitle', 'login_logo_title' );
+			/**
+			 * 初期設定処理の分岐
+			 * @var array
+			 * @param get_option()
+			 */
+			$HUV_init_actions  = new HUV_init_actions( $this->option );
 
 
-// /*
-//  * 02.0 - ログイン後に投稿のページヘリダイレクトさせる
-//  */
-// function redirect_dashiboard() {
-// 	// ダッシュボード／管理画面チェック
-// 	if( is_admin() ) {
-// 		// ダッシュボードチェック
-// 		if ( preg_match('/(\/wp-admin\/index.php)/', $_SERVER['SCRIPT_NAME']) ) {
-// 			// リダイレクトアドレス作成
-// 			$redirect_url = str_replace($_SERVER['SCRIPT_NAME'], "index.php", "edit.php");
-// 			// リダイレクト
-// 			wp_redirect( $redirect_url );
-// 		};
-// 	};
-// }
-// // 管理者ではない場合実行
-// if ( !current_user_can( 'level_10' ) ) {
-// 	add_action( 'init', 'redirect_dashiboard' );
-// };
+			// メニューの追加をする処理
+			add_action( 'admin_menu', array( $this, 'add_plugin_menu' ) );
+
+			// 設定ページのHTMLを出力する処理
+			add_action( 'admin_init', array( $this, 'setting_views' ) );
+
+			// ページの設定を保存する処理
+			add_action( 'admin_init', array( $this, 'setting_save' ) );
+		}
+
+		/*-------------------*\
+		 * メニューの追加をする処理 *
+		\*-------------------*/
+		public function add_plugin_menu() {
+			/**
+			 * @link https://goo.gl/T2Yxsk
+			 */
+			add_submenu_page(
+				// parent slug
+				$this->parent_slug,
+
+				// title tag
+				__( 'init設定のタイトル' ),
+
+				// menu title
+				__( 'init' ),
+
+				// title tag
+				'administrator',
+
+				// page slug
+				$this->slug,
+
+				// call back
+				array( $this, 'create_admin_page' )
+			);
+		}
+
+		/*------------------------*\
+		 * 使用するシェアボタンの表示設定 *
+		\*------------------------*/
+		public function sns_settings() {
+			$snsarr = $this->snsarr;
+
+			echo '<ul>';
+			foreach ($snsarr as $key => $value) {
+				echo '<li>';
+
+				var_dump( get_option( $this->slug ) );
+				// nameの[]より前の部分はregister_setting()の$option_nameと同じ名前にします。
+				echo '<input type="radio" id="custom_login_logo_'.$value.'" name="'.$this->slug.'" value="'.$value.'"'.( isset( get_option( $this->slug )['custom_logo_radio'] ) && get_option( $this->slug )['custom_logo_radio'] === 'change' ? ' checked' : ' checked' ).'>';
+
+				echo '<label for="custom_login_logo_'.$value.'">'.$value.'</label>';
+				echo '</li>';
+			}
+			echo '</ul>';
+		}
+
+		public function setting_views() {
+			/**
+			 * @link https://goo.gl/PWgs2X
+			 */
+			add_settings_section( $this->slug.'_section_id', '', '', $this->slug );
+
+			/**
+			 * @link https://goo.gl/Uf15cK
+			 */
+			add_settings_field( 'sns', '使用するシェアボタン', array( $this, 'sns_settings' ), $this->slug, $this->slug.'_section_id' );
+		}
+
+		/*--------------------------*\
+		 * 設定ページのHTMLを出力する処理 *
+		\*--------------------------*/
+		public function create_admin_page() {
+			echo '<div class=\"wrap\">';
+				echo '<h2>HUV 開発者用設定</h2>';
+				/* *
+				 * add_options_page()で設定のサブメニューとして追加している場合は問題ありませんが、
+				 * add_menu_page()で追加している場合
+				 * options-head.phpが読み込まれずメッセージが出ないため(※)
+				 * メッセージが出るようにします。
+				 * (※) add_menu_page()の場合親ファイルがoptions-general.phpではない
+				 */
+				global $parent_file;
+				if ( $parent_file != 'options-general.php' ) {
+					require( ABSPATH . 'wp-admin/options-head.php' );
+				}
+
+				echo '<form method="post" action="options.php">';
+
+					// 隠しフィールドなどを出力します(register_setting()の$option_groupと同じものを指定)。
+					settings_fields( $this->slug );
+
+					// 入力項目を出力します(設定ページのslugを指定)。
+					do_settings_sections( $this->slug );
+
+					// 送信ボタンを出力します。
+					submit_button();
+
+				echo '</form>';
+			echo '</div>';
+			echo '<!-- /.wrap -->';
+		}
 
 
-// /*
-//  * 03.0 - フッターWordPressリンクを非表示にする設定
-//  */
-// function custom_admin_footer() {
-// 	echo '';
-// }
-// add_filter( 'admin_footer_text', 'custom_admin_footer' );
+		/*----------------------*\
+		 * ページの設定を保存する処理 *
+		\*----------------------*/
+		public function setting_save() {
+			/**
+			 * @link https://goo.gl/5PjtyL
+			 */
+			register_setting( $this->slug, $this->slug, array( $this, 'save_valid' ) );
+		}
 
+		/**
+		 * 送信された入力値のサニタイズ化
+		 * @param array $input 設定値
+		 */
+		public function save_valid( $input ) {
+			$new_input = array();
 
-// /*
-//  * 04.0 - 管理バーのサイトリンクを別ウインドウで開く
-//  */
-// function site_target_blank( $wp_admin_bar ) {
-// 	$wp_admin_bar -> add_menu(
-// 		array(
-// 			'id'     => 'site-name',
-// 			'meta'   => array( 'target' => '_blank' ),
-// 		)
-// 	);
+			// SNS シェアボタンの保存
+			$snsarr = $this->snsarr;
+			foreach ($snsarr as $key => $value) {
+			}
+			$new_input['custom_logo_radio'] = stripslashes( $input );
 
-// 	// サブメニューの削除
-// 	$wp_admin_bar -> remove_menu( 'view-site' );
-// }
-// add_action( 'admin_bar_menu', 'site_target_blank', 50 );
-
-// //---------------------------------
-// /*
-//  * 05.0 - メニューの非表示関係
-//  */
-// //---------------------------------
-
-// /*
-//  * 05.1 - 管理バーの項目を非表示にする設定
-//  */
-// function remove_admin_bar_menu( $wp_admin_bar ) {
-// 	// WordPressシンボルマーク
-// 	$wp_admin_bar->remove_menu( 'wp-logo' );
-// 	// コメント
-// 	$wp_admin_bar->remove_menu( 'comments' );
-// 	// 『新規 -> 投稿ページ』の削除
-// 	// $wp_admin_bar->remove_menu( 'new-post' );
-
-// 	// 管理者ではない場合実行
-// 	if ( !current_user_can( 'level_10' ) ) {
-// 		// 『新規 -> 固定ページ』の削除
-// 		$wp_admin_bar->remove_menu( 'new-page' );
-// 	};
-// }
-// add_action( 'admin_bar_menu', 'remove_admin_bar_menu', 201 );
-
-// /*
-//  * 05.2 - メニューバーの表示に関する設定
-//  */
-// function remove_menus () {
-// 	global $menu;
-// 	// 投稿
-// 	// unset( $menu[5] );
-// 	// コメント
-// 	unset( $menu[25] );
-
-// 	// 管理者ではない場合実行
-// 	if ( !current_user_can( 'level_10' ) ) {
-// 		// ダッシュボード
-// 		unset( $menu[2] );
-// 		// ページ
-// 		unset( $menu[20] );
-// 		// ツール
-// 		unset( $menu[75] );
-// 		// メニューのカテゴリーの削除
-// 		remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=category' );
-// 		// メニューのタグの削除
-// 		remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=post_tag' );
-// 	};
-// }
-// add_action('admin_menu', 'remove_menus');
-
-// /*
-//  * 05.3 - 投稿画面 / カテゴリーのタブを非表示
-//  */
-// function hide_category_tabs_adder() {
-// 	global $pagenow;
-// 	global $post_type;
-// 	if ( is_admin() && ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) ) {
-// 		echo "<style type=\"text/css\">\n
-// 		#category-tabs, #category-adder {display:none;}
-// 		.categorydiv .tabs-panel {padding: 0 !important; background: none; border: none !important;}
-// 		</style>\n";
-// 	};
-// }
-// if ( !current_user_can( 'level_10' ) ) { // 管理者ではない場合
-// 	add_action( 'admin_head', 'hide_category_tabs_adder' );
-// };
-
-// /*
-//  * 05.4 - 投稿画面 / 項目を非表示にする
-//  */
-// function remove_default_post_screen_metaboxes() {
-// 	// remove_meta_box( 'slugdiv','post','normal' );            // スラッグ
-// 	// remove_meta_box( 'postcustom','post','normal' );         // カスタムフィールド
-// 	remove_meta_box( 'commentsdiv','post','normal' );        // コメント
-// 	// remove_meta_box( 'postexcerpt','post','normal' );        // 抜粋
-// 	// remove_meta_box( 'trackbacksdiv','post','normal' );      // トラックバック
-// 	// remove_meta_box( 'commentstatusdiv','post','normal' );   // ディスカッション
-// 	// remove_meta_box( 'tagsdiv-post_tag' , 'post' , 'side' ); // 投稿のタグ
-// }
-
-// add_action('admin_menu','remove_default_post_screen_metaboxes');
-
-// function remove_post_supports() {
-// 	// remove_post_type_support( 'post', 'title' );           // タイトル
-// 	// remove_post_type_support( 'post', 'editor' );          // 本文欄
-// 	// remove_post_type_support( 'post', 'author' );          // 作成者
-// 	// remove_post_type_support( 'post', 'thumbnail' );       // アイキャッチ
-// 	// remove_post_type_support( 'post', 'excerpt' );         // 抜粋
-// 	// remove_post_type_support( 'post', 'trackbacks' );      // トラックバック
-// 	// remove_post_type_support( 'post', 'custom-fields' );   // カスタムフィールド
-// 	// remove_post_type_support( 'post', 'comments' );        // コメント
-// 	// remove_post_type_support( 'post', 'revisions' );       // リビジョン
-// 	// remove_post_type_support( 'post', 'page-attributes' ); // ページ属性
-// 	// remove_post_type_support( 'post', 'post-formats' );    // 投稿フォーマット
-
-// 	// unregister_taxonomy_for_object_type( 'category', 'post' ); // カテゴリ
-// 	// unregister_taxonomy_for_object_type( 'post_tag', 'post' ); // タグ
-// }
-// add_action( 'init', 'remove_post_supports' );
-// /*
-//  * 06.0 - 投稿画面のパーマリンク編集部分を非表示
-//  */
-// // add_filter( 'get_sample_permalink_html', '__return_false' );
-
-// /*
-//  * 07.0 - APIによるバージョンチェックの通信をさせない
-//  */
-// remove_action('wp_version_check', 'wp_version_check');
-// remove_action('admin_init', '_maybe_update_core');
-
-// /*
-//  * 08.0 - 自動更新の停止
-//  */
-// add_filter( 'automatic_updater_disabled', '__return_true' );
-
-// /*
-//  * 09.0 - バージョン更新を非表示にする
-//  */
-// add_filter('pre_site_transient_update_core', '__return_zero');
-
-// /*
-//  * 10.0 - サイト側の管理バーを非表示
-//  */
-// add_filter('show_admin_bar', '__return_false');
-
-// /**
-//  * 11.0 - アイキャッチ画像の設定
-//  */
-// add_theme_support( 'post-thumbnails' );
-
-// /**
-//  * 12.0 - カスタムメニューをONにする
-//  */
-// add_theme_support( 'menus' );
+			return $new_input;
+		}
+	}
+}
