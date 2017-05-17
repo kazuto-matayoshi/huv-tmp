@@ -65,9 +65,9 @@ add_action('widgets_init', 'unregister_widgets');
 add_action( 'widgets_init', function () {
 
 register_sidebar( array(  //「サイドバー」を登録する
-	'name'          => __( 'グローバルナビゲーション' ),
+	'name'          => 'グローバルナビゲーション',
 	'id'            => 'gnav',
-	'description'   => __( 'グローバルナビゲーションの追加' ),
+	'description'   => 'グローバルナビゲーションの追加',
 	'before_widget' => '',
 	'after_widget'  => '',
 	'before_title'  => '',

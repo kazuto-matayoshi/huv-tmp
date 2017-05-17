@@ -19,8 +19,8 @@ function create_post_type() {
 	register_post_type( 'original_themes', //ポストタイプ名の指定
 		array(
 			'labels'           => array (
-				'name'           => __( 'オリジナルテーマ作成' ),
-				'singular_name'  => __( 'オリジナルテーマ作成' ),
+				'name'           => 'オリジナルテーマ作成',
+				'singular_name'  => 'オリジナルテーマ作成',
 			),
 			'public'        => true,
 			'has_archive'   => true,
