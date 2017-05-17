@@ -71,14 +71,17 @@ if ( !class_exists( 'HUV_admin_settings' ) ) {
 /*----------------*\
  * call functions *
 \*----------------*/
+if ( is_admin() ) {
 
-$base_slug = 'huv_admin_settings';
-$HUV_admin_settings = new HUV_admin_settings( $base_slug );
+	$base_slug = 'huv_admin_settings';
+	$HUV_admin_settings = new HUV_admin_settings( $base_slug );
 
-/**
- * 初期化処理
- * @param $base_srug -> base slug;
- * @param $slug      -> this part slug;
- */
-$HUV_init_settings  = new HUV_init_settings( $base_slug, 'huv_init_settings' );
-$HUV_sns_settings   = new HUV_sns_settings( $base_slug, 'huv_sns_settings' );
+	/**
+	 * 初期化処理
+	 * @param $base_srug -> base slug;
+	 * @param $slug      -> this part slug;
+	 */
+	$HUV_init_settings  = new HUV_init_settings( $base_slug, 'huv_init_settings' );
+	$HUV_sns_settings   = new HUV_sns_settings( $base_slug, 'huv_sns_settings' );
+
+}
