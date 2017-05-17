@@ -49,7 +49,7 @@ add_action( 'login_head', 'custom_login_logo' );
  * 01.2 - ロゴのリンク先を変更する
  */
 function login_logo_url() {
-	return get_bloginfo( 'url' );
+	return get_home_url();
 }
 add_filter( 'login_headerurl', 'login_logo_url' );
 
