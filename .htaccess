@@ -1,4 +1,3 @@
-
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -10,3 +9,32 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+
+
+
+
+
+# BEGIN maintenance
+
+# huvrid add
+
+# maintenance
+# customized 503 page
+
+# 503用のHTMLを指定
+ErrorDocument 503 /mainte/index.html
+
+RewriteEngine On
+RewriteBase /
+
+# アクセスしたURLが「mainte」ディレクトリ配下でない場合という条件
+RewriteCond %{REQUEST_URI} !^/mainte/
+
+# アクセスした元のIPアドレスが「180.43.125.217」(huvrid)でない場合、
+# または「39.110.207.111」(wevnal)という条件
+RewriteCond %{REMOTE_ADDR} !^(180\.43\.125\.217|39\.110\.207\.111)$
+
+# 上記2つの条件を満たした場合に、503スタータスにする
+RewriteRule ^.*$ - [R=503,L]
+
+# END maintenance

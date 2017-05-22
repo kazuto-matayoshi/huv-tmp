@@ -5,9 +5,9 @@ if ( !class_exists( 'HUV_init_settings' ) ) {
 	class HUV_init_settings {
 
 		/* 設定値 */
-		private $snsarr = array(
-			'dontChange',
-			'change',
+		private $loginArr = array(
+			'dontchange' => '変更しない',
+			'change'     => '変更する',
 		);
 
 		/*---------*\
@@ -68,19 +68,26 @@ if ( !class_exists( 'HUV_init_settings' ) ) {
 		 * 使用するシェアボタンの表示設定 *
 		\*------------------------*/
 		public function sns_settings() {
-			$snsarr = $this->snsarr;
+			$loginArr = $this->loginArr;
 
 			echo '<ul>';
-			foreach ($snsarr as $key => $value) {
+			foreach ( $loginArr as $value => $txt ) {
 				echo '<li>';
 
-				var_dump( get_option( $this->slug ) );
 				// nameの[]より前の部分はregister_setting()の$option_nameと同じ名前にします。
-				echo '<input type="radio" id="custom_login_logo_'.$value.'" name="'.$this->slug.'" value="'.$value.'"'.( isset( get_option( $this->slug )['custom_logo_radio'] ) && get_option( $this->slug )['custom_logo_radio'] === 'change' ? ' checked' : ' checked' ).'>';
-
-				echo '<label for="custom_login_logo_'.$value.'">'.$value.'</label>';
+				echo '<input',
+								' type="radio"',
+								' id="custom_login_logo_'.$value.'"',
+								' name="'.$this->slug.'[]"',
+								' value="'.$value.'"',
+								isset( get_option( $this->slug )[0] )
+								&& get_option( $this->slug )[0] === $value
+								? ' checked' : '',
+						 '>';
+				echo '<label for="custom_login_logo_'.$value.'">'.$txt.'</label>';
 				echo '</li>';
 			}
+			echo '<input type="text" name="'.$this->slug.'[]" value="'.get_option( $this->slug )[1].'">';
 			echo '</ul>';
 		}
 
@@ -93,7 +100,7 @@ if ( !class_exists( 'HUV_init_settings' ) ) {
 			/**
 			 * @link https://goo.gl/Uf15cK
 			 */
-			add_settings_field( 'sns', '使用するシェアボタン', array( $this, 'sns_settings' ), $this->slug, $this->slug.'_section_id' );
+			add_settings_field( 'sns', 'ログイン画面のロゴの変更', array( $this, 'sns_settings' ), $this->slug, $this->slug.'_section_id' );
 		}
 
 		/*--------------------------*\
@@ -149,10 +156,11 @@ if ( !class_exists( 'HUV_init_settings' ) ) {
 			$new_input = array();
 
 			// SNS シェアボタンの保存
-			$snsarr = $this->snsarr;
-			foreach ($snsarr as $key => $value) {
+			$loginArr = $this->loginArr;
+
+			foreach ( $input as $key => $value ) {
+				$new_input[] = stripslashes( $value );
 			}
-			$new_input['custom_logo_radio'] = stripslashes( $input );
 
 			return $new_input;
 		}
