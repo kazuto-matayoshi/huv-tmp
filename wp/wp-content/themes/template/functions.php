@@ -34,54 +34,213 @@ get_template_part('function/custom_post');
  * 01.0 - 一覧用ページネーション
  */
 //---------------------------------------------------------------------------------------------------
-function pagination($pages = '') {
+function pagination( $args = array() ) {
 
-  // ページネーションのリンク数 -> ( $range * 2 ) + 1
-  $range = 2;
-  $showitems = ( $range * 2 ) + 1;
+  $df_args = array(
+    /**
+     * @param str 'link' or 'text'
+     * linkにすると数字の部分がリンクになります。
+     * textだと 1/n となります。
+     */
+    'type'         => 'link',
+
+    /**
+     * @param bool true or false
+     * trueにするとprev、nextへのリンクがない場合非表示にします。
+     */
+    'hide'         => true,
+
+    /**
+     * type == linkの時に使用します。
+     * 現在のページを中心に左右に何個リンクを排出するかの設定になります。
+     */
+    'range'        => 2,
+
+    /**
+     * @param float $wp_query->max_num_pages
+     * ページの最大値です。
+     * 基本設定しませんが、WP_Query等でループした際には必須となります。
+     */
+    'pages'        => '',
+
+    /**
+     * @param str -> base class name
+     * クラス名を変更できます。
+     */
+    'class_name'   => 'pager',
+
+    /**
+     * @param bool
+     * wrapperを生成するかどうか。
+     */
+    'wrapper'      => false,
+
+    /**
+     * @param str
+     * nextのテキストの設定
+     */
+    'next_txt'     => '>',
+
+    /**
+     * @param str
+     * prevのテキストの設定
+     */
+    'prev_txt'     => '<',
+
+    /**
+     * @param bool
+     * 最後まで飛ばすリンクを作成するか
+     */
+    'endlink'      => false,
+
+    /**
+     * @param str
+     * end nextのテキストの設定
+     */
+    'end_next_txt' => '>>',
+
+    /**
+     * @param str
+     * end prevのテキストの設定
+     */
+    'end_prev_txt' => '<<',
+  );
+
+  $args = array_merge( $df_args, $args );
+
+  // ページネーションのリンク数
+  $showitems = ( $args['range'] * 2 ) + 1;
 
   // 現在のページの値を取得
   global $paged;
+
   if ( empty( $paged ) ) {
     $paged = 1;
   }
 
-  if( $pages == '' ) {
+  if ( $args['pages'] == '' ) {
     global $wp_query;
 
     // 全ページ数を取得
-    $pages = $wp_query->max_num_pages;
+    $args['pages'] = $wp_query->max_num_pages;
+  }
 
-    // 全ページ数が空の場合は、1とする
-    if( !$pages ) {
-      $pages = 1;
-    }
+  // 全ページ数が空の場合は、1とする
+  if( !$args['pages'] ) {
+    $args['pages'] = 1;
   }
 
   // 全ページが1でない場合はページネーションを表示する
-  if ( $pages != 1 ) {
-
-    // echo '<div class="pagenation-content">';
-    echo '<ul class="pager">';
-
-    // 現在のページ値が1より大きい場合にPrev表示
-    if ( $paged > 1 ) {
-      echo '<li class="prev"><a href="'. get_pagenum_link( $paged - 1 ) .'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
+  if ( $args['pages'] != 1 ) {
+    if ( $args['wrapper'] ) {
+      echo '<div class="'.$args['class_name'].'">';
     }
 
-    for ( $i = 1; $i <= $pages; $i++ ) {
-      if ( 1 != $pages && ( !( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
-        //三項演算子での条件分岐
-        echo ( $paged == $i ) ? '<li class="active">'. $i .'</li>' : '<li><a href="'. get_pagenum_link( $i ) .'">'. $i .'</a></li>';
+    echo '<ul class="'.$args['class_name'].'__list">';
+      // endPrev
+      if ( $args['endlink'] ) {
+        if ( $args['hide'] ) {
+          if ( $paged > 1 ) {
+            echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--endPrev"><a href="'. get_pagenum_link( 1 ) .'">',
+                    $args['end_prev_txt'],
+                 '</a></li>';
+          }
+        } else {
+          if ( ( $paged - 1 ) > 1 ) {
+            echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--endPrev"><a href="'. get_pagenum_link( 1 ) .'">',
+                    $args['end_prev_txt'],
+                 '</a></li>';
+          } else {
+            echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--endPrev">',
+                    $args['end_prev_txt'],
+                 '</a></li>';
+          }
+        }
       }
-    }
 
-    // 総ページ数より現在のページ値が小さい場合にNext表示
-    if ( $paged < $pages ) {
-      echo '<li class="next"><a href="'. get_pagenum_link( $paged + 1 ) .'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>';
+      // Prev
+      if ( $args['hide'] ) {
+        if ( $paged > 1 ) {
+          echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--prev"><a href="'. get_pagenum_link( $paged - 1 ) .'">',
+                  $args['prev_txt'],
+               '</a></li>';
+        }
+      } else {
+        if ( $paged > 1 ) {
+          echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--prev"><a href="'. get_pagenum_link( $paged - 1 ) .'">',
+                  $args['prev_txt'],
+               '</a></li>';
+        } else {
+          echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--prev">',
+                  $args['prev_txt'],
+               '</li>';
+        }
+      }
+
+      if ( $args['type'] === 'link' ) {
+        for ( $i = 1; $i <= $args['pages']; $i++ ) {
+          if (
+            1 != $args['pages']
+            && (
+              !( $i >= $paged + $args['range'] + 1 || $i <= $paged - $args['range'] - 1 )
+              || $args['pages'] <= $showitems
+            )
+          ) {
+            if ( $paged == $i ) {
+              echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--active">'. $i .'</li>';
+            } else {
+              echo '<li class="'.$args['class_name'].'__list__item"><a href="'. get_pagenum_link( $i ) .'">'. $i .'</a></li>';
+            }
+          }
+        }
+      } elseif ( $args['type'] === 'text' ) {
+        echo $paged.'/'.$args['pages'];
+      }
+
+      // next
+      if ( $args['hide'] ) {
+        if ( $paged < $args['pages'] ) {
+          echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--next"><a href="'. get_pagenum_link( $paged + 1 ) .'">',
+                  $args['next_txt'],
+               '</a></li>';
+        }
+      } else {
+        if ( $paged < $args['pages'] ) {
+          echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--next"><a href="'. get_pagenum_link( $paged + 1 ) .'">',
+                  $args['next_txt'],
+               '</a></li>';
+        } else {
+          echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--next">',
+                  $args['next_txt'],
+               '</li>';
+        }
+      }
+
+      // endNext
+      if ( $args['endlink'] ) {
+        if ( $args['hide'] ) {
+          if ( $paged < $args['pages'] ) {
+            echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--endNext"><a href="'. get_pagenum_link( $args['pages'] ) .'">',
+                    $args['end_next_txt'],
+                 '</a></li>';
+          }
+        } else {
+          if ( ( $paged + 1 ) < $args['pages'] ) {
+            echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--endNext"><a href="'. get_pagenum_link( $args['pages'] ) .'">',
+                    $args['end_next_txt'],
+                 '</a></li>';
+          } else {
+            echo '<li class="'.$args['class_name'].'__list__item '.$args['class_name'].'__list__item--endNext">',
+                    $args['end_next_txt'],
+                 '</li>';
+          }
+        }
+      }
+    echo '</ul>';
+
+    if ( $args['wrapper'] ) {
+      echo '</div>';
     }
-      echo '</ul>';
-      // echo '</div>';
   }
 }
 
