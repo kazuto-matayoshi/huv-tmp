@@ -1,8 +1,13 @@
 <?php
 get_header();
 
-  // $path = get_query_var( 'post_type' ) ? get_query_var( 'post_type' ) : 'post';
-  $path = get_post_type() ? get_post_type() : 'post';
+  $url = explode( '/', $_SERVER['REQUEST_URI'] );
+
+  if ( get_post_type() === $url[1] ) {
+    $path = get_post_type() ? get_post_type() : 'post';
+  } else {
+    $path = $url[1];
+  }
 
   // 書き出しテスト
   // echo 'archive : '.$path;
