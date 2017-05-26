@@ -1,30 +1,30 @@
 <?php
 get_header();
 
-	// $path = get_post_type($post->ID);
-	$path = get_query_var( 'post_type' ) ? get_query_var( 'post_type' ) : 'post';
+  // $path = get_post_type($post->ID);
+  $path = get_query_var( 'post_type' ) ? get_query_var( 'post_type' ) : 'post';
 
-	// 書き出しテスト
-	// echo 'archive : '.$path;
+  // 書き出しテスト
+  // echo 'archive : '.$path;
 
 /**
  * ファイルがあるかの判定
  */
 if ( locate_template( 'archive/'.$path.'.php' ) ) {
-	// true
+  // true
 
-	// ファイルの呼び出し
-	get_template_part( 'archive/'.$path );
+  // ファイルの呼び出し
+  get_template_part( 'archive/'.$path );
 } else {
-	// false
+  // false
 
-	// 入力したコンテンツの表示
-	if ( have_posts() ) :
-	while ( have_posts() ) :
-		the_post();
-		the_content();
-	endwhile;
-	endif;
+  // 入力したコンテンツの表示
+  if ( have_posts() ) :
+  while ( have_posts() ) :
+    the_post();
+    the_content();
+  endwhile;
+  endif;
 }
 
 get_footer();

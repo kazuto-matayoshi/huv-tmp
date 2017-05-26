@@ -2,35 +2,35 @@
 @import "mixin";
 
 .error {
-	width: 980px;
-	margin: 0 auto;
-	&-img {
-		margin-bottom: 20px;
-		text-align: center;
-		img {
-			font-size: 0;
-			line-height: 1;
-		}
-	}
-	&-txt {
-		text-align: center;
-		margin-bottom: 30px;
-	}
-	&-btn {
-		background: #FFF;
-		width: 380px;
-		margin: 0 auto 30px;
-		a {
-			display: block;
-			color: #FFF;
-			line-height: 46px;
-			text-align: center;
-			background: #16D0D0;
-			height: 46px;
-			transition: all 0.3s;
-			&:hover {
-				opacity: 0.8;
-			}
-		}
-	}
+  width: 980px;
+  margin: 0 auto;
+  &-img {
+    margin-bottom: 20px;
+    text-align: center;
+    img {
+      font-size: 0;
+      line-height: 1;
+    }
+  }
+  &-txt {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  &-btn {
+    background: #FFF;
+    width: 380px;
+    margin: 0 auto 30px;
+    a {
+      display: block;
+      color: #FFF;
+      line-height: 46px;
+      text-align: center;
+      background: #16D0D0;
+      height: 46px;
+      transition: all 0.3s;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
 }

@@ -1,29 +1,29 @@
 <?php
 get_header();
 
-	$path = get_post_type($post->ID);
+  $path = get_post_type($post->ID);
 
-	// 書き出しテスト
-	// echo 'single : '.$path;
+  // 書き出しテスト
+  // echo 'single : '.$path;
 
 /**
  * ファイルがあるかの判定
  */
 if ( locate_template( 'single/'.$path.'.php' ) ) {
-	// true
+  // true
 
-	// ファイルの呼び出し
-	get_template_part( 'single/'.$path );
+  // ファイルの呼び出し
+  get_template_part( 'single/'.$path );
 } else {
-	// false
+  // false
 
-	// 入力したコンテンツの表示
-	if ( have_posts() ) :
-	while ( have_posts() ) :
-		the_post();
-		the_content();
-	endwhile;
-	endif;
+  // 入力したコンテンツの表示
+  if ( have_posts() ) :
+  while ( have_posts() ) :
+    the_post();
+    the_content();
+  endwhile;
+  endif;
 }
 
 get_footer();

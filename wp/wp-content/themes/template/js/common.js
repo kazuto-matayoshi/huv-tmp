@@ -1,3 +1,3 @@
 (function($){
-	var swiper = new Swiper('.mv');
+  var swiper = new Swiper('.mv');
 })(jQuery);

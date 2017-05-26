@@ -36,53 +36,53 @@ get_template_part('function/custom_post');
 //---------------------------------------------------------------------------------------------------
 function pagination($pages = '') {
 
-	// ページネーションのリンク数 -> ( $range * 2 ) + 1
-	$range = 2;
-	$showitems = ( $range * 2 ) + 1;
+  // ページネーションのリンク数 -> ( $range * 2 ) + 1
+  $range = 2;
+  $showitems = ( $range * 2 ) + 1;
 
-	// 現在のページの値を取得
-	global $paged;
-	if ( empty( $paged ) ) {
-		$paged = 1;
-	}
+  // 現在のページの値を取得
+  global $paged;
+  if ( empty( $paged ) ) {
+    $paged = 1;
+  }
 
-	if( $pages == '' ) {
-		global $wp_query;
+  if( $pages == '' ) {
+    global $wp_query;
 
-		// 全ページ数を取得
-		$pages = $wp_query->max_num_pages;
+    // 全ページ数を取得
+    $pages = $wp_query->max_num_pages;
 
-		// 全ページ数が空の場合は、1とする
-		if( !$pages ) {
-			$pages = 1;
-		}
-	}
+    // 全ページ数が空の場合は、1とする
+    if( !$pages ) {
+      $pages = 1;
+    }
+  }
 
-	// 全ページが1でない場合はページネーションを表示する
-	if ( $pages != 1 ) {
+  // 全ページが1でない場合はページネーションを表示する
+  if ( $pages != 1 ) {
 
-		// echo '<div class="pagenation-content">';
-		echo '<ul class="pager">';
+    // echo '<div class="pagenation-content">';
+    echo '<ul class="pager">';
 
-		// 現在のページ値が1より大きい場合にPrev表示
-		if ( $paged > 1 ) {
-			echo '<li class="prev"><a href="'. get_pagenum_link( $paged - 1 ) .'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
-		}
+    // 現在のページ値が1より大きい場合にPrev表示
+    if ( $paged > 1 ) {
+      echo '<li class="prev"><a href="'. get_pagenum_link( $paged - 1 ) .'"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
+    }
 
-		for ( $i = 1; $i <= $pages; $i++ ) {
-			if ( 1 != $pages && ( !( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
-				//三項演算子での条件分岐
-				echo ( $paged == $i ) ? '<li class="active">'. $i .'</li>' : '<li><a href="'. get_pagenum_link( $i ) .'">'. $i .'</a></li>';
-			}
-		}
+    for ( $i = 1; $i <= $pages; $i++ ) {
+      if ( 1 != $pages && ( !( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
+        //三項演算子での条件分岐
+        echo ( $paged == $i ) ? '<li class="active">'. $i .'</li>' : '<li><a href="'. get_pagenum_link( $i ) .'">'. $i .'</a></li>';
+      }
+    }
 
-		// 総ページ数より現在のページ値が小さい場合にNext表示
-		if ( $paged < $pages ) {
-			echo '<li class="next"><a href="'. get_pagenum_link( $paged + 1 ) .'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>';
-		}
-			echo '</ul>';
-			// echo '</div>';
-	}
+    // 総ページ数より現在のページ値が小さい場合にNext表示
+    if ( $paged < $pages ) {
+      echo '<li class="next"><a href="'. get_pagenum_link( $paged + 1 ) .'"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>';
+    }
+      echo '</ul>';
+      // echo '</div>';
+  }
 }
 
 //---------------------------------------------------------------------------------------------------
@@ -91,49 +91,49 @@ function pagination($pages = '') {
  */
 //---------------------------------------------------------------------------------------------------
 function breadcrumb() {
-	global $post;
-	$str = "";
-	if( ( !is_home() || !is_front_page() ) && !is_admin() ){
-		// $str .= '<div class="breadcrumb">';
-		$str .= '<ul class="breadcrumb-list">';
-		$str .= '<li class="breadcrumb-list-item"><a href="'. home_url() .'">TOP</a></li>';
+  global $post;
+  $str = "";
+  if( ( !is_home() || !is_front_page() ) && !is_admin() ){
+    // $str .= '<div class="breadcrumb">';
+    $str .= '<ul class="breadcrumb-list">';
+    $str .= '<li class="breadcrumb-list-item"><a href="'. home_url() .'">TOP</a></li>';
 
-		// if( is_category() ) {
-		// 	$cat = get_queried_object();
-		// 	if($cat->parent != 0){
-		// 		$ancestors = array_reverse(get_ancestors( $cat->cat_ID, 'category' ));
-		// 		foreach($ancestors as $ancestor){
-		// 			$str.='<li><a href='.get_category_link($ancestor).'>'.get_cat_name($ancestor).'</a></li>';
-		// 		}
-		// 	}
-		// 	$str .='<a href='.get_category_link($cat->term_id).'>'.$cat->cat_name.'</a>';
-		// }
-		// elseif( is_page() ){
-		if( is_page() ){ // 調整済み
-			if( $post->post_parent != 0 ){
-				$ancestors = array_reverse( get_post_ancestors( $post->ID ) );
-				foreach( $ancestors as $ancestor ){
-					$str .= '<li class="breadcrumb-list-item"><a href="'. get_permalink( $ancestor ) .'">'. get_the_title( $ancestor ) .'</a></li>';
-				}
-			}
-			$str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
-		} elseif( is_single() ){
-			$str .= '<li class="breadcrumb-list-item"><a href="/'. get_post_type() .'/">';
-			$str .= esc_html( get_post_type_object( get_post_type() )->label );
-			$str .= '</a></li>';
-			$str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
-		} elseif( is_archive() ){
-			$str .= '<li class="breadcrumb-list-item">';
-			$str .= esc_html( get_post_type_object( get_post_type() )->label );
-			$str .= '</li>';
-		} elseif( is_search() ){
-		} else {
-			$str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
-		}
-		$str .= '</ul>';
-		// $str .= '</div>';
-	}
-	echo $str;
+    // if( is_category() ) {
+    //  $cat = get_queried_object();
+    //  if($cat->parent != 0){
+    //    $ancestors = array_reverse(get_ancestors( $cat->cat_ID, 'category' ));
+    //    foreach($ancestors as $ancestor){
+    //      $str.='<li><a href='.get_category_link($ancestor).'>'.get_cat_name($ancestor).'</a></li>';
+    //    }
+    //  }
+    //  $str .='<a href='.get_category_link($cat->term_id).'>'.$cat->cat_name.'</a>';
+    // }
+    // elseif( is_page() ){
+    if( is_page() ){ // 調整済み
+      if( $post->post_parent != 0 ){
+        $ancestors = array_reverse( get_post_ancestors( $post->ID ) );
+        foreach( $ancestors as $ancestor ){
+          $str .= '<li class="breadcrumb-list-item"><a href="'. get_permalink( $ancestor ) .'">'. get_the_title( $ancestor ) .'</a></li>';
+        }
+      }
+      $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
+    } elseif( is_single() ){
+      $str .= '<li class="breadcrumb-list-item"><a href="/'. get_post_type() .'/">';
+      $str .= esc_html( get_post_type_object( get_post_type() )->label );
+      $str .= '</a></li>';
+      $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
+    } elseif( is_archive() ){
+      $str .= '<li class="breadcrumb-list-item">';
+      $str .= esc_html( get_post_type_object( get_post_type() )->label );
+      $str .= '</li>';
+    } elseif( is_search() ){
+    } else {
+      $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
+    }
+    $str .= '</ul>';
+    // $str .= '</div>';
+  }
+  echo $str;
 }
 
 //---------------------------------------------------------------------------------------------------
@@ -143,18 +143,18 @@ function breadcrumb() {
 //---------------------------------------------------------------------------------------------------
 function add_slug_for_posts( $post_id ) {
 
-	// DBからpostしたidを取得し配列に入れる
-	$posts_data = get_post( $post_id, ARRAY_A );
+  // DBからpostしたidを取得し配列に入れる
+  $posts_data = get_post( $post_id, ARRAY_A );
 
-	// DBから取得した配列の'post_name'を抽出
-	$slug       = $posts_data['post_name'];
+  // DBから取得した配列の'post_name'を抽出
+  $slug       = $posts_data['post_name'];
 
-	if ( $post_id != $slug ){
-		$my_post              = array();
-		$my_post['ID']        = $post_id;
-		$my_post['post_name'] = $post_id;
-		wp_update_post($my_post);
-	};
+  if ( $post_id != $slug ){
+    $my_post              = array();
+    $my_post['ID']        = $post_id;
+    $my_post['post_name'] = $post_id;
+    wp_update_post($my_post);
+  };
 };
 // add_action('publish_base', 'add_slug_for_posts');
 
@@ -168,10 +168,10 @@ function add_slug_for_posts( $post_id ) {
  * 04.1 - 検索の値が空でもsearch.phpに飛ばす処理
  */
 function custom_search( $search, $wp_query ) {
-	if( isset( $wp_query->query['s'] ) ) {
-		$wp_query->is_search = true;
-	}
-	return $search;
+  if( isset( $wp_query->query['s'] ) ) {
+    $wp_query->is_search = true;
+  }
+  return $search;
 }
 // add_filter( 'posts_search', 'custom_search', 10, 2);
 
@@ -182,10 +182,10 @@ function custom_search( $search, $wp_query ) {
  */
 //---------------------------------------------------------------------------------------------------
 function get_post_type_query() {
-	if ( is_archive() ) {
-		return get_query_var( 'post_type' );
-	}
-	return get_post_type();
+  if ( is_archive() ) {
+    return get_query_var( 'post_type' );
+  }
+  return get_post_type();
 }
 
 //---------------------------------------------------------------------------------------------------
@@ -194,9 +194,9 @@ function get_post_type_query() {
  */
 //---------------------------------------------------------------------------------------------------
 function parse_query_ex() {
-	if ( !is_super_admin() && !get_query_var('post_status') && !is_singular() ) {
-		set_query_var('post_status', 'publish');
-	}
+  if ( !is_super_admin() && !get_query_var('post_status') && !is_singular() ) {
+    set_query_var('post_status', 'publish');
+  }
 }
 // add_action('parse_query', 'parse_query_ex');
 
@@ -206,14 +206,14 @@ function parse_query_ex() {
  */
 //---------------------------------------------------------------------------------------------------
 function is_subpage() {
-	global $post;
-	if ( is_page() && $post->post_parent ) {
-		$parentID = $post->post_parent;
-		// 親ページの ID を返す。
-		return $parentID;
-	} else {
-		return false;
-	};
+  global $post;
+  if ( is_page() && $post->post_parent ) {
+    $parentID = $post->post_parent;
+    // 親ページの ID を返す。
+    return $parentID;
+  } else {
+    return false;
+  };
 };
 
 //---------------------------------------------------------------------------------------------------
@@ -225,20 +225,20 @@ function is_subpage() {
  * 08.1 - 直上の親を返す
  */
 function is_parent_slug() {
-	global $post;
-	if ($post->post_parent) {
-		$post_data = get_post($post->post_parent);
-		return $post_data->post_name;
-	}
+  global $post;
+  if ($post->post_parent) {
+    $post_data = get_post($post->post_parent);
+    return $post_data->post_name;
+  }
 }
 
 /**
  * 08.2 - 一番上の親を返す
  */
 function is_root_parent_slug() {
-	global $post;
-	$root_parent = get_page($post->ancestors[count($post->ancestors) - 1]);
-	return $root_parent->post_name;
+  global $post;
+  $root_parent = get_page($post->ancestors[count($post->ancestors) - 1]);
+  return $root_parent->post_name;
 }
 
 //---------------------------------------------------------------------------------------------------
@@ -249,15 +249,15 @@ function is_root_parent_slug() {
 
 function change_posts_per_page($query) {
 /* 管理画面,メインクエリに干渉しないために必須 */
-	if ( is_admin() || ! $query->is_main_query() ) {
-		return;
-	}
+  if ( is_admin() || ! $query->is_main_query() ) {
+    return;
+  }
 
  // カテゴリーページの表示件数を5件にする 
-	if ( $query->is_category() ) {
-		// $query->set( 'posts_per_page', '5' );
-		return;
-	}
+  if ( $query->is_category() ) {
+    // $query->set( 'posts_per_page', '5' );
+    return;
+  }
 
 }
 // add_action( 'pre_get_posts', 'change_posts_per_page' );
@@ -272,10 +272,10 @@ function change_posts_per_page($query) {
  * ※ 記載後にパーマリンク設定で「変更を保存」してください。
  */
 function post_has_archive( $args, $post_type ) {
-	if ( $post_type == 'post' ) {
-		$args['rewrite'] = true;
-		$args['has_archive'] = 'post'; // ページ名
-	}
-	return $args;
+  if ( $post_type == 'post' ) {
+    $args['rewrite'] = true;
+    $args['has_archive'] = 'post'; // ページ名
+  }
+  return $args;
 }
 add_filter( 'register_post_type_args', 'post_has_archive', 10, 2 );

@@ -9,29 +9,29 @@
 Default Settings
 -------------------*/
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-	font-size: 10px;
-	position: relative;
-	min-height: 100%;
-	// overflow-y: scroll;
-	// type-kit、goolge-fonts読み込み時のカクツキを解消
-	&.wf-loading {
-		visibility: hidden;
-	}
-	&.wf-active {
-		visibility: visible;
-	}
+  font-size: 10px;
+  position: relative;
+  min-height: 100%;
+  // overflow-y: scroll;
+  // type-kit、goolge-fonts読み込み時のカクツキを解消
+  &.wf-loading {
+    visibility: hidden;
+  }
+  &.wf-active {
+    visibility: visible;
+  }
 }
 
 body {
-	font-family: Avenir, 'Open Sans', 'Helvetica Neue', Helvetica , Arial , Verdana, '游ゴシック', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, sans-serif;
-	font-size: 1.6em;
-	line-height: 1.6;
-	margin: 0;
-	// overflow: hidden;
+  font-family: Avenir, 'Open Sans', 'Helvetica Neue', Helvetica , Arial , Verdana, '游ゴシック', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, sans-serif;
+  font-size: 1.6em;
+  line-height: 1.6;
+  margin: 0;
+  // overflow: hidden;
 }
 
 h1,
@@ -47,40 +47,40 @@ li,
 dl,
 dt,
 dd {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 h1.meta-h1 {
-	overflow: hidden;
-	white-space: nowrap;
-	// 一旦削除
-	// text-indent: -99999999px;
-	// height: 0;
-	// 一旦追加
-	text-indent: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  // 一旦削除
+  // text-indent: -99999999px;
+  // height: 0;
+  // 一旦追加
+  text-indent: 100%;
 }
 
 li {
-	list-style-type: none;
+  list-style-type: none;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 img {
-	max-width: 100%;
-	height: auto;
-	vertical-align: bottom;
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
 }
 
 .cf {
-	*zoom: 1;
-	&:after {
-		display: block;
-		clear: both;
-		width: 100%;
-		content: '';
-	}
+  *zoom: 1;
+  &:after {
+    display: block;
+    clear: both;
+    width: 100%;
+    content: '';
+  }
 }
