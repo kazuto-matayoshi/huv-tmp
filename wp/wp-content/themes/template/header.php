@@ -19,20 +19,22 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/normalize.css">
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/common.css">
 	
-	<?php
-		if ( is_home() || is_front_page() ) {
-			echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/index.css">';
-		// archive area
-		} elseif ( is_post_type_archive( 'post' ) ) {
-		// singul area
-		} elseif ( is_singular( 'post' ) ) {
-		} elseif ( is_search() ) {
-		} elseif ( is_404() ) {
-			echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/404.css">';
-		} else {
-			echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/'.get_page_uri($post->ID).'.css">';
-		}
-	?>
+  <?php
+    if ( is_home() || is_front_page() ) {
+      echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/index.css">';
+    // archive area
+    } elseif ( is_post_type_archive( get_post_type() ) ) {
+      echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/'.get_post_type().'.css">';
+    // singul area
+    } elseif ( is_singular( get_post_type() ) ) {
+      echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/'.get_post_type().'.css">';
+    } elseif ( is_search() ) {
+    } elseif ( is_404() ) {
+      echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/404.css">';
+    } else {
+      echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/css/'.get_page_uri($post->ID).'.css">';
+    }
+  ?>
 </head>
 <body>
 <h1 class="meta-h1"></h1>
