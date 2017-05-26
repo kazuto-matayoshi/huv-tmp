@@ -13,7 +13,7 @@ get_header();
     $page = get_post( $post->ID );
     $path .= $page->post_name;
   } else {
-    $path = get_page_uri($post->ID);
+    $path = get_page_uri( $post->ID );
   };
 
   // 書き出しテスト
