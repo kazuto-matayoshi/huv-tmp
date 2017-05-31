@@ -471,8 +471,8 @@ File内での検索を行ったりするのでこまめに残してください�
 
 【Rule】
 ・/(Slash)を先頭に着けること。
-・/(Slash)の後はその要素のクラス、またはIDを示すこと。
-　→cssのセレクタに習い、クラスの場合は.(Dot)、IDの場合は#(Hash)
+・/(Slash)の後はその要素のClass、またはIDを示すこと。
+　→cssのselectorに習い、Classの場合は.(Dot)、IDの場合は#(Hash)
 ~~~
 
 【SCSS】
@@ -635,10 +635,10 @@ CSSの記述は基本的に「SCSS」で行う。
 ### 5-1. 命名規則-Regulation
 - id名はPage内リンク、またはJSでのフック、input等以外では使用しない。<br>
 styleの用途では基本使用しない。
-- IDとクラス名にタイプセレクタは記述しない。
-- パフォーマンスを考慮して不要な子孫セレクタも避ける。
+- IDとClass名にtype selectorは記述しない。
+- パフォーマンスを考慮して不要な子孫selectorも避ける。
 - 可能な限りショートハンドでプロパティを書く。
-- cssセレクタのネストは三つまで。
+- css selectorのネストは三つまで。
 - cssのresetにはnormalize.cssを使用する。
 - !importantは使用しない。
 - Plugin既存のcss fileには触れない。カスタマイズは別のfileで行うこと。<br>
@@ -760,7 +760,7 @@ Visual editorで入力される内容は投稿者に依存します。<br>
 
 - Visual editorで入力された内容が表示される部分はdivないし、article等で囲うこと。
 　※"p tag"やhレベルのHTMLtagが入ってくる為。
-- クラスでの制御、n番目など、中に生成される要素にクラスで制御したcssを付けないでください。
+- Classでの制御、n番目など、中に生成される要素にClassで制御したcssを付けないでください。
 　※必ずしも投稿者がcssに記載した順番、Ruleに沿ってに入力するとは限らない為。
 
 <br>
