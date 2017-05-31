@@ -82,7 +82,7 @@
 - Firefox
 - Safari
 - Microsoft Edge
-- Interne Explorer 11 （A user使用率と業界内の動向を確認）
+- Interne Explorer 11 （User使用率と業界内の動向を確認）
 
 ■ mobile
 - Google Chrome
@@ -102,7 +102,7 @@
 
 ■ PC<br>
 通常多く流通している画像解像度を考慮して設定。<br>
-projectorでの表示は考慮しない。<br>
+Projectorでの表示は考慮しない。<br>
 Full HD（1920 x 1080）での表示を基本とする。
 
 ■ Tablet<br>
@@ -124,7 +124,7 @@ AndroidはXperiaやGalaxyなど流通量の多く、且つtrendなdeviceを考�
 <br>
 
 ## 2.【制作環境】
-codingは以下の制作toolを使用を前提して業務に従事する。
+Codingは以下の制作toolを使用を前提して業務に従事する。
 
 - Design tool
 - Editor
@@ -142,14 +142,14 @@ codingは以下の制作toolを使用を前提して業務に従事する。
 <br>
 
 ### 2-1. Design tool
-designerが使用するtoolを同様に使用する。
+Designerが使用するtoolを同様に使用する。
 また書き出しはPluginやJSXで自動書き出しできるように工夫する。
 具体的には以下になる。
 
 - Adobe Photoshop CC
 - Adobe Illustrator CC
 - Adobe Experience Design CC （XD）
-- Adobe Fireworks CS6 （レガシースキーム）
+- Adobe Fireworks CS6 （Legacy Scheme）
 
 <br>
 
@@ -162,7 +162,7 @@ designerが使用するtoolを同様に使用する。
 <br>
 
 ### 2-2. Editor
-codingに用いるEditorは以下を使用するようにする。
+Codingに用いるEditorは以下を使用するようにする。
 
 - Visual Studio Code
 - Sublime Text 3
@@ -199,9 +199,9 @@ codingに用いるEditorは以下を使用するようにする。
 <br>
 
 ### 2-3. Build Tools
-Sass/Scssのコンパイルビルドとして「Prepros」を使用。<br>
-タスクランナーの「gulp.js」、「Grunt」なども使用してよい。<br>
-画像の圧縮は「TinyPng」などのWebサービスを使用して良い。
+Sass/ScssのCompiled buildとして「Prepros」を使用。<br>
+Task runnerの「gulp.js」、「Grunt」なども使用してよい。<br>
+画像の圧縮は「TinyPng」などのWeb serviceを使用して良い。
 
 <br>
 
@@ -215,8 +215,8 @@ Sass/Scssのコンパイルビルドとして「Prepros」を使用。<br>
 
 ### 2-4. Git管理
 GitのGUI tool「SourceTree」を使用。<br>
-また複数人での共有の場合は、「Backlog」にてプロジェクトを立ち上げ、リモートリポジトリを使用する。<br>
-※WordPressでのgitignore の設定は、後述のWordPressの項目で記載する。
+また複数人での共有の場合は、「Backlog」にてProjectを立ち上げ、Remote repositoryを使用する。<br>
+※WordPressでのgitignoreの設定は、後述のWordPressの項目で記載する。
 
 <br>
 
@@ -234,16 +234,16 @@ GitのGUI tool「SourceTree」を使用。<br>
 / - document root -<br>
 　┝ css/<br>
 　│　┝ normalize.css - default -<br>
-　│　┝ common.css - サイト全体の共通css -<br>
+　│　┝ common.css - site全体の共通css -<br>
 　│　└pagename.css - Pageごとのcss -<br>
 　┝ img/<br>
 　│　┝ pagename/ - 下層ごとにDirectoryを設置 -<br>
 　┝ js/ - JS Directory -<br>
-　│ 　└ common.js - セットJS jqueryは基本的にCDNのload -<br>
+　│ 　└ common.js - setting JS - jqueryは基本的にCDNのload -<br>
 　┝ scss/ - Pageごと or Directoryごとにscssファイル作成 -<br>
-　│　┝ common.scss - サイト全体の共通scss -<br>
+　│　┝ common.scss - site全体の共通scss -<br>
 　│　└ pagename.scss - Pageごとのscss -<br>
-　┝ index.html - トップPage -<br>
+　┝ index.html - Top Page -<br>
 　└ pagename.html - PageのHTML -
 
 <br>
@@ -282,8 +282,8 @@ UTF-8のみとする。
 <br>
 
 ### 3-2. Indent
-Indentは半角2スペース。<br>
-エディタのtabキーの設定が必要。
+Indentは半角2space。<br>
+Editorのtab keyの設定が必要。
 
 <br>
 
@@ -300,15 +300,15 @@ Indentは半角2スペース。<br>
 
 ■ BEMの基本
 - Blockは単語。
-- BlockとElementは「アンスコ:2 (__)」で繋ぐ。
-- BlockまたはElementとModifierは「ハイフン:2 (--)」で繋ぐ。
+- BlockとElementは「underscore:2 (__)」で繋ぐ。
+- BlockまたはElementとModifierは「hyphen:2 (--)」で繋ぐ。
 
 ### 3-3-1. BEMの命名規則
 - 使用単語にはその箇所を表す適切な英単語を用いる。
 - 省略できる単語はできるだけ省略形式で記述する。[(\*1)](#1-単語の省略について)
 - 3語以上の連結は可能な限り避ける。
 - Modifierで使用した単語は独立して存在してはいけない。
-- キャメルケースで書く場合は単語間の区切りの際に使用する。<br>
+- Camel caseで書く場合は単語間の区切りの際に使用する。<br>
 (例 : box__subtitle ⇒ box__subTitle)
 
 
@@ -318,13 +318,13 @@ Indentは半角2スペース。<br>
 ~~~html
 <!-- Block + Element -->
 <div class="box">
-    <h2 class="box__ttl">タイトル</h2>
-    <p class="box__txt">テキスト</p>
+    <h2 class="box__ttl">Title</h2>
+    <p class="box__txt">Text</p>
 </div>
 
 <!-- Block + Modifier -->
 <div class="box box--white">
-    <h2 class="box__ttl">背景が白いコンテンツ内にあるタイトル</h2>
+    <h2 class="box__ttl">背景が白いcontent内にあるTitle</h2>
 </div>
 
 <!-- Block + Element + Modifier -->
@@ -337,14 +337,14 @@ Indentは半角2スペース。<br>
 <!-- Block + Element + Element -->
 <div class="box">
     <div class="box__inner">
-        <h2 class="box__inner__ttl">タイトル</h2>
-        <p class="box__inner__txt">テキスト</p>
+        <h2 class="box__inner__ttl">Title</h2>
+        <p class="box__inner__txt">Text</p>
     </div>
 </div>
 
 <!-- Block + Modifier + Element -->
 <div class="box box--white">
-    <h2 class="box__ttl box--white__ttl">タイトル</h2>
+    <h2 class="box__ttl box--white__ttl">Title</h2>
 </div>
 
 【※補足】
@@ -409,8 +409,8 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 |メインビジュアル|mv|
 |ナビ|nav|
 |ボタン|btn|
-|見出し、タイトル|ttl|
-|テキスト|txt|
+|見出し、Title|ttl|
+|Text|txt|
 |説明|desc,descript|
 |カテゴリー|cat|
 |テンプレート|tmp,tmpl|
@@ -437,7 +437,7 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 ファイル名も同様とする。
 
 - 値が文字列
-- キャメルケース
+- Camel case
 
 上記の場合は除く。
 
@@ -458,14 +458,14 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 【HTML】
 ~~~html
 <div class="box">
-    <h2 class="box__ttl">タイトル</h2>
-    <p class="box__txt">テキスト</p>
+    <h2 class="box__ttl">Title</h2>
+    <p class="box__txt">Text</p>
 </div>
 <!-- /.box -->
 
 <div id="box">
-    <h2 class="box__ttl">タイトル</h2>
-    <p class="box__txt">テキスト</p>
+    <h2 class="box__ttl">Title</h2>
+    <p class="box__txt">Text</p>
 </div>
 <!-- /#box -->
 
@@ -583,14 +583,14 @@ HTML5ではデフォルトで解釈されるため必要ない。
 ### 4-4. HTMLtag
 |意味・用途|HTMLtag|解説|
 |-|-|-|
-|見出し|h1～6|見出しに使用すること。<br><br>dt要素との使い分けに迷うことがある場合<br>以下の基準で判断すること。<br><ul><li>そのテキストがPageの目次として適しているか</li><li>そのテキストに対するコンテンツがあるか</li></ul>HTML5の"section tag"で文書の階層構造を表している場合、<br>見出しレベルの数字は1～6のどれを使っても仕様上問題はないが、<br>コードを読んだ際に階層レベルがわかりにくいため、<br>"section tag"を使っていたとしても階層レベルに合わせて数字を増やすこと。|
-|段落|p|段落（複数の文から構成される文章）に使用すること。<br><br>その他にも段落とは言えず、<br>どのようなHTMLtagも適していないテキストがでてくることがあるが、<br>そういったときには"div tag"か"span tag"を使用すること。|
+|見出し|h1～6|見出しに使用すること。<br><br>dt要素との使い分けに迷うことがある場合<br>以下の基準で判断すること。<br><ul><li>そのTextがPageの目次として適しているか</li><li>そのTextに対するcontentがあるか</li></ul>HTML5の"section tag"で文書の階層構造を表している場合、<br>見出しレベルの数字は1～6のどれを使っても仕様上問題はないが、<br>コードを読んだ際に階層レベルがわかりにくいため、<br>"section tag"を使っていたとしても階層レベルに合わせて数字を増やすこと。|
+|段落|p|段落（複数の文から構成される文章）に使用すること。<br><br>その他にも段落とは言えず、<br>どのようなHTMLtagも適していないTextがでてくることがあるが、<br>そういったときには"div tag"か"span tag"を使用すること。|
 |リスト|ul > li|順序に意味がないリスト（箇条書き）に使用すること。<br><br>文章を確認し、箇条書きといえる内容（端的で長文を含まない）かどうか、<br>順序に意味があるかどうかを判断してマークアップすること。|
 |順序リスト|ol > li|順序に意味があるリスト（箇条書き）に使用すること。<br><br>"ul tag"によるマークアップの考え方に加えて順序に意味があるかどうかで使い分ける。<br>番号が付いている＝"ol tag"ではないため、<br>まずは箇条書きとして適切かどうかを判断した後に順序に意味があるかどうかを判断し使うこと。|
 |定義リスト|dl > dt + dd|用語とその説明から構成される文章に使用すること。<br><br>用語以外にも、新着情報の年月日（dt tag）と内容（dd tag）や対話型の文章の中で話者（dt tag）とその内容（dd tag）にも使用できる。<br>汎用性が高く、用途も広いため便利なHTMLtagなため、<br>他に適切なHTMLtagがないかを考えてから使うこと。|
-|注釈・細目|small|免責・警告・法的規制・著作権・ライセンス要件などを注釈・細目に使用すること。<br>一般的なWebサイトでよくあるものとしては、コピーライトが挙げられる。|
-|記事|article|このHTMLtagでマークアップされた内容が独立したコンテンツとして成り立つものに使用すること。<br><br>ブログ記事・ニュース記事・新着情報などが対象になります。 独立しているかどうか判断に困ることがありますので、以下を判断基準とすること。<br><ul><li>RSSフィードで配信するコンテンツか</li><li>そのコンテンツだけを抜き取ってWordなどに貼り付けたとき、<br>何のコト・モノについて言及したコンテンツなのか理解できるか</li></ul>それでも困った場合には使用しないこと。|
-|余談・補足情報|aside|文章の本筋ではないが、<br>余談・補足程度で軽く触れている文章や関連する広告・商品に使用すること。<br><br>文章の意図や書き手の考えを汲み取らなければ正しく使用できないため、使用が難しいHTMLtagの一つ。<br>以下の基準で判断し、それでも使用に迷った場合は使わないこと。<ul><li>このHTMLtagでマークアップされた文章が削除された場合にコンテンツが破綻しないか。</li></ul>|
+|注釈・細目|small|免責・警告・法的規制・著作権・ライセンス要件などを注釈・細目に使用すること。<br>一般的なWeb siteでよくあるものとしては、コピーライトが挙げられる。|
+|記事|article|このHTMLtagでマークアップされた内容が独立したcontentとして成り立つものに使用すること。<br><br>ブログ記事・ニュース記事・新着情報などが対象になります。 独立しているかどうか判断に困ることがありますので、以下を判断基準とすること。<br><ul><li>RSSフィードで配信するcontentか</li><li>そのcontentだけを抜き取ってWordなどに貼り付けたとき、<br>何のコト・モノについて言及したcontentなのか理解できるか</li></ul>それでも困った場合には使用しないこと。|
+|余談・補足情報|aside|文章の本筋ではないが、<br>余談・補足程度で軽く触れている文章や関連する広告・商品に使用すること。<br><br>文章の意図や書き手の考えを汲み取らなければ正しく使用できないため、使用が難しいHTMLtagの一つ。<br>以下の基準で判断し、それでも使用に迷った場合は使わないこと。<ul><li>このHTMLtagでマークアップされた文章が削除された場合にcontentが破綻しないか。</li></ul>|
 |フォームの項目名|label|"input tag"や"select tag"など入力要素に対する項目名に使用すること。<br><br>このHTMLtagでマークアップされた内容をクリックしたときに、<br>フォーカスが対象の要素に移るようにfor属性を指定すること。|
 
 <br>
@@ -726,7 +726,7 @@ styleの用途では基本使用しない。
 ### 7-1. Version
 常に最新Versionを使用する。<br>
 Pluginの相性、干渉の恐れもあるので<br>
-本サイト公開後のアップデートは基本的に行わない。
+本site公開後のアップデートは基本的に行わない。
 
 <br>
 
