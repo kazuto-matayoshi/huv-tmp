@@ -610,7 +610,7 @@ HTML5ではDefaultで解釈されるため必要ない。
 - 保守しやすい
 - 拡張しやすい
 
-以上の結果から次のことを念頭にCSS　codingを行う。
+以上の結果から次のことを念頭にCSS codingを行う。
 
 - 一貫性
 - 誰が読んでも理解できる
@@ -620,7 +620,7 @@ HTML5ではDefaultで解釈されるため必要ない。
 CSSの記述は基本的に「SCSS」で行う。
 
 また、公開時には圧縮をかけること。<br>
-圧縮前のfileはバックアップとして残しておくこと。
+圧縮前のfileはBack upとして残しておくこと。
 
 <br>
 
@@ -633,16 +633,16 @@ CSSの記述は基本的に「SCSS」で行う。
 <br>
 
 ### 5-1. 命名規則-Regulation
-- id名はPage内リンク、またはJSでのフック、input等以外では使用しない。<br>
+- id名はPage内link、またはJSでのhook、input等以外では使用しない。<br>
 styleの用途では基本使用しない。
 - IDとClass名にtype selectorは記述しない。
-- パフォーマンスを考慮して不要な子孫selectorも避ける。
-- 可能な限りショートハンドでプロパティを書く。
-- css selectorのネストは三つまで。
+- performanceを考慮して不要な子孫selectorも避ける。
+- 可能な限りShort handでPropertyを書く。
+- css selectorのNestは三つまで。
 - cssのresetにはnormalize.cssを使用する。
 - !importantは使用しない。
-- Plugin既存のcss fileには触れない。カスタマイズは別のfileで行うこと。<br>
-またその際にスタイルの調整が非常に困難な場合にのみ!importantの使用を許可する。
+- Plugin既存のcss fileには触れない。Customizeは別のfileで行うこと。<br>
+またその際にStyleの調整が非常に困難な場合にのみ!importantの使用を許可する。
 
 <br>
 
@@ -655,14 +655,14 @@ styleの用途では基本使用しない。
 <br>
 
 ### 5-2. Breakpoint
-[多様化したdeviceに対応！CSSで使いやすいブレイクポイントを的確に定義する方法](https://goo.gl/64dMl6)<br>
+[多様化したdeviceに対応！CSSで使いやすいBreak Pointを的確に定義する方法](https://goo.gl/64dMl6)<br>
 上記記事内容に基づき設定。
 
 - 600px
 - 900px
 - 1200px
 
-モバイルファーストではなく、PCデザインを元に設定。
+Mobile Firstではなく、PC designを元に設定。
 よってmediaqueryの記述は以下のようになる。
 
 ~~~css
@@ -696,9 +696,9 @@ styleの用途では基本使用しない。
 ### 6-1. Regulation
 - jQuery等のPluginで、CDNがある場合はCDNを利用すること。
 - GoogleMapはifreamではなくjsで記述すること。
-- Plugin既存のjs fileには触れない。カスタマイズは別のfileで行うこと。
+- Plugin既存のjs fileには触れない。Customizeは別のfileで行うこと。
 - どうしても解消できない場合はそのPluginの使用を中止すること。
-- 公開時には圧縮をかけること。また、圧縮前のfileはバックアップとして残しておくこと。
+- 公開時には圧縮をかけること。また、圧縮前のfileはBack upとして残しておくこと。
 
 <br>
 
@@ -711,7 +711,7 @@ styleの用途では基本使用しない。
 <br>
 
 ## 7.【WP】
-基本的に共有しているWPのテンプレートをカスタマイズし、使用する。
+基本的に共有しているWPのtemplateをCustomizeし、使用する。
 
 <br>
 
@@ -726,7 +726,7 @@ styleの用途では基本使用しない。
 ### 7-1. Version
 常に最新Versionを使用する。<br>
 Pluginの相性、干渉の恐れもあるので<br>
-本site公開後のアップデートは基本的に行わない。
+本site公開後のupdateは基本的に行わない。
 
 <br>
 
@@ -739,7 +739,7 @@ Pluginの相性、干渉の恐れもあるので<br>
 <br>
 
 ### 7-2. Plugin
-初期インストールPluginは下記のとおりです。<br>
+初期Install pluginは下記のとおりです。<br>
 有効化にし、作業を行うこと。
 
 --- まとめます。 ---
