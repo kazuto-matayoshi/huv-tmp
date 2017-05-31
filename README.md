@@ -240,7 +240,7 @@ GitのGUI tool「SourceTree」を使用。<br>
 　│　┝ pagename/ - 下層ごとにDirectoryを設置 -<br>
 　┝ js/ - JS Directory -<br>
 　│ 　└ common.js - setting JS - jqueryは基本的にCDNのload -<br>
-　┝ scss/ - Pageごと or Directoryごとにscssファイル作成 -<br>
+　┝ scss/ - Pageごと or Directoryごとにscss file作成 -<br>
 　│　┝ common.scss - site全体の共通scss -<br>
 　│　└ pagename.scss - Pageごとのscss -<br>
 　┝ index.html - Top Page -<br>
@@ -348,7 +348,7 @@ Editorのtab keyの設定が必要。
 </div>
 
 【※補足】
-Modifierとして拡張された要素の、パーツとして定義したい場合に使用。
+Modifierとして拡張された要素の、partsとして定義したい場合に使用。
 前述した『Block + Modifier』のさらに細かく指定する場合に使用します。
 
 ~~~
@@ -403,23 +403,23 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 |:--:|:--:|
 |画像、図、写真|img|
 |動画|mov|
-|バナー|bnr|
-|サムネイル|thumb|
-|アイコン|ico|
-|メインビジュアル|mv|
-|ナビ|nav|
-|ボタン|btn|
+|banner|bnr|
+|thumbnail|thumb|
+|icon|ico|
+|Main Visual|mv|
+|Navi|nav|
+|Button|btn|
 |見出し、Title|ttl|
 |Text|txt|
 |説明|desc,descript|
-|カテゴリー|cat|
-|テンプレート|tmp,tmpl|
+|Category|cat|
+|template|tmp,tmpl|
 |番号|num|
 |背景|bg|
 |前へ|prev|
 |次へ|next|
-|エラー|err|
-|メッセージ|msg|
+|Error|err|
+|Message|msg|
 
 
 <br>
@@ -434,7 +434,7 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 
 ### 3-4. 大文字/小文字
 小文字のみ使用する。<br>
-ファイル名も同様とする。
+File名も同様とする。
 
 - 値が文字列
 - Camel case
@@ -452,7 +452,7 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 <br>
 
 ### 3-5. Comment
-ファイル内での検索を行ったりするのでこまめに残してください。
+File内での検索を行ったりするのでこまめに残してください。
 
 #### Example
 【HTML】
@@ -470,18 +470,18 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 <!-- /#box -->
 
 【Rule】
-・/(スラッシュ)を先頭に着けること。
-・/(スラッシュ)の後はその要素のクラス、またはIDを示すこと。
-　→cssのセレクタに習い、クラスの場合は.(ドット)、IDの場合は#(ハッシュ)
+・/(Slash)を先頭に着けること。
+・/(Slash)の後はその要素のクラス、またはIDを示すこと。
+　→cssのセレクタに習い、クラスの場合は.(Dot)、IDの場合は#(Hash)
 ~~~
 
 【SCSS】
 ~~~scss
-// で一行comment。コンパイルした際、css上には残りません。
-/**/ で範囲comment。コンパイルした際、css上に残ります。
+// で一行comment。compileした際、css上には残りません。
+/**/ で範囲comment。compileした際、css上に残ります。
 
 【Rule】
-ネストが深くなって場合や
+Nestが深くなって場合や
 複雑になった場合にもわかるように
 随所に残すこと。
 ~~~
@@ -502,7 +502,7 @@ scssで書くため割愛
 <br>
 
 ## 4.【HTML】
-作成後は「[W3C](https://validator.w3.org/)」のデバッカーに通して構文的にエラーがないか確認すること。<br>
+作成後は「[W3C](https://validator.w3.org/)」のDebuggerに通して構文的にerrorがないか確認すること。<br>
 EditorのPluginなどで導入されている場合はそのPluginを使用してもよい。
 
 <br>
@@ -531,9 +531,9 @@ EditorのPluginなどで導入されている場合はそのPluginを使用し�
 <br>
 
 ### 4-2. Protocol
-http/httpsのそれぞれのファイルを両方のProtocol上で利用できない場合を除き、<br>
-画像やその他のメディアファイル、スタイルシート、<br>
-およびスクリプトを指しているURLからProtocolを省略する。
+http/httpsのそれぞれのfileを両方のProtocol上で利用できない場合を除き、<br>
+画像やその他のMedia file、css、<br>
+およびscriptを指しているURLからProtocolを省略する。
 
 ~~~html
 <!-- 非推奨 -->
@@ -554,7 +554,7 @@ http/httpsのそれぞれのファイルを両方のProtocol上で利用でき�
 
 ### 4-3. Type属性
 stylesheetとscriptのtype属性は省略する。<br>
-HTML5ではデフォルトで解釈されるため必要ない。
+HTML5ではDefaultで解釈されるため必要ない。
 
 ~~~html
 /* css */
@@ -620,7 +620,7 @@ HTML5ではデフォルトで解釈されるため必要ない。
 CSSの記述は基本的に「SCSS」で行う。
 
 また、公開時には圧縮をかけること。<br>
-圧縮前のファイルはバックアップとして残しておくこと。
+圧縮前のfileはバックアップとして残しておくこと。
 
 <br>
 
@@ -641,7 +641,7 @@ styleの用途では基本使用しない。
 - cssセレクタのネストは三つまで。
 - cssのresetにはnormalize.cssを使用する。
 - !importantは使用しない。
-- Plugin既存のcssファイルには触れない。カスタマイズは別のファイルで行うこと。<br>
+- Plugin既存のcss fileには触れない。カスタマイズは別のfileで行うこと。<br>
 またその際にスタイルの調整が非常に困難な場合にのみ!importantの使用を許可する。
 
 <br>
@@ -696,9 +696,9 @@ styleの用途では基本使用しない。
 ### 6-1. Regulation
 - jQuery等のPluginで、CDNがある場合はCDNを利用すること。
 - GoogleMapはifreamではなくjsで記述すること。
-- Plugin既存のjsファイルには触れない。カスタマイズは別のファイルで行うこと。
+- Plugin既存のjs fileには触れない。カスタマイズは別のfileで行うこと。
 - どうしても解消できない場合はそのPluginの使用を中止すること。
-- 公開時には圧縮をかけること。また、圧縮前のファイルはバックアップとして残しておくこと。
+- 公開時には圧縮をかけること。また、圧縮前のfileはバックアップとして残しておくこと。
 
 <br>
 
