@@ -47,7 +47,7 @@
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -66,7 +66,7 @@
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -82,7 +82,7 @@
 - Firefox
 - Safari
 - Microsoft Edge
-- Interne Explorer 11 （ユーザ使用率と業界内の動向を確認）
+- Interne Explorer 11 （A user使用率と業界内の動向を確認）
 
 ■ mobile
 - Google Chrome
@@ -90,7 +90,7 @@
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -102,7 +102,7 @@
 
 ■ PC<br>
 通常多く流通している画像解像度を考慮して設定。<br>
-プロジェクターでの表示は考慮しない。<br>
+projectorでの表示は考慮しない。<br>
 Full HD（1920 x 1080）での表示を基本とする。
 
 ■ Tablet<br>
@@ -111,11 +111,11 @@ iPadを基準にする。<br>
 
 ■ mobile<br>
 iPhone 6を基準に。<br>
-AndroidはXperiaやGalaxyなど流通量の多く、且つトレンドなdeviceを考慮する。
+AndroidはXperiaやGalaxyなど流通量の多く、且つtrendなdeviceを考慮する。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -124,7 +124,7 @@ AndroidはXperiaやGalaxyなど流通量の多く、且つトレンドなdevice�
 <br>
 
 ## 2.【制作環境】
-コーディングは以下の制作ツールを使用を前提して業務に従事する。
+codingは以下の制作toolを使用を前提して業務に従事する。
 
 - Design tool
 - Editor
@@ -133,7 +133,7 @@ AndroidはXperiaやGalaxyなど流通量の多く、且つトレンドなdevice�
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -142,7 +142,7 @@ AndroidはXperiaやGalaxyなど流通量の多く、且つトレンドなdevice�
 <br>
 
 ### 2-1. Design tool
-デザイナーが使用するツールを同様に使用する。
+designerが使用するtoolを同様に使用する。
 また書き出しはPluginやJSXで自動書き出しできるように工夫する。
 具体的には以下になる。
 
@@ -153,7 +153,7 @@ AndroidはXperiaやGalaxyなど流通量の多く、且つトレンドなdevice�
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -162,7 +162,7 @@ AndroidはXperiaやGalaxyなど流通量の多く、且つトレンドなdevice�
 <br>
 
 ### 2-2. Editor
-コーディングに用いるEditorは以下を使用するようにする。
+codingに用いるEditorは以下を使用するようにする。
 
 - Visual Studio Code
 - Sublime Text 3
@@ -190,7 +190,7 @@ AndroidはXperiaやGalaxyなど流通量の多く、且つトレンドなdevice�
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -205,7 +205,7 @@ Sass/Scssのコンパイルビルドとして「Prepros」を使用。<br>
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -214,13 +214,13 @@ Sass/Scssのコンパイルビルドとして「Prepros」を使用。<br>
 <br>
 
 ### 2-4. Git管理
-GitのGUIツール「SourceTree」を使用。<br>
+GitのGUI tool「SourceTree」を使用。<br>
 また複数人での共有の場合は、「Backlog」にてプロジェクトを立ち上げ、リモートリポジトリを使用する。<br>
 ※WordPressでのgitignore の設定は、後述のWordPressの項目で記載する。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -235,20 +235,20 @@ GitのGUIツール「SourceTree」を使用。<br>
 　┝ css/<br>
 　│　┝ normalize.css - default -<br>
 　│　┝ common.css - サイト全体の共通css -<br>
-　│　└pagename.css - ページごとのcss -<br>
+　│　└pagename.css - Pageごとのcss -<br>
 　┝ img/<br>
 　│　┝ pagename/ - 下層ごとにDirectoryを設置 -<br>
 　┝ js/ - JS Directory -<br>
 　│ 　└ common.js - セットJS jqueryは基本的にCDNのload -<br>
-　┝ scss/ - ページごと or Directoryごとにscssファイル作成 -<br>
+　┝ scss/ - Pageごと or Directoryごとにscssファイル作成 -<br>
 　│　┝ common.scss - サイト全体の共通scss -<br>
-　│　└ pagename.scss - ページごとのscss -<br>
-　┝ index.html - トップページ -<br>
-　└ pagename.html - ページのHTML -
+　│　└ pagename.scss - Pageごとのscss -<br>
+　┝ index.html - トップPage -<br>
+　└ pagename.html - PageのHTML -
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -260,7 +260,7 @@ GitのGUIツール「SourceTree」を使用。<br>
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -273,7 +273,7 @@ UTF-8のみとする。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -287,7 +287,7 @@ Indentは半角2スペース。<br>
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -424,7 +424,7 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -443,7 +443,7 @@ Modifierとして拡張された要素の、パーツとして定義したい場
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -493,7 +493,7 @@ scssで書くため割愛
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -507,7 +507,7 @@ EditorのPluginなどで導入されている場合はそのPluginを使用し�
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -522,7 +522,7 @@ EditorのPluginなどで導入されている場合はそのPluginを使用し�
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -544,7 +544,7 @@ http/httpsのそれぞれのファイルを両方のProtocol上で利用でき�
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -572,7 +572,7 @@ HTML5ではデフォルトで解釈されるため必要ない。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -583,7 +583,7 @@ HTML5ではデフォルトで解釈されるため必要ない。
 ### 4-4. HTMLtag
 |意味・用途|HTMLtag|解説|
 |-|-|-|
-|見出し|h1～6|見出しに使用すること。<br><br>dt要素との使い分けに迷うことがある場合<br>以下の基準で判断すること。<br><ul><li>そのテキストがページの目次として適しているか</li><li>そのテキストに対するコンテンツがあるか</li></ul>HTML5の"section tag"で文書の階層構造を表している場合、<br>見出しレベルの数字は1～6のどれを使っても仕様上問題はないが、<br>コードを読んだ際に階層レベルがわかりにくいため、<br>"section tag"を使っていたとしても階層レベルに合わせて数字を増やすこと。|
+|見出し|h1～6|見出しに使用すること。<br><br>dt要素との使い分けに迷うことがある場合<br>以下の基準で判断すること。<br><ul><li>そのテキストがPageの目次として適しているか</li><li>そのテキストに対するコンテンツがあるか</li></ul>HTML5の"section tag"で文書の階層構造を表している場合、<br>見出しレベルの数字は1～6のどれを使っても仕様上問題はないが、<br>コードを読んだ際に階層レベルがわかりにくいため、<br>"section tag"を使っていたとしても階層レベルに合わせて数字を増やすこと。|
 |段落|p|段落（複数の文から構成される文章）に使用すること。<br><br>その他にも段落とは言えず、<br>どのようなHTMLtagも適していないテキストがでてくることがあるが、<br>そういったときには"div tag"か"span tag"を使用すること。|
 |リスト|ul > li|順序に意味がないリスト（箇条書き）に使用すること。<br><br>文章を確認し、箇条書きといえる内容（端的で長文を含まない）かどうか、<br>順序に意味があるかどうかを判断してマークアップすること。|
 |順序リスト|ol > li|順序に意味があるリスト（箇条書き）に使用すること。<br><br>"ul tag"によるマークアップの考え方に加えて順序に意味があるかどうかで使い分ける。<br>番号が付いている＝"ol tag"ではないため、<br>まずは箇条書きとして適切かどうかを判断した後に順序に意味があるかどうかを判断し使うこと。|
@@ -595,7 +595,7 @@ HTML5ではデフォルトで解釈されるため必要ない。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -610,7 +610,7 @@ HTML5ではデフォルトで解釈されるため必要ない。
 - 保守しやすい
 - 拡張しやすい
 
-以上の結果から次のことを念頭にCSSコーディングを行う。
+以上の結果から次のことを念頭にCSS　codingを行う。
 
 - 一貫性
 - 誰が読んでも理解できる
@@ -624,7 +624,7 @@ CSSの記述は基本的に「SCSS」で行う。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -633,7 +633,7 @@ CSSの記述は基本的に「SCSS」で行う。
 <br>
 
 ### 5-1. 命名規則-Regulation
-- id名はページ内リンク、またはJSでのフック、input等以外では使用しない。<br>
+- id名はPage内リンク、またはJSでのフック、input等以外では使用しない。<br>
 styleの用途では基本使用しない。
 - IDとクラス名にタイプセレクタは記述しない。
 - パフォーマンスを考慮して不要な子孫セレクタも避ける。
@@ -646,7 +646,7 @@ styleの用途では基本使用しない。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -673,7 +673,7 @@ styleの用途では基本使用しない。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -685,7 +685,7 @@ styleの用途では基本使用しない。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -702,7 +702,7 @@ styleの用途では基本使用しない。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -715,7 +715,7 @@ styleの用途では基本使用しない。
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -730,7 +730,7 @@ Pluginの相性、干渉の恐れもあるので<br>
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -746,7 +746,7 @@ Pluginの相性、干渉の恐れもあるので<br>
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
@@ -756,7 +756,7 @@ Pluginの相性、干渉の恐れもあるので<br>
 
 ### 7-3. Visual editor部分の書き出し
 Visual editorで入力される内容は投稿者に依存します。<br>
-故に、下記の内容を踏まえコーディングを行うこと。
+故に、下記の内容を踏まえcodingを行うこと。
 
 - Visual editorで入力された内容が表示される部分はdivないし、article等で囲うこと。
 　※"p tag"やhレベルのHTMLtagが入ってくる為。
@@ -765,7 +765,7 @@ Visual editorで入力される内容は投稿者に依存します。<br>
 
 <br>
 
-<p><a href="./README.md#user-content-huvrid用coding-guidelines">ページ上部へ戻る</a></p>
+<p><a href="./README.md#user-content-huvrid用coding-guidelines">Page上部へ戻る</a></p>
 
 <br>
 
