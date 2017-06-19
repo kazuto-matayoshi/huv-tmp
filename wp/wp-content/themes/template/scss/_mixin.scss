@@ -197,7 +197,19 @@ $im: icomoon;
 // グラデーション
 //————————————————————————————————————————————
 
+// $direction には数字またはテキストが入ります。
+// 数字の場合 -> '0', '20deg'... 
+// テキストの場合 -> 'top', 'to bottom'... 
+
+
+// $args : ( 'set_point' : 'color', );
+// $argsは連想配列になります。
+// keyに反映したい位置、valueにカラーが入ります。
+// 連想配列なので複数設定可能です。
+
+
 @mixin linear-gradient($direction, $args) {
+
   // // 標準のキーワード
   // $standard_keywords:
   //     to bottom, to left, to top, to right,
