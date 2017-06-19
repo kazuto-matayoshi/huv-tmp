@@ -194,7 +194,7 @@ function pagination( $args = array() ) {
           }
         }
       } elseif ( $args['type'] === 'text' ) {
-        echo $paged.'/'.$args['pages'];
+        echo '<li class="'.$args['class_name'].'__list__item">'.$paged.'/'.$args['pages'].'</li>';
       }
 
       // next
