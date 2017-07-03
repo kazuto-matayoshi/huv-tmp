@@ -11,15 +11,7 @@ RewriteRule . /index.php [L]
 # END WordPress
 
 
-
-
-
-# BEGIN maintenance
-
-# huvrid add
-
-# maintenance
-# customized 503 page
+# BEGIN maintenance - huvrid add
 
 # 503用のHTMLを指定
 ErrorDocument 503 /mainte/index.html
