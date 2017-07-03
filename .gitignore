@@ -11,4 +11,5 @@ wp/wp-content/uploads
 wp/wp-content/themes/twentysixteen
 
 #.gitignore
+wp/wp-content/plugins/huv_options/
 wp/wp-content/plugins/wordpress-database-reset/
