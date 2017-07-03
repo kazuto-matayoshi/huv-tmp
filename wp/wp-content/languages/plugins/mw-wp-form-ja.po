@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MW WP Form - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-05-01 02:06:58+0000\n"
+"PO-Revision-Date: 2017-05-23 21:44:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -672,7 +672,7 @@ msgstr "半角英数字に変換"
 
 #: classes/form-fields/class.email.php:30
 msgid "Email"
-msgstr "Email フィールド"
+msgstr "メール"
 
 #: classes/form-fields/class.datepicker.php:30
 msgid "Datepicker"
