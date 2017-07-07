@@ -40,10 +40,10 @@
 /*
  * 01.1 - ロゴを変更する
  */
-// function custom_login_logo() {
-//  echo '<style type="text/css">h1 a { width: auto !important; background: url(' . get_template_directory_uri() . '/login.png) no-repeat !important; background-size: contain !important; background-position: center !important; }</style>';
-// }
-// add_action( 'login_head', 'custom_login_logo' );
+function custom_login_logo() {
+ echo '<style type="text/css">h1 a { width: auto !important; background: url(' . huv_theme_path . '/login.png) no-repeat !important; background-size: contain !important; background-position: center !important; }</style>';
+}
+add_action( 'login_head', 'custom_login_logo' );
 
 /*
  * 01.2 - ロゴのリンク先を変更する

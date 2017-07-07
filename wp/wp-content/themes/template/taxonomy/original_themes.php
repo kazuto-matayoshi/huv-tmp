@@ -36,7 +36,7 @@
     <li class="post-list-item">
       <p class="post-img"><?php
         // アイキャッチ
-        if ( has_post_thumbnail( 'thumbnail' ) ) {
+        if ( has_post_thumbnail( $post->ID ) ) {
           echo the_post_thumbnail( 'thumbnail' );
         } else {
           echo'<img src="/img/no-image.jpg" alt="no-image">';

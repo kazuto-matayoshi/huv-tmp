@@ -1,5 +1,5 @@
 <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/common.js"></script>
+<script src="<?php echo huv_theme_path; ?>/js/common.js"></script>
 <script>
   <?php if ( is_page('form_xxx') ) : ?>
   (function($){
