@@ -2,6 +2,9 @@
 // 初期設定関数群(主に管理画面)
 get_template_part('function/init');
 
+// 定数の設定
+get_template_part('function/const');
+
 // ウィジェットに関する関数群
 get_template_part('function/widget');
 
