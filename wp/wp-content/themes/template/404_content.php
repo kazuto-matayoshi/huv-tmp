@@ -1,6 +1,6 @@
 <div class="error">
   <p class="error-img">
-    <img src="<?php echo get_template_directory_uri(); ?>/img/404/attention.png" alt="attention">
+    <img src="<?php echo huv_theme_path; ?>/img/404/attention.png" alt="attention">
   </p>
   <p class="error-txt">指定されたURLは存在しませんでした。</p>
   <p class="error-btn">
