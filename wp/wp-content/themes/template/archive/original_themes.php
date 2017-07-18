@@ -39,7 +39,7 @@
         if ( has_post_thumbnail( $post->ID ) ) {
           echo the_post_thumbnail( 'thumbnail' );
         } else {
-          echo'<img src="/img/no-image.jpg" alt="no-image">';
+          echo '<img src="'.huv_theme_path.'img/no-image.jpg" alt="no-image">';
         }
       ?></p>
       <p class="post-day"><?php echo get_the_date(); ?></p>

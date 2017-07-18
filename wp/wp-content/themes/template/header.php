@@ -22,16 +22,26 @@
   <?php
     if ( is_home() || is_front_page() ) {
       echo '<link rel="stylesheet" href="'.huv_theme_path.'css/index.css">';
+    }
+
     // archive area
-    } elseif ( is_post_type_archive( get_post_type() ) ) {
+    elseif ( is_post_type_archive( get_post_type() ) ) {
       echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.get_post_type().'.css">';
+    }
+
     // singul area
-    } elseif ( is_singular( get_post_type() ) ) {
+    elseif ( is_singular( get_post_type() ) && is_single() ) {
       echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.get_post_type().'.css">';
-    } elseif ( is_search() ) {
-    } elseif ( is_404() ) {
+    }
+
+    elseif ( is_search() ) {
+    }
+
+    elseif ( is_404() ) {
       echo '<link rel="stylesheet" href="'.huv_theme_path.'css/404.css">';
-    } else {
+    }
+
+    else {
       echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.get_page_uri( $post->ID ).'.css">';
     }
   ?>

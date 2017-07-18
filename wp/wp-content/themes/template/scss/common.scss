@@ -31,6 +31,10 @@ body {
   font-size: 1.6em;
   line-height: 1.6;
   margin: 0;
+  // 游フォントを使うとIEで崩れるので IE hack で回避
+  @media all and (-ms-high-contrast:none) {
+    font-family: 'メイリオ', Meiryo, '游ゴシック', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, sans-serif;
+  }
   // overflow: hidden;
 }
 
