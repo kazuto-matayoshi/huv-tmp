@@ -22,12 +22,7 @@
  * 10.0 - サイト側の管理バーを非表示
  * 11.0 - アイキャッチ画像の設定
  * 12.0 - カスタムメニューをONにする
- *
- *
- * - カスタマイズ -
- *
- * カスタム投稿タイプを追加
- * カスタム投稿タイプの公開時に自動で投稿IDをスラッグに変更する。
+ * 13.0 - 管理画面のheadに追加
  *
  */
 
@@ -247,3 +242,11 @@ add_theme_support( 'post-thumbnails' );
  * 12.0 - カスタムメニューをONにする
  */
 add_theme_support( 'menus' );
+
+/**
+ * 13.0 - 管理画面のheadに追加
+ */
+function huv_head() {
+  echo '<link rel="shortcut icon" href="'. huv_theme_path .'img/favicon.ico">';
+}
+add_action('admin_head', 'huv_head', 11);
