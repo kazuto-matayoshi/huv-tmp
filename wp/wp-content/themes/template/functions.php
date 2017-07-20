@@ -304,7 +304,6 @@ function breadcrumb() {
  */
 //---------------------------------------------------------------------------------------------------
 function add_slug_for_posts( $post_id ) {
-
   // DBからpostしたidを取得し配列に入れる
   $posts_data = get_post( $post_id, ARRAY_A );
 
@@ -316,9 +315,15 @@ function add_slug_for_posts( $post_id ) {
     $my_post['ID']        = $post_id;
     $my_post['post_name'] = $post_id;
     wp_update_post($my_post);
-  };
-};
-// add_action('publish_base', 'add_slug_for_posts');
+  }
+}
+$post_type_array = array(
+  'original_post_type',
+);
+
+foreach ($post_type_array as $post_type_value) {
+  // add_action( "publish_{$post_type_value}", 'add_slug_for_posts' );
+}
 
 //---------------------------------------------------------------------------------------------------
 /**
