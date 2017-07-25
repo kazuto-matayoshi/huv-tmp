@@ -13,7 +13,10 @@ if(window.attachEvent) {
     }
 }
 function wpfc_column_button_action(){
-    jQuery(document).ready(function(){
+    jQuery("#wpfc_column_clear_cache").css('width', '50px');
+    jQuery("#wpfc_column_clear_cache").css('text-align', 'center');
+
+	jQuery(document).ready(function(){
         jQuery("button.button.wpfc-clear-column-action:visible").click(function(e){
 
             jQuery(e.currentTarget).attr("disabled", true);
@@ -35,5 +38,5 @@ function wpfc_column_button_action(){
 
             return false;
         });
-    });
+	});
 }

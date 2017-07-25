@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 0.8.7.0
+Version: 0.8.7.1
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 Text Domain: wp-fastest-cache
@@ -83,6 +83,9 @@ GNU General Public License for more details.
 
 
 			add_action( 'rate_post', array($this, 'wp_postratings_clear_fastest_cache'), 10, 2);
+
+			// to check nonce is timeout or not
+			//add_action('init', array($this, "nonce_timeout"));
 
 			if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 				$this->rm_folder_recursively($this->getWpContentDir()."/cache/tmpWpfc");
@@ -189,6 +192,32 @@ GNU General Public License for more details.
 
 						//for cache
 						$this->cache();
+					}
+				}
+			}
+		}
+
+		public function nonce_timeout(){
+			if(!is_user_logged_in()){
+				$run = false;
+				$list = array("ninja-forms/ninja-forms.php",
+							  "kk-star-ratings/index.php",
+							  "contact-form-7/wp-contact-form-7.php"
+							  );
+
+				foreach ($list as $key => $value) {
+					if($this->isPluginActive($value)){
+						$run = true;
+					}
+				}
+
+				if($run){
+					include_once('inc/nonce-timeout.php');
+					
+					$wpfc_nonce = new WPFC_NONCE_TIMEOUT();
+					
+					if(!$wpfc_nonce->verify_nonce()){
+						$this->deleteCache();
 					}
 				}
 			}
@@ -601,10 +630,12 @@ GNU General Public License for more details.
 		}
 
 		public function load_column(){
-			include_once plugin_dir_path(__FILE__)."inc/column.php";
+			if(!defined('WPFC_HIDE_CLEAR_CACHE_BUTTON') || (defined('WPFC_HIDE_CLEAR_CACHE_BUTTON') && !WPFC_HIDE_CLEAR_CACHE_BUTTON)){
+				include_once plugin_dir_path(__FILE__)."inc/column.php";
 
-			$column = new WpFastestCacheColumn();
-			$column->add();
+				$column = new WpFastestCacheColumn();
+				$column->add();
+			}
 		}
 
 		public function load_admin_toolbar(){
@@ -1723,10 +1754,11 @@ GNU General Public License for more details.
 					}else if(isset($matches[2]) && preg_match("/^(\/?)(wp-includes|wp-content)/", $matches[2])){
 						$matches[0] = preg_replace("/(\/?)(wp-includes|wp-content)/i", $cdnurl."/"."$2", $matches[0]);
 					}else if(preg_match("/[\"\']https?\:\\\\\/\\\\\/[^\"\']+[\"\']/i", $matches[0])){
-						if(preg_match("/^(logo|url)$/i", $matches[1])){
+						if(preg_match("/^(logo|url|image)$/i", $matches[1])){
 							//If the url is called with "//", it causes an error on https://search.google.com/structured-data/testing-tool/u/0/
 							//<script type="application/ld+json">"logo":{"@type":"ImageObject","url":"\/\/cdn.site.com\/image.png"}</script>
 							//<script type="application/ld+json">{"logo":"\/\/cdn.site.com\/image.png"}</script>
+							//<script type="application/ld+json">{"image":"\/\/cdn.site.com\/image.jpg"}</script>
 						}else{
 							//<script>var loaderRandomImages=["https:\/\/www.site.com\/wp-content\/uploads\/2016\/12\/image.jpg"];</script>
 							$matches[0] = preg_replace("/\\\\\//", "/", $matches[0]);

@@ -46,7 +46,7 @@
 				</div>
 				<div class="wiz-input-cont" style="margin-right: 5px;">
 					<label class="mc-input-label" style="margin-right: 5px;"><input type="checkbox" <?php echo $wpFastestCachePreload_tag; ?> id="wpFastestCachePreload_tag" name="wpFastestCachePreload_tag"></label>
-					<label for="wpFastestCachePreload_tag">Tages</label>
+					<label for="wpFastestCachePreload_tag">Tags</label>
 				</div>
 				<div class="wiz-input-cont">
 					<label class="mc-input-label" style="margin-right: 5px;"><input type="checkbox" <?php echo $wpFastestCachePreload_attachment; ?> id="wpFastestCachePreload_attachment" name="wpFastestCachePreload_attachment"></label>

@@ -79,7 +79,8 @@
 			}else{
 				if($this->isPluginActive('gtranslate/gtranslate.php')){
 					if(isset($_SERVER["HTTP_X_GT_LANG"])){
-						$this->cacheFilePath = $this->getWpContentDir()."/cache/all/".$_SERVER["HTTP_X_GT_LANG"];
+						//$this->cacheFilePath = $this->getWpContentDir()."/cache/all/".$_SERVER["HTTP_X_GT_LANG"];
+						$this->cacheFilePath = $this->getWpContentDir()."/cache/all/".$_SERVER["HTTP_X_GT_LANG"].$_SERVER["REQUEST_URI"];
 					}else if(isset($_SERVER["REDIRECT_URL"]) && $_SERVER["REDIRECT_URL"] != "/index.php"){
 						$this->cacheFilePath = $this->getWpContentDir()."/cache/all/".$_SERVER["REDIRECT_URL"];
 					}else if(isset($_SERVER["REQUEST_URI"])){
@@ -235,6 +236,11 @@
 					return 0;
 				}
 
+				if($this->exclude_page()){
+					//echo "<!-- Wp Fastest Cache: Exclude Page -->"."\n";
+					return 0;
+				}
+
 				// http://mobiledetect.net/ does not contain the following user-agents
 				if(preg_match("/Nokia309|Casper_VIA/i", $_SERVER['HTTP_USER_AGENT'])){
 					return 0;
@@ -343,7 +349,7 @@
 			return false;
 		}
 
-		public function exclude_page($buffer){
+		public function exclude_page($buffer = false){
 			$preg_match_rule = "";
 			$request_url = trim($_SERVER["REQUEST_URI"], "/");
 
@@ -352,7 +358,7 @@
 				foreach((array)$this->exclude_rules as $key => $value){
 					$value->type = isset($value->type) ? $value->type : "page";
 
-					if(isset($value->prefix) && $value->prefix && $value->type == "page"){
+					if($buffer && isset($value->prefix) && $value->prefix && ($value->type == "page")){
 						$value->content = trim($value->content);
 						$value->content = trim($value->content, "/");
 
@@ -851,7 +857,7 @@
 					return true;     
 				break;
 
-				case (preg_match('/android/i',$user_agent));
+				case (preg_match('/android/i',$user_agent) && preg_match('/mobile/i',$user_agent));
 					return true;
 				break;
 

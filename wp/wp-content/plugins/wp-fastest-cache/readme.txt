@@ -4,7 +4,7 @@ Donate link: http://profiles.wordpress.org/emrevona/
 Tags: cache, performance, wp-cache, total cache, super cache
 Requires at least: 3.3
 Tested up to: 4.8
-Stable tag: 0.8.7.0
+Stable tag: 0.8.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,13 @@ Wpfc does not support Wordpress Multisite yet.
 18. Database Cleanup
 
 == Changelog ==
+
+= 0.8.7.1 =
+* to fix image error on Structured Data Testing Tool when cdn is used
+* to optimize the panel of wp fastest cache
+* to fix cache path for gtranslate
+* to fix Cannot modify header error
+* to add WPFC_HIDE_CLEAR_CACHE_BUTTON
 
 = 0.8.7.0 =
 * to avoid removing www prefix from photon cdn-url
