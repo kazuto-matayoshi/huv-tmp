@@ -29,6 +29,7 @@ get_template_part('function/custom_post');
  *   08.2 - 一番上の親を返す
  * 09.0 - メインクエリの書き換え
  * 10.0 - post_type == 'post'の一覧ページの設定
+ * 11.0 - アイキャッチのサイズ追加
  *
  */
 
@@ -446,3 +447,19 @@ function post_has_archive( $args, $post_type ) {
   return $args;
 }
 add_filter( 'register_post_type_args', 'post_has_archive', 10, 2 );
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 11.0 - アイキャッチのサイズ追加
+ */
+//---------------------------------------------------------------------------------------------------
+
+// add_image_size( 'tmpl_thumbnail', 530, 374, true );
+
+// メディアアップローダーに登録するために必須
+function my_custom_sizes( $sizes ) {
+  return array_merge( $sizes, array(
+    'tmpl_thumbnail' => __('tmpl_thumbnail'),
+  ) );
+}
+// add_filter( 'image_size_names_choose', 'my_custom_sizes' );
