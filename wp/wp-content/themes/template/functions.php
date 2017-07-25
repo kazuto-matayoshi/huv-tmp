@@ -280,7 +280,7 @@ function breadcrumb() {
       }
       $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
     } elseif( is_single() ){
-      $str .= '<li class="breadcrumb-list-item"><a href="/'. get_post_type() .'/">';
+      $str .= '<li class="breadcrumb-list-item"><a href="'. get_post_type_archive_link( get_post_type() ) .'">';
       $str .= esc_html( get_post_type_object( get_post_type() )->label );
       $str .= '</a></li>';
       $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
