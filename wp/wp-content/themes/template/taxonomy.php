@@ -1,10 +1,14 @@
 <?php
 get_header();
 
-  $path = get_post_type();
+  global $taxonomy;
+  global $term;
+
+  // $path = $taxonomy.'-'.$term;
+  $path = $taxonomy;
 
   // 書き出しテスト
-  echo 'taxonomy : '.$path;
+  // echo 'taxonomy : '.$path;
 
 /**
  * ファイルがあるかの判定
@@ -20,7 +24,7 @@ echo $path;
   if ( have_posts() ) :
   while ( have_posts() ) :
     the_post();
-    the_content();
+    // the_content();
   endwhile;
   endif;
 }
