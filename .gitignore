@@ -6,6 +6,7 @@ prepros-6.config
 .project
 .htaccess
 .htpasswd
+*.css.map
 wp/wp-config.php
 wp/wp-content/uploads
 wp/wp-content/themes/twentysixteen
