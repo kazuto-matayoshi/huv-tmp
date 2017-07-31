@@ -34,6 +34,12 @@
       echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.get_post_type().'.css">';
     }
 
+    // taxonomy area
+    elseif( is_tax( $taxonomy ) ) {
+      echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.$taxonomy.'.css">';
+      echo '<link rel="stylesheet" href="'.huv_theme_path.'css/404.css">';
+    }
+
     elseif ( is_search() ) {
     }
 
