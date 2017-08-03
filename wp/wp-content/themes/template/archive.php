@@ -1,6 +1,8 @@
 <?php
+global $post_type;
+
 get_header();
-  $archive_link = get_post_type_archive_link( get_post_type() );
+  $archive_link = get_post_type_archive_link( $post_type );
   $protocol     = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
   $domain       = $_SERVER['HTTP_HOST'];
   $archive_dir  = str_replace( $protocol.$domain, '', $archive_link );
@@ -8,8 +10,8 @@ get_header();
   $url  = explode( '/', $archive_dir );
   $path = '';
 
-  if ( get_post_type() === $url[1] ) {
-    $path = get_post_type() ? get_post_type() : 'post';
+  if ( $post_type === $url[1] ) {
+    $path = $post_type ? $post_type : 'post';
   } else {
     // $path = $url[1];
     foreach ( $url as $key => $value ) {
