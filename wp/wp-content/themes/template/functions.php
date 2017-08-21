@@ -405,21 +405,39 @@ function is_subpage() {
 /**
  * 08.1 - 直上の親を返す
  */
-function is_parent_slug() {
+function is_parent_slug( $post_type ) {
   global $post;
-  if ($post->post_parent) {
-    $post_data = get_post($post->post_parent);
-    return $post_data->post_name;
+  if ( $post->post_parent ) {
+    $post_data = get_post( $post->post_parent );
+
+    if ( empty( $post_type ) ) {
+      return $post_data->post_name;
+    }
+
+    if ( !empty( $post_type ) && $post_data->post_name === $post_type ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
 /**
  * 08.2 - 一番上の親を返す
  */
-function is_root_parent_slug() {
+function is_root_parent_slug( $post_type ) {
   global $post;
   $root_parent = get_page($post->ancestors[count($post->ancestors) - 1]);
-  return $root_parent->post_name;
+
+  if ( empty( $post_type ) ) {
+    return $root_parent->post_name;
+  }
+
+  if ( !empty( $post_type ) && $root_parent->post_name === $post_type ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------
