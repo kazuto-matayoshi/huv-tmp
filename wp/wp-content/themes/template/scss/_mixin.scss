@@ -248,6 +248,8 @@ $im: icomoon;
       @return #{unquote('to right bottom')};
     } @else if $str == 'right top' {
       @return #{unquote('to left bottom')};
+    } @else {
+      @return $str;
     }
   }
 
@@ -277,6 +279,8 @@ $im: icomoon;
       @return #{unquote('left top')};
     } @else if $str == 'to left bottom' {
       @return #{unquote('right top')};
+    } @else {
+      @return $str;
     }
   }
 
@@ -294,7 +298,6 @@ $im: icomoon;
   $startColor    : map-get( $args, nth( $key, 1 ) );
   $endColor      : map-get( $args, nth( $key, length($key) ) );
   $gradientColor : gradient_val($args);
-
 
   /* Old browsers */
   background: $startColor;
