@@ -425,7 +425,7 @@ function is_parent_slug( $post_type ) {
 /**
  * 08.2 - 一番上の親を返す
  */
-function get_root_parent_slug( $post_id ) {
+function get_root_info( $info, $post_id ) {
   global $post;
 
   if ( $post_id ) {
@@ -434,23 +434,44 @@ function get_root_parent_slug( $post_id ) {
 
   $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
 
-  return $root_parent->post_name;
+  if ( $info === 'id' ) {
+    return $root_parent->ID;
+  }
+  else if ( $info === 'slug' ) {
+    return $root_parent->post_name;
+  }
 }
 
-function is_root_parent_slug( $slug ) {
+function is_root_slug( $slug ) {
   global $post;
 
   if ( empty( $slug ) ) {
-    $root_parent = get_post($post->ancestors[count($post->ancestors) - 1]);
+    $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
     return $root_parent->post_name;
   }
 
-  if ( get_root_parent_slug() === $slug ) {
+  if ( get_root_info( 'slug' ) === $slug ) {
     return true;
   } else {
     return false;
   }
 }
+
+function is_root_id( $post_id ) {
+  global $post;
+
+  if ( empty( $post_id ) ) {
+    $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
+    return $root_parent->ID;
+  }
+
+  if ( get_root_info( 'id' ) === $post_id ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 //---------------------------------------------------------------------------------------------------
 /**
