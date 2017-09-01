@@ -425,15 +425,27 @@ function is_parent_slug( $post_type ) {
 /**
  * 08.2 - 一番上の親を返す
  */
-function is_root_parent_slug( $post_type ) {
+function get_root_parent_slug( $post_id ) {
   global $post;
-  $root_parent = get_page($post->ancestors[count($post->ancestors) - 1]);
 
-  if ( empty( $post_type ) ) {
+  if ( $post_id ) {
+    $post = get_post( $post_id );
+  }
+
+  $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
+
+  return $root_parent->post_name;
+}
+
+function is_root_parent_slug( $slug ) {
+  global $post;
+
+  if ( empty( $slug ) ) {
+    $root_parent = get_post($post->ancestors[count($post->ancestors) - 1]);
     return $root_parent->post_name;
   }
 
-  if ( !empty( $post_type ) && $root_parent->post_name === $post_type ) {
+  if ( get_root_parent_slug() === $slug ) {
     return true;
   } else {
     return false;
