@@ -3,18 +3,19 @@ get_header();
 
   // $path = get_post_type($post->ID);
 
-  $archive_link = get_post_type_archive_link( get_post_type() );
-  $protocol     = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
-  $domain       = $_SERVER['HTTP_HOST'];
-  $archive_dir  = str_replace( $protocol.$domain, '', $archive_link );
+  $post_link = get_post_permalink();
+  $protocol  = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
+  $domain    = $_SERVER['HTTP_HOST'];
+  $post_dir  = str_replace( $protocol.$domain, '', $post_link );
 
-  $url  = explode( '/', $archive_dir );
+  $url  = explode( '/', $post_dir );
   $path = '';
 
   if ( get_post_type() === $url[1] ) {
     $path = get_post_type() ? get_post_type() : 'post';
   } else {
     // $path = $url[1];
+
     foreach ( $url as $key => $value ) {
       if ( $value && !$path ) {
         $path .= $value;
