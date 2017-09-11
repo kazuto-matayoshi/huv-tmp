@@ -1,7 +1,8 @@
 <?php
-global $post_type;
+  get_header();
 
-get_header();
+  global $post_type;
+
   $post_type = !empty( $post_type ) ? $post_type : 'post';
 
   // 各値の取得
@@ -10,7 +11,6 @@ get_header();
   $domain       = $_SERVER['HTTP_HOST'];
   $archive_dir  = str_replace( $protocol.$domain, '', $archive_link );
 
-  $url  = explode( '/', $archive_dir );
   $url = explode( '/', $archive_dir );
   $url = array_filter( $url, 'strlen' );
   $url = array_values( $url );
@@ -23,9 +23,11 @@ get_header();
 
   $path = '';
 
-  if ( $post_type === $url[1] ) {
-  } else {
-    // $path = $url[1];
+  if ( $post_type === $url[0] ) {
+    $path = $post_type;
+  }
+
+  else {
     foreach ( $url as $key => $value ) {
       if ( $value && !$path ) {
         $path .= $value;
@@ -35,28 +37,27 @@ get_header();
     }
   }
 
-  // 書き出しテスト
+  // ファイルパスをチェックをするとき
   // echo 'archive : '.$path;
 
-/**
- * ファイルがあるかの判定
- */
-if ( locate_template( 'archive/'.$path.'.php' ) ) {
-  // true
+  /**
+   * ファイルがあるかの判定
+   */
+  if ( locate_template( 'archive/'.$path.'.php' ) ) {
+    get_template_part( 'archive/'.$path );
+  }
 
-  // ファイルの呼び出し
-  get_template_part( 'archive/'.$path );
-} else {
-  // false
+  // いる？
+  else {
 
-  // 入力したコンテンツの表示
-  if ( have_posts() ) :
-  while ( have_posts() ) :
-    the_post();
-    the_content();
-  endwhile;
-  endif;
-}
+    // 入力したコンテンツの表示
+    if ( have_posts() ) :
+    while ( have_posts() ) :
+      the_post();
+      the_content();
+    endwhile;
+    endif;
+  }
 
-get_footer();
+  get_footer();
 ?>
