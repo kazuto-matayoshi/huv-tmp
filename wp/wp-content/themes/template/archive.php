@@ -8,6 +8,16 @@ get_header();
   $archive_dir  = str_replace( $protocol.$domain, '', $archive_link );
 
   $url  = explode( '/', $archive_dir );
+  $url = explode( '/', $archive_dir );
+  $url = array_filter( $url, 'strlen' );
+  $url = array_values( $url );
+
+  // 何かしらの形でアーカイブのリンクが変更され、上手く取得できない状態を回避
+  // 一度arrayの歯抜けなど調整しているがこの方が確実。。。
+  if ( !isset( $url[0] ) ) {
+    $url[] = '';
+  }
+
   $path = '';
 
   if ( $post_type === $url[1] ) {
