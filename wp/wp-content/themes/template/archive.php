@@ -2,6 +2,9 @@
 global $post_type;
 
 get_header();
+  $post_type = !empty( $post_type ) ? $post_type : 'post';
+
+  // 各値の取得
   $archive_link = get_post_type_archive_link( $post_type );
   $protocol     = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
   $domain       = $_SERVER['HTTP_HOST'];
@@ -21,7 +24,6 @@ get_header();
   $path = '';
 
   if ( $post_type === $url[1] ) {
-    $path = $post_type ? $post_type : 'post';
   } else {
     // $path = $url[1];
     foreach ( $url as $key => $value ) {
