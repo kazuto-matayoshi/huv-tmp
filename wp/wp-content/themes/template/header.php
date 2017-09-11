@@ -20,18 +20,24 @@
   <link rel="stylesheet" href="<?php echo huv_theme_path; ?>css/common.css">
   
   <?php
+    global $post;
+    global $post_type;
+    global $taxonomy;
+
+    $post_type = !empty( $post_type ) ? $post_type : 'post';
+
     if ( is_home() || is_front_page() ) {
       echo '<link rel="stylesheet" href="'.huv_theme_path.'css/index.css">';
     }
 
     // archive area
-    elseif ( is_post_type_archive( get_post_type() ) ) {
-      echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.get_post_type().'.css">';
+    elseif ( is_post_type_archive( $post_type ) ) {
+      echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.$post_type.'.css">';
     }
 
     // singul area
-    elseif ( is_singular( get_post_type() ) && is_single() ) {
-      echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.get_post_type().'.css">';
+    elseif ( is_singular( $post_type ) && is_single() ) {
+      echo '<link rel="stylesheet" href="'.huv_theme_path.'css/'.$post_type.'.css">';
     }
 
     // taxonomy area
