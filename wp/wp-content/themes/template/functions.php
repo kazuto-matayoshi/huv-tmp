@@ -5,8 +5,8 @@ get_template_part('function/init');
 // 定数の設定
 get_template_part('function/const');
 
-// ウィジェットに関する関数群
-get_template_part('function/widget');
+// // ウィジェットに関する関数群
+// get_template_part('function/widget');
 
 // headerで自動生成される不要なタグを削除する関数群
 get_template_part('function/cleanup');
@@ -21,15 +21,14 @@ get_template_part('function/custom_post');
  * 03.0 - カスタム投稿タイプの公開時に自動で投稿IDをスラッグに変更する。
  * 04.0 - 検索
  *   04.1 - 検索の値が空でもsearch.phpに飛ばす処理
- * 05.0 - アーカイブページの記事ループ外でも、通常の記事ループ内でもpost_typeを取得できるようにした関数
- * 06.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
- * 07.0 - 子ページであるかのチェック(true -> 親ページの ID を返す。)
- * 08.0 - 親スラッグの取得
- *   08.1 - 直上の親を返す
- *   08.2 - 一番上の親を返す
- * 09.0 - メインクエリの書き換え
- * 10.0 - post_type == 'post'の一覧ページの設定
- * 11.0 - アイキャッチのサイズ追加
+ * 05.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
+ * 06.0 - 親スラッグの取得
+ *   06.1 - 直上の親を返す
+ *   06.2 - 一番上の親を返す
+ * 07.0 - メインクエリの書き換え
+ * 08.0 - post_type == 'post'の一覧ページの設定
+ * 09.0 - アイキャッチのサイズ追加
+ * 10.0 - 日付チェックする関数
  *
  */
 
@@ -130,7 +129,7 @@ function pagination( $args = array() ) {
   }
 
   // 全ページ数が空の場合は、1とする
-  if( !$args['pages'] ) {
+  if ( !$args['pages'] ) {
     $args['pages'] = 1;
   }
 
@@ -255,55 +254,104 @@ function pagination( $args = array() ) {
 //---------------------------------------------------------------------------------------------------
 function breadcrumb() {
   global $post;
-  global $taxonomy;
+  global $post_type;
   global $term;
+  global $taxonomy;
 
-  $str = "";
-  if( ( !is_home() || !is_front_page() ) && !is_admin() ) {
+  $post_type = !empty( $post_type ) ? $post_type : 'post';
+
+  $urlArr = $_SERVER["REQUEST_URI"];
+  $urlArr = explode( '/', $urlArr );
+  $urlArr = array_filter( $urlArr, 'strlen' );
+  $urlArr = array_values( $urlArr );
+
+  $str = '';
+  if ( ( !is_home() || !is_front_page() ) && !is_admin() ) {
     // $str .= '<div class="breadcrumb">';
     $str .= '<ul class="breadcrumb-list">';
     $str .= '<li class="breadcrumb-list-item"><a href="'. home_url() .'">TOP</a></li>';
 
-    // if( is_category() ) {
-    //  $cat = get_queried_object();
-    //  if($cat->parent != 0) {
-    //    $ancestors = array_reverse(get_ancestors( $cat->cat_ID, 'category' ));
-    //    foreach($ancestors as $ancestor) {
-    //      $str.='<li><a href='.get_category_link($ancestor).'>'.get_cat_name($ancestor).'</a></li>';
-    //    }
-    //  }
-    //  $str .='<a href='.get_category_link($cat->term_id).'>'.$cat->cat_name.'</a>';
-    // }
-    // elseif( is_page() ) {
-    if( is_page() ) { // 調整済み
-      if( $post->post_parent != 0 ) {
+    // page
+    if ( is_page() ) {
+      if ( $post->post_parent != 0 ) {
         $ancestors = array_reverse( get_post_ancestors( $post->ID ) );
         foreach( $ancestors as $ancestor ) {
-          $str .= '<li class="breadcrumb-list-item"><a href="'. get_permalink( $ancestor ) .'">'. get_the_title( $ancestor ) .'</a></li>';
+          $str .= '<li class="breadcrumb-list-item">';
+          $str .= '<a href="'. get_permalink( $ancestor ) .'">';
+          $str .= get_the_title( $ancestor );
+          $str .= '</a>';
+          $str .= '</li>';
         }
       }
       $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
-    } elseif( is_singular( get_post_type() ) && is_single() ) {
-      $str .= '<li class="breadcrumb-list-item"><a href="'. get_post_type_archive_link( get_post_type() ) .'">';
-      $str .= esc_html( get_post_type_object( get_post_type() )->label );
-      $str .= '</a></li>';
-      $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
-    } elseif( is_post_type_archive( get_post_type() ) ) {
+    }
+
+    // 年別とか
+    elseif( is_year() || is_month() || is_day() ) {
+      $link = '';
+      foreach ( $urlArr as $url ) {
+        $link .= '/' . $url;
+
+        if ( $url !== end( $urlArr ) ) {
+          $str .= '<li class="breadcrumb__item">';
+          $str .= '<a href="'. $link .'/">';
+          $str .= $url;
+          $str .= '</a>';
+          $str .= '</li>';
+        } else {
+          $str .= '<li class="breadcrumb__item">';
+          $str .= esc_html( $url );
+          $str .= '</li>';
+        }
+      }
+    }
+
+    // archive
+    elseif ( is_post_type_archive( $post_type ) ) {
       $str .= '<li class="breadcrumb-list-item">';
-      $str .= esc_html( get_post_type_object( get_post_type() )->label );
+      $str .= esc_html( get_post_type_object( $post_type )->label );
       $str .= '</li>';
-    } elseif( is_tax( $taxonomy, $term ) ) {
+    }
+
+    // category
+    elseif( is_category() ) {
+      $str .= '<li class="breadcrumb__item">';
+      $cat  = get_category( get_query_var( 'cat' ), false );
+      $str .= esc_html( $cat->name );
+      $str .= '</li>';
+    }
+
+    // taxonomy
+    elseif ( is_tax( $taxonomy, $term ) ) {
       $str .= '<li class="breadcrumb-list-item">';
       $str .= get_taxonomy( $taxonomy )->label;
       $str .= '</li>';
       $str .= '<li class="breadcrumb-list-item">';
       $str .= single_tag_title( '', false );
       $str .= '</li>';
-    } elseif( is_search() ) {
-    } elseif( is_404() ) {
+    }
+
+    // single
+    elseif ( is_singular( $post_type ) && is_single() ) {
+      $str .= '<li class="breadcrumb-list-item">';
+      $str .= '<a href="'. get_post_type_archive_link( $post_type ) .'">';
+      $str .= esc_html( get_post_type_object( $post_type )->label );
+      $str .= '</a>';
+      $str .= '</li>';
+      $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
+    }
+
+    // search
+    elseif ( is_search() ) {
+    }
+
+    // 404
+    elseif ( is_404() ) {
       $str .= '<li class="breadcrumb-list-item">404</li>';
-    } else {
-      // $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
+    }
+
+    // other
+    else {
       $str .= '<li class="breadcrumb-list-item">404</li>';
     }
     $str .= '</ul>';
@@ -318,26 +366,33 @@ function breadcrumb() {
  */
 //---------------------------------------------------------------------------------------------------
 function add_slug_for_posts( $post_id ) {
+  global $post;
+  if ( !$post ) {
+    return;
+  }
+
+  // 投稿タイプを取得
+  $post_type = $post->post_type;
+
   // DBからpostしたidを取得し配列に入れる
   $posts_data = get_post( $post_id, ARRAY_A );
 
   // DBから取得した配列の'post_name'を抽出
   $slug       = $posts_data['post_name'];
 
-  if ( $post_id != $slug ){
+  if ( $post_id !== $slug && $post_type !== 'page' ) {
+    remove_action( 'save_post', 'add_slug_for_posts' );
+
     $my_post              = array();
     $my_post['ID']        = $post_id;
     $my_post['post_name'] = $post_id;
-    wp_update_post($my_post);
+    wp_update_post( $my_post );
+
+    add_action( 'save_post', 'add_slug_for_posts' );
   }
 }
-$post_type_array = array(
-  'original_post_type',
-);
 
-foreach ($post_type_array as $post_type_value) {
-  // add_action( "publish_{$post_type_value}", 'add_slug_for_posts' );
-}
+// add_action( 'save_post', 'add_slug_for_posts' );
 
 //---------------------------------------------------------------------------------------------------
 /**
@@ -349,61 +404,32 @@ foreach ($post_type_array as $post_type_value) {
  * 04.1 - 検索の値が空でもsearch.phpに飛ばす処理
  */
 function custom_search( $search, $wp_query ) {
-  if( isset( $wp_query->query['s'] ) ) {
+  if ( isset( $wp_query->query['s'] ) ) {
     $wp_query->is_search = true;
   }
   return $search;
 }
 // add_filter( 'posts_search', 'custom_search', 10, 2);
 
-
 //---------------------------------------------------------------------------------------------------
 /**
- * 05.0 - アーカイブページの記事ループ外でも、通常の記事ループ内でもpost_typeを取得できるようにした関数
- */
-//---------------------------------------------------------------------------------------------------
-function get_post_type_query() {
-  if ( is_archive() ) {
-    return get_query_var( 'post_type' );
-  }
-  return get_post_type();
-}
-
-//---------------------------------------------------------------------------------------------------
-/**
- * 06.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
+ * 05.0 - ログインしてる状態でも「非公開：」の記事が表示されないようする。
  */
 //---------------------------------------------------------------------------------------------------
 function parse_query_ex() {
-  if ( !is_super_admin() && !get_query_var('post_status') && !is_singular() ) {
-    set_query_var('post_status', 'publish');
+  if ( !is_super_admin() && !get_query_var( 'post_status' ) && !is_singular() ) {
+    set_query_var( 'post_status', 'publish' );
   }
 }
 // add_action('parse_query', 'parse_query_ex');
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 07.0 - 子ページであるかのチェック(true -> 親ページの ID を返す。)
- */
-//---------------------------------------------------------------------------------------------------
-function is_subpage() {
-  global $post;
-  if ( is_page() && $post->post_parent ) {
-    $parentID = $post->post_parent;
-    // 親ページの ID を返す。
-    return $parentID;
-  } else {
-    return false;
-  };
-};
-
-//---------------------------------------------------------------------------------------------------
-/**
- * 08.0 - 親スラッグの取得
+ * 06.0 - 親スラッグの取得
  */
 //---------------------------------------------------------------------------------------------------
 /**
- * 08.1 - 直上の親を返す
+ * 06.1 - 直上の親を返す
  */
 function is_parent_slug( $post_type ) {
   global $post;
@@ -423,13 +449,18 @@ function is_parent_slug( $post_type ) {
 }
 
 /**
- * 08.2 - 一番上の親を返す
+ * 06.2 - 一番上の親を返す
  */
 function get_root_info( $info, $post_id ) {
   global $post;
 
   if ( $post_id ) {
     $post = get_post( $post_id );
+  }
+
+  // $postが取得できない場合（アーカイブとか）
+  if ( $post === null ) {
+    return false;
   }
 
   $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
@@ -442,8 +473,13 @@ function get_root_info( $info, $post_id ) {
   }
 }
 
-function is_root_slug( $slug ) {
+function is_root_slug( $slug = null ) {
   global $post;
+
+  // $postが取得できない場合（アーカイブとか）
+  if ( $post === null ) {
+    return false;
+  }
 
   if ( empty( $slug ) ) {
     $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
@@ -457,8 +493,13 @@ function is_root_slug( $slug ) {
   }
 }
 
-function is_root_id( $post_id ) {
+function is_root_id( $post_id = null ) {
   global $post;
+
+  // $postが取得できない場合（アーカイブとか）
+  if ( $post === null ) {
+    return false;
+  }
 
   if ( empty( $post_id ) ) {
     $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
@@ -475,7 +516,7 @@ function is_root_id( $post_id ) {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 09.0 - メインクエリの書き換え
+ * 07.0 - メインクエリの書き換え
  */
 //---------------------------------------------------------------------------------------------------
 
@@ -496,7 +537,7 @@ function change_posts_per_page($query) {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 10.0 - post_type == 'post'の一覧ページの設定
+ * 08.0 - post_type == 'post'の一覧ページの設定
  */
 //---------------------------------------------------------------------------------------------------
 /*
@@ -510,11 +551,11 @@ function post_has_archive( $args, $post_type ) {
   }
   return $args;
 }
-add_filter( 'register_post_type_args', 'post_has_archive', 10, 2 );
+// add_filter( 'register_post_type_args', 'post_has_archive', 10, 2 );
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 11.0 - アイキャッチのサイズ追加
+ * 09.0 - アイキャッチのサイズ追加
  */
 //---------------------------------------------------------------------------------------------------
 
@@ -527,3 +568,35 @@ function my_custom_sizes( $sizes ) {
   ) );
 }
 // add_filter( 'image_size_names_choose', 'my_custom_sizes' );
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 10.0 - 日付チェックする関数
+ */
+//---------------------------------------------------------------------------------------------------
+
+/**
+ * @param $day       -> Newを表示させたい期間の日数
+ * @param $post_date -> 投稿の日付
+ */
+
+function new_checker( $day, $post_date = '' ) {
+  global $post, $posts;
+
+  if ( !$post_date ) {
+    $post_date = $post->post_date;
+  }
+
+  $today = date_i18n( 'U' );
+  $entry = strtotime( $post_date );
+
+  // Newを表示させたい期間の日数
+  $days = $day;
+  $kiji = date( 'U', ( $today - $entry ) ) / 86400;
+  // 86400(s/Day) = 60(s) * 60(m) * 24(h)
+
+  if ( $days > $kiji ) {
+    return true;
+  }
+  return false;
+}
