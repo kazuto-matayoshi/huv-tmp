@@ -1,5 +1,5 @@
 <?php
-get_header();
+  get_header();
 
   global $taxonomy;
   global $term;
@@ -7,27 +7,27 @@ get_header();
   // $path = $taxonomy.'-'.$term;
   $path = $taxonomy;
 
-  // 書き出しテスト
+
+  // ファイルパスをチェックをするとき
   // echo 'taxonomy : '.$path;
 
-/**
- * ファイルがあるかの判定
- */
-if ( locate_template( 'taxonomy/'.$path.'.php' ) ) {
-  // true
+  /**
+   * ファイルがあるかの判定
+   */
+  if ( locate_template( 'taxonomy/'.$path.'.php' ) ) {
+    get_template_part( 'taxonomy/'.$path );
+  }
 
-  get_template_part( 'taxonomy/'.$path );
-} else {
-  // false
-echo $path;
-  // 入力したコンテンツの表示
-  if ( have_posts() ) :
-  while ( have_posts() ) :
-    the_post();
-    the_content();
-  endwhile;
-  endif;
-}
+  // いる？
+  else {
+    // 入力したコンテンツの表示
+    if ( have_posts() ) :
+    while ( have_posts() ) :
+      the_post();
+      the_content();
+    endwhile;
+    endif;
+  }
 
-get_footer();
+  get_footer();
 ?>
