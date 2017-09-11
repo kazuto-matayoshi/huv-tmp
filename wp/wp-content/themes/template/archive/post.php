@@ -24,7 +24,19 @@ if ( have_posts() ) :
   endwhile;
   echo '</ul>';
   global $wp_query;
+
   // ページネーション
-  pagination($wp_query->max_num_pages);
+  $args = array(
+    // 'type'         => 'link',
+    // 'hide'         => true,
+    // 'range'        => 2,
+    // 'pages'        => $the_query->max_num_pages,
+    // 'class_name'   => 'pager',
+    // 'wrapper'      => false,
+    // 'next_txt'     => '>',
+    // 'prev_txt'     => '<',
+    // 'endlink'      => false,
+  );
+  pagination($args);
 endif;
 ?>
