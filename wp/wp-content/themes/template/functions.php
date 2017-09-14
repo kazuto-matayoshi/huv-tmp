@@ -268,22 +268,22 @@ function breadcrumb() {
   $str = '';
   if ( ( !is_home() || !is_front_page() ) && !is_admin() ) {
     // $str .= '<div class="breadcrumb">';
-    $str .= '<ul class="breadcrumb-list">';
-    $str .= '<li class="breadcrumb-list-item"><a href="'. home_url() .'">TOP</a></li>';
+    $str .= '<ul class="breadcrumb__list">';
+    $str .= '<li class="breadcrumb__item"><a href="'. home_url() .'">TOP</a></li>';
 
     // page
     if ( is_page() ) {
       if ( $post->post_parent != 0 ) {
         $ancestors = array_reverse( get_post_ancestors( $post->ID ) );
         foreach( $ancestors as $ancestor ) {
-          $str .= '<li class="breadcrumb-list-item">';
+          $str .= '<li class="breadcrumb__item">';
           $str .= '<a href="'. get_permalink( $ancestor ) .'">';
           $str .= get_the_title( $ancestor );
           $str .= '</a>';
           $str .= '</li>';
         }
       }
-      $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
+      $str .= '<li class="breadcrumb__item">'. get_the_title() .'</li>';
     }
 
     // 年別とか
@@ -308,7 +308,7 @@ function breadcrumb() {
 
     // archive
     elseif ( is_post_type_archive( $post_type ) ) {
-      $str .= '<li class="breadcrumb-list-item">';
+      $str .= '<li class="breadcrumb__item">';
       $str .= esc_html( get_post_type_object( $post_type )->label );
       $str .= '</li>';
     }
@@ -323,22 +323,22 @@ function breadcrumb() {
 
     // taxonomy
     elseif ( is_tax( $taxonomy, $term ) ) {
-      $str .= '<li class="breadcrumb-list-item">';
+      $str .= '<li class="breadcrumb__item">';
       $str .= get_taxonomy( $taxonomy )->label;
       $str .= '</li>';
-      $str .= '<li class="breadcrumb-list-item">';
+      $str .= '<li class="breadcrumb__item">';
       $str .= single_tag_title( '', false );
       $str .= '</li>';
     }
 
     // single
     elseif ( is_singular( $post_type ) && is_single() ) {
-      $str .= '<li class="breadcrumb-list-item">';
+      $str .= '<li class="breadcrumb__item">';
       $str .= '<a href="'. get_post_type_archive_link( $post_type ) .'">';
       $str .= esc_html( get_post_type_object( $post_type )->label );
       $str .= '</a>';
       $str .= '</li>';
-      $str .= '<li class="breadcrumb-list-item">'. get_the_title() .'</li>';
+      $str .= '<li class="breadcrumb__item">'. get_the_title() .'</li>';
     }
 
     // search
@@ -347,12 +347,12 @@ function breadcrumb() {
 
     // 404
     elseif ( is_404() ) {
-      $str .= '<li class="breadcrumb-list-item">404</li>';
+      $str .= '<li class="breadcrumb__item">404</li>';
     }
 
     // other
     else {
-      $str .= '<li class="breadcrumb-list-item">404</li>';
+      $str .= '<li class="breadcrumb__item">404</li>';
     }
     $str .= '</ul>';
     // $str .= '</div>';

@@ -347,3 +347,47 @@ $im: icomoon;
 
 @mixin radial-gradient($direction, $args) {
 }
+
+//————————————————————————————————————————————
+// Text Border
+//————————————————————————————————————————————
+// 5pxぐらいが限界。。。
+
+@mixin text-border($width, $color) {
+  $left-top     : null;
+  $top-right    : null;
+  $right-bottom : null;
+  $bottom-left  : null;
+  @for $i from 0 through $width {
+    @if $left-top == null {
+      $left-top: #{$color} #{-$width + $i + px} #{0 - $i + px};
+    } @else {
+      $left-top: #{$left-top}#{unquote(',')} #{$color} #{-$width + $i + px} #{0 - $i + px};
+    }
+  }
+  @for $i from 0 through $width {
+    @if $left-top == null {
+      $top-right: #{$color} #{0 + $i + px} #{-$width + $i + px};
+    } @else {
+      $top-right: #{$top-right}#{unquote(',')} #{$color} #{0 + $i + px} #{-$width + $i + px};
+    }
+  }
+  @for $i from 0 through $width {
+    @if $left-top == null {
+      $right-bottom: #{$color} #{$width - $i + px} #{0 + $i + px};
+    } @else {
+      $right-bottom: #{$right-bottom}#{unquote(',')} #{$color} #{$width - $i + px} #{0 + $i + px};
+    }
+  }
+  @for $i from 0 through $width {
+    @if $left-top == null {
+      $bottom-left: #{$color} #{0 - $i + px} #{$width - $i + px};
+    } @else {
+      $bottom-left: #{$bottom-left}#{unquote(',')} #{$color} #{0 - $i + px} #{$width - $i + px};
+    }
+  }
+
+  // 連結すると勝手にカンマが入る。(配列扱い)
+  $text-shadow: $left-top $top-right $right-bottom $bottom-left;
+  text-shadow: $text-shadow;
+}
