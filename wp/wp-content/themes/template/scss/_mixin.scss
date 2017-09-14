@@ -1,6 +1,6 @@
 @charset "utf-8";
 //————————————————————————————————————————————
-// break point
+// Break Point
 //————————————————————————————————————————————
 
 @mixin bp ( $type: min, $num1: false, $num2: false ) {
@@ -45,20 +45,46 @@
   }
 }
 
-@mixin breakMax( $max, $min: false ) {
-  @if $min == false {
-    @media screen and (max-width: $max) { @content; }
-  } @else {
-    @media screen and (max-width: $max) and (min-width: $min) { @content; }
-  }
+//————————————————————————————————————————————
+// Vw
+//————————————————————————————————————————————
+@function vw_sp( $num ) {
+  @return ( $num / 750 * 100 ) + vw;
 }
 
-@mixin breakMin( $min, $max: false ) {
-  @if $max == false {
-    @media screen and (min-width: $min) { @content; }
-  } @else {
-    @media screen and (max-width: $max) and (min-width: $min) { @content; }
-  }
+@mixin vw_sp( $num ) {
+  width: vw_sp( $num );
+  max-width: ( $num )+px;
+}
+
+@function vw_pc( $num ) {
+  @return ( $num / 1200 * 100 ) + vw;
+}
+
+@mixin vw_pc( $num ){
+  width: vw_pc( $num );
+  max-width: ( $num ) + px;
+}
+
+//————————————————————————————————————————————
+// Per
+//————————————————————————————————————————————
+@function per_sp( $num ) {
+  @return ( $num / 750 * 100 ) + %;
+}
+
+@mixin per_sp( $num ) {
+  width: per_sp( $num );
+  max-width: ( $num )+px;
+}
+
+@function per_pc( $num ) {
+  @return ( $num / 1200 * 100 ) + %;
+}
+
+@mixin per_pc( $num ){
+  width: per_pc( $num );
+  max-width: ( $num ) + px;
 }
 
 //————————————————————————————————————————————
@@ -117,9 +143,7 @@ $im: icomoon;
 
 
 //————————————————————————————————————————————
-//   ／＼
-// ／    ＼三角形を作るcss
-// ￣￣￣￣
+// Triangle
 //————————————————————————————————————————————
 
 @mixin tri-base {
@@ -194,7 +218,7 @@ $im: icomoon;
 }
 
 //————————————————————————————————————————————
-// グラデーション
+// Gradation
 //————————————————————————————————————————————
 
 // $direction には数字またはテキストが入ります。
