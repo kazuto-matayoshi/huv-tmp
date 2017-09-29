@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 0.8.7.2
+Version: 0.8.7.3
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 Text Domain: wp-fastest-cache
@@ -100,34 +100,35 @@ GNU General Public License for more details.
 			add_action( 'wp_ajax_wpfc_remove_cdn_integration_ajax_request', array($this, 'wpfc_remove_cdn_integration_ajax_request_callback'));
 			add_action( 'wp_ajax_wpfc_save_cdn_integration_ajax_request', array($this, 'wpfc_save_cdn_integration_ajax_request_callback'));
 			add_action( 'wp_ajax_wpfc_cdn_template_ajax_request', array($this, 'wpfc_cdn_template_ajax_request_callback'));
-
-
-
-
 			add_action( 'wp_ajax_wpfc_check_url_ajax_request', array($this, 'wpfc_check_url_ajax_request_callback'));
-
 			add_action( 'wp_ajax_wpfc_cache_statics_get', array($this, 'wpfc_cache_statics_get_callback'));
-
-
 			add_action( 'wp_ajax_wpfc_db_statics', array($this, 'wpfc_db_statics_callback'));
 			add_action( 'wp_ajax_wpfc_db_fix', array($this, 'wpfc_db_fix_callback'));
-
-
-			
-
-
 			add_action( 'rate_post', array($this, 'wp_postratings_clear_fastest_cache'), 10, 2);
-
-
-			add_action('user_register', array($this, 'modify_htaccess_for_new_user'), 10, 1);
-			add_action('profile_update', array($this, 'modify_htaccess_for_new_user'), 10, 1);
-
-
-			add_action('edit_terms', array($this, 'delete_cache_of_term'), 10, 1);
+			add_action( 'user_register', array($this, 'modify_htaccess_for_new_user'), 10, 1);
+			add_action( 'profile_update', array($this, 'modify_htaccess_for_new_user'), 10, 1);
+			add_action( 'edit_terms', array($this, 'delete_cache_of_term'), 10, 1);
 
 			// to check nonce is timeout or not
 			//add_action('init', array($this, "nonce_timeout"));
 
+			// to clear cache after new Woocommerce orders
+			add_action( 'woocommerce_checkout_order_processed', array($this, 'clear_cache_after_woocommerce_checkout_order_processed'), 1, 1);
+
+			// kk Star Ratings: to clear the cache of the post after voting
+			add_action( 'kksr_rate', array($this, 'clear_cache_on_kksr_rate'));
+
+			// to clear cache after ajax request by other plugins
+			if(isset($_POST["action"])){
+				// All In One Schema.org Rich Snippets
+				if(preg_match("/bsf_(update|submit)_rating/i", $_POST["action"])){
+					if(isset($_POST["post_id"])){
+						$this->singleDeleteCache(false, $_POST["post_id"]);
+					}
+				}
+			}
+
+			// to clear /tmpWpfc folder
 			if(is_dir($this->getWpContentDir()."/cache/tmpWpfc")){
 				$this->rm_folder_recursively($this->getWpContentDir()."/cache/tmpWpfc");
 			}
@@ -236,6 +237,10 @@ GNU General Public License for more details.
 			}
 		}
 
+		public function clear_cache_on_kksr_rate($id){
+			$this->singleDeleteCache(false, $id);
+		}
+
 		public function nonce_timeout(){
 			if(!is_user_logged_in()){
 				$run = false;
@@ -257,10 +262,24 @@ GNU General Public License for more details.
 				if($run){
 					include_once('inc/nonce-timeout.php');
 					
-					$wpfc_nonce = new WPFC_NONCE_TIMEOUT();
+					$wpfc_nonce = new WPFC_NONCE_TIMEOUT(WPFC_WP_CONTENT_DIR."/cache/all");
 					
 					if(!$wpfc_nonce->verify_nonce()){
 						$this->deleteCache();
+					}
+				}
+			}
+		}
+
+		public function clear_cache_after_woocommerce_checkout_order_processed($order_id = false){
+			if($order_id){
+				$order = wc_get_order($order_id);
+
+				if($order){
+					foreach($order->get_items() as $item_key => $item_values ){
+						if(method_exists($item_values, 'get_product_id')){
+							$this->singleDeleteCache(false, $item_values->get_product_id());
+						}
 					}
 				}
 			}
@@ -386,6 +405,10 @@ GNU General Public License for more details.
 						}
 
 						if(isset($header["server"]) && preg_match("/squid/i", $header["server"])){
+							$res = array("success" => true);
+						}
+
+						if(($response_code == 401) && (preg_match("/res\.cloudinary\.com/i", $_GET["url"]))){
 							$res = array("success" => true);
 						}
 					}
@@ -908,6 +931,8 @@ GNU General Public License for more details.
 		}
 
 		public function singleDeleteCache($comment_id = false, $post_id = false){
+			$to_clear_parents = true;
+
 			if($comment_id){
 				$comment = get_comment($comment_id);
 				
@@ -944,15 +969,30 @@ GNU General Public License for more details.
 					}
 				}
 				
-				// to clear cache of homepage
-				$this->deleteHomePageCache();
+				// not to clear cache of homepage/cats/tags after ajax request by other plugins
+				if(isset($_POST) && isset($_POST["action"])){
+					// kk Star Rating
+					if($_POST["action"] == "kksr_ajax"){
+						$to_clear_parents = false;
+					}
 
-				// to clear cache of cats and  tags which contains the post (only first page)
-				global $wpdb;
-				$terms = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."term_relationships` WHERE `object_id`=".$post_id, ARRAY_A);
+					// All In One Schema.org Rich Snippets
+					if(preg_match("/bsf_(update|submit)_rating/i", $_POST["action"])){
+						$to_clear_parents = false;
+					}
+				}
 
-				foreach ($terms as $term_key => $term_val){
-					$this->delete_cache_of_term($term_val["term_taxonomy_id"]);
+				if($to_clear_parents){
+					// to clear cache of homepage
+					$this->deleteHomePageCache();
+
+					// to clear cache of cats and  tags which contains the post (only first page)
+					global $wpdb;
+					$terms = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."term_relationships` WHERE `object_id`=".$post_id, ARRAY_A);
+
+					foreach ($terms as $term_key => $term_val){
+						$this->delete_cache_of_term($term_val["term_taxonomy_id"]);
+					}
 				}
 			}
 		}
@@ -967,8 +1007,13 @@ GNU General Public License for more details.
 					$path = preg_replace("/https?\:\/\/[^\/]+/i", "", $url);
 					$path = trim($path, "/");
 
+					// to remove the cache of tag/cat
 					@unlink($this->getWpContentDir()."/cache/all/".$path."/index.html");
 					@unlink($this->getWpContentDir()."/cache/wpfc-mobile-cache/".$path."/index.html");
+
+					// to remove the cache of the pages
+					$this->rm_folder_recursively($this->getWpContentDir()."/cache/all/".$path."/page");
+					$this->rm_folder_recursively($this->getWpContentDir()."/cache/wpfc-mobile-cache/".$path."/page");
 				}
 			}
 		}
@@ -1605,7 +1650,9 @@ GNU General Public License for more details.
 		        }
 		    }
 		    
-		    if(is_dir($dir) && !isset($files[2])){
+		    $files_tmp = @scandir($dir);
+		    
+		    if(is_dir($dir) && !isset($files_tmp[2])){
 		    	@rmdir($dir);
 		    }
 

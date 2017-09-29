@@ -90,6 +90,13 @@
 					$this->cacheFilePath = $this->getWpContentDir()."/cache/all/".$_SERVER["REQUEST_URI"];
 				}
 			}
+			
+			//WPML language switch
+			//https://wpml.org/forums/topic/wpml-language-switch-wp-fastest-cache-issue/
+			if($this->isPluginActive('sitepress-multilingual-cms/sitepress.php')){
+				$current_language = apply_filters('wpml_current_language', false);
+				$this->cacheFilePath = str_replace('/cache/all/', '/cache/all/'.$current_language.'/', $this->cacheFilePath);
+			}
 
 			$this->cacheFilePath = $this->cacheFilePath ? rtrim($this->cacheFilePath, "/")."/" : "";
 			$this->cacheFilePath = str_replace("/cache/all//", "/cache/all/", $this->cacheFilePath);
@@ -215,6 +222,8 @@
 					}else if(defined('WPFC_CACHE_QUERYSTRING') && WPFC_CACHE_QUERYSTRING){
 						//
 					}else{
+						ob_start(array($this, "cdn_rewrite"));
+						
 						return 0;
 					}
 				}
@@ -310,7 +319,7 @@
 					if($create_cache){
 						$this->startTime = microtime(true);
 
-						add_action('wp', array($this, "detect_current_page_type"));
+						add_action('get_footer', array($this, "detect_current_page_type"));
 						add_action('get_footer', array($this, "wp_print_scripts_action"));
 
 						ob_start(array($this, "callback"));
