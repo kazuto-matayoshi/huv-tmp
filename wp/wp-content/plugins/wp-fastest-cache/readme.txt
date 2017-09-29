@@ -4,7 +4,7 @@ Donate link: http://profiles.wordpress.org/emrevona/
 Tags: cache, performance, wp-cache, total cache, super cache
 Requires at least: 3.3
 Tested up to: 4.8
-Stable tag: 0.8.7.2
+Stable tag: 0.8.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,15 @@ Wpfc does not support Wordpress Multisite yet.
 
 == Changelog ==
 
+= 0.8.7.3 =
+* to espace empty spaces for webp rules
+* to clear cache after new Woocommerce orders
+* <strong>[FEATURE]</strong> Compatible with kk Star Ratings
+* to clear the pages cache of the categories and tags
+* <strong>[FEATURE]</strong> Compatible with All In One Schema.org Rich Snippets
+* <strong>[FEATURE]</strong> Compatible with WPML Multilingual Plugin
+* <strong>[FEATURE]</strong> Compatible with Cloudinary
+
 = 0.8.7.2 =
 * to exclude the admins cookies for the cache automatically
 * to clear the cache of category and tag after update
@@ -176,7 +185,6 @@ Wpfc does not support Wordpress Multisite yet.
 * to clear the cache of post cats and the cache of post tags after update post
 
 = 0.8.6.4 =
-* <strong>[FEATURE]</strong> Compatible with kk Star Ratings
 * to add aac, mp3, ogg extension for CDN
 * to serve wp-emoji-release.min.js via cdn if CDN integration has been added
 * not to show the cache for comment authors

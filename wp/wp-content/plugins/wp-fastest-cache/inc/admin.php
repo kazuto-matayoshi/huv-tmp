@@ -334,8 +334,10 @@
 				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
 			}else if($res = $this->checkSuperCache($path, $htaccess)){
 				return $res;
+			}else if($this->isPluginActive('fast-velocity-minify/fvm.php')){
+				return array("Fast Velocity Minify needs to be deactived", "error");
 			}else if($this->isPluginActive('sg-cachepress/sg-cachepress.php')){
-				return array("SG Optimizer needs to be deactive", "error");
+				return array("SG Optimizer needs to be deactived", "error");
 			}else if($this->isPluginActive('adrotate/adrotate.php') || $this->isPluginActive('adrotate-pro/adrotate.php')){
 				return $this->warningIncompatible("AdRotate");
 			}else if($this->isPluginActive('mobilepress/mobilepress.php')){
@@ -414,8 +416,11 @@
 				if(ABSPATH == "//"){
 					$RewriteCond = "RewriteCond %{DOCUMENT_ROOT}/".$basename." -f"."\n";
 				}else{
+					// to escape spaces
+					$tmp_ABSPATH = str_replace(" ", "\ ", ABSPATH);
+
 					$RewriteCond = "RewriteCond %{DOCUMENT_ROOT}/".$basename." -f [or]"."\n";
-					$RewriteCond = $RewriteCond."RewriteCond ".ABSPATH."$1.webp -f"."\n";
+					$RewriteCond = $RewriteCond."RewriteCond ".$tmp_ABSPATH."$1.webp -f"."\n";
 				}
 
 

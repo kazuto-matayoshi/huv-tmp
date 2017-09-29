@@ -1,10 +1,10 @@
-@charset "utf-8";
-@import "mixin";
+@charset 'utf-8';
+@import 'mixin';
 
 .error {
   width: 980px;
   margin: 0 auto;
-  &-img {
+  &__img {
     margin-bottom: 20px;
     text-align: center;
     img {
@@ -12,24 +12,24 @@
       line-height: 1;
     }
   }
-  &-txt {
-    text-align: center;
+  &__txt {
     margin-bottom: 30px;
+    text-align: center;
   }
-  &-btn {
-    background: #FFF;
+  &__btn {
     width: 380px;
     margin: 0 auto 30px;
+    background: #FFF;
     a {
-      display: block;
-      color: #FFF;
       line-height: 46px;
-      text-align: center;
-      background: #16D0D0;
+      display: block;
       height: 46px;
-      transition: all 0.3s;
+      transition: all .3s;
+      text-align: center;
+      color: #FFF;
+      background: #16D0D0;
       &:hover {
-        opacity: 0.8;
+        opacity: .8;
       }
     }
   }
