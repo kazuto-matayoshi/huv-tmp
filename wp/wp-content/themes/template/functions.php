@@ -29,6 +29,7 @@ get_template_part('function/custom_post');
  * 08.0 - post_type == 'post'の一覧ページの設定
  * 09.0 - アイキャッチのサイズ追加
  * 10.0 - 日付チェックする関数
+ * 11.0 - 投稿者別アーカイブを404へ
  *
  */
 
@@ -600,3 +601,17 @@ function new_checker( $day, $post_date = '' ) {
   }
   return false;
 }
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 11.0 - 投稿者別アーカイブを404へ
+ */
+//---------------------------------------------------------------------------------------------------
+add_filter( 'author_rewrite_rules', '__return_empty_array' );
+function disable_author_archive() {
+  if ( isset( $_GET['author'] ) || preg_match('#/author/.+#', $_SERVER['REQUEST_URI']) ){
+    wp_redirect( home_url( '/404.php' ) );
+    exit;
+  }
+}
+add_action('init', 'disable_author_archive');
