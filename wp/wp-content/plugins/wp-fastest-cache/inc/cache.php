@@ -42,6 +42,8 @@
 				echo "<!--WPFC_PAGE_TYPE_post-->";
 			}else if(is_page()){
 				echo "<!--WPFC_PAGE_TYPE_page-->";
+			}else if(is_attachment()){
+				echo "<!--WPFC_PAGE_TYPE_attachment-->";
 			}
 		}
 
@@ -357,7 +359,7 @@
 						//wc_get_page_id('product')
 						//wc_get_page_id('product-category')
 						
-						array_push($woocommerce_ids, wc_get_page_id('cart'), wc_get_page_id('checkout'), wc_get_page_id('receipt'), wc_get_page_id('confirmation'));
+						array_push($woocommerce_ids, wc_get_page_id('cart'), wc_get_page_id('checkout'), wc_get_page_id('receipt'), wc_get_page_id('confirmation'), wc_get_page_id('myaccount'));
 
 						if (in_array($page_id[1], $woocommerce_ids)) {
 							return true;
@@ -630,7 +632,7 @@
 								$lazy_load_js = WpFastestCacheLazyLoad::get_js_source();
 							}
 
-							$content = preg_replace("/\s*<\/head>/i", $lazy_load_js."</head>", $content, 1);
+							$content = preg_replace("/\s*<\/head\s*>/i", $lazy_load_js."</head>", $content, 1);
 						}
 					}
 

@@ -4,7 +4,7 @@ Donate link: http://profiles.wordpress.org/emrevona/
 Tags: cache, performance, wp-cache, total cache, super cache
 Requires at least: 3.3
 Tested up to: 4.8
-Stable tag: 0.8.7.3
+Stable tag: 0.8.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,12 @@ Wpfc does not support Wordpress Multisite yet.
 18. Database Cleanup
 
 == Changelog ==
+
+= 0.8.7.4 =
+* to exclude the renamed my-account page of woocommerce
+* to add AddType x-font/ttf for gzip
+* to fix the errors of Undefined property: stdClass::$post, stdClass::$page, stdClass::$category
+* <strong>[FEATURE]</strong> exclude attachments
 
 = 0.8.7.3 =
 * to espace empty spaces for webp rules

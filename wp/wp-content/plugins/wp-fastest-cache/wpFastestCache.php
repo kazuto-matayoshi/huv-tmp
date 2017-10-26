@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 0.8.7.3
+Version: 0.8.7.4
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 Text Domain: wp-fastest-cache
@@ -1243,7 +1243,7 @@ GNU General Public License for more details.
 				}
 
 				// POST
-				if($number > 0 && $pre_load->post > -1){
+				if($number > 0 && isset($pre_load->post) && $pre_load->post > -1){
 		    		// $recent_posts = wp_get_recent_posts(array(
 								// 			'numberposts' => $number,
 								// 		    'offset' => $pre_load->post,
@@ -1297,7 +1297,7 @@ GNU General Public License for more details.
 				}
 
 				// PAGE
-				if($number > 0 && $pre_load->page > -1){
+				if($number > 0 && isset($pre_load->page) && $pre_load->page > -1){
 					$pages = get_pages(array(
 							'sort_order' => 'DESC',
 							'sort_column' => 'ID',
@@ -1329,7 +1329,7 @@ GNU General Public License for more details.
 				}
 
 				// CATEGORY
-				if($number > 0 && $pre_load->category > -1){
+				if($number > 0 && isset($pre_load->category) && $pre_load->category > -1){
 					// $categories = get_terms(array(
 					// 							'taxonomy'          => array('category', 'product_cat'),
 					// 						    'orderby'           => 'id', 
