@@ -334,6 +334,8 @@
 				return array("You have to set <strong><u><a href='".admin_url()."options-permalink.php"."'>permalinks</a></u></strong>", "error");
 			}else if($res = $this->checkSuperCache($path, $htaccess)){
 				return $res;
+			}else if($this->isPluginActive('far-future-expiration/far-future-expiration.php')){
+				return array("Far Future Expiration Plugin", "error");
 			}else if($this->isPluginActive('fast-velocity-minify/fvm.php')){
 				return array("Fast Velocity Minify needs to be deactived", "error");
 			}else if($this->isPluginActive('sg-cachepress/sg-cachepress.php')){
@@ -498,6 +500,7 @@
 		    	$data = "# BEGIN GzipWpFastestCache"."\n".
 		          		"<IfModule mod_deflate.c>"."\n".
 		          		"AddType x-font/woff .woff"."\n".
+		          		"AddType x-font/ttf .ttf"."\n".
 		          		"AddOutputFilterByType DEFLATE image/svg+xml"."\n".
 		  				"AddOutputFilterByType DEFLATE text/plain"."\n".
 		  				"AddOutputFilterByType DEFLATE text/html"."\n".
@@ -1690,6 +1693,7 @@
 										<option value="tag">Tags</option>
 										<option value="post">Posts</option>
 										<option value="page">Pages</option>
+										<option value="attachment">Attachments</option>
 										<option value="startwith">Start With</option>
 										<option value="contain">Contain</option>
 										<option value="exact">Exact</option>
@@ -2033,6 +2037,11 @@
 			</div>
 
 			<div class="omni_admin_sidebar">
+				<div class="omni_admin_sidebar_section" style="padding:0 !important;border:none !important;background:none !important;">
+					<a href="//inmotion-hosting.evyy.net/c/149801/353727/4222" target="_blank">
+						<img style="width: 273px; margin-left: -27px;" src="<?php echo plugins_url("wp-fastest-cache/images/inmotion-ads.png"); ?>">
+					</a>
+				</div>
 				<div class="omni_admin_sidebar_section" id="vote-us">
 					<h3 style="color: antiquewhite;">Rate Us</h3>
 					<ul>
