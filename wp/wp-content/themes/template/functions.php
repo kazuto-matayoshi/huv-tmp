@@ -452,16 +452,19 @@ function is_parent_slug( $post_type ) {
 /**
  * 06.2 - 一番上の親を返す
  */
-function get_root_info( $info, $post_id ) {
+function get_root_info( $info, $post_id = null ) {
   global $post;
 
-  if ( $post_id ) {
-    $post = get_post( $post_id );
-  }
+  $post = get_post( $post_id );
 
   // $postが取得できない場合（アーカイブとか）
   if ( $post === null ) {
     return false;
+  }
+
+  // 親がいない場合
+  if ( count( $post->ancestors ) === 0 ) {
+    return $post->post_name;
   }
 
   $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
