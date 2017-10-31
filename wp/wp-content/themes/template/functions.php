@@ -30,7 +30,7 @@ get_template_part('function/custom_post');
  * 09.0 - アイキャッチのサイズ追加
  * 10.0 - 日付チェックする関数
  * 11.0 - 投稿者別アーカイブを404へ
- * 12.0 - html、空白を除いたテキストに変換する関数
+ * 12.0 - html、空白を除いたテキストに変換する関数 (字数制限機能付き)
  *
  */
 
@@ -622,11 +622,20 @@ add_action('init', 'disable_author_archive');
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 12.0 - html、空白を除いたテキストに変換する関数
+ * 12.0 - html、空白を除いたテキストに変換する関数 (字数制限機能付き)
  */
 //---------------------------------------------------------------------------------------------------
-function convert_string( $string ) {
+function convert_string( $string, $length = null, $leader = '...' ) {
   $str = strip_tags( $string );
   $str = preg_replace( "/( |　)|\n|\r|\r\n/", '', $str );
+
+  // 字数制限
+  if ( is_int( $length ) && $length !== null ) {
+    if ( mb_strlen( $str, 'UTF-8' ) > $length ) {
+      $l_length = mb_strlen( $leader, 'UTF-8' );
+      $str = mb_substr( $str, 0, $length - $l_length, 'UTF-8' ).$leader;
+    }
+  }
+
   return $str;
 }
