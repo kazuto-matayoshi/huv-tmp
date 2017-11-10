@@ -7,9 +7,7 @@
 
   // 各値の取得
   $archive_link = get_post_type_archive_link( $post_type );
-  $protocol     = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
-  $domain       = $_SERVER['HTTP_HOST'];
-  $archive_dir  = str_replace( $protocol.$domain, '', $archive_link );
+  $archive_dir  = str_replace( home_url(), '', $archive_link );
 
   $url = explode( '/', $archive_dir );
   $url = array_filter( $url, 'strlen' );

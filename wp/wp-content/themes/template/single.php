@@ -4,9 +4,7 @@ get_header();
   // $path = get_post_type($post->ID);
 
   $post_link = get_post_permalink();
-  $protocol  = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
-  $domain    = $_SERVER['HTTP_HOST'];
-  $post_dir  = str_replace( $protocol.$domain, '', $post_link );
+  $post_dir  = str_replace( home_url(), '', $post_link );
 
   $url  = explode( '/', $post_dir );
   $path = '';
