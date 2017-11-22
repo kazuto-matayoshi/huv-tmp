@@ -148,6 +148,8 @@ function remove_menus () {
     unset( $menu[2] );
     // ページ
     unset( $menu[20] );
+    // mw
+    // unset( $menu[26] );
     // ツール
     unset( $menu[75] );
     // メニューのカテゴリーの削除
