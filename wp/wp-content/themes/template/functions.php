@@ -11,6 +11,9 @@ get_template_part('function/const');
 // headerで自動生成される不要なタグを削除する関数群
 get_template_part('function/cleanup');
 
+// ajax呼び出しする際に使用する関数群
+get_template_part('function/ajax');
+
 /**
  *
  * 01.0 - 一覧用ページネーション
