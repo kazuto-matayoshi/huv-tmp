@@ -1,26 +1,13 @@
-# BEGIN WordPress
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-</IfModule>
-
-# END WordPress
-
-
 # BEGIN maintenance - huvrid add
 
 # 503用のHTMLを指定
-ErrorDocument 503 /mainte/index.html
+ErrorDocument 503 /mainte/
 
 RewriteEngine On
 RewriteBase /
 
 # アクセスしたURLが「mainte」ディレクトリ配下でない場合という条件
-RewriteCond %{REQUEST_URI} !^/mainte/
+RewriteCond %{REQUEST_URI} !^/mainte/$
 
 # アクセスした元のIPアドレスが「180.43.125.217」(huvrid)でない場合、
 # または「39.110.207.111」(wevnal)という条件
@@ -30,3 +17,15 @@ RewriteCond %{REMOTE_ADDR} !^(180\.43\.125\.217|39\.110\.207\.111|192\.168\.1\.1
 RewriteRule ^.*$ - [R=503,L]
 
 # END maintenance
+
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
