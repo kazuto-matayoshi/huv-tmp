@@ -332,7 +332,7 @@ $im: icomoon;
     $angle: if( unitless($angle), #{$angle}deg, #{$angle} );
     background: -moz-linear-gradient( $angle, $gradientColor );
   } @else {
-    background: -moz-linear-gradient( vender_angle($direction), $gradientColor );
+    background: -moz-linear-gradient( unquote( vender_angle( $direction ) ), $gradientColor );
   }
 
   /* Chrome10-25,Safari5.1-6 */
@@ -341,7 +341,7 @@ $im: icomoon;
     $angle: if( unitless($angle), #{$angle}deg, #{$angle} );
     background: -webkit-linear-gradient( $angle, $gradientColor );
   } @else {
-    background: -webkit-linear-gradient( vender_angle($direction), $gradientColor );
+    background: -webkit-linear-gradient( unquote( vender_angle( $direction ) ), $gradientColor );
   }
 
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -349,7 +349,7 @@ $im: icomoon;
     $angle: if( unitless($direction), #{$direction}deg, #{$direction} );
     background: linear-gradient( $angle, $gradientColor );
   } @else {
-    background: linear-gradient( angle($direction), $gradientColor );
+    background: linear-gradient( unquote( angle( $direction ) ), $gradientColor );
   }
 
   /* IE6-9 */
