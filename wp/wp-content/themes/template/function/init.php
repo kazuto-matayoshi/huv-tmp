@@ -249,6 +249,6 @@ add_theme_support( 'menus' );
  * 13.0 - 管理画面のheadに追加
  */
 function huv_head() {
-  echo '<link rel="shortcut icon" href="'. huv_theme_path .'img/favicon.ico">';
+  echo '<link rel="shortcut icon" href="'. huv_theme_path .'assets/img/common/favicon.ico">';
 }
 add_action('admin_head', 'huv_head', 11);
