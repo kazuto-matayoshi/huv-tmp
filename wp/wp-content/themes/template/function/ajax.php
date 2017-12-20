@@ -54,7 +54,7 @@ function ajax_get_index(){
        |    thumbnail    |
       \*-----------------*/
       // noimgの設定
-      $noImg = '<img src="'.huv_theme_path.'img/noimage.jpg" alt="noimage">';
+      $noImg = '<img src="'.huv_theme_path.'assets/img/common/no-image.jpg" alt="no-image">';
 
       // サムネイルの有無と分岐、セット
       $thumbnail = has_post_thumbnail( get_the_id() )
