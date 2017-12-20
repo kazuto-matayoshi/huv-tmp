@@ -1,13 +1,9 @@
 @charset 'utf-8';
 @import 'mixin';
 
-//-------------------
-// 変数指定
-//-------------------
-
-/*-------------------
-Default Settings
--------------------*/
+/*------------------
+  Default Settings
+------------------*/
 *,
 *:before,
 *:after {
@@ -57,17 +53,8 @@ dd {
   padding: 0;
 }
 
-h1.meta-h1 {
-  overflow: hidden;
-  white-space: nowrap;
-  // 一旦削除
-  // text-indent: -99999999px;
-  // height: 0;
-  // 一旦追加
-  text-indent: 100%;
-}
-
-li {
+ul,
+ol {
   list-style-type: none;
 }
 
