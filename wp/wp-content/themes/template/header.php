@@ -84,5 +84,5 @@
     wp_nav_menu( $args );
   ?>
 </nav> -->
-あああああ
+ooooooooooooooooo
 <?php breadcrumb(); ?>
