@@ -84,5 +84,4 @@
     wp_nav_menu( $args );
   ?>
 </nav> -->
-んでもってテスト
 <?php breadcrumb(); ?>
