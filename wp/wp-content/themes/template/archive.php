@@ -21,10 +21,15 @@
 
   $path = '';
 
-  if ( $post_type === $url[0] ) {
+  // 何かしらでアーカイブのディレクトリが取得できなかった場合
+  if ( $url[0] === '' ) {
     $path = $post_type;
   }
-
+  // カスタム投稿名/ユニーク名とかになっていた場合
+  else if ( $post_type === $url[0] && !isset( $url[1] ) ) {
+    $path = $post_type;
+  }
+  // それ以外
   else {
     foreach ( $url as $key => $value ) {
       if ( $value && !$path ) {
