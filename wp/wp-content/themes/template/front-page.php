@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<!-- <?php dynamic_sidebar('gnav'); ?> -->
+
 <?php
   $query =
   array(
