@@ -1,5 +1,16 @@
 @charset "utf-8";
 //————————————————————————————————————————————
+// Unit Delete
+//————————————————————————————————————————————
+@function unit_delete( $num ) {
+  @if not(unitless( $num ) ) {
+    $_nounit_divisor: ( floor( $num ) * 2 ) % 2 + 1;
+    $num: ( $num / $_nounit_divisor );
+  }
+  @return $num;
+}
+
+//————————————————————————————————————————————
 // Break Point
 //————————————————————————————————————————————
 
@@ -54,7 +65,7 @@
 
 @mixin vw_sp( $num ) {
   width: vw_sp( $num );
-  max-width: ( $num )+px;
+  max-width: ( $num ) + px;
 }
 
 @function vw_pc( $num ) {
@@ -70,16 +81,16 @@
 // Per
 //————————————————————————————————————————————
 @function per_sp( $num ) {
-  @return ( $num / 750 * 100 ) + %;
+  @return ( $num / 750 * 100 ) + '%';
 }
 
 @mixin per_sp( $num ) {
   width: per_sp( $num );
-  max-width: ( $num )+px;
+  max-width: ( $num ) + px;
 }
 
 @function per_pc( $num ) {
-  @return ( $num / 1200 * 100 ) + %;
+  @return ( $num / 1200 * 100 ) + '%';
 }
 
 @mixin per_pc( $num ){
@@ -104,11 +115,11 @@
 
 $fa: FontAwesome;
 
-@mixin fa($fontCode) {
-  @if str-index($fontCode, '\\' ) {
-    content: unquote("\"") + unquote($fontCode) + unquote("\"");
+@mixin fa( $fontCode ) {
+  @if str-index( $fontCode, '\\' ) {
+    content: unquote( "\"" ) + unquote( $fontCode ) + unquote( "\"" );
   } @else {
-    content: unquote("\"") + unquote(str-insert($fontCode, "\\", 1)) + unquote("\"");
+    content: unquote( "\"" ) + unquote( str-insert( $fontCode, "\\", 1 ) ) + unquote( "\"" );
   }
   font-family: $fa;
   line-height: 1;
@@ -128,11 +139,11 @@ $fa: FontAwesome;
 
 $im: icomoon;
 
-@mixin im($fontCode) {
-  @if str-index($fontCode, '\\' ) {
-    content: unquote("\"") + unquote($fontCode) + unquote("\"");
+@mixin im( $fontCode ) {
+  @if str-index( $fontCode, '\\' ) {
+    content: unquote( "\"" ) + unquote( $fontCode ) + unquote( "\"" );
   } @else {
-    content: unquote("\"") + unquote(str-insert($fontCode, "\\", 1)) + unquote("\"");
+    content: unquote( "\"" ) + unquote( str-insert( $fontCode, "\\", 1 ) ) + unquote( "\"" );
   }
   font-family: $im;
   line-height: 1;
@@ -154,207 +165,211 @@ $im: icomoon;
 }
 
 // top
-@mixin tri-t($color, $width, $height: false) {
-  $height: if($height, $height, $width);
+@mixin tri-t( $color, $width, $height: false ) {
+  $height: if( $height, $height, $width );
   @include tri-base;
   border-width: 0 $width/2 $height $width/2;
   border-color: transparent transparent $color transparent;
 }
 
 // right
-@mixin tri-r($color, $width, $height: false) {
+@mixin tri-r( $color, $width, $height: false ) {
   @include tri-base;
-  $height: if($height, $height, $width);
+  $height: if( $height, $height, $width );
   border-width: $height/2 0 $height/2 $width;
   border-color: transparent transparent transparent $color;
 }
 
 // bottom
-@mixin tri-b($color, $width, $height: false) {
+@mixin tri-b( $color, $width, $height: false ) {
   @include tri-base;
-  $height: if($height, $height, $width);
+  $height: if( $height, $height, $width );
   border-width: $height $width/2 0 $width/2;
   border-color: $color transparent transparent transparent;
 }
 
 // left
-@mixin tri-l($color, $width, $height: false) {
+@mixin tri-l( $color, $width, $height: false ) {
   @include tri-base;
-  $height: if($height, $height, $width);
+  $height: if( $height, $height, $width );
   border-width: $height/2 $width $height/2 0;
   border-color: transparent $color transparent transparent;
 }
 
 // top-right
-@mixin tri-tr($color, $width, $height: false) {
+@mixin tri-tr( $color, $width, $height: false ) {
   @include tri-base;
-  $height: if($height, $height, $width);
+  $height: if( $height, $height, $width );
   border-width: 0 $width $height 0;
   border-color: transparent $color transparent transparent;
 }
 
 // bottom-right
-@mixin tri-br($color, $width, $height: false) {
+@mixin tri-br( $color, $width, $height: false ) {
   @include tri-base;
-  $height: if($height, $height, $width);
+  $height: if( $height, $height, $width );
   border-width: 0 0 $height $width;
   border-color: transparent transparent $color transparent;
 }
 
 // bottom-left
-@mixin tri-bl($color, $width, $height: false) {
+@mixin tri-bl( $color, $width, $height: false ) {
   @include tri-base;
-  $height: if($height, $height, $width);
+  $height: if( $height, $height, $width );
   border-width: $height 0 0 $width;
   border-color: transparent transparent transparent $color;
 }
 
 // top-left
-@mixin tri-tl($color, $width, $height: false) {
+@mixin tri-tl( $color, $width, $height: false ) {
   @include tri-base;
-  $height: if($height, $height, $width);
+  $height: if( $height, $height, $width );
   border-width: $height $width 0 0;
   border-color: $color transparent transparent transparent;
 }
 
 //————————————————————————————————————————————
-// Gradation
+// Gradation系
 //————————————————————————————————————————————
-
-// $direction には数字またはテキストが入ります。
-// 数字の場合 -> '0', '20deg'... 
-// テキストの場合 -> 'top', 'to bottom'... 
-
-
-// $args : ( 'set_point' : 'color', );
-// $argsは連想配列になります。
-// keyに反映したい位置、valueにカラーが入ります。
-// 連想配列なので複数設定可能です。
-
-
-@mixin linear-gradient($direction, $args) {
-
-  // // 標準のキーワード
-  // $standard_keywords:
-  //     to bottom, to left, to top, to right,
-  //     to top left, to top right, to bottom right, to bottom left,
-  //     to left top, to right top, to right bottom, to left bottom;
-
-  // // 接頭辞版のキーワード
-  // $legacy_keywords:
-  //     top, right, bottom, left,
-  //     bottom right, bottom left, top left, top right,
-  //     right bottom, left bottom, left top, right top; 
-
-  // top → to bottom 等に変換する処理
-  @function angle($str) {
-    @if $str == 'top' {
-      @return #{unquote('to bottom')};
-    } @else if $str == 'right' {
-      @return #{unquote('to left')};
-    } @else if $str == 'bottom' {
-      @return #{unquote('to top')};
-    } @else if $str == 'left' {
-      @return #{unquote('to right')};
-    } @else if $str == 'bottom right' {
-      @return #{unquote('to top left')};
-    } @else if $str == 'bottom left' {
-      @return #{unquote('to top right')};
-    } @else if $str == 'top left' {
-      @return #{unquote('to bottom right')};
-    } @else if $str == 'top right' {
-      @return #{unquote('to bottom left')};
-    } @else if $str == 'right bottom' {
-      @return #{unquote('to left top')};
-    } @else if $str == 'left bottom' {
-      @return #{unquote('to right top')};
-    } @else if $str == 'left top' {
-      @return #{unquote('to right bottom')};
-    } @else if $str == 'right top' {
-      @return #{unquote('to left bottom')};
-    } @else {
-      @return $str;
-    }
+/**
+ * top → to bottom 等に変換する処理
+ *
+ * 変換後のパターン
+ * to bottom, to left, to top, to right,
+ * to top left, to top right, to bottom right, to bottom left,
+ * to left top, to right top, to right bottom, to left bottom
+ */
+@function angle( $str ) {
+  @if $str == 'top' {
+    @return #{unquote('to bottom')};
+  } @else if $str == 'right' {
+    @return #{unquote('to left')};
+  } @else if $str == 'bottom' {
+    @return #{unquote('to top')};
+  } @else if $str == 'left' {
+    @return #{unquote('to right')};
+  } @else if $str == 'bottom right' {
+    @return #{unquote('to top left')};
+  } @else if $str == 'bottom left' {
+    @return #{unquote('to top right')};
+  } @else if $str == 'top left' {
+    @return #{unquote('to bottom right')};
+  } @else if $str == 'top right' {
+    @return #{unquote('to bottom left')};
+  } @else if $str == 'right bottom' {
+    @return #{unquote('to left top')};
+  } @else if $str == 'left bottom' {
+    @return #{unquote('to right top')};
+  } @else if $str == 'left top' {
+    @return #{unquote('to right bottom')};
+  } @else if $str == 'right top' {
+    @return #{unquote('to left bottom')};
+  } @else {
+    @return $str;
   }
+}
 
-  // to bottom → top 等に変換する処理
-  @function vender_angle($str) {
-    @if $str == 'to bottom' {
-      @return #{unquote('top')};
-    } @else if $str == 'to left' {
-      @return #{unquote('right')};
-    } @else if $str == 'to top' {
-      @return #{unquote('bottom')};
-    } @else if $str == 'to right' {
-      @return #{unquote('left')};
-    } @else if $str == 'to top left' {
-      @return #{unquote('bottom right')};
-    } @else if $str == 'to top right' {
-      @return #{unquote('bottom left')};
-    } @else if $str == 'to bottom right' {
-      @return #{unquote('top left')};
-    } @else if $str == 'to bottom left' {
-      @return #{unquote('top right')};
-    } @else if $str == 'to left top' {
-      @return #{unquote('right bottom')};
-    } @else if $str == 'to right top' {
-      @return #{unquote('left bottom')};
-    } @else if $str == 'to right bottom' {
-      @return #{unquote('left top')};
-    } @else if $str == 'to left bottom' {
-      @return #{unquote('right top')};
-    } @else {
-      @return $str;
-    }
+/**
+ * to bottom → top 等に変換する処理
+ *
+ * 変換後のパターン
+ * top, right, bottom, left,
+ * bottom right, bottom left, top left, top right,
+ * right bottom, left bottom, left top, right top
+ */
+@function vender_angle( $str ) {
+  @if $str == 'to bottom' {
+    @return #{unquote('top')};
+  } @else if $str == 'to left' {
+    @return #{unquote('right')};
+  } @else if $str == 'to top' {
+    @return #{unquote('bottom')};
+  } @else if $str == 'to right' {
+    @return #{unquote('left')};
+  } @else if $str == 'to top left' {
+    @return #{unquote('bottom right')};
+  } @else if $str == 'to top right' {
+    @return #{unquote('bottom left')};
+  } @else if $str == 'to bottom right' {
+    @return #{unquote('top left')};
+  } @else if $str == 'to bottom left' {
+    @return #{unquote('top right')};
+  } @else if $str == 'to left top' {
+    @return #{unquote('right bottom')};
+  } @else if $str == 'to right top' {
+    @return #{unquote('left bottom')};
+  } @else if $str == 'to right bottom' {
+    @return #{unquote('left top')};
+  } @else if $str == 'to left bottom' {
+    @return #{unquote('right top')};
+  } @else {
+    @return $str;
   }
+}
+
+// 連想配列の文字列連結
+@function gradient_val( $array ) {
+  $val: null;
+  @each $pos, $color in $array {
+    $separator: '#{$color} #{$pos}';
+    $val: join( $val, $separator, 'comma');
+  }
+  @return #{unquote( $val )};
+}
+
+//————————————————————————————————————————————
+// Linear Gradient
+//————————————————————————————————————————————
+@mixin linear-gradient( $direction, $args ) {
+  // $direction には数字またはテキストが入ります。
+  // 数字の場合 -> '0', '20deg'... 
+  // テキストの場合 -> 'top', 'to bottom'... 
+
+  // $args : ( 'set_point' : 'color', );
+  // $argsは連想配列になります。
+  // keyに反映したい位置、valueにカラーが入ります。
+  // 連想配列なので複数設定可能です。
+
 
   // 色の作成
   $key: map-keys( $args );
-  $val: null;
-  @function gradient_val($args) {
-    @each $pos, $color in $args {
-      $separator: '#{$color} #{$pos}';
-      $val: join($val, $separator, 'comma');
-    }
-    @return #{unquote($val)};
-  }
 
   $startColor    : map-get( $args, nth( $key, 1 ) );
-  $endColor      : map-get( $args, nth( $key, length($key) ) );
-  $gradientColor : gradient_val($args);
+  $endColor      : map-get( $args, nth( $key, length( $key ) ) );
+  $gradientColor : gradient_val( $args );
 
   /* Old browsers */
   background: $startColor;
 
   /* FF3.6-15 */
-  @if type-of($direction) == 'number' {
+  @if type-of( $direction) == 'number' {
     $angle: (450 - $direction) % 360;
-    $angle: if( unitless($angle), #{$angle}deg, #{$angle} );
+    $angle: if( unitless( $angle ), #{$angle}deg, #{$angle} );
     background: -moz-linear-gradient( $angle, $gradientColor );
   } @else {
-    background: -moz-linear-gradient( #{vender_angle( $direction )}, $gradientColor );
+    background: -moz-linear-gradient( vender_angle( $direction ), $gradientColor );
   }
 
   /* Chrome10-25,Safari5.1-6 */
-  @if type-of($direction) == 'number' {
-    $angle: (450 - $direction) % 360;
-    $angle: if( unitless($angle), #{$angle}deg, #{$angle} );
+  @if type-of( $direction ) == 'number' {
+    $angle: ( 450 - $direction ) % 360;
+    $angle: if( unitless( $angle ), #{$angle}deg, #{$angle} );
     background: -webkit-linear-gradient( $angle, $gradientColor );
   } @else {
-    background: -webkit-linear-gradient( #{vender_angle( $direction )}, $gradientColor );
+    background: -webkit-linear-gradient( vender_angle( $direction ), $gradientColor );
   }
 
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  @if type-of($direction) == 'number' {
-    $angle: if( unitless($direction), #{$direction}deg, #{$direction} );
+  @if type-of( $direction ) == 'number' {
+    $angle: if( unitless( $direction ), #{$direction}deg, #{$direction} );
     background: linear-gradient( $angle, $gradientColor );
   } @else {
-    background: linear-gradient( #{angle( $direction )}, $gradientColor );
+    background: linear-gradient( angle( $direction ), $gradientColor );
   }
 
   /* IE6-9 */
-  @if type-of($direction) == 'number' {
-    $angle: if( unitless($direction), #{$direction}deg, #{$direction} );
+  @if type-of( $direction ) == 'number' {
+    $angle: if( unitless( $direction ), #{$direction}deg, #{$direction} );
     @if $angle == 0 {
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$startColor}', endColorstr='#{$endColor}',GradientType=0 );
     } @else {
@@ -369,15 +384,85 @@ $im: icomoon;
   }
 }
 
-@mixin radial-gradient($direction, $args) {
+//————————————————————————————————————————————
+// Radial Gradient
+//————————————————————————————————————————————
+@mixin radial-gradient( $direction, $args ) {
+}
+
+//————————————————————————————————————————————
+// Repeating Background
+//————————————————————————————————————————————
+@function repeating-linear( $color: ( '#FFF', '#000' ), $direction: 45, $size: false ) {
+  $size: if( $size, unit_delete( $size ), 100 / length( $color ) );
+
+  $args: ();
+  @each $color_i in $color {
+    $key: ( length( $args ) ) * $size;
+    $each_args: ( $key: $color_i );
+    $args: map-merge( $args, $each_args );
+  }
+
+  $st:'';
+  @each $point, $color in $args {
+    // map index
+    $index: index( $args, $point $color );
+    // first
+    @if $index == 1 {
+      $st: #{$color}, #{$color};
+    }
+    // last
+    @else if $index == length( $args ) {
+      $p: $point / ( length( $args ) - 1 );
+      $st: $st #{$point + px}, #{$color $point + px}, #{$color $point + $p + px};
+    }
+    @else {
+      $st: $st #{$point + px}, #{$color $point + px}, #{$color};
+    }
+  }
+
+  $context: unquote('repeating-linear-gradient(') #{$direction}deg, #{$st} unquote(')');
+  @return $context;
+}
+
+@function repeating-radial( $color: ( '#FFF', '#000' ), $direction: false, $size: false ) {
+  $size: if( $size, unit_delete( $size ),  100 / length( $color ) );
+  $direction: if( type-of( $direction ) == string, $direction, 'ellipse' );
+
+  $args: ();
+  @each $color_i in $color {
+    $key: length( $args ) * $size;
+    $each_args: ( $key: $color_i );
+    $args: map-merge( $args, $each_args );
+  }
+
+  $st:'';
+  @each $point, $color in $args {
+    // map index
+    $index: index( $args, $point $color );
+    // first
+    @if $index == 1 {
+      $st: #{$color}, #{$color};
+    }
+    // last
+    @else if $index == length( $args ) {
+      $p: $point / ( length( $args ) - 1 );
+      $st: $st #{$point + px}, #{$color $point + px}, #{$color $point + $p + px};
+    }
+    @else {
+      $st: $st #{$point + px}, #{$color $point + px}, #{$color};
+    }
+  }
+
+  $context: unquote('repeating-radial-gradient(') #{$direction}, #{$st} unquote(')');
+  @return $context;
 }
 
 //————————————————————————————————————————————
 // Text Border
 //————————————————————————————————————————————
 // 5pxぐらいが限界。。。
-
-@mixin text-border($width, $color) {
+@mixin text-border( $width, $color ) {
   $left-top     : null;
   $top-right    : null;
   $right-bottom : null;
@@ -411,13 +496,19 @@ $im: icomoon;
     }
   }
 
-  // IE以外
-  text-stroke: #{$width}px #{$color};
-  -webkit-text-stroke: #{$width}px #{$color};
-
   // 連結すると勝手にカンマが入る。(配列扱い)
   $text-shadow: $left-top $top-right $right-bottom $bottom-left;
-  @media all and (-ms-high-contrast:none) {
-    text-shadow: $text-shadow;
-  }
+  text-shadow: $text-shadow;
+}
+
+//————————————————————————————————————————————
+// 3 Point Leader
+//————————————————————————————————————————————
+@mixin leader( $width: 100% ) {
+  width: $width;
+  max-width: 100%;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
