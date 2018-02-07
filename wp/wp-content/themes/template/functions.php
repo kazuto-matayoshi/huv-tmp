@@ -455,6 +455,12 @@ function is_parent_slug( $post_type ) {
  */
 function get_root_info( $info, $post_id = null ) {
   global $post;
+  $post_id = $post_id !== null ? $post_id : get_the_id();
+
+
+  if ( !$post_id || $post_id === null ) {
+    return false;
+  }
 
   $post = get_post( $post_id );
 
@@ -465,16 +471,22 @@ function get_root_info( $info, $post_id = null ) {
 
   // 親がいない場合
   if ( count( $post->ancestors ) === 0 ) {
-    return $post->post_name;
+    if ( $info === 'id' ) {
+      return $post->ID;
+    }
+    else if ( $info === 'slug' ) {
+      return $post->post_name;
+    }
   }
+  else {
+    $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
 
-  $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
-
-  if ( $info === 'id' ) {
-    return $root_parent->ID;
-  }
-  else if ( $info === 'slug' ) {
-    return $root_parent->post_name;
+    if ( $info === 'id' ) {
+      return $root_parent->ID;
+    }
+    else if ( $info === 'slug' ) {
+      return $root_parent->post_name;
+    }
   }
 }
 
