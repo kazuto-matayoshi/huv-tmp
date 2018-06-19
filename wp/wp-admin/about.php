@@ -39,8 +39,6 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 					_n(
 						'<strong>Version %1$s</strong> addressed %2$s bug.',
 						'<strong>Version %1$s</strong> addressed %2$s bugs.',
-<<<<<<< HEAD
-=======
 						18
 					),
 					'4.9.6',
@@ -77,7 +75,6 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 					_n(
 						'<strong>Version %1$s</strong> addressed %2$s bug.',
 						'<strong>Version %1$s</strong> addressed %2$s bugs.',
->>>>>>> master
 						1
 					),
 					'4.9.4',
