@@ -108,8 +108,9 @@ function ewww_image_optimizer_bulk_head_output() {
 			</div>
 		</div>
 		<form class="ewww-bulk-form">
-			<p><label for="ewww-force" style="font-weight: bold"><?php esc_html_e( 'Force re-optimize', 'ewww-image-optimizer' ); ?></label>&emsp;<input type="checkbox" id="ewww-force" name="ewww-force">
-			&nbsp;<?php esc_html_e( 'Previously optimized images will be skipped by default, check this box before scanning to override.', 'ewww-image-optimizer' ); ?></p>
+			<p><label for="ewww-force" style="font-weight: bold"><?php esc_html_e( 'Force re-optimize', 'ewww-image-optimizer' ); ?></label>
+				&emsp;<input type="checkbox" id="ewww-force" name="ewww-force"<?php echo ( get_transient( 'ewww_image_optimizer_force_reopt' ) ) ? ' checked' : ''; ?>>
+				&nbsp;<?php esc_html_e( 'Previously optimized images will be skipped by default, check this box before scanning to override.', 'ewww-image-optimizer' ); ?></p>
 			<p><label for="ewww-delay" style="font-weight: bold"><?php esc_html_e( 'Choose how long to pause between images (in seconds, 0 = disabled)', 'ewww-image-optimizer' ); ?></label>&emsp;<input type="text" id="ewww-delay" name="ewww-delay" value="<?php echo $delay; ?>"></p>
 			<div id="ewww-delay-slider" style="width:50%"></div>
 		</form>
@@ -473,7 +474,7 @@ function ewww_image_optimizer_bulk_script( $hook ) {
 		'time_remaining'        => esc_html__( 'remaining', 'ewww-image-optimizer' ),
 		'original_restored'     => esc_html__( 'Original Restored', 'ewww-image-optimizer' ),
 		'restoring'             => '<p>' . esc_html__( 'Restoring', 'ewww-image-optimizer' ) . "&nbsp;<img src='$loading_image' /></p>",
-		'bulk_fail_more'        => '<a href="http://docs.ewww.io/article/39-bulk-optimizer-failure" target="_blank" data-beacon-article="596f84f72c7d3a73488b3ca7">' . esc_html__( 'more...', 'ewww-image-optimizer' ) . '</a>',
+		'bulk_fail_more'        => '<a href="https://docs.ewww.io/article/39-bulk-optimizer-failure" target="_blank" data-beacon-article="596f84f72c7d3a73488b3ca7">' . esc_html__( 'more...', 'ewww-image-optimizer' ) . '</a>',
 	) );
 	// Load the stylesheet for the jquery progressbar.
 	wp_enqueue_style( 'jquery-ui-progressbar', plugins_url( '/includes/jquery-ui-1.10.1.custom.css', __FILE__ ) );
@@ -667,6 +668,12 @@ function ewww_image_optimizer_media_scan( $hook = '' ) {
 	// Retrieve the time when the scan starts.
 	$started        = microtime( true );
 	$attachment_ids = get_option( 'ewww_image_optimizer_scanning_attachments' );
+	// Make the Force Re-optimize option persistent.
+	if ( ! empty( $_REQUEST['ewww_force'] ) ) {
+		set_transient( 'ewww_image_optimizer_force_reopt', true, HOUR_IN_SECONDS );
+	} else {
+		delete_transient( 'ewww_image_optimizer_force_reopt' );
+	}
 
 	if ( ! empty( $attachment_ids ) && count( $attachment_ids ) > 300 ) {
 		ewww_image_optimizer_debug_log();
@@ -967,7 +974,7 @@ function ewww_image_optimizer_media_scan( $hook = '' ) {
 			foreach ( $attachment_images as $size => $file_path ) {
 				ewwwio_debug_message( "here is a path $file_path" );
 				ewww_image_optimizer_debug_log();
-				if ( ! $remote_file && strpos( $file_path, 's3' ) !== 0 && ! defined( 'EWWW_IMAGE_OPTIMIZER_RELATIVE_FOLDER' ) ) {
+				if ( ! $remote_file && strpos( $file_path, 's3' ) !== 0 && ! defined( 'EWWW_IMAGE_OPTIMIZER_RELATIVE' ) ) {
 					$file_path = realpath( $file_path );
 				}
 				if ( empty( $file_path ) ) {
@@ -1477,6 +1484,12 @@ function ewww_image_optimizer_bulk_loop( $hook = '', $delay = 0 ) {
 	$started = microtime( true );
 	// Prevent the scheduled optimizer from firing during a bulk optimization.
 	set_transient( 'ewww_image_optimizer_no_scheduled_optimization', true, 10 * MINUTE_IN_SECONDS );
+	// Make the Force Re-optimize option persistent.
+	if ( ! empty( $_REQUEST['ewww_force'] ) ) {
+		set_transient( 'ewww_image_optimizer_force_reopt', true, HOUR_IN_SECONDS );
+	} else {
+		delete_transient( 'ewww_image_optimizer_force_reopt' );
+	}
 	// Find out if our nonce is on it's last leg/tick.
 	if ( ! empty( $_REQUEST['ewww_wpnonce'] ) ) {
 		$tick = wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' );
@@ -1677,6 +1690,7 @@ function ewww_image_optimizer_bulk_cleanup() {
 	update_option( 'ewww_image_optimizer_bulk_resume', '' );
 	update_option( 'ewww_image_optimizer_bulk_attachments', '', false );
 	delete_transient( 'ewww_image_optimizer_skip_aux' );
+	delete_transient( 'ewww_image_optimizer_force_reopt' );
 	// Let the user know we are done.
 	ewwwio_memory( __FUNCTION__ );
 	ewwwio_ob_clean();

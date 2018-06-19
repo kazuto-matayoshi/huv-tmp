@@ -1,0 +1,38 @@
+@charset 'utf-8';
+@import 'mixin';
+.MVslide {
+  &__inner {
+    // code...
+  }
+  &__item {
+    // code...
+  }
+  &__view {
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    &--img_pc {
+      @include bp( max, 600px ) {
+        display: none;
+      }
+      &:before {
+        display: block;
+        padding-top: calc( 9 / 16 * 100% );
+        content: '';
+      }
+    }
+    &--img_sp {
+      display: none;
+
+      @include bp( max, 600px ) {
+        display: block;
+      }
+      &:before {
+        display: block;
+        padding-top: calc( 3 / 4 * 100% );
+        content: '';
+      }
+    }
+  }
+}

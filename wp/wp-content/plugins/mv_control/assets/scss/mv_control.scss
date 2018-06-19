@@ -1,0 +1,347 @@
+@charset 'utf-8';
+@import 'mixin';
+.MVControl {
+  padding: 30px 20px 0 0;
+
+  @include bp( max, 782px ) {
+    padding: 30px 10px 0 0;
+  }
+  /*------------------
+    Default Settings
+  ------------------*/
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol,
+  li,
+  dl,
+  dt,
+  dd {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul,
+  ol {
+    list-style-type: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+  }
+
+  .cf {
+    &:after {
+      display: block;
+      clear: both;
+      width: 100%;
+      content: '';
+    }
+  }
+
+  .MVControl {
+    &__ttl {
+      font-size: 30px;
+      line-height: 1;
+    }
+    &__createMV {
+      margin-top: 30px;
+      &__modal {
+        position: fixed;
+        z-index: 99999;
+        top: 50%;
+        left: 50%;
+        visibility: hidden;
+        width: 100%;
+        height: 100%;
+        transition: all .3s;
+        transform: translate( -50%, -50% );
+        background: rgba( 0, 0, 0, .9 );
+        &--close {
+          position: absolute;
+          top: calc( 35% + ( ( 9 / 16 * 100% ) ) );
+          left: 50%;
+          width: 80%;
+          max-width: 1280px;
+          transform: translate( -50%, 0 );
+          text-align: right;
+          a {
+            color: #FFF;
+          }
+        }
+      }
+    }
+    &__wrapper {
+      margin-top: 30px;
+    }
+    &__item {
+      background: #FFF;
+      & + .MVControl__item {
+        margin-top: 30px;
+      }
+      &.ui-sortable-helper {
+        box-shadow: 5px 5px 3px rgba( 0, 0, 0, .3 );
+      }
+      &.ui-sortable-placeholder {
+        visibility: visible !important;
+        box-sizing: border-box;
+        border: 5px dashed #0073AA;
+        background: none;
+        &:nth-child(1),
+        &:nth-child(2) {
+          margin: none;
+        }
+      }
+      &__head {
+        padding: 10px 20px;
+      }
+
+      &__ttl {
+        font-size: 20px;
+        line-height: 1;
+        position: relative;
+        &:after {
+          position: absolute;
+          top: 50%;
+          right: 0;
+          display: block;
+          content: '';
+          transform: translate( 0, -50% );
+
+          @include tri-b( #A0A5AA, 15px, 13px );
+        }
+        a {
+          font-size: 14px;
+          line-height: 1;
+          display: inline-block;
+          margin-left: 10px;
+          &:before {
+            content: '[ 閉じる ]';
+          }
+          &.open {
+            &:before {
+              content: '[ 開く ]';
+            }
+          }
+        }
+      }
+      &__thumbnail {
+        display: flex;
+        align-items: center;
+        li {
+          position: relative;
+          width: 20%;
+          max-width: 230px;
+          margin-top: 10px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          &:before {
+            display: block;
+            content: '';
+          }
+          &.no_img {
+            span {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate( -50%, -50% );
+            }
+            &:before {
+              background: #DEDEDE;
+            }
+          }
+          &.img_pc {
+            @include bp( max, 600px ) {
+              display: none;
+            }
+            &:before {
+              padding-top: 9 / 16 * 100%;
+            }
+          }
+          &.img_sp {
+            display: none;
+
+            @include bp( max, 600px ) {
+              display: block;
+            }
+
+            &:before {
+              padding-top: 3 / 4 * 100%;
+            }
+          }
+        }
+      }
+      &__inner {
+        padding: 20px;
+        border-top: 2px solid #A0A5AA;
+      }
+    }
+    &__ui {
+      &Area {
+        display: flex;
+        justify-content: space-between;
+
+        @include bp( max, 782px ) {
+          flex-wrap: wrap;
+        }
+      }
+      &Box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: calc( 50% - 10px );
+
+        @include bp( max, 782px ) {
+          width: 100%;
+        }
+        &--pc {
+          .MVControl__views {
+            &:before {
+              display: block;
+              padding-top: calc( 9 / 16 * 100% );
+              content: '';
+            }
+          }
+        }
+        &--sp {
+          @include bp( max, 782px ) {
+            margin-top: 20px;
+          }
+          .MVControl__views {
+            &:before {
+              display: block;
+              padding-top: calc( 3 / 4 * 100% );
+              content: '';
+            }
+          }
+        }
+        &.view {
+          .MVControl__uiBtn__item {
+            &--add {
+              display: none;
+            }
+            &--change,
+            &--del {
+              display: block;
+            }
+          }
+        }
+      }
+      &Btn {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 10px;
+        // @include bp( max, 600px ) {
+        //   margin-top: 10px;
+        // }
+        &__item {
+          & + .MVControl__uiBtn__item:not(:nth-child(2)) {
+            // margin-left: 10px;
+          }
+          &--change,
+          &--del {
+            display: none;
+          }
+          &--change {
+            margin-right: 10px;
+
+            @include bp( max, 600px ) {
+              margin-top: 10px;
+            }
+          }
+          &--del {
+            @include bp( max, 600px ) {
+              margin-top: 10px;
+            }
+            button {
+              @include wp_button( #CF4944 );
+            }
+          }
+        }
+      }
+    }
+    &__views {
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid #A0A5AA;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+    &__input {
+      &Area {
+        margin-top: 20px;
+      }
+      &__anchor {
+        line-height: 1;
+        display: flex;
+        align-items: center;
+
+        @include bp( max, 600px ) {
+          flex-wrap: wrap;
+        }
+      }
+      &__link {
+        margin-right: 20px;
+        input {
+          width: calc( 100% - 4em );
+          max-width: 500px;
+        }
+      }
+      &__blank {
+        @include bp( max, 600px ) {
+          margin-top: 10px;
+        }
+      }
+    }
+    &__delBox {
+      margin-top: 20px;
+
+      @include bp( max, 600px ) {
+      }
+      button {
+        @include wp_button( #CF4944 );
+      }
+    }
+    &__addBox {
+      margin: 30px 0 10px;
+    }
+  }
+  .MVslide {
+    top: 50%;
+    width: 80%;
+    max-width: 1280px;
+    transform: translate( 0, -50% );
+    &__view {
+      &__ttl {
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 5px 10px;
+        background: #C6C6C6;
+      }
+    }
+  }
+}
