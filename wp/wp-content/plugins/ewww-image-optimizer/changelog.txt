@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 = 4.2.1 =
 * fixed: EXACTDN_LOCAL_DOMAIN does not work with auto-verification
 * fixed: uncaught error during upgrade when 'SHOW FULL COLUMNS' fails
@@ -48,7 +46,6 @@
 * fixed: relative path support not working properly for Pantheon users
 * fixed: missing directories prevent optimization of S3 files
 
->>>>>>> master
 = 4.1.0 =
 * SECURITY: gifsicle and optipng have been updated to address security flaws
 * added: full compatibility with Image Watermark plugin

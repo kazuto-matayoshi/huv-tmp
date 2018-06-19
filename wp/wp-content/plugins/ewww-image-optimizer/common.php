@@ -26,26 +26,14 @@
 // TODO: integrate AGR, since it's "abandoned", but possibly using gifsicle for better GIFs.
 // TODO: use this: https://codex.wordpress.org/AJAX_in_Plugins#The_post-load_JavaScript_Event .
 // TODO: on images without srscet, add 2x and 3x versions anyway.
-<<<<<<< HEAD
-// TODO: check what happens to WebP images when restoring original from backups.
-// TODO: use got_mod_rewrite to warn folks not to bother with webp htaccess.
-// TODO: fix ExactDN failure after multisite save settings.
-// TODO: add ExactDN compat with A3 lazy.
-// TODO: can svg/use tags be exluded from all the things?
-=======
 // TODO: can svg/use tags be exluded from all the things?
 // TODO: match Adaptive Images functionality with ExactDN.
 // TODO: handle relative urls with ExactDN.
->>>>>>> master
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-<<<<<<< HEAD
-define( 'EWWW_IMAGE_OPTIMIZER_VERSION', '410.0' );
-=======
 define( 'EWWW_IMAGE_OPTIMIZER_VERSION', '421.0' );
->>>>>>> master
 
 // Initialize a couple globals.
 $ewww_debug = '';
@@ -2131,8 +2119,6 @@ function ewww_image_optimizer_path_renamed( $post, $old_filepath, $new_filepath 
 			)
 		);
 	}
-<<<<<<< HEAD
-=======
 	// Look for WebP variants and rename them.
 	$old_webp = $old_filepath . '.webp';
 	$new_webp = $new_filepath . '.webp';
@@ -2140,7 +2126,6 @@ function ewww_image_optimizer_path_renamed( $post, $old_filepath, $new_filepath 
 		ewwwio_debug_message( "renaming $old_webp to $new_webp" );
 		rename( $old_webp, $new_webp );
 	}
->>>>>>> master
 }
 
 /**

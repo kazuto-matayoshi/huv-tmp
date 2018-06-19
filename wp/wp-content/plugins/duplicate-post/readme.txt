@@ -5,6 +5,7 @@ Tags: 				duplicate post, copy, clone
 Requires at least: 	3.6
 Tested up to: 		4.9
 Stable tag: 		3.2.2
+Requires PHP:		5.2.4
 License: 			GPLv2 or later
 License URI: 		http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +35,8 @@ There is also a **template tag**, so you can put it in your templates and clone 
 Duplicate Post has many useful settings to customize its behavior and restrict its use to certain roles or post types. Check out the extensive documentation on [the plugin's site](https://duplicate-post.lopo.it).
 
 **If you're a plugin developer**, I suggest you to read the [Developer's Guide](https://duplicate-post.lopo.it/docs/developers-guide/) to ensure compatibility between your plugin(s) and mine. Feel free to [contact me](https://duplicate-post.lopo.it/contact) so we can keep in touch and collaborate.
+
+Duplicate Post does not collect any information outside your WordPress installation, therefore it's 100% GDPR compliant.
 
 Thanks for all the suggestions, bug reports, translations and donations, they're frankly too many to be listed here!
 

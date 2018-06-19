@@ -2218,20 +2218,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 			if ( $options['type'] == 'custom' ) {
 				return apply_filters( "{$prefix}output_option", '', $args );
 			}
-<<<<<<< HEAD
-			if ( in_array( $options['type'], array(
-				'multiselect',
-				'select',
-				'multicheckbox',
-				'radio',
-				'checkbox',
-				'textarea',
-				'text',
-				'submit',
-				'hidden',
-				'date',
-				) ) && is_string( $value )
-=======
 			if ( in_array(
 				$options['type'], array(
 					'multiselect',
@@ -2246,7 +2232,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 					'date',
 				)
 			) && is_string( $value )
->>>>>>> master
 			) {
 				$value = esc_attr( $value );
 			}
@@ -2315,9 +2300,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 					$size = $options['size'];
 				} elseif ( isset( $options['rows'] ) && isset( $options['cols'] ) ) {
 					$size = $options['rows'] * $options['cols'];
-				}
-				if ( 'Description' === $options['name'] && isset( $options['name'] ) ) {
-					$size = ( $size - 90 ) . '-' . $size;
 				}
 				if ( isset( $options['count_desc'] ) ) {
 					$count_desc = $options['count_desc'];

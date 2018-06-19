@@ -646,12 +646,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Opengraph' ) ) {
 			// Only ping Facebook if Social SEO is enabled on this post type.
 			if ( $this->option_isset( 'types' ) && is_array( $this->options['aiosp_opengraph_types'] ) && in_array( $current_post_type, $this->options['aiosp_opengraph_types'] ) ) {
 				$post_url = aioseop_get_permalink( $post->ID );
-<<<<<<< HEAD
-				$endpoint = sprintf( 'https://graph.facebook.com/?%s', http_build_query( array(
-					'id'     => $post_url,
-					'scrape' => true,
-				) ) );
-=======
 				$endpoint = sprintf(
 					'https://graph.facebook.com/?%s', http_build_query(
 						array(
@@ -660,7 +654,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Opengraph' ) ) {
 						)
 					)
 				);
->>>>>>> master
 				wp_remote_post( $endpoint, array( 'blocking' => false ) );
 			}
 		}
@@ -681,12 +674,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Opengraph' ) ) {
 			// Only ping Facebook if Social SEO is enabled on this post type.
 			if ( 'publish' === $post_after->post_status && $this->option_isset( 'types' ) && is_array( $this->options['aiosp_opengraph_types'] ) && in_array( $current_post_type, $this->options['aiosp_opengraph_types'] ) ) {
 				$post_url = aioseop_get_permalink( $post_id );
-<<<<<<< HEAD
-				$endpoint = sprintf( 'https://graph.facebook.com/?%s', http_build_query( array(
-					'id'     => $post_url,
-					'scrape' => true,
-				) ) );
-=======
 				$endpoint = sprintf(
 					'https://graph.facebook.com/?%s', http_build_query(
 						array(
@@ -695,7 +682,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Opengraph' ) ) {
 						)
 					)
 				);
->>>>>>> master
 				wp_remote_post( $endpoint, array( 'blocking' => false ) );
 			}
 		}

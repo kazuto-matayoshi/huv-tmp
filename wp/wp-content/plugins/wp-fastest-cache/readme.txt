@@ -4,11 +4,7 @@ Donate link: http://profiles.wordpress.org/emrevona/
 Tags: cache, performance, wp-cache, total cache, super cache
 Requires at least: 3.3
 Tested up to: 4.9
-<<<<<<< HEAD
-Stable tag: 0.8.7.7
-=======
 Stable tag: 0.8.8.1
->>>>>>> master
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,8 +102,6 @@ Wpfc does not support Wordpress Multisite yet.
 
 == Changelog ==
 
-<<<<<<< HEAD
-=======
 = 0.8.8.1 =
 * to update russian translation
 * to set browser caching for Cloudflare
@@ -144,7 +138,6 @@ Wpfc does not support Wordpress Multisite yet.
 * to fix 403 cdn template error
 * to fix height problem of lightbox
 
->>>>>>> master
 = 0.8.7.7 =
 * to remove "via php" text if WPFC_REMOVE_VIA_FOOTER_COMMENT is defined as true
 * <strong>[FEATURE]</strong> Restart Preload [<a target="_blank" href="http://www.wpfastestcache.com/features/restart-preload-after-completed/">Details</a>]

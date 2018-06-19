@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - EWWW Image Optimizer - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-27 23:21:55+0000\n"
+"PO-Revision-Date: 2018-06-18 03:48:03+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,9 +11,29 @@ msgstr ""
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - EWWW Image Optimizer - Stable (latest release)\n"
 
+#: common.php:7783
+msgid "Overrides"
+msgstr "上書きする"
+
+#: common.php:7760
+msgid "Re-test"
+msgstr "再テスト"
+
+#: common.php:7530
+msgid "Active, not yet verified."
+msgstr "アクティブ、未認証です。"
+
+#: common.php:7527
+msgid "Temporarily disabled."
+msgstr "一時的に無効化されています。"
+
 #: common.php:228
 msgid "The next major release of EWWW Image Optimizer will require PHP 5.5 or greater. Newer versions of PHP, like 5.6, 7.0 and 7.1, are significantly faster and much more secure. If you are unsure how to upgrade to a supported version, ask your webhost for instructions."
-msgstr "次のメジャーリリースで EWWW Image Optimizer プラグインは PHP 5.5 以上を要求するようになります。PHP 5.6, 7.0 や 7.1 といったより新しいバージョンの PHP は動作が早く、セキュリティも高いです。PHP のアップグレード方法に不明点がある場合、お使いのホスティング会社にお尋ねください。"
+msgstr "次のメジャーリリースで EWWW Image Optimizer プラグインは PHP 5.5 以上を要求するようになります。PHP 5.6, 7.0 や 7.1 といったより新しいバージョンの PHP は動作が早く、セキュリティ的にも安全です。PHP のアップグレード方法に不明点がある場合、お使いのホスティング会社にお尋ねください。"
+
+#: common.php:7764
+msgid "Background mode active, enable Parallel Optimization in Advanced Settings"
+msgstr "バックグラウンドモード有効、高度な設定内で並列最適化を有効化してください"
 
 #: common.php:8109
 msgid "Remove Rewrite Rules"
@@ -26,6 +46,10 @@ msgstr "削除に失敗しました"
 #: common.php:7227
 msgid "Removal successful"
 msgstr "削除に成功しました"
+
+#: common.php:1928
+msgid "New thumbnails will be optimized by the EWWW Image Optimizer as they are generated. You may wish to disable the plugin and run a bulk optimize later to speed up the process."
+msgstr "新しいサムネイル画像は EWWW Image Optimizer プラグインによって生成される度に最適化されます。サムネイル画像の生成プロセスをより早く行うためには、プラグインを無効化して、後で一括最適化を行ってください。"
 
 #: common.php:8147
 msgid "Add ExactDN to increase website speeds dramatically!"

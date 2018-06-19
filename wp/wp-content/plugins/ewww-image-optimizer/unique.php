@@ -1039,57 +1039,6 @@ function ewww_image_optimizer_mimetype( $path, $case ) {
 			ewwwio_debug_message( "match not found for image: $magic" );
 		} else {
 			ewwwio_debug_message( 'could not open for reading' );
-<<<<<<< HEAD
-		}
-	}
-	if ( 'b' === $case ) {
-		$fhandle = fopen( $path, 'rb' );
-		if ( $fhandle ) {
-			// Read first 4 bytes, which equates to 8 hex characters.
-			$magic = bin2hex( fread( $fhandle, 4 ) );
-			// Mac (Mach-O) binary.
-			if ( 'cffaedfe' === $magic || 'feedface' === $magic || 'feedfacf' === $magic || 'cefaedfe' === $magic || 'cafebabe' === $magic ) {
-				$type = 'application/x-executable';
-				ewwwio_debug_message( "ewwwio type: $type" );
-				return $type;
-			}
-			// ELF (Linux or BSD) binary.
-			if ( '7f454c46' === $magic ) {
-				$type = 'application/x-executable';
-				ewwwio_debug_message( "ewwwio type: $type" );
-				return $type;
-			}
-			// MS (DOS) binary.
-			if ( '4d5a9000' === $magic ) {
-				$type = 'application/x-executable';
-				ewwwio_debug_message( "ewwwio type: $type" );
-				return $type;
-			}
-			ewwwio_debug_message( "match not found for binary: $magic" );
-		} else {
-			ewwwio_debug_message( 'could not open for reading' );
-		}
-	}
-	return false;
-	if ( function_exists( 'finfo_file' ) && defined( 'FILEINFO_MIME' ) ) {
-		// Create a finfo resource.
-		$finfo = finfo_open( FILEINFO_MIME );
-		// Retrieve the mimetype.
-		$type = explode( ';', finfo_file( $finfo, $path ) );
-		$type = $type[0];
-		finfo_close( $finfo );
-		ewwwio_debug_message( "finfo_file: $type" );
-	}
-	// See if we can use the getimagesize function.
-	if ( empty( $type ) && function_exists( 'getimagesize' ) && 'i' === $case && strpos( ewww_image_optimizer_quick_mimetype( $path ), 'pdf' ) === false ) {
-		// Run getimagesize on the file.
-		$type = getimagesize( $path );
-		// Make sure we have results.
-		if ( false !== $type ) {
-			// Store the mime-type.
-			$type = $type['mime'];
-=======
->>>>>>> master
 		}
 	}
 	if ( 'b' === $case ) {

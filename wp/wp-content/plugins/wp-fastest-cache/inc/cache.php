@@ -8,10 +8,7 @@
 		public $cacheFilePath = "";
 		public $exclude_rules = false;
 		public $preload_user_agent = false;
-<<<<<<< HEAD
-=======
 		public $current_page_type = false;
->>>>>>> master
 
 		public function __construct(){
 			//to fix: PHP Notice: Undefined index: HTTP_USER_AGENT
@@ -848,10 +845,7 @@
 
 		public function createFolder($cachFilePath, $buffer, $extension = "html", $prefix = false){
 			$create = false;
-<<<<<<< HEAD
-=======
 			$file_name = "index.";
->>>>>>> master
 			$update_db_statistic = true;
 			
 			if($buffer && strlen($buffer) > 100 && $extension == "html"){
@@ -862,15 +856,9 @@
 				}
 
 				if($this->preload_user_agent){
-<<<<<<< HEAD
-					if(file_exists($cachFilePath."/".$prefix."index.".$extension)){
-						$update_db_statistic = false;
-						@unlink($cachFilePath."/".$prefix."index.".$extension);
-=======
 					if(file_exists($cachFilePath."/"."index.".$extension)){
 						$update_db_statistic = false;
 						@unlink($cachFilePath."/"."index.".$extension);
->>>>>>> master
 					}
 				}
 			}

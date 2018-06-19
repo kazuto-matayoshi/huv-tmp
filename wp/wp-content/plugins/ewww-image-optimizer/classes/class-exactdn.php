@@ -782,12 +782,8 @@ class ExactDN {
 						$src = $this->strip_image_dimensions_maybe( $src );
 					}
 
-<<<<<<< HEAD
-					if ( ! empty( $attachment_id ) ) {
-=======
 					if ( ! ewww_image_optimizer_get_option( 'exactdn_prevent_db_queries' ) && ! empty( $attachment_id ) ) {
 						ewwwio_debug_message( 'using attachment id to check smart crop' );
->>>>>>> master
 						$args = $this->maybe_smart_crop( $args, $attachment_id );
 					}
 
@@ -899,21 +895,6 @@ class ExactDN {
 					}
 				} // End if().
 			} // End foreach().
-<<<<<<< HEAD
-			if ( $this->filtering_the_page && ewww_image_optimizer_get_option( 'exactdn_all_the_things' ) ) {
-				ewwwio_debug_message( 'rewriting all other wp_content urls' );
-				if ( $this->exactdn_domain && $this->upload_domain ) {
-					$escaped_upload_domain = str_replace( '.', '\.', $this->upload_domain );
-					ewwwio_debug_message( $escaped_upload_domain );
-					// Pre-empt rewriting of wp-includes and wp-content if the extension is php/ashx by using a temporary placeholder.
-					$content = preg_replace( '#(https?)://' . $escaped_upload_domain . '([^"\'?>]+?)?/wp-content/([^"\'?>]+?)\.(php|ashx)#i', '$1://' . $this->upload_domain . '$2/?wpcontent-bypass?/$3.$4', $content );
-					$content = preg_replace( '#(https?)://' . $escaped_upload_domain . '/([^"\'?>]+?)?wp-(includes|content)#i', '$1://' . $this->exactdn_domain . '/$2wp-$3', $content );
-					$content = str_replace( '?wpcontent-bypass?', 'wp-content', $content );
-					$content = preg_replace( '#(concatemoji":"https?:\\\/\\\/)' . $escaped_upload_domain . '([^"\'?>]+?)wp-emoji-release.min.js\?ver=(\w)#', '$1' . $this->exactdn_domain . '$2wp-emoji-release.min.js?ver=$3', $content );
-				}
-			}
-=======
->>>>>>> master
 		} // End if();
 		if ( $this->filtering_the_page && ewww_image_optimizer_get_option( 'exactdn_all_the_things' ) ) {
 			ewwwio_debug_message( 'rewriting all other wp_content urls' );

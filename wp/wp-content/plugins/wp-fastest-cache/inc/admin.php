@@ -818,11 +818,7 @@
 
 			$wpFastestCacheLazyLoad = isset($this->options->wpFastestCacheLazyLoad) ? 'checked="checked"' : "";
 			$wpFastestCacheLazyLoad_keywords = isset($this->options->wpFastestCacheLazyLoad_keywords) ? $this->options->wpFastestCacheLazyLoad_keywords : "";
-<<<<<<< HEAD
-
-=======
 			$wpFastestCacheLazyLoad_placeholder = isset($this->options->wpFastestCacheLazyLoad_placeholder) ? $this->options->wpFastestCacheLazyLoad_placeholder : "default";
->>>>>>> master
 
 
 			$wpFastestCacheLBC = isset($this->options->wpFastestCacheLBC) ? 'checked="checked"' : "";
@@ -1226,11 +1222,8 @@
 											"pt-PT",
 											"pt-BR",
 											"tr-TR",
-<<<<<<< HEAD
-=======
 											"rebootyourpc.gr",
 											"nicheadvice.co.uk",
->>>>>>> master
 											"addkenmerken.net",
 											"animefantastica.com",
 											"rynofitness.com.au",
@@ -1254,10 +1247,7 @@
 											"parkviewhomes.info",
 											"myparkviewhomes.com",
 											"kompressorcheck.de",
-<<<<<<< HEAD
-=======
 											"cutflower.com",
->>>>>>> master
 											"sackkarre-tests.de",
 											"schraubstock-test.de",
 											"knarrenkasten-tests.de",
@@ -1272,10 +1262,7 @@
 										<div class="questionCon">
 											<div class="question">Lazy Load</div>
 											<div class="inputCon">
-<<<<<<< HEAD
-=======
 												<input type="hidden" value="<?php echo $wpFastestCacheLazyLoad_placeholder; ?>" id="wpFastestCacheLazyLoad_placeholder" name="wpFastestCacheLazyLoad_placeholder">
->>>>>>> master
 												<input type="hidden" value="<?php echo $wpFastestCacheLazyLoad_keywords; ?>" id="wpFastestCacheLazyLoad_keywords" name="wpFastestCacheLazyLoad_keywords">
 												<input type="checkbox" <?php echo $wpFastestCacheLazyLoad; ?> id="wpFastestCacheLazyLoad" name="wpFastestCacheLazyLoad"><label for="wpFastestCacheLazyLoad">Load images and iframes when they enter the browsers viewport</label>
 											</div>

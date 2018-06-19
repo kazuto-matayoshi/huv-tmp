@@ -3,11 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-<<<<<<< HEAD
-Version: 0.8.7.7
-=======
 Version: 0.8.8.1
->>>>>>> master
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 Text Domain: wp-fastest-cache
@@ -866,12 +862,7 @@ GNU General Public License for more details.
 				return false;
 			}
 
-<<<<<<< HEAD
-			if(preg_match("/cat|tag/", $term->taxonomy)){
-				$url = get_term_link($term->term_id, $term->taxonomy);
-=======
 			//if(preg_match("/cat|tag|store|listing/", $term->taxonomy)){}
->>>>>>> master
 
 			$url = get_term_link($term->term_id, $term->taxonomy);
 

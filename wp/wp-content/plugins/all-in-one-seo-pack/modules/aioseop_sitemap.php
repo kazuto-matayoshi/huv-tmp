@@ -1443,15 +1443,9 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Sitemap' ) ) {
 				$this->options = $aioseop_options['modules'][ "{$this->prefix}options" ];
 			}
 
-<<<<<<< HEAD
-			if ( ! empty( $this->options["{$this->prefix}indexes"] ) ) {
-				if ( $this->options["{$this->prefix}max_posts"] && ( $this->options["{$this->prefix}max_posts"] > 0 ) && ( $this->options["{$this->prefix}max_posts"] < 50000 ) ) {
-					$this->max_posts = $this->options["{$this->prefix}max_posts"];
-=======
 			if ( ! empty( $this->options[ "{$this->prefix}indexes" ] ) ) {
 				if ( $this->options[ "{$this->prefix}max_posts" ] && ( $this->options[ "{$this->prefix}max_posts" ] > 0 ) && ( $this->options[ "{$this->prefix}max_posts" ] < 50000 ) ) {
 					$this->max_posts = $this->options[ "{$this->prefix}max_posts" ];
->>>>>>> master
 				} else {
 					$this->max_posts = 50000;
 				}
@@ -1660,14 +1654,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Sitemap' ) ) {
 			if ( ! empty( $options[ "{$this->prefix}posttypes" ] ) ) {
 				$prio        = $this->get_default_priority( 'post' );
 				$freq        = $this->get_default_frequency( 'post' );
-<<<<<<< HEAD
-				$post_counts = $this->get_all_post_counts( array(
-					'post_type'   => $options["{$this->prefix}posttypes"],
-					'post_status' => 'publish',
-				) );
-
-				foreach ( $options["{$this->prefix}posttypes"] as $sm ) {
-=======
 				$post_counts = $this->get_all_post_counts(
 					array(
 						'post_type'   => $options[ "{$this->prefix}posttypes" ],
@@ -1676,7 +1662,6 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Sitemap' ) ) {
 				);
 
 				foreach ( $options[ "{$this->prefix}posttypes" ] as $sm ) {
->>>>>>> master
 					if ( 0 == $post_counts[ $sm ] ) {
 						continue;
 					}
@@ -2815,22 +2800,8 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Sitemap' ) ) {
 				return $images;
 			}
 
-<<<<<<< HEAD
-			$attached_url = false;
-			// Check featured image.
-			if ( version_compare( $wp_version, '4.4.0', '>=' ) ) {
-				$attached_url = get_the_post_thumbnail_url( $post->ID );
-			} else {
-				$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
-				if ( $post_thumbnail_id ) {
-					$attached_url = wp_get_attachment_image_src( $post_thumbnail_id );
-				}
-			}
-			if ( false !== $attached_url ) {
-=======
 			$attached_url = get_the_post_thumbnail_url( $post->ID );
 			if ( $attached_url ) {
->>>>>>> master
 				$images[] = $attached_url;
 			}
 
@@ -2908,14 +2879,10 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Sitemap' ) ) {
 			}
 
 			global $wp_version;
-<<<<<<< HEAD
-			if ( version_compare( $wp_version, '4.7', '<' ) ) {
-=======
 			if ( version_compare( $wp_version, '4.4', '<' ) ) {
 				$p_url = parse_url( $image );
 				$url = $p_url['scheme'] . $p_url['host'] . $p_url['path'];
 			} elseif ( version_compare( $wp_version, '4.7', '<' ) ) {
->>>>>>> master
 				// Compatability for older WP version that don't have 4.7 changes.
 				// @link https://core.trac.wordpress.org/changeset/38726
 				$p_url = wp_parse_url( $image );
@@ -2928,11 +2895,7 @@ if ( ! class_exists( 'All_in_One_SEO_Pack_Sitemap' ) ) {
 			// make the url absolute, if its relative.
 			$image      = aiosp_common::absolutize_url( $image );
 
-<<<<<<< HEAD
-			$extn       = pathinfo( $url, PATHINFO_EXTENSION );
-=======
 			$extn       = pathinfo( parse_url( $image, PHP_URL_PATH ), PATHINFO_EXTENSION );
->>>>>>> master
 			$allowed    = apply_filters( 'aioseop_allowed_image_extensions', self::$image_extensions );
 			// Bail if image does not refer to an image file otherwise google webmaster tools might reject the sitemap.
 			if ( ! in_array( $extn, $allowed, true ) ) {

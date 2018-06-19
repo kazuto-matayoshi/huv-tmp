@@ -458,16 +458,6 @@ if ( ! function_exists( 'aioseop_ajax_save_url' ) ) {
 			$prefix = $module->get_prefix();
 			$_POST  = $module->get_current_options( $_POST, null );
 			$module->handle_settings_updates( null );
-<<<<<<< HEAD
-			$options = $module->get_current_options( Array(), null );
-			$output  = $module->display_custom_options( '', Array(
-				'name'  => $prefix . 'addl_pages',
-				'type'  => 'custom',
-				'save'  => true,
-				'value' => $options[ $prefix . 'addl_pages' ],
-				'attr'  => '',
-			) );
-=======
 			$options = $module->get_current_options( array(), null );
 			$output  = $module->display_custom_options(
 				'', array(
@@ -478,7 +468,6 @@ if ( ! function_exists( 'aioseop_ajax_save_url' ) ) {
 					'attr'  => '',
 				)
 			);
->>>>>>> master
 			$output  = str_replace( "'", "\'", $output );
 			$output  = str_replace( "\n", '\n', $output );
 		} else {
