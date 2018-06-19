@@ -1,4 +1,7 @@
-<?php get_header(); ?>
+<?php
+  ob_start();
+  get_header();
+?>
 <article class="article-box">
 <?php
   // $path = get_post_type($post->ID);
@@ -71,4 +74,12 @@
   }
 ?>
 </article>
-<?php get_footer(); ?>
+<?php
+  get_footer();
+  $compress = ob_get_clean();
+  $compress = str_replace("\t", '', $compress);
+  $compress = str_replace("\r", '', $compress);
+  $compress = str_replace("\n", '', $compress);
+  $compress = preg_replace('/<!--[\s\S]*?-->/', '', $compress);
+  echo $compress;
+?>

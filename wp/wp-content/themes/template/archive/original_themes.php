@@ -29,21 +29,25 @@
   $the_query = new WP_Query( $query );
 
   if ( $the_query->have_posts() ) :
-  echo '<ul class="post-list">';
+  echo '<ul class="post__list">';
     while ( $the_query->have_posts() ) :
     $the_query->the_post();
 ?>
-    <li class="post-list-item">
-      <p class="post-img"><?php
+    <li class="post__item">
+      <p class="post__img"><?php
         // アイキャッチ
+        $attr = array(
+          'class'    => 'lazyload',
+        );
         if ( has_post_thumbnail( $post->ID ) ) {
-          echo the_post_thumbnail( 'thumbnail' );
+          huv_lazyload( huv_get_thumbnail_src( 'thumbnail' ), $attr );
         } else {
-          echo '<img src="'.huv_theme_path.'assets/img/common/no-image.jpg" alt="no-image">';
+          $attr['alt'] = 'no-image';
+          huv_lazyload( huv_theme_path.'assets/img/common/no-image.jpg', $attr );
         }
       ?></p>
-      <p class="post-day"><?php echo get_the_date(); ?></p>
-      <p class="post-ttl"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
+      <p class="post__day"><?php echo get_the_date(); ?></p>
+      <p class="post__ttl"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
     </li>
 <?php
     endwhile;

@@ -1,3 +1,4 @@
 (function($){
-  var swiper = new Swiper('.mv');
+  console.log('common');
+  // var swiper = new Swiper('.mv');
 })(jQuery);

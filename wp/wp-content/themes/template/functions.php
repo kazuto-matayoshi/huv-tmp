@@ -31,6 +31,7 @@ get_template_part('function/ajax');
  * 10.0 - 日付チェックする関数
  * 11.0 - 投稿者別アーカイブを404へ
  * 12.0 - html、空白を除いたテキストに変換する関数 (字数制限機能付き)
+ * 13.0 - Lazy Load等に対応するための画像呼び出し
  *
  */
 
@@ -455,6 +456,12 @@ function is_parent_slug( $post_type ) {
  */
 function get_root_info( $info, $post_id = null ) {
   global $post;
+  $post_id = $post_id !== null ? $post_id : get_the_id();
+
+
+  if ( !$post_id || $post_id === null ) {
+    return false;
+  }
 
   $post = get_post( $post_id );
 
@@ -465,16 +472,22 @@ function get_root_info( $info, $post_id = null ) {
 
   // 親がいない場合
   if ( count( $post->ancestors ) === 0 ) {
-    return $post->post_name;
+    if ( $info === 'id' ) {
+      return $post->ID;
+    }
+    else if ( $info === 'slug' ) {
+      return $post->post_name;
+    }
   }
+  else {
+    $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
 
-  $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
-
-  if ( $info === 'id' ) {
-    return $root_parent->ID;
-  }
-  else if ( $info === 'slug' ) {
-    return $root_parent->post_name;
+    if ( $info === 'id' ) {
+      return $root_parent->ID;
+    }
+    else if ( $info === 'slug' ) {
+      return $root_parent->post_name;
+    }
   }
 }
 
@@ -638,4 +651,44 @@ function convert_string( $string, $length = null, $leader = '...' ) {
   }
 
   return $str;
+}
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 13.0 - Lazy Load等に対応するための画像呼び出し
+ */
+//---------------------------------------------------------------------------------------------------
+function huv_get_thumbnail_src( $size = 'thumbnail' ) {
+  // アイキャッチ画像のIDを取得
+  $thumbnail_id = get_post_thumbnail_id(); 
+  $img_path     = wp_get_attachment_image_src( $thumbnail_id , $size )[0];
+
+  return $img_path;
+}
+
+function huv_the_thumbnail( $size = 'thumbnail', $array = array() ) {
+  $src  = huv_get_thumbnail_src( $size );
+  $attr = '';
+
+  foreach ( (array)$array as $key => $value ) {
+    $attr .= ' '.$key.'="'.$value.'"';
+  }
+
+  echo '<img src="'.$src.'"'.$attr.'>';
+}
+
+function huv_lazyload( $src, $add_attr ) {
+  $default = array(
+               'class'    => 'lazyload',
+               'data-src' => $src,
+             );
+
+  $array = array_merge( $default, $add_attr );
+
+  $attr = '';
+  foreach ( (array)$array as $key => $value ) {
+    $attr .= ' '.$key.'="'.$value.'"';
+  }
+
+  echo '<img'.$attr.'>';
 }
