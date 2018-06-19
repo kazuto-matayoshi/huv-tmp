@@ -1,4 +1,5 @@
 <?php
+  ob_start();
   get_header();
 ?>
 <article class="article-box">
@@ -75,4 +76,10 @@
 </article>
 <?php
   get_footer();
+  $compress = ob_get_clean();
+  $compress = str_replace("\t", '', $compress);
+  $compress = str_replace("\r", '', $compress);
+  $compress = str_replace("\n", '', $compress);
+  $compress = preg_replace('/<!--[\s\S]*?-->/', '', $compress);
+  echo $compress;
 ?>
