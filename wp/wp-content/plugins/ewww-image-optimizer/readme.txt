@@ -4,8 +4,13 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: image, compress, optimize, optimization, lossless, lossy, seo, tinyjpg, tinypng, webp, wp-cli
 Requires at least: 4.6
 Tested up to: 4.9
+<<<<<<< HEAD
 Requires PHP: 5.3
 Stable tag: 4.1.0
+=======
+Requires PHP: 5.4
+Stable tag: 4.2.1
+>>>>>>> master
 License: GPLv3
 
 Speed up your website and improve your visitors' experience by automatically compressing and resizing images and PDFs. Boost SEO and improve sales.
@@ -177,6 +182,57 @@ http://developer.yahoo.com/performance/rules.html#opt_images
 * Feature requests can be submitted via https://ewww.io/contact-us/ and commented on here: https://trello.com/b/Fp81dWof/ewww-image-optimizer
 * If you would like to help translate this plugin in your language, get started here: https://translate.wordpress.org/projects/wp-plugins/ewww-image-optimizer/
 
+<<<<<<< HEAD
+=======
+= 4.2.1 =
+* fixed: EXACTDN_LOCAL_DOMAIN does not work with auto-verification
+* fixed: uncaught error during upgrade when 'SHOW FULL COLUMNS' fails
+* fixed: async simulation gets 403 error
+
+= 4.2.0 =
+* added: disable ExactDN attachment ID queries if they take too long
+* added: ExactDN compatibility with a3 Lazy Load
+* added: ability to re-test async/background mode if it gets disabled
+* changed: better compatibility between Autoptimize and ExactDN
+* changed: .webp files removed when restoring original from API
+* changed: Force re-optimize checkbox persists up to an hour if bulk optimizer is interrupted
+* fixed: CSS, JS, and other resources could be skipped by ExactDN in certain circumstances
+* fixed: Jupiter theme captcha incompatible with ExactDN
+* fixed: prevent calls to php_uname when it is disabled
+* fixed: MacOS X installer for PNGOUT
+* fixed: prevent notices due to empty output from exec()
+* fixed: ExactDN fails to crop when image_downsize() is called with explicit dimensions
+* fixed: ExactDN breaks image resizing with Themify themes
+* fixed: multi-site settings throws error during submission when ExactDN is active
+* fixed: single-site override option displayed when plugin activated per-site
+* removed: PHP 5.3 no longer supported
+
+= 4.1.3 =
+* fixed: infinite loop when removing invalid API key
+* fixed: img elements with incorrect attachment ID being replaced with wrong image src
+* fixed: ExactDN CSS and JS parsing incompatible with Autoptimize
+
+= 4.1.2 =
+* added: detect WP Fastest Cache WebP rewrite rules
+* added: notice if WebP conversion enabled but mod_rewrite or mod_headers is missing
+* added: better debugging when background/async mode is blocked
+* changed: CSS/JS files are filtered pre-emptively by ExactDN to avoid quirks with emoji scripts
+* fixed: warning during wp_cron for undefined constant
+* fixed: invalid or expired keys would still attempt optimization
+* fixed: WebP files are orphaned when using Media File Renamer
+* deprecated: PHP 5.3 will no longer be supported in 4.2
+* deprecated: PHP 5.4 support will be removed by July 2018
+* deprecated: PHP 5.5 support will be removed by October 2018
+
+= 4.1.1 =
+* added: reduce ExactDN load time by suppressing db queries with EXACTDN_PREVENT_DB_QUERIES
+* added: $fullsize indicator added to pre/post optimization hooks, props Schweinepriester
+* fixed: missing www preventing rewrites for ExactDN
+* fixed: Alt WebP compatibility with Tatsu page builder
+* fixed: relative path support not working properly for Pantheon users
+* fixed: missing directories prevent optimization of S3 files
+
+>>>>>>> master
 = 4.1.0 =
 * SECURITY: gifsicle and optipng have been updated to address security flaws
 * added: full compatibility with Image Watermark plugin
@@ -190,6 +246,7 @@ http://developer.yahoo.com/performance/rules.html#opt_images
 * fixed: resize detection script throws error when admin bar is hidden
 * fixed: warnings when WP Offload S3 set to delete local files, props ianmjones
 * updated: pngquant version 2.11.7
+<<<<<<< HEAD
 
 = 4.0.6 =
 * changed: dummy images have no args appended with exactdn except for ssl flag
@@ -252,12 +309,21 @@ http://developer.yahoo.com/performance/rules.html#opt_images
 * fixed: network-wide settings not saving properly
 * fixed: notice of undefined index with some configurations of the Shield security plugin
 * deprecated: PHP 5.3 support will be removed by March 2018
+=======
+>>>>>>> master
 
 = Earlier versions =
 Please refer to the separate changelog.txt file.
 
 == Upgrade Notice ==
 
+<<<<<<< HEAD
+=======
+= 4.2.0 =
+* ExactDN verification rewritten, please report any issues immediately.
+* PHP 5.3 support discontinued, see https://docs.ewww.io/article/55-upgrading-php
+
+>>>>>>> master
 = 4.1.0 =
 * Security update: gifsicle and optipng have been updated to resolve security flaws.
 * ExactDN now processes JS/CSS/Fonts for even more speed.
@@ -268,12 +334,6 @@ Please refer to the separate changelog.txt file.
 = 3.6.0 =
 * API functions have been rewritten to use core WP detection for https capability, please report any errors right away.
 * Several options have been removed from the user interface, see the changelog for details.
-
-= 3.4.0 =
-* Multisite change: disabling resizes must be done on individual sites even when network activated, as those settings are heavily theme-specific.
-
-= 3.3.0 =
-* Requires PHP 5.3+. All sites hosted on Pantheon will now use "relative" paths. Existing Pantheon sites will need to update the ewwwio_images table to match (contact support for help), or disable this function by setting EWWW_IMAGE_OPTIMIZER_RELATIVE to false in wp-config.php.
 
 == Contact and Credits ==
 

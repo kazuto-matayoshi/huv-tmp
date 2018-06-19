@@ -41,48 +41,51 @@
 
     jqXHR.done( function( response ) {
       // console.log( response );
-      setting.init();
+      setting.init( response );
 
       var jsonData = JSON.parse( response ), el = '';
 
       $.each( jsonData, function( i, val ) {
         // jsonデータのkeyに'end'が入っていない場合
         if ( i === 'end' ) {
-          setting.moreEnd();
+          setting.moreEnd( response );
+          return false;
         }
         else if ( i === 'noneObj' ) {
-          setting.noneObj();
+          setting.noneObj( response );
+          return false;
         }
         else {
-          var html = setting.htmlContent(val);
+          var html = setting.htmlContent( val );
 
           // デバック
           if ( html === undefined ) {
-            console.error('Please do "retrun" when using "htmlContent(val)".');
+            console.error('Please do "return" when using "htmlContent( val )".');
           }
 
           el += html;
+
+          switch ( setting.type ) {
+
+            // setting.type === 'change'
+            case 'change':
+              // $targetを空にした後、エレメントを追加。
+              $target.empty().append(el);
+              break;
+
+            // setting.type === 'add'
+            case 'add':
+              // $targetにエレメントを追加。
+              $target.append(el);
+              break;
+
+            // else
+            default:
+              break;
+          }
+
         }
       });
-
-      switch ( setting.type ) {
-
-        // setting.type === 'change'
-        case 'change':
-          // $targetを空にした後、エレメントを追加。
-          $target.empty().append(el);
-          break;
-
-        // setting.type === 'add'
-        case 'add':
-          // $targetにエレメントを追加。
-          $target.append(el);
-          break;
-
-        // else
-        default:
-          break;
-      }
 
       setting.ajaxLoadEnd();
     });

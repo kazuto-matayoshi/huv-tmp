@@ -1,23 +1,10 @@
-# BEGIN maintenance - huvrid add
-
-# 503用のHTMLを指定
-ErrorDocument 503 /mainte/
-
-RewriteEngine On
-RewriteBase /
-
-# アクセスしたURLが「mainte」ディレクトリ配下でない場合という条件
-RewriteCond %{REQUEST_URI} !^/mainte/$
-
-# アクセスした元のIPアドレスが「180.43.125.217」(huvrid)でない場合、
-# または「39.110.207.111」(wevnal)という条件
-RewriteCond %{REMOTE_ADDR} !^(180\.43\.125\.217|39\.110\.207\.111|192\.168\.1\.109)$
-
-# 上記2つの条件を満たした場合に、503スタータスにする
-RewriteRule ^.*$ - [R=503,L]
-
-# END maintenance
-
+# BEGIN https redirect
+# <IfModule mod_rewrite.c>
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+# </IfModule>
+# END https redirect
 
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
@@ -29,3 +16,52 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </IfModule>
 # END WordPress
+
+
+# BEGIN maintenance - huvrid add
+
+# 503用のHTMLを指定
+# ErrorDocument 503 /mainte/index.html
+
+# RewriteEngine On
+# RewriteBase /
+
+# # アクセスしたURLが「mainte」ディレクトリ配下でない場合という条件
+# RewriteCond %{REQUEST_URI} !^/mainte/
+
+# # アクセスした元のIPアドレスが「180.43.125.217」(huvrid)でない場合、
+# # または「39.110.207.111」(wevnal)という条件
+# RewriteCond %{REMOTE_ADDR} !^(180\.43\.125\.217|39\.110\.207\.111|192\.168\.1\.109)$
+
+# # 上記2つの条件を満たした場合に、503スタータスにする
+# RewriteRule ^.*$ - [R=503,L]
+
+# END maintenance
+
+
+# BEGIN Basic - huvrid add
+# <Files wp-login.php>
+# AuthName "Input ID & Password"
+# AuthGroupFile /dev/null
+# AuthType Basic
+# AuthUserFile /home/users/0/main.jp-2675656d4e1750f3/web/template/.htpasswd
+# Require valid-user
+# </Files>
+# END Basic
+
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/css                      "access plus 15 days"
+ExpiresByType image/gif                     "access plus 10 days"
+ExpiresByType image/jpg                     "access plus 10 days"
+ExpiresByType image/jpeg                    "access plus 10 days"
+ExpiresByType image/png                     "access plus 10 days"
+ExpiresByType application/x-javascript      "access plus 10 days"
+ExpiresByType text/x-javascript             "access plus 1 month"
+ExpiresByType application/javascript        "access plus 1 month"
+ExpiresByType application/x-javascript      "access plus 1 month"
+ExpiresByType text/js                       "access plus 1 month"
+ExpiresByType text/javascript               "access plus 1 month"
+ExpiresByType application/x-shockwave-flash "access plus 1 month"
+</IfModule>

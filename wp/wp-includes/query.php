@@ -880,7 +880,11 @@ function wp_old_slug_redirect() {
 		 *
 		 * @since 4.9.3
 		 *
+<<<<<<< HEAD
 		 * @param string $id The redirect post ID.
+=======
+		 * @param int $id The redirect post ID.
+>>>>>>> master
 		 */
 		$id = apply_filters( 'old_slug_redirect_post_id', $id );
 
@@ -962,7 +966,10 @@ function _find_post_by_old_slug( $post_type ) {
  * @param string $post_type The current post type based on the query vars.
  * @return int $id The Post ID.
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 function _find_post_by_old_date( $post_type ) {
 	global $wpdb;
 

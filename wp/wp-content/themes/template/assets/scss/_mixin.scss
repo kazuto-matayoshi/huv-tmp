@@ -113,7 +113,7 @@
 // FontAwesome
 //————————————————————————————————————————————
 
-$fa: FontAwesome;
+$fa: Font Awesome\ 5 Free, FontAwesome;
 
 @mixin fa( $fontCode ) {
   @if str-index( $fontCode, '\\' ) {

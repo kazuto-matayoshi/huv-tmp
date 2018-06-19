@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
   <link rel="stylesheet" href="<?php echo huv_theme_path; ?>assets/css/normalize.css">
   <link rel="stylesheet" href="<?php echo huv_theme_path; ?>assets/css/common.css">
   
@@ -84,4 +84,13 @@
     wp_nav_menu( $args );
   ?>
 </nav> -->
+
+
+
+
+
+
+
+<div id="barba-wrapper" aria-live="polite">
+<div class="barba-container">
 <?php breadcrumb(); ?>
