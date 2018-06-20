@@ -125,6 +125,27 @@ $fa: Font Awesome\ 5 Free, FontAwesome;
   line-height: 1;
 }
 
+@mixin fa4( $fontCode, $lh: 1 ) {
+  @if str-index( $fontCode, '\\' ) {
+    content: unquote( "\"" ) + unquote( $fontCode ) + unquote( "\"" );
+  } @else {
+    content: unquote( "\"" ) + unquote( str-insert( $fontCode, "\\", 1 ) ) + unquote( "\"" );
+  }
+  font-family: FontAwesome;
+  line-height: $lh;
+}
+
+@mixin fa5( $fontCode, $lh: 1 ) {
+  @if str-index( $fontCode, '\\' ) {
+    content: unquote( "\"" ) + unquote( $fontCode ) + unquote( "\"" );
+  } @else {
+    content: unquote( "\"" ) + unquote( str-insert( $fontCode, "\\", 1 ) ) + unquote( "\"" );
+  }
+  font-family: Font Awesome\ 5 Free;
+  font-weight: 900;
+  line-height: $lh;
+}
+
 //————————————————————————————————————————————
 // icomoon
 //————————————————————————————————————————————
