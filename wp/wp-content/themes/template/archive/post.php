@@ -3,13 +3,14 @@
  * loopの細かい設定はfunctions.php
  * 09.0 - メインクエリの書き換え
  */
+
 if ( have_posts() ) :
-  echo '<ul class="post-list">';
+  echo '<ul class="post__list">';
   while ( have_posts() ) :
     the_post();
 ?>
-  <li class="post-list-item">
-    <p class="post-img"><?php
+  <li class="post__item">
+    <p class="post__img"><?php
       // アイキャッチ
       $attr = array(
         'class'    => 'lazyload',
@@ -21,8 +22,8 @@ if ( have_posts() ) :
         huv_lazyload( huv_theme_path.'assets/img/common/no-image.jpg', $attr );
       }
     ?></p>
-    <p class="post-day"><?php echo get_the_date(); ?></p>
-    <p class="post-ttl"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
+    <p class="post__day"><?php echo get_the_date( 'Y.m.d' ); ?></p>
+    <p class="post__ttl"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
   </li>
 <?php
   endwhile;
