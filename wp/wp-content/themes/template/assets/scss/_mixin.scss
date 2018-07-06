@@ -1,5 +1,5 @@
 /**
- * _mixin 2.5.5
+ * _mixin 2.5.6
  * Released on: June 20, 2018
  */
 
@@ -66,7 +66,7 @@
 // Vw
 //————————————————————————————————————————————
 @function vw_sp( $num ) {
-  @return ( $num / 750 * 100 ) + vw;
+  @return ( $num / 750 * 100vw );
 }
 
 @mixin vw_sp( $num ) {
@@ -75,7 +75,7 @@
 }
 
 @function vw_pc( $num ) {
-  @return ( $num / 1200 * 100 ) + vw;
+  @return ( $num / 1200 * 100vw ) ;
 }
 
 @mixin vw_pc( $num ){
@@ -87,7 +87,7 @@
 // Per
 //————————————————————————————————————————————
 @function per_sp( $num ) {
-  @return ( $num / 750 * 100 ) + '%';
+  @return ( $num / 750 * 100% );
 }
 
 @mixin per_sp( $num ) {
@@ -96,7 +96,7 @@
 }
 
 @function per_pc( $num ) {
-  @return ( $num / 1200 * 100 ) + '%';
+  @return ( $num / 1200 * 100% );
 }
 
 @mixin per_pc( $num ){
