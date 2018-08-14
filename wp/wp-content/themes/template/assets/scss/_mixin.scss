@@ -1,15 +1,15 @@
 /**
- * _mixin 2.5.6
- * Released on: June 20, 2018
+ * _mixin 2.5.7
+ * Released on: July 10, 2018
  */
 
-@charset "utf-8";
+@charset 'utf-8';
 
 //————————————————————————————————————————————
 // Unit Delete
 //————————————————————————————————————————————
 @function unit_delete( $num ) {
-  @if not(unitless( $num ) ) {
+  @if not( unitless( $num ) ) {
     $_nounit_divisor: ( floor( $num ) * 2 ) % 2 + 1;
     $num: ( $num / $_nounit_divisor );
   }
@@ -78,7 +78,7 @@
   @return ( $num / 1200 * 100vw ) ;
 }
 
-@mixin vw_pc( $num ){
+@mixin vw_pc( $num ) {
   width: vw_pc( $num );
   max-width: ( $num ) + px;
 }
@@ -99,7 +99,7 @@
   @return ( $num / 1200 * 100% );
 }
 
-@mixin per_pc( $num ){
+@mixin per_pc( $num ) {
   width: per_pc( $num );
   max-width: ( $num ) + px;
 }
@@ -123,9 +123,9 @@ $fa: Font Awesome\ 5 Free, FontAwesome;
 
 @mixin fa( $fontCode ) {
   @if str-index( $fontCode, '\\' ) {
-    content: unquote( "\"" ) + unquote( $fontCode ) + unquote( "\"" );
+    content: unquote( '\"' ) + unquote( $fontCode ) + unquote( '\"' );
   } @else {
-    content: unquote( "\"" ) + unquote( str-insert( $fontCode, "\\", 1 ) ) + unquote( "\"" );
+    content: unquote( '\"' ) + unquote( str-insert( $fontCode, '\\', 1 ) ) + unquote( '\"' );
   }
   font-family: $fa;
   line-height: 1;
@@ -133,9 +133,9 @@ $fa: Font Awesome\ 5 Free, FontAwesome;
 
 @mixin fa4( $fontCode, $lh: 1 ) {
   @if str-index( $fontCode, '\\' ) {
-    content: unquote( "\"" ) + unquote( $fontCode ) + unquote( "\"" );
+    content: unquote( '\"' ) + unquote( $fontCode ) + unquote( '\"' );
   } @else {
-    content: unquote( "\"" ) + unquote( str-insert( $fontCode, "\\", 1 ) ) + unquote( "\"" );
+    content: unquote( '\"' ) + unquote( str-insert( $fontCode, '\\', 1 ) ) + unquote( '\"' );
   }
   font-family: FontAwesome;
   line-height: $lh;
@@ -143,9 +143,9 @@ $fa: Font Awesome\ 5 Free, FontAwesome;
 
 @mixin fa5( $fontCode, $lh: 1 ) {
   @if str-index( $fontCode, '\\' ) {
-    content: unquote( "\"" ) + unquote( $fontCode ) + unquote( "\"" );
+    content: unquote( '\"' ) + unquote( $fontCode ) + unquote( '\"' );
   } @else {
-    content: unquote( "\"" ) + unquote( str-insert( $fontCode, "\\", 1 ) ) + unquote( "\"" );
+    content: unquote( '\"' ) + unquote( str-insert( $fontCode, '\\', 1 ) ) + unquote( '\"' );
   }
   font-family: Font Awesome\ 5 Free;
   font-weight: 900;
@@ -168,9 +168,9 @@ $im: icomoon;
 
 @mixin im( $fontCode ) {
   @if str-index( $fontCode, '\\' ) {
-    content: unquote( "\"" ) + unquote( $fontCode ) + unquote( "\"" );
+    content: unquote( '\"' ) + unquote( $fontCode ) + unquote( '\"' );
   } @else {
-    content: unquote( "\"" ) + unquote( str-insert( $fontCode, "\\", 1 ) ) + unquote( "\"" );
+    content: unquote( '\"' ) + unquote( str-insert( $fontCode, '\\', 1 ) ) + unquote( '\"' );
   }
   font-family: $im;
   line-height: 1;
@@ -268,29 +268,29 @@ $im: icomoon;
    * to left top, to right top, to right bottom, to left bottom
    */
   @if $str == 'top' {
-    @return #{unquote('to bottom')};
+    @return #{ unquote( 'to bottom' ) };
   } @else if $str == 'right' {
-    @return #{unquote('to left')};
+    @return #{ unquote( 'to left' ) };
   } @else if $str == 'bottom' {
-    @return #{unquote('to top')};
+    @return #{ unquote( 'to top' ) };
   } @else if $str == 'left' {
-    @return #{unquote('to right')};
+    @return #{ unquote( 'to right' ) };
   } @else if $str == 'bottom right' {
-    @return #{unquote('to top left')};
+    @return #{ unquote( 'to top left' ) };
   } @else if $str == 'bottom left' {
-    @return #{unquote('to top right')};
+    @return #{ unquote( 'to top right' ) };
   } @else if $str == 'top left' {
-    @return #{unquote('to bottom right')};
+    @return #{ unquote( 'to bottom right' ) };
   } @else if $str == 'top right' {
-    @return #{unquote('to bottom left')};
+    @return #{ unquote( 'to bottom left' ) };
   } @else if $str == 'right bottom' {
-    @return #{unquote('to left top')};
+    @return #{ unquote( 'to left top' ) };
   } @else if $str == 'left bottom' {
-    @return #{unquote('to right top')};
+    @return #{ unquote( 'to right top' ) };
   } @else if $str == 'left top' {
-    @return #{unquote('to right bottom')};
+    @return #{ unquote( 'to right bottom' ) };
   } @else if $str == 'right top' {
-    @return #{unquote('to left bottom')};
+    @return #{ unquote( 'to left bottom' ) };
   } @else {
     @return $str;
   }
@@ -306,29 +306,29 @@ $im: icomoon;
    * right bottom, left bottom, left top, right top
    */
   @if $str == 'to bottom' {
-    @return #{unquote('top')};
+    @return #{ unquote( 'top' ) };
   } @else if $str == 'to left' {
-    @return #{unquote('right')};
+    @return #{ unquote( 'right' ) };
   } @else if $str == 'to top' {
-    @return #{unquote('bottom')};
+    @return #{ unquote( 'bottom' ) };
   } @else if $str == 'to right' {
-    @return #{unquote('left')};
+    @return #{ unquote( 'left' ) };
   } @else if $str == 'to top left' {
-    @return #{unquote('bottom right')};
+    @return #{ unquote( 'bottom right' ) };
   } @else if $str == 'to top right' {
-    @return #{unquote('bottom left')};
+    @return #{ unquote( 'bottom left' ) };
   } @else if $str == 'to bottom right' {
-    @return #{unquote('top left')};
+    @return #{ unquote( 'top left' ) };
   } @else if $str == 'to bottom left' {
-    @return #{unquote('top right')};
+    @return #{ unquote( 'top right' ) };
   } @else if $str == 'to left top' {
-    @return #{unquote('right bottom')};
+    @return #{ unquote( 'right bottom' ) };
   } @else if $str == 'to right top' {
-    @return #{unquote('left bottom')};
+    @return #{ unquote( 'left bottom' ) };
   } @else if $str == 'to right bottom' {
-    @return #{unquote('left top')};
+    @return #{ unquote( 'left top' ) };
   } @else if $str == 'to left bottom' {
-    @return #{unquote('right top')};
+    @return #{ unquote( 'right top' ) };
   } @else {
     @return $str;
   }
@@ -369,9 +369,9 @@ $im: icomoon;
   background: unquote( $startColor );
 
   /* FF3.6-15 */
-  @if type-of( $direction) == 'number' {
-    $angle: (450 - $direction) % 360;
-    $angle: if( unitless( $angle ), #{$angle}deg, #{$angle} );
+  @if type-of( $direction ) == 'number' {
+    $angle: ( 450 - $direction ) % 360;
+    $angle: if( unitless( $angle ), #{ $angle }deg, #{ $angle } );
     background: -moz-linear-gradient( $angle, $gradientColor );
   } @else {
     background: -moz-linear-gradient( vender_angle( $direction ), $gradientColor );
@@ -380,7 +380,7 @@ $im: icomoon;
   /* Chrome10-25,Safari5.1-6 */
   @if type-of( $direction ) == 'number' {
     $angle: ( 450 - $direction ) % 360;
-    $angle: if( unitless( $angle ), #{$angle}deg, #{$angle} );
+    $angle: if( unitless( $angle ), #{ $angle }deg, #{ $angle } );
     background: -webkit-linear-gradient( $angle, $gradientColor );
   } @else {
     background: -webkit-linear-gradient( vender_angle( $direction ), $gradientColor );
@@ -388,7 +388,7 @@ $im: icomoon;
 
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   @if type-of( $direction ) == 'number' {
-    $angle: if( unitless( $direction ), #{$direction}deg, #{$direction} );
+    $angle: if( unitless( $direction ), #{ $direction }deg, #{ $direction } );
     background: linear-gradient( $angle, $gradientColor );
   } @else {
     background: linear-gradient( angle( $direction ), $gradientColor );
@@ -396,17 +396,17 @@ $im: icomoon;
 
   /* IE6-9 */
   @if type-of( $direction ) == 'number' {
-    $angle: if( unitless( $direction ), #{$direction}deg, #{$direction} );
+    $angle: if( unitless( $direction ), #{ $direction }deg, #{ $direction } );
     @if $angle == 0 {
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$startColor}', endColorstr='#{$endColor}',GradientType=0 );
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{ $startColor }', endColorstr='#{ $endColor }',GradientType=0 );
     } @else {
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$startColor}', endColorstr='#{$endColor}',GradientType=1 );
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{ $startColor }', endColorstr='#{ $endColor }',GradientType=1 );
     }
   } @else {
     @if $direction == 'top' {
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$startColor}', endColorstr='#{$endColor}',GradientType=0 );
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{ $startColor }', endColorstr='#{ $endColor }',GradientType=0 );
     } @else {
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$startColor}', endColorstr='#{$endColor}',GradientType=1 );
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{ $startColor }', endColorstr='#{ $endColor }',GradientType=1 );
     }
   }
 }
@@ -436,19 +436,19 @@ $im: icomoon;
     $index: index( $args, $point $color );
     // first
     @if $index == 1 {
-      $st: #{$color}, #{$color};
+      $st: #{ $color }, #{ $color };
     }
     // last
     @else if $index == length( $args ) {
       $p: $point / ( length( $args ) - 1 );
-      $st: $st #{$point + px}, #{$color $point + px}, #{$color $point + $p + px};
+      $st: $st #{ $point + px }, #{ $color $point + px }, #{ $color $point + $p + px };
     }
     @else {
-      $st: $st #{$point + px}, #{$color $point + px}, #{$color};
+      $st: $st #{ $point + px }, #{ $color $point + px }, #{ $color };
     }
   }
 
-  $context: unquote('repeating-linear-gradient(') #{$direction}deg, #{$st} unquote(')');
+  $context: unquote( 'repeating-linear-gradient(' ) #{ $direction }deg, #{ $st } unquote( ')' );
   @return $context;
 }
 
@@ -469,19 +469,19 @@ $im: icomoon;
     $index: index( $args, $point $color );
     // first
     @if $index == 1 {
-      $st: #{$color}, #{$color};
+      $st: #{ $color }, #{ $color };
     }
     // last
     @else if $index == length( $args ) {
       $p: $point / ( length( $args ) - 1 );
-      $st: $st #{$point + px}, #{$color $point + px}, #{$color $point + $p + px};
+      $st: $st #{ $point + px }, #{ $color $point + px }, #{ $color $point + $p + px };
     }
     @else {
-      $st: $st #{$point + px}, #{$color $point + px}, #{$color};
+      $st: $st #{ $point + px }, #{ $color $point + px }, #{ $color };
     }
   }
 
-  $context: unquote('repeating-radial-gradient(') #{$direction}, #{$st} unquote(')');
+  $context: unquote( 'repeating-radial-gradient(' ) #{ $direction }, #{ $st } unquote( ')' );
   @return $context;
 }
 
@@ -496,30 +496,30 @@ $im: icomoon;
   $bottom-left  : null;
   @for $i from 0 through $width {
     @if $left-top == null {
-      $left-top: #{$color} #{-$width + $i + px} #{0 - $i + px};
+      $left-top: #{ $color } #{ -$width + $i + px } #{ 0 - $i + px };
     } @else {
-      $left-top: #{$left-top}#{unquote(',')} #{$color} #{-$width + $i + px} #{0 - $i + px};
+      $left-top: #{ $left-top }#{ unquote(',') } #{ $color } #{ -$width + $i + px } #{ 0 - $i + px };
     }
   }
   @for $i from 0 through $width {
     @if $left-top == null {
-      $top-right: #{$color} #{0 + $i + px} #{-$width + $i + px};
+      $top-right: #{ $color } #{ 0 + $i + px } #{ -$width + $i + px };
     } @else {
-      $top-right: #{$top-right}#{unquote(',')} #{$color} #{0 + $i + px} #{-$width + $i + px};
+      $top-right: #{ $top-right }#{ unquote(',') } #{ $color } #{ 0 + $i + px } #{ -$width + $i + px };
     }
   }
   @for $i from 0 through $width {
     @if $left-top == null {
-      $right-bottom: #{$color} #{$width - $i + px} #{0 + $i + px};
+      $right-bottom: #{ $color } #{ $width - $i + px } #{ 0 + $i + px };
     } @else {
-      $right-bottom: #{$right-bottom}#{unquote(',')} #{$color} #{$width - $i + px} #{0 + $i + px};
+      $right-bottom: #{ $right-bottom }#{ unquote(',') } #{ $color } #{ $width - $i + px } #{ 0 + $i + px };
     }
   }
   @for $i from 0 through $width {
     @if $left-top == null {
-      $bottom-left: #{$color} #{0 - $i + px} #{$width - $i + px};
+      $bottom-left: #{ $color } #{ 0 - $i + px } #{ $width - $i + px };
     } @else {
-      $bottom-left: #{$bottom-left}#{unquote(',')} #{$color} #{0 - $i + px} #{$width - $i + px};
+      $bottom-left: #{ $bottom-left }#{ unquote(',') } #{ $color } #{ 0 - $i + px } #{ $width - $i + px };
     }
   }
 
@@ -531,11 +531,22 @@ $im: icomoon;
 //————————————————————————————————————————————
 // 3 Point Leader
 //————————————————————————————————————————————
-@mixin leader( $width: 100% ) {
-  width: $width;
+@mixin leader() {
+  width: 100%;
   max-width: 100%;
   display: block;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  @content;
+}
+
+@mixin break-leader() {
+  display: initial;
+  overflow: initial;
+  width: initial;
+  max-width: initial;
+  white-space: initial;
+  text-overflow: initial;
+  @content;
 }
