@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MW WP Form - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-05-23 21:44:46+0000\n"
+"PO-Revision-Date: 2018-06-26 12:08:48+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,22 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - MW WP Form - Stable (latest release)\n"
+
+#: classes/services/class.exec-shortcode.php:413
+msgid "There was an error trying to send your message. Please try again later."
+msgstr "エラーが発生しました。後ほどもう一度お試しください。 "
+
+#: classes/validation-rules/class.month.php:73
+msgid "Date(Year/Month)"
+msgstr "日付（年月）"
+
+#: classes/validation-rules/class.month.php:32
+msgid "This is not the format of a date (Year/Month)."
+msgstr "日付（年月）の形式ではありません。"
+
+#: classes/form-fields/class.monthpicker.php:30
+msgid "Monthpicker"
+msgstr "年月ピッカー"
 
 #: templates/admin/tag-generator.php:16
 msgid "Button fields (input)"
@@ -619,7 +635,7 @@ msgstr "ラジオボタン"
 
 #: classes/form-fields/class.password.php:30
 msgid "Password"
-msgstr "パスワードフィールド"
+msgstr "パスワード"
 
 #: classes/form-fields/class.number.php:30
 msgid "Number"
@@ -676,7 +692,7 @@ msgstr "メール"
 
 #: classes/form-fields/class.datepicker.php:30
 msgid "Datepicker"
-msgstr "日付"
+msgstr "日付ピッカー"
 
 #: classes/form-fields/class.button-confirm.php:43
 #: classes/form-fields/class.confirm-button.php:42

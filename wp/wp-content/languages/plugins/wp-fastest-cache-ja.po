@@ -11,47 +11,47 @@ msgstr ""
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - WP Fastest Cache - Stable (latest release)\n"
 
-#: wpFastestCache.php:1671
+#: wpFastestCache.php:1686
 msgid "Once Every 3 Days"
 msgstr "3日に1度"
 
-#: wpFastestCache.php:1581
+#: wpFastestCache.php:1596
 msgid "Once Every 1 Minute"
 msgstr "1分毎に1度"
 
-#: wpFastestCache.php:1587
+#: wpFastestCache.php:1602
 msgid "Once Every 5 Minutes"
 msgstr "5分毎に1度"
 
-#: wpFastestCache.php:1593
+#: wpFastestCache.php:1608
 msgid "Once Every 15 Minutes"
 msgstr "15分毎に1度"
 
-#: wpFastestCache.php:1599
+#: wpFastestCache.php:1614
 msgid "Twice an Hour"
 msgstr "1時間に2度"
 
-#: wpFastestCache.php:1605
+#: wpFastestCache.php:1620
 msgid "Once an Hour"
 msgstr "1時間毎に1度"
 
-#: wpFastestCache.php:1665
+#: wpFastestCache.php:1680
 msgid "Once a Day"
 msgstr "1日に1度"
 
-#: wpFastestCache.php:1635
+#: wpFastestCache.php:1650
 msgid "Once Every 6 Hours"
 msgstr "6時間毎に1度"
 
-#: wpFastestCache.php:1677
+#: wpFastestCache.php:1692
 msgid "Once a Week"
 msgstr "1周間に1度"
 
-#: wpFastestCache.php:1689
+#: wpFastestCache.php:1704
 msgid "Once a Month"
 msgstr "1ヶ月に1度"
 
-#: wpFastestCache.php:1695
+#: wpFastestCache.php:1710
 msgid "Once a Year"
 msgstr "1年毎に1度"
 
@@ -75,38 +75,38 @@ msgstr "http://tr.linkedin.com/in/emrevona"
 msgid "Emre Vona"
 msgstr "Emre Vona"
 
-#: wpFastestCache.php:1683
+#: wpFastestCache.php:1698
 msgid "Once Every 10 Days"
 msgstr "10日に1度"
 
-#: wpFastestCache.php:1611
+#: wpFastestCache.php:1626
 msgid "Once Every 2 Hours"
 msgstr "2時間毎に1度"
 
-#: wpFastestCache.php:1617
+#: wpFastestCache.php:1632
 msgid "Once Every 3 Hours"
 msgstr "3時間毎に1度"
 
-#: wpFastestCache.php:1623
+#: wpFastestCache.php:1638
 msgid "Once Every 4 Hours"
 msgstr "4時間毎に1度"
 
-#: wpFastestCache.php:1659
+#: wpFastestCache.php:1674
 msgid "Once Every 10 Hours"
 msgstr "10時間毎に1度"
 
-#: wpFastestCache.php:1653
+#: wpFastestCache.php:1668
 msgid "Once Every 9 Hours"
 msgstr "9時間毎に1度"
 
-#: wpFastestCache.php:1647
+#: wpFastestCache.php:1662
 msgid "Once Every 8 Hours"
 msgstr "8時間毎に1度"
 
-#: wpFastestCache.php:1641
+#: wpFastestCache.php:1656
 msgid "Once Every 7 Hours"
 msgstr "7時間毎に1度"
 
-#: wpFastestCache.php:1629
+#: wpFastestCache.php:1644
 msgid "Once Every 5 Hours"
 msgstr "5時間毎に1度"

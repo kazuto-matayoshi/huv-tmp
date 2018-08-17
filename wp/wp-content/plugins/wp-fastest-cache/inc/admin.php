@@ -289,9 +289,9 @@
 				$path = $this->getABSPATH();
 			}
 
-			if(isset($_SERVER["SERVER_SOFTWARE"]) && $_SERVER["SERVER_SOFTWARE"] && preg_match("/iis/i", $_SERVER["SERVER_SOFTWARE"])){
-				return array("The plugin does not work with Microsoft IIS. Only with Apache", "error");
-			}
+			// if(isset($_SERVER["SERVER_SOFTWARE"]) && $_SERVER["SERVER_SOFTWARE"] && preg_match("/iis/i", $_SERVER["SERVER_SOFTWARE"])){
+			// 	return array("The plugin does not work with Microsoft IIS. Only with Apache", "error");
+			// }
 
 			// if(isset($_SERVER["SERVER_SOFTWARE"]) && $_SERVER["SERVER_SOFTWARE"] && preg_match("/nginx/i", $_SERVER["SERVER_SOFTWARE"])){
 			// 	return array("The plugin does not work with Nginx. Only with Apache", "error");
@@ -336,8 +336,6 @@
 				return $res;
 			}else if($this->isPluginActive('far-future-expiration/far-future-expiration.php')){
 				return array("Far Future Expiration Plugin", "error");
-			}else if($this->isPluginActive('fast-velocity-minify/fvm.php')){
-				return array("Fast Velocity Minify needs to be deactived", "error");
 			}else if($this->isPluginActive('sg-cachepress/sg-cachepress.php')){
 				return array("SG Optimizer needs to be deactived", "error");
 			}else if($this->isPluginActive('adrotate/adrotate.php') || $this->isPluginActive('adrotate-pro/adrotate.php')){
@@ -371,7 +369,8 @@
 				$htaccess = $this->insertLBCRule($htaccess, $post);
 				$htaccess = $this->insertGzipRule($htaccess, $post);
 				$htaccess = $this->insertRewriteRule($htaccess, $post);
-				//$htaccess = preg_replace("/\n+/","\n", $htaccess);
+
+				$htaccess = $this->to_move_gtranslate_rules($htaccess);
 
 				file_put_contents($path.".htaccess", $htaccess);
 			}else{
@@ -380,6 +379,17 @@
 			}
 			return array("Options have been saved", "success");
 
+		}
+
+		public function to_move_gtranslate_rules($htaccess){
+			preg_match("/\#\#\#\s+BEGIN\sGTranslate\sconfig\s\#\#\#[^\#]+\#\#\#\s+END\sGTranslate\sconfig\s\#\#\#/i", $htaccess, $gtranslate);
+
+			if(isset($gtranslate[0])){
+				$htaccess = preg_replace("/\#\#\#\s+BEGIN\sGTranslate\sconfig\s\#\#\#[^\#]+\#\#\#\s+END\sGTranslate\sconfig\s\#\#\#/i", "", $htaccess);
+				$htaccess = $gtranslate[0]."\n".$htaccess;
+			}
+
+			return $htaccess;
 		}
 
 		public function warningIncompatible($incompatible, $alternative = false){
@@ -609,6 +619,9 @@
 			// WeePie Cookie Allow: to serve cache if the cookie named wpca_consent is set
 			if($this->isPluginActive('wp-cookie-allow/wp-cookie-allow.php')){
 				$consent_cookie = "RewriteCond %{HTTP:Cookie} wpca_consent=1"."\n";
+				$consent_cookie .= "RewriteCond %{HTTP:Cookie} !wpca_cc [OR]"."\n";
+				$consent_cookie .= "RewriteCond %{HTTP:Cookie} wpca_consent=1"."\n";
+				$consent_cookie .= "RewriteCond %{HTTP:Cookie} wpca_cc=functional,analytical,social-media,advertising,other"."\n";
 			}
 
 			if($this->is_trailing_slash()){
@@ -635,7 +648,7 @@
 					"RewriteCond %{QUERY_STRING} !.+"."\n".$loggedInUser.
 					$consent_cookie.
 					"RewriteCond %{HTTP:Cookie} !comment_author_"."\n".
-					"RewriteCond %{HTTP:Cookie} !wp_woocommerce_session"."\n".
+					"RewriteCond %{HTTP:Cookie} !woocommerce_items_in_cart"."\n".
 					"RewriteCond %{HTTP:Cookie} !safirmobilswitcher=mobil"."\n".
 					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".$mobile;
 			
@@ -1247,6 +1260,7 @@
 											"parkviewhomes.info",
 											"myparkviewhomes.com",
 											"kompressorcheck.de",
+											"bsty.vn",
 											"cutflower.com",
 											"sackkarre-tests.de",
 											"schraubstock-test.de",
