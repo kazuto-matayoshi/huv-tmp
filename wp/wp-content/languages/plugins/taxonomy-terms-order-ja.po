@@ -16,10 +16,10 @@ msgid "Nsp-Code"
 msgstr "Nsp-Code"
 
 #. #-#-#-#-#  taxonomy-terms-order-code.pot (Category Order and Taxonomy Terms
-#. Order 1.5.4)  #-#-#-#-#
+#. Order 1.5.3.2)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
 #. #-#-#-#-#  taxonomy-terms-order-code.pot (Category Order and Taxonomy Terms
-#. Order 1.5.4)  #-#-#-#-#
+#. Order 1.5.3.2)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "http://www.nsp-code.com"
 msgstr "http://www.nsp-code.com"
@@ -28,7 +28,7 @@ msgstr "http://www.nsp-code.com"
 msgid "Category Order and Taxonomy Terms Order"
 msgstr "Category Order and Taxonomy Terms Order"
 
-#: taxonomy-terms-order.php:81
+#: taxonomy-terms-order.php:80
 msgid "Taxonomy Terms Order"
 msgstr "Taxonomy Terms Order"
 
@@ -128,8 +128,8 @@ msgstr "タクソノミー"
 msgid "This plugin can't work without javascript, because it's use drag and drop and AJAX."
 msgstr "Javascriptが動作していないため、ドラッグ＆ドロップ(AJAX)が利用出来ません。"
 
-#: include/interface.php:38 taxonomy-terms-order.php:116
-#: taxonomy-terms-order.php:118 taxonomy-terms-order.php:120
+#: include/interface.php:38 taxonomy-terms-order.php:115
+#: taxonomy-terms-order.php:117 taxonomy-terms-order.php:119
 msgid "Taxonomy Order"
 msgstr "Taxonomy Order"
 

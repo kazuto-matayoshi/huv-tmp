@@ -1,14 +1,14 @@
 === MW WP Form ===
 Contributors: inc2734, ryu263, tomothumb, nanniku, mt8.biz, NExt-Season, kuck1u, mypacecreator, mh35
-Donate link: http://www.amazon.co.jp/registry/wishlist/39ANKRNSTNW40
+Donate link: https://www.amazon.co.jp/registry/wishlist/39ANKRNSTNW40
 Tags: plugin, form, confirm, preview, shortcode, mail, chart, graph, html, contact form, form creation, form creator, form manager, form builder, custom form
 Requires at least: 4.0
-Tested up to: 4.9.7
-Stable tag: 3.2.3
+Tested up to: 4.9.8
+Stable tag: 4.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-MW WP Form is shortcode base contact form plugin. This plugin have many feature. For example you can use many validation rules, contact data saving, and chart aggregation using saved contact data.
+MW WP Form is shortcode base contact form plugin. This plugin have many features. For example you can use many validation rules, inquiry data saving, and chart aggregation using saved inquiry data.
 
 == Description ==
 
@@ -18,21 +18,12 @@ MW WP Form can create mail form with a confirmation screen using shortcode.
 * Using confirmation page is possible.
 * The page changes by the same URL or individual URL are possible.
 * Many validation rules
-* Saving contact data is possible.
-* Displaying Chart using saved contact data is possible.
-
-MW WP Form はショートコードを使って確認画面付きのメールフォームを作成することができるプラグインです。
-
-* ショートコードを使用したフォーム生成
-* 確認画面が表示可能
-* 同一URL・個別URLでの画面変遷が可能
-* 豊富なバリデーションルール
-* 問い合わせデータを保存可能
-* 保存した問い合わせデータをグラフ可能
+* Saving inquiry data is possible.
+* Displaying Chart using saved inquiry data is possible.
 
 = Official =
 
-http://plugins.2inc.org/mw-wp-form/
+https://plugins.2inc.org/mw-wp-form/
 
 = GitHub =
 
@@ -45,14 +36,14 @@ Source: https://developers.google.com/chart/
 
 = Contributors =
 
-* [Takashi Kitajima](http://2inc.org) ( [inc2734](http://profiles.wordpress.org/inc2734) )
-* [Ryujiro Yamamoto](http://webcre-archive.com) ( [ryu263](http://profiles.wordpress.org/ryu263) )
-* [Tsujimoto Tomoyuki](http://kee-non.com) ( [tomothumb](http://profiles.wordpress.org/tomothumb) )
-* [Naoyuki Ohata] ( [nanniku](http://profiles.wordpress.org/nanniku) )
-* [Kazuto Takeshita](http://mt8.biz/) ( [moto hachi](https://profiles.wordpress.org/mt8biz/) )
-* [Atsushi Ando](http://www.next-season.net/) ( [NExt-Season](https://profiles.wordpress.org/next-season/) )
-* [Kazuki Tomiyasu](http://visualive.jp/) ( [KUCKLU](https://profiles.wordpress.org/kuck1u/) )
-* [Kei Nomura](http://mypacecreator.net/) ( [mypacecreator](https://profiles.wordpress.org/mypacecreator/) )
+* [Takashi Kitajima](https://2inc.org) ( [inc2734](https://profiles.wordpress.org/inc2734) )
+* [Ryujiro Yamamoto](https://webcre-archive.com) ( [ryu263](https://profiles.wordpress.org/ryu263) )
+* [Tsujimoto Tomoyuki](http://kee-non.com) ( [tomothumb](https://profiles.wordpress.org/tomothumb) )
+* [Naoyuki Ohata] ( [nanniku](https://profiles.wordpress.org/nanniku) )
+* [Kazuto Takeshita](https://mt8.biz/) ( [moto hachi](https://profiles.wordpress.org/mt8biz/) )
+* [Atsushi Ando](https://www.next-season.net/) ( [NExt-Season](https://profiles.wordpress.org/next-season/) )
+* [Kazuki Tomiyasu](https://visualive.jp/) ( [KUCKLU](https://profiles.wordpress.org/kuck1u/) )
+* [Kei Nomura](https://mypacecreator.net/) ( [mypacecreator](https://profiles.wordpress.org/mypacecreator/) )
 * [mh35](https://profiles.wordpress.org/mh35)
 * [Takashi Nojima](https://github.com/nojimage)
 * [herikutu](https://github.com/herikutu)
@@ -67,8 +58,8 @@ Source: https://developers.google.com/chart/
 
 Do you have questions or issues with MW WP Form? Use these support channels appropriately.
 
-1. [Official](http://plugins.2inc.org/mw-wp-form/)
-1. [Support Forum](http://wordpress.org/support/plugin/mw-wp-form)
+1. [Official](https://plugins.2inc.org/mw-wp-form/)
+1. [Support Forum](https://wordpress.org/support/plugin/mw-wp-form)
 
 == Screenshots ==
 
@@ -79,6 +70,25 @@ Do you have questions or issues with MW WP Form? Use these support channels appr
 5. Supports chart display of saved inquiry data.
 
 == Changelog ==
+
+= 4.0.1 =
+* Fix bug that form layout broken when Gutenberg installed.
+
+= 4.0.0 =
+* Refactoring
+* Update redirect process.
+* Changed that admin and reply Mail settings are required.
+* Changed to be able to set the form besides $post and main template.
+* Each input fields can overwrite from themes.
+* Deprecated action hook `mwform_exec_shortcode`. Please use this instead `mwform_start_main_process`
+* The hook to `mwform_validation_rules` is no longer needed to add your own validation rule.
+* Deprecated `MW_WP_Form_Contact_Data_Setting::get_posts()`. Please use this instead `MW_WP_Form_Contact_Data_Setting::get_form_post_types()`
+* Added method MW_WP_Form_Data::get_saved_mail_id();
+* Added method MW_WP_Form_Data::set_saved_mail_id();
+* Deprecated `MW_WP_Form_Data::getInstance()`. Please use this instead `MW_WP_Form_Data::connect()`
+* Deprecated `MW_WP_Form_Form::remove_linefeed_space()`. Please use this instead `MW_WP_Form_Form::remove_newline_space()`
+* Deprecated `MW_WP_Form_Validation::check()`. Please use this instead `MW_WP_Form_Validation::is_valid()`
+* Deprecated `MW_WP_Form_Validation::single_check()`. Please use this instead `MW_WP_Form_Validation::is_valid_field()`
 
 = 3.2.3 =
 * Added   : Added filter hook mwform_response_statuses_mwf_xxx
