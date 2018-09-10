@@ -7,9 +7,9 @@
 
 <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="<?php echo huv_theme_path; ?>assets/js/barba.min.js" async defer></script>
+<script src="<?php echo huv_theme_path; ?>assets/js/barba.setting.min.js" async defer></script>
 <div id="barba-scripts">
   <script src="<?php echo huv_theme_path; ?>assets/js/lazysizes.min.js" async defer></script>
-  <script src="<?php echo huv_theme_path; ?>assets/js/barba.setting.min.js" async defer></script>
   <script src="<?php echo huv_theme_path; ?>assets/js/common.js" async defer></script>
   <script>
     (function($){
