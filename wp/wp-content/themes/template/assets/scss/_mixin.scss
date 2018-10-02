@@ -542,10 +542,10 @@ $im: icomoon;
 }
 
 @mixin break-leader() {
-  display: initial;
-  overflow: initial;
   width: initial;
   max-width: initial;
+  display: initial;
+  overflow: initial;
   white-space: initial;
   text-overflow: initial;
   @content;
