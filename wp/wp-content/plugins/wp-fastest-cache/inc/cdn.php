@@ -143,8 +143,11 @@
 											"Content-Type" => "application/json"
 											),
 							);
-
-			$response = wp_remote_request('https://api.cloudflare.com/client/v4/zones/?status=active&page=1&per_page=1000', $header);
+			
+			/*
+			status=active has been removed because status may be "pending"
+			*/
+			$response = wp_remote_request('https://api.cloudflare.com/client/v4/zones/?page=1&per_page=1000', $header);
 
 			if(!$response || is_wp_error($response)){
 				$res = array("success" => false, "error_message" => $response->get_error_message());
@@ -369,6 +372,12 @@
 
 		public static function save_cdn_integration(){
 			if(current_user_can('manage_options')){
+				if(isset($_POST) && isset($_POST["values"])){
+					foreach ($_POST["values"] as $val_key => &$val_value) {
+						$val_value = sanitize_text_field($val_value);
+					}
+				}
+				
 				if($data = get_option("WpFastestCacheCDN")){
 					$cdn_exist = false;
 					$arr = json_decode($data);

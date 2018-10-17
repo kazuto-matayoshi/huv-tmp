@@ -27,9 +27,12 @@ class MW_WP_Form_Main_Controller {
 	protected $Validation;
 
 	public function __construct() {
-		add_action( 'parse_request'   , array( $this, '_remove_query_vars_from_post' ) );
-		add_filter( 'nocache_headers' , array( $this, '_nocache_headers' ) , 1 );
-		add_filter( 'template_include', array( $this, '_template_include' ), 10000 );
+		add_filter( 'nocache_headers', array( $this, '_nocache_headers' ) );
+		add_filter( 'nginxchampuru_caching_headers', array( $this, '_nginxchampuru_caching_headers' ) );
+
+		add_action( 'parse_request'    , array( $this, '_remove_query_vars_from_post' ) );
+		add_action( 'template_redirect', array( $this, '_send_headers' ), 10000 );
+		add_action( 'template_redirect', array( $this, '_template_redirect' ), 10000 );
 	}
 
 	/**
@@ -62,6 +65,38 @@ class MW_WP_Form_Main_Controller {
 	}
 
 	/**
+	 * Proxy cache measures
+	 *
+	 * @todo NOT WORKING
+	 */
+	public function _send_headers() {
+		if ( ! empty( $_POST ) && ! empty( $_POST[ MWF_Config::NAME . '-form-id' ] ) ) {
+			nocache_headers();
+			$form_id  = $_POST[ MWF_Config::NAME . '-form-id' ];
+			$form_key = MWF_Functions::get_form_key_from_form_id( $form_id );
+			$this->_set_transient_for_nocache_headers( $form_key );
+		} else {
+			$transient = $this->_get_transient_for_nocache_headers();
+			if ( $transient ) {
+				nocache_headers();
+			}
+		}
+	}
+
+	/**
+	 * Cache control for Nginx Cache Controller plugin
+	 *
+	 * @todo NOT WORKING
+	 */
+	public function _nginxchampuru_caching_headers( $headers ) {
+		$transient = $this->_get_transient_for_nocache_headers();
+		if ( $transient ) {
+			$headers = $this->_nocache_headers( $headers );
+		}
+		return $headers;
+	}
+
+	/**
 	 * Customize request header for Nginx Cache Controller
 	 *
 	 * @param array $headers
@@ -69,26 +104,20 @@ class MW_WP_Form_Main_Controller {
 	 */
 	public function _nocache_headers( $headers ) {
 		$headers['X-Accel-Expires'] = 0;
+		$headers['Cache-Control']   = 'private, no-store, no-cache, must-revalidate';
 		return $headers;
 	}
 
 	/**
 	 * Main process for form displaying
-	 *
-	 * @param string $template
-	 * @return string $template
 	 */
-	public function _template_include( $template ) {
-		global $post;
-
+	public function _template_redirect() {
 		/**
 		 * - 送信時はバリデーションチェック、トークンチェックを行い、リダイレクト先を決定する
 		 * - 決定したリダイレクト先にリダイレクトする
 		 * - リダイレクト先が現在表示しようとしているページと同じ場合は無視する
 		 */
 		if ( ! empty( $_POST ) && ! empty( $_POST[ MWF_Config::NAME . '-form-id' ] ) ) {
-			nocache_headers();
-
 			$form_id = $_POST[ MWF_Config::NAME . '-form-id' ];
 			if ( MWF_Config::NAME !== get_post_type( $form_id ) ) {
 				wp_safe_redirect( home_url() );
@@ -156,8 +185,6 @@ class MW_WP_Form_Main_Controller {
 			$this->_mwform_enqueue_scripts();
 
 		}
-
-		return $template;
 	}
 
 	/**
@@ -324,5 +351,42 @@ class MW_WP_Form_Main_Controller {
 		$uploaded_files = $File->upload( $files );
 		$this->Data->push_uploaded_file_keys( $uploaded_files );
 		$this->Data->regenerate_upload_file_keys();
+	}
+
+	/**
+	 * Return transient name of nocache headers
+	 *
+	 * @return string
+	 */
+	protected function _get_transient_name_for_nocache_headers() {
+		$url  = $_SERVER['REQUEST_URI'];
+		$hash = base64_encode( pack( 'H*', sha1( $url ) ) );
+		return 'mwform_keyurl_' . $hash;
+	}
+
+	/**
+	 * Set transient for nocache headers
+	 *
+	 * @param string $form_key
+	 * @return void
+	 */
+	protected function _set_transient_for_nocache_headers( $form_key ) {
+		$transient_name = $this->_get_transient_name_for_nocache_headers();
+		$transient = get_transient( $transient_name );
+		if ( ! $transient ) {
+			$transient = array();
+		}
+		$transient[] = $form_key;
+		set_transient( $transient_name, $transient, 1 );
+	}
+
+	/**
+	 * Return transient for nocache headers
+	 *
+	 * @return array
+	 */
+	protected function _get_transient_for_nocache_headers() {
+		$transient_name = $this->_get_transient_name_for_nocache_headers();
+		return get_transient( $transient_name );
 	}
 }

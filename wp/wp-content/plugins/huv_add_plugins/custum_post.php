@@ -86,4 +86,4 @@ function create_post_type() {
   // パーマリンク設定を再設定
   flush_rewrite_rules();
 }
-// add_action( 'init', 'create_post_type' );
+add_action( 'init', 'create_post_type' );

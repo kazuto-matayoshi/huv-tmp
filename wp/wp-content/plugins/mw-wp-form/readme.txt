@@ -4,7 +4,7 @@ Donate link: https://www.amazon.co.jp/registry/wishlist/39ANKRNSTNW40
 Tags: plugin, form, confirm, preview, shortcode, mail, chart, graph, html, contact form, form creation, form creator, form manager, form builder, custom form
 Requires at least: 4.0
 Tested up to: 4.9.8
-Stable tag: 4.0.2
+Stable tag: 4.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,13 @@ Do you have questions or issues with MW WP Form? Use these support channels appr
 5. Supports chart display of saved inquiry data.
 
 == Changelog ==
+
+= 4.0.4 =
+* PHP 5.3, 5.2.4 support
+
+= 4.0.3 =
+* Fix saved contact data list bug.
+* Fix nocache headers bug.
 
 = 4.0.2 =
 * Fixed a bug caused by erroneous use of set_error_handler()
@@ -458,7 +465,6 @@ Do you have questions or issues with MW WP Form? Use these support channels appr
 * Added   : X-Accel-Expires param in header.
 * Added   : Add CC setting in admin mail setting.
 * Added   : Add BCC setting in admin mail setting.
-* Added   : X-Accel-Expires param in header.
 * Changed : Data store has been changed to Transient API from PHP SESSION.
 * Changed : Nonce check system has been changed to WordPress nonce check system from original.
 * Changed : Accept space in katakana validation.

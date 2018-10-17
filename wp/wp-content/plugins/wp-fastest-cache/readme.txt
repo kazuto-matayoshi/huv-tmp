@@ -4,7 +4,7 @@ Donate link: http://profiles.wordpress.org/emrevona/
 Tags: cache, performance, wp-cache, total cache, super cache
 Requires at least: 3.3
 Tested up to: 4.9
-Stable tag: 0.8.8.4
+Stable tag: 0.8.8.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,25 @@ Wpfc does not support Wordpress Multisite yet.
 18. Database Cleanup
 
 == Changelog ==
+
+= 0.8.8.6 =
+* to show single clear cache button for the pages
+* to show warning if wp cron is disabled when a cache timeout rule is added
+* to disabe lazy load for the amp pages
+* to replace urls on data-cvpsrc and data-cvpset attribute with cdn-url
+* to clear the cache of a post which includes /%postname%/%post_id% permalink after the post is deleted
+* to fix vulnerability
+* to add "event" and "artist" custom post types for preload
+
+= 0.8.8.5 =
+* to fix pre tag problem after minify html
+* to add woff2 extensions for cdn
+* to support non-latin characters for exclude
+* to support non-latin characters for toolbar clear current page cache
+* to fix "removing dollar sign with number" on fixing pre tag
+* to clear cache of cloudflare afer restart preload
+* to exclude LinkedInBot user-agent
+* to replace urls on data-large_image attribute with cdn-url
 
 = 0.8.8.4 =
 * to show language option via php instead of javascript
@@ -762,7 +781,7 @@ You need to refresh a page twice. If a page is cached, at the bottom of the page
 Yes, it works with Nginx properly.
 
 = Does it work with IIS (Windows Server) ? =
-No, it does not work with IIS.
+Yes, it works with IIS properly.
 
 = What does ".htaccess not found" warning mean? =
 Wpfc does not create .htaccess automatically so you need to create empty one.

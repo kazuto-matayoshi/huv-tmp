@@ -237,41 +237,6 @@
 					}
 				}
 
-				// WeePie Cookie Allow: to create cache if the cookie named wpca_consent is set
-				if($this->isPluginActive('wp-cookie-allow/wp-cookie-allow.php')){
-					$wpca_settings_general = get_option('wpca_settings_general', array());
-
-					// check if settings are indexed by multilang locales
-					if($this->isPluginActive('sitepress-multilingual-cms/sitepress.php')){
-						$wpml_current_language = apply_filters('wpml_current_language', false);
-
-						if($wpml_current_language){
-							$wpml_languages = apply_filters('wpml_active_languages', NULL, 'orderby=id&order=desc');
-
-							if(isset($wpml_languages[$wpml_current_language]) && isset($wpml_languages[$wpml_current_language]['default_locale'])) {
-								$wpml_locale = $wpml_languages[$wpml_current_language]['default_locale'];
-
-								if(isset($wpca_settings_general[$wpml_locale])) {
-									$wpca_settings_general = $wpca_settings_general[$wpml_locale];
-									if(!is_array($wpca_settings_general)) {
-										$wpca_settings_general = array();
-									}
-								}
-							}
-						}
-					}
-
-					$wpca_enabled = (isset($wpca_settings_general['general_plugin_status']) && $wpca_settings_general['general_plugin_status'] == '1');
-
-					if($wpca_enabled){
-						if(!isset($_COOKIE["wpca_consent"]) || (isset($_COOKIE["wpca_consent"]) && $_COOKIE["wpca_consent"] == 0) || (isset($_COOKIE["wpca_cc"]) && $_COOKIE["wpca_cc"] != 'functional,analytical,social-media,advertising,other')){
-							ob_start(array($this, "cdn_rewrite"));
-							
-							return 0;
-						}
-					}
-				}
-
 				if(isset($_COOKIE) && isset($_COOKIE['safirmobilswitcher'])){
 					ob_start(array($this, "cdn_rewrite"));
 
@@ -482,7 +447,7 @@
 
 		public function exclude_page($buffer = false){
 			$preg_match_rule = "";
-			$request_url = trim($_SERVER["REQUEST_URI"], "/");
+			$request_url = urldecode(trim($_SERVER["REQUEST_URI"], "/"));
 
 			if($this->exclude_rules){
 
@@ -712,7 +677,7 @@
 						$execute_lazy_load = true;
 						
 						// to disable Lazy Load if the page is amp
-						if(preg_match("/<html[^\>]+amp[^\>]*>/i", $content)){
+						if($this->is_amp($content)){
 							$execute_lazy_load = false;
 						}
 						
@@ -744,11 +709,11 @@
 						$content = $wph->functions->content_urls_replacement($content, $wph->functions->get_replacement_list());
 					}
 
+					$content = $this->fix_pre_tag($content, $buffer);
+
 					if($this->cacheFilePath){
 						$this->createFolder($this->cacheFilePath, $content);
 					}
-					
-					$content = $this->fix_pre_tag($content, $buffer);
 
 					return $content."<!-- need to refresh to see cached version -->";
 				}
@@ -762,6 +727,15 @@
 
 				if(isset($pre_content[0]) && isset($pre_content[0][0])){
 					foreach ($pre_content[0] as $key => $value){
+						/*
+						location ~ / {
+						    set $path /path/$1/index.html;
+						}
+						*/
+						$pre_buffer[0][$key] = preg_replace('/\$(\d)/', '\\\$$1', $pre_buffer[0][$key]);
+
+						
+
 						$content = preg_replace("/".preg_quote($value, "/")."/", $pre_buffer[0][$key], $content);
 					}
 				}
@@ -772,7 +746,7 @@
 
 		public function cdn_rewrite($content){
 			if($this->cdn){
-				$content = preg_replace_callback("/(srcset|src|href|data-thumb|data-bg-url|data-lazyload|data-source-url|data-srcsmall|data-srclarge|data-srcfull|data-slide-img|data-lazy-original)\s{0,2}\=[\'\"]([^\'\"]+)[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
+				$content = preg_replace_callback("/(srcset|src|href|data-cvpsrc|data-cvpset|data-thumb|data-bg-url|data-large_image|data-lazyload|data-source-url|data-srcsmall|data-srclarge|data-srcfull|data-slide-img|data-lazy-original)\s{0,2}\=[\'\"]([^\'\"]+)[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
 
 				//url()
 				$content = preg_replace_callback("/(url)\(([^\)\>]+)\)/i", array($this, 'cdn_replace_urls'), $content);
