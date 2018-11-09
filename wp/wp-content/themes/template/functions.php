@@ -327,7 +327,9 @@ function breadcrumb() {
     // taxonomy
     elseif ( is_tax( $taxonomy, $term ) ) {
       $str .= '<li class="breadcrumb__item">';
+      $str .= '<a href="/'. get_taxonomy( $taxonomy )->rewrite['slug'] .'/">';
       $str .= get_taxonomy( $taxonomy )->label;
+      $str .= '</a>';
       $str .= '</li>';
       $str .= '<li class="breadcrumb__item">';
       $str .= single_tag_title( '', false );
