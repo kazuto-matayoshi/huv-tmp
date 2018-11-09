@@ -1,6 +1,9 @@
 <?php
-// テーマまでの絶対パス
-define('huv_theme_path', get_template_directory_uri().'/');
+// rootの絶対URL
+define( 'huv_url_root', esc_url( get_home_url().'/' ) );
 
-// rootの絶対パス
-define('huv_root_url', get_home_url().'/');
+// テーマまでの絶対URL
+define( 'huv_url_theme', esc_url( get_template_directory_uri().'/' ) );
+
+// テーマまでのサーバーパス
+define( 'huv_dir_theme', esc_url( get_template_directory().'/' ) );

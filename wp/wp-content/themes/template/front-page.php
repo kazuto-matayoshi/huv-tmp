@@ -48,7 +48,7 @@
             huv_lazyload( huv_get_thumbnail_src( 'thumbnail' ), $attr );
           } else {
             $attr['alt'] = 'no-image';
-            huv_lazyload( huv_theme_path.'assets/img/common/no-image.jpg', $attr );
+            huv_lazyload( huv_url_theme.'assets/img/common/no-image.jpg', $attr );
           }
         ?></p>
         <p class="post__day"><?php echo get_the_date(); ?></p>
