@@ -436,16 +436,16 @@ function parse_query_ex() {
 /**
  * 06.1 - 直上の親を返す
  */
-function is_parent_slug( $post_type ) {
+function is_parent_slug( $post_name ) {
   global $post;
   if ( $post->post_parent ) {
     $post_data = get_post( $post->post_parent );
 
-    if ( empty( $post_type ) ) {
+    if ( empty( $post_name ) ) {
       return $post_data->post_name;
     }
 
-    if ( !empty( $post_type ) && $post_data->post_name === $post_type ) {
+    if ( !empty( $post_name ) && $post_data->post_name === $post_name ) {
       return true;
     } else {
       return false;
