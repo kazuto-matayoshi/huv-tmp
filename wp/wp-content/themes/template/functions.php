@@ -460,7 +460,6 @@ function get_root_info( $info, $post_id = null ) {
   global $post;
   $post_id = $post_id !== null ? $post_id : get_the_id();
 
-
   if ( !$post_id || $post_id === null ) {
     return false;
   }
@@ -502,13 +501,13 @@ function is_root_slug( $slug = null ) {
   }
 
   if ( empty( $slug ) ) {
-    $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
-    return $root_parent->post_name;
+    return get_root_info( 'slug' );
   }
 
   if ( get_root_info( 'slug' ) === $slug ) {
     return true;
-  } else {
+  }
+  else {
     return false;
   }
 }
@@ -522,17 +521,16 @@ function is_root_id( $post_id = null ) {
   }
 
   if ( empty( $post_id ) ) {
-    $root_parent = get_post( $post->ancestors[ count( $post->ancestors ) - 1 ] );
-    return $root_parent->ID;
+    return get_root_info( 'id' );
   }
 
   if ( get_root_info( 'id' ) === $post_id ) {
     return true;
-  } else {
+  }
+  else {
     return false;
   }
 }
-
 
 //---------------------------------------------------------------------------------------------------
 /**
