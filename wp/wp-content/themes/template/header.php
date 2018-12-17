@@ -59,37 +59,6 @@
   ?>
 </head>
 <body>
-<h1 class=""></h1>
-<!-- <nav>
-  <?php
-    // 開発中ナビゲーション
-    $args = array(
-      'theme_location'  => '',
-      'menu'            => '',
-      'menu_class'      => '',
-      'menu_id'         => '',
-      'container'       => '',
-      'container_class' => '',
-      'container_id'    => '',
-      'echo'            => true,
-      'fallback_cb'     => '',
-      'before'          => '',
-      'after'           => '',
-      'link_before'     => '',
-      'link_after'      => '',
-      'items_wrap'      => '<ul class="a">%3$s</ul>',
-      'depth'           => 0,
-      'walker'          => ''
-    );
-    wp_nav_menu( $args );
-  ?>
-</nav> -->
-
-
-
-
-
-
 
 <div id="barba-wrapper" aria-live="polite">
 <div class="barba-container">
