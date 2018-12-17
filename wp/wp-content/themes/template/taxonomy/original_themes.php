@@ -40,11 +40,11 @@
           'class'    => 'lazyload',
         );
         if ( has_post_thumbnail( $post->ID ) ) {
-          huv_lazyload( huv_get_thumbnail_src( 'thumbnail' ), $attr );
+          huv_the_lazyload( huv_get_thumbnail_src( 'thumbnail' ), $attr );
         }
         else {
           $attr['alt'] = 'no-image';
-          huv_lazyload( huv_url_theme.'assets/img/common/no-image.jpg', $attr );
+          huv_the_lazyload_retina( huv_url_theme . 'assets/img/common/no-image.jpg', $attr );
         }
       ?></p>
       <p class="post__day"><?php echo get_the_date(); ?></p>
