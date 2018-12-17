@@ -41,7 +41,8 @@
         );
         if ( has_post_thumbnail( $post->ID ) ) {
           huv_lazyload( huv_get_thumbnail_src( 'thumbnail' ), $attr );
-        } else {
+        }
+        else {
           $attr['alt'] = 'no-image';
           huv_lazyload( huv_url_theme.'assets/img/common/no-image.jpg', $attr );
         }
@@ -65,7 +66,7 @@
     // 'prev_txt'     => '<',
     // 'endlink'      => false,
   );
-  pagination($args);
+  pagination( $args );
 endif;
 wp_reset_postdata(); // reset
 ?>
