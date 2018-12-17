@@ -31,7 +31,9 @@ get_template_part('function/ajax');
  * 10.0 - 日付チェックする関数
  * 11.0 - 投稿者別アーカイブを404へ
  * 12.0 - html、空白を除いたテキストに変換する関数 (字数制限機能付き)
- * 13.0 - Lazy Load等に対応するための画像呼び出し
+ * 13.0 - アイキャッチ登録した画像をループ内で取得
+ * 14.0 - srcset吐き出し
+ * 15.0 - Lazy Load等に対応するための画像呼び出し
  *
  */
 
@@ -655,7 +657,7 @@ function convert_string( $string, $length = null, $leader = '...' ) {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * 13.0 - Lazy Load等に対応するための画像呼び出し
+ * 13.0 - アイキャッチ登録した画像をループ内で取得
  */
 //---------------------------------------------------------------------------------------------------
 function huv_get_thumbnail_src( $size = 'thumbnail' ) {
@@ -677,7 +679,40 @@ function huv_the_thumbnail( $size = 'thumbnail', $array = array() ) {
   echo '<img src="'.$src.'"'.$attr.'>';
 }
 
-function huv_lazyload( $src, $add_attr ) {
+//---------------------------------------------------------------------------------------------------
+/**
+ * 14.0 - srcset吐き出し
+ * @format $suffix = '@%x' -> %が数字にになります。
+ *         $suffix = '@%'とすれば@2となります。
+ */
+//---------------------------------------------------------------------------------------------------
+function get_srcset_retina( $src, $suffix = '@%x' ) {
+  $src_explode = explode( '.', $src );
+  $extension   = $src_explode[ count( $src_explode ) - 1 ];
+  // $srcset      = [];
+
+  // 1x
+  $x1 = $src . ' 1x';
+
+  // 2x
+  $new_src = str_replace(
+    '.' . $extension,
+    str_replace( '%', '2', $suffix ) . '.' . $extension,
+    $src
+  );
+  $x2 = $new_src . ' 2x';
+
+  $srcset = $x1 . ', ' . $x2;
+
+  return $srcset;
+}
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * 15.0 - Lazy Load等に対応するための画像呼び出し
+ */
+//---------------------------------------------------------------------------------------------------
+function huv_get_the_lazyload( $src, $add_attr ) {
   $default = array(
                'class'    => 'lazyload',
                'data-src' => $src,
@@ -690,5 +725,31 @@ function huv_lazyload( $src, $add_attr ) {
     $attr .= ' '.$key.'="'.$value.'"';
   }
 
-  echo '<img'.$attr.'>';
+  return '<img'.$attr.'>';
+}
+
+function huv_the_lazyload( $src, $add_attr ) {
+  echo huv_get_the_lazyload( $src, $add_attr );
+}
+
+// srcset
+function huv_get_the_lazyload_retina( $src , $add_attr, $suffix = '@%x' ) {
+  $default = array(
+               'class'       => 'lazyload',
+               'data-src'    => $src,
+               'data-srcset' => get_srcset_retina( $src, $suffix ),
+             );
+
+  $array = array_merge( $default, $add_attr );
+
+  $attr = '';
+  foreach ( (array)$array as $key => $value ) {
+    $attr .= ' '.$key.'="'.$value.'"';
+  }
+
+  return '<img'.$attr.'>';
+}
+
+function huv_the_lazyload_retina( $src , $add_attr, $suffix = '@%x' ) {
+  echo huv_get_the_lazyload_retina( $src , $add_attr, $suffix );
 }
