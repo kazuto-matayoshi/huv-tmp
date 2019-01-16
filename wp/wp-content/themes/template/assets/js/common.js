@@ -13,7 +13,7 @@
       return;
     }
 
-    var targetTop = target != '#' ? $( '#' + target[1] ).offset().top : 0;
+    var targetTop = target != '#' ? $( target ).offset().top : 0;
 
     $( 'html, body' ).stop().animate({
         scrollTop: targetTop,
